@@ -97,5 +97,3 @@ spring:
             client-authentication-method: POST
 
 #??? upload?? ???
-file:
-  path: C:/Users/kang4/spring/shopping mall/upload/
