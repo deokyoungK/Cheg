@@ -1,0 +1,52 @@
+
+button {
+    cursor: pointer;
+}
+
+.signup__form__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:400px;
+}
+.signup-text{
+    font-size:25px;
+    color:#3d4756;
+    font-weight: bold;
+}
+.signup-register{
+    font-size:17px;
+}
+.signup__form{
+    text-align: center;
+    background-color: #fff;
+}
+
+/*로그인 인풋박스*/
+.signup__input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+}
+
+/*로그인 인풋태그*/
+.signup__input input {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+
+/*로그인 버튼*/
+.signup__input button {
+    border: 0;
+    outline: 0;
+    width: 80%;
+    height: 30px;
+    background-color: #3d4756;
+    color: white;
+    margin-top: 15px;
+    border-radius: 5px;
+}

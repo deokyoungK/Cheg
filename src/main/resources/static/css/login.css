@@ -1,0 +1,81 @@
+
+button {
+    cursor: pointer;
+}
+
+.login__form__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:400px;
+}
+.login-text{
+    font-size:25px;
+    color:#3d4756;
+    font-weight: bold;
+}
+.login-register{
+    font-size:17px;
+}
+.login__form{
+    text-align: center;
+    background-color: #fff;
+}
+
+/*로그인 인풋박스*/
+.login__input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+}
+
+/*로그인 인풋태그*/
+.login__input input {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+
+/*로그인 버튼*/
+.login__input button {
+    border: 0;
+    outline: 0;
+    width: 80%;
+    height: 30px;
+    background-color: #3d4756;
+    color: white;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+/* 소셜로그인 영역*/
+.login__social {
+    margin-top: 15px;
+}
+.login__social div{
+    margin-top:5px;
+}
+.login__social button {
+    width: 80%;
+    height: 30px;
+    border:none;
+    font-weight: bold;
+    border:1px solid black;
+    border-radius: 5px;
+}
+
+.facebook-btn{
+    background-color: #4d6db0;
+}
+.google-btn{
+    background-color: white;
+}
+.naver-btn{
+    background-color: #2DB400;
+}
+.kakao-btn{
+    background-color: #F7E600;
+}

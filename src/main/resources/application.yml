@@ -1,0 +1,101 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+    jsp:
+      cache: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+
+  security:
+    user:
+      name: test
+      password: 1234
+
+    oauth2:
+      client:
+        provider: #???, ???? ?? provider? ??????.
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
+            token-uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
+            user-name-attribute: response
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+        registration:
+          facebook:
+            client-id: 359158592700797
+            client-secret: 67cb49a77d07997999de3e63a44cca27
+            scope:
+              - public_profile
+              - email
+
+          google:
+            clientId: '467513416157-dk0p7noq44cub5740ugesn2hviclbe2k.apps.googleusercontent.com'
+            clientSecret: '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'
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope:
+              - email
+              - profile
+
+          naver:
+            clientId: 'bfRiojNYtwqORcejN7Io'
+            client-secret: 'TgTVVgDEut'
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            authorization-grant-type: authorization_code
+            scope:
+              - name
+              - email
+              - profile_image
+            client-name: Naver
+
+          kakao:
+            clientId: '152d3da5b5efbe4ac4b37b56ada69e21'
+            client-secret: 'tCCf0mlLyANITSYhCp4eIalN71fpMmNh'
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - account_email
+              - profile_image
+            client-name: Kakao
+            client-authentication-method: POST
+
+#??? upload?? ???
+file:
+  path: C:/Users/kang4/spring/shopping mall/upload/
