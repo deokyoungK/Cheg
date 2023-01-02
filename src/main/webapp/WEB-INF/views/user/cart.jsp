@@ -10,8 +10,6 @@
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
-
-
-
+    <div>이건한글</div>
 </body>
 </html>
