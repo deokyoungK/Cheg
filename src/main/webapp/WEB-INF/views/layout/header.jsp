@@ -21,33 +21,36 @@
 <!-- navbar시작 -->
 <div class="bar"></div>
 <nav class="navbar">
-    <ul class="navbar__left">
-        <li><a href="#" class="menu">Menu</a></li>
-        <li><a href="#" class="search">Search</a></li>
-    </ul>
 
     <div class="navbar__logo">
         <a href="/" class="logo">CHEG</a>
     </div>
 
     <ul class="navbar__right">
+        <div class="search-padding">
+            <div class="search-box">
+                <input class="search-input" type="text" name="search">
+                <img class="search-btn" src="images/search.png">    
+            </div>
+        </div>
 
         <c:choose>
             <c:when test="${principal == null}">
-                <li class="sub-login"><a href="/auth/login">
-                    로그인
+                <li class="right-sub fromLeft"><a href="/auth/login" class="nav-txt">
+                    Login
                 </a></li>
-                <li class="sub-signup"><a href="/auth/signup">
-                    회원가입
+                <li class="right-sub fromLeft"><a href="/auth/signup" class="nav-txt">
+                    Join
                 </a></li>
             </c:when>
+
             <c:otherwise>
-                <li class="sub-welcome" style="padding: 8px 13px;">
+                <li class="nav-txt sub-welcome" >
                         ${principal.user.name}님, 환영합니다!
                 </li>
-                <li><a href="/cart" class="cart">Cart</a></li>
+                <li><a href="/cart" class="nav-txt right-sub fromLeft">Cart</a></li>
                 <li class="sub-logout">
-                    <button class="logout-btn" onclick="location.href='/logout'">로그아웃</button>
+                    <button class="nav-txt logout-btn right-sub fromLeft" onclick="location.href='/logout'">logout</button>
                 </li>
 
             </c:otherwise>

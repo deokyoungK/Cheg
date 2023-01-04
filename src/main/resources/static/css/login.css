@@ -1,26 +1,49 @@
-
 button {
     cursor: pointer;
 }
 
+body {
+    background-color: #F6F5EF;
+    height: 100vh;
+}
+
+.wrap{
+    display: flex;
+    /* 가로를 기준으로 가운데 정렬 */
+    justify-content: center; 
+    align-items: center;
+    height: 70%;
+    box-sizing: border-box;
+    width: 100vw;
+}
+
 .login__form__container {
     width: 100%;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     height:400px;
 }
+
 .login-text{
-    font-size:25px;
-    color:#3d4756;
-    font-weight: bold;
+    /* color:#3d4756; */
+    font-size: 28px;
+    line-height: 36px;
+    color: rgb(33, 39, 42);
+    font-family: 'Pretendard';
 }
+
 .login-register{
     font-size:17px;
+    line-height: 36px;
+    color: rgb(33, 39, 42);
 }
+
+.registe-account-txt{ text-decoration:underline; color:#222222}
+
 .login__form{
     text-align: center;
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 /*로그인 인풋박스*/
@@ -33,22 +56,35 @@ button {
 
 /*로그인 인풋태그*/
 .login__input input {
-    width: 80%;
-    height: 30px;
-    border-radius: 5px;
-    margin-bottom: 6px;
+    width: 30%;
+    height: 44px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e9e9e9;
+    border-radius: 6px;
+    background-color:transparent;
+    margin-bottom: 8px;
+    /* padding: 0px 16px; */
 }
 
 /*로그인 버튼*/
 .login__input button {
     border: 0;
     outline: 0;
-    width: 80%;
-    height: 30px;
-    background-color: #3d4756;
+    width: 30%;
+    height: 44px;
+    background-color: #222222;
     color: white;
     margin-top: 15px;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.2;
+    font-family: 'Pretendard-Regular';
+}
+
+.login__input input:focus {
+    border-color:#222222;
+    outline: none;
 }
 
 /* 소셜로그인 영역*/
@@ -57,25 +93,32 @@ button {
 }
 .login__social div{
     margin-top:5px;
+    margin-bottom: 8px;
 }
 .login__social button {
-    width: 80%;
-    height: 30px;
-    border:none;
-    font-weight: bold;
-    border:1px solid black;
-    border-radius: 5px;
+    width: 30%;
+    height: 44px;
+    font-size: 15px;
+    line-height: 1.2;
+    font-family: 'Pretendard-Regular';
+    border-radius: 4px;
 }
 
 .facebook-btn{
+    border:none;
     background-color: #4d6db0;
 }
 .google-btn{
-    background-color: white;
+    background-color: #fffff;
+    border: 1px solid rgb(221, 221, 221);
+    color: #111111;
 }
 .naver-btn{
+    border:none;
     background-color: #2DB400;
 }
-.kakao-btn{
-    background-color: #F7E600;
+.kakao-btn {
+    border:none;
+    background-color: #FAE300;
+    color: #333333;
 }
