@@ -34,6 +34,19 @@
     </div>
 
 
+    <div class="product-list">
+        <c:forEach var="p" items="${productList}">
+            <img src="${p.url}" alt="">
+            <div>${p.brand}</div>
+            <div>${p.name}</div>
+            <div>${p.price}원</div>
+
+        </c:forEach>
+    </div>
+
+
+
+
 </body>
 <script>
     var swiper = new Swiper(".mySwiper", {

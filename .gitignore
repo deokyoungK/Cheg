@@ -14,6 +14,8 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
+docker-compose.yml
+application.yml
 .idea
 *.iws
 *.iml
