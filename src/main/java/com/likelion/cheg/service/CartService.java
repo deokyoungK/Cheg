@@ -47,8 +47,48 @@ public class CartService {
             cart.setProduct_count(prev+amount);
             cartRepository.save(cart);
         }
+    }
 
+    @Transactional
+    public Cart downCart(int cartId){
+        Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
+           return new CustomException("찾을 수 없는 장바구니 입니다.");
+        });
 
+        //수량 0개가 아닐때 감소시킴.
+        if(cart.getProduct_count() != 0) {
+            int prev = cart.getProduct_count();
+            cart.setProduct_count(prev - 1);
 
+            //계산을 해주고 commit해야함.
+            cart.calculateTotalPrice();
+            cartRepository.save(cart);
+        }
+        return cart;
+    }
+
+    @Transactional
+    public Cart upCart(int cartId){
+        Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
+            return new CustomException("찾을 수 없는 장바구니 입니다.");
+        });
+
+        int prev = cart.getProduct_count();
+        cart.setProduct_count(prev + 1);
+
+        //계산을 해주고 commit해야함.
+        cart.calculateTotalPrice();
+        cartRepository.save(cart);
+
+        return cart;
+    }
+
+    @Transactional
+    public void deleteCart(int cartId){
+        try{
+            cartRepository.deleteById(cartId);
+        }catch(Exception e){
+            throw new CustomException(e.getMessage());
+        }
     }
 }

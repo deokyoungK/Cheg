@@ -1,11 +1,13 @@
 package com.likelion.cheg.domain.cart;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -18,6 +20,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
 
     @ManyToOne
     @JoinColumn(name="user_id")

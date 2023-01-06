@@ -15,7 +15,8 @@
 <!-- Style -->
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/header.css">
-
+<!-- fontawesome-->
+<script src="https://kit.fontawesome.com/226cf9ba84.js" crossorigin="anonymous"></script>
 
 
 <!-- navbar시작 -->

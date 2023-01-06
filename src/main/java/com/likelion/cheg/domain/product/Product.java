@@ -1,16 +1,18 @@
 package com.likelion.cheg.domain.product;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@ToString(exclude = "cart")
+@ToString(exclude = {"cart","category"})
 public class Product {
 
     @Id
@@ -20,6 +22,7 @@ public class Product {
     //양방향 관계를 맺었지만 영속성 컨텍스트에서 카테고리가 상품의 정보를 알기 위해서는
     //product.getCategory().getProducts().add(product)와 같이
     //카테고리에도 product를 넣어주어야 한다.
+    @JsonBackReference //순환참조 방지
     @ManyToOne
     @JoinColumn(name="category")
     private Category category;
