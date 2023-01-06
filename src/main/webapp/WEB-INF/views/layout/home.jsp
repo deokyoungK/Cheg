@@ -33,19 +33,32 @@
         <div class="swiper-pagination"></div>
     </div>
 
+    <div class="product-container">
+        <div class="product-category">
+            <p class="category-txt">카테고리</p>
+            <a class="category-list" href="">리드줄</a>
+            <a class="category-list" href="">목줄</a>
+            <a class="category-list" href="">패딩</a>
+            <a class="category-list" href="">자켓</a>
+            <a class="category-list" href="">티셔츠</a>
+            <a class="category-list" href="">하네스</a>
+            <a class="category-list" href="">가방</a>
+            <a class="category-list" href="">진드기 퇴치제</a>
+            <a class="category-list" href="">보조제</a>
+            <a class="category-list" href="">방석/쿠션</a>
+        </div>
 
-    <div class="product-list">
-        <c:forEach var="p" items="${productList}">
-            <a href="/detail/${p.id}"><img src="${p.url}" alt=""></a>
-            <div>${p.brand}</div>
-            <div>${p.name}</div>
-            <div>${p.price}원</div>
-
-        </c:forEach>
+        <div class="product-list">
+            <c:forEach var="p" items="${productList}" >
+                <div class="product-card">
+                    <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="${p.url}" alt=""></a>
+                    <div class="product-brand">${p.brand}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">${p.price}원</div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
-
-
-
 
 </body>
 <script>
@@ -69,3 +82,5 @@
 </script>
 
 </html>
+
+

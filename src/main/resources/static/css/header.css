@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SEBANG_Gothic_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin : 0;
     background-color: #F6F5EF;
@@ -17,7 +24,7 @@ a {
 
 .bar{
     width: 100%;
-    height: 17px;
+    height: 10px;
     display: flex;
     background-color: #2f5e2c;
 }
@@ -29,18 +36,19 @@ a {
 }
 
 .navbar__logo {
+    /* font-family: 'SEBANG_Gothic_Bold'; */
     font-size: 24px;
     color: #000;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    margin-left: 10%
+    margin-left: 2%
 }
 
 .navbar__right {
     list-style: none;
     display: flex;
-    margin-right: 10%;
+    margin-right: 2%;
     padding-left: 0px;
 }
 
