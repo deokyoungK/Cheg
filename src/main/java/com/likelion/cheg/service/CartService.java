@@ -52,7 +52,7 @@ public class CartService {
     @Transactional
     public Cart downCart(int cartId){
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-           return new CustomException("찾을 수 없는 장바구니 입니다.");
+            return new CustomException("찾을 수 없는 장바구니 입니다.");
         });
 
         //수량 0개가 아닐때 감소시킴.

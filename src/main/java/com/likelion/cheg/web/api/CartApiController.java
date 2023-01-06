@@ -11,7 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,13 +28,15 @@ public class CartApiController {
     @PostMapping("api/cart/{cartId}/down")
     public ResponseEntity<?> downCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
         Cart cart = cartService.downCart(cartId);
-        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량감소 성공",cart), HttpStatus.OK);
+        List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
+        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량감소 성공",cartList), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/up")
     public ResponseEntity<?> upCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
         Cart cart = cartService.upCart(cartId);
-        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",cart), HttpStatus.OK);
+        List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
+        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",cartList), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/delete")

@@ -1,19 +1,13 @@
 body{
     margin: 0;
 }
-
-
 h2{
     text-align: center;
     margin-top: 20px;
 }
-
-
 span{
     margin: 0;
 }
-
-
 .cart{
     width: 80%;
     margin: auto;
@@ -41,76 +35,42 @@ td{
     border-bottom: 1px solid lightgray;
 }
 
-/* #summary{
-    text-align: right;
-} */
-
-.price{
-    /* font-weight: bold; s*/
+/*하단 버튼 영역*/
+.cart__total{
+    margin-top:20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cart__order{
+    flex-direction: column;
+    margin-right:110px;
+}
+.cart__order div{
+    margin-top:10px;
+}
+#summary{
+    font-weight: bold;
+}
+.cart__btn{
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
 }
 
-.cart__mainbtns{
-    width: 420px;
-    height: 200px;
-    padding-top: 40px;
-    display: block;
-    margin: auto;
-}
-
-.cart__orderbtn{
-    width: 200px;
-    height: 50px;
-    font-size: 16px;
-    margin: auto;
-    border-radius: 5px;
-}
-
-.cart__orderbtn.left{
-    background-color: white;
+.cart__btn.left{
+    background-color: #c2b8b8;
+    color:white;
     border: 1px lightgray solid;
+    cursor: pointer;
 }
-
-.cart__orderbtn.right{
+.cart__btn.right{
     background-color: #2f5e2c;
     color: white;
     border: none;
-}
-
-/* 밑쪽에 버튼 */
-.btns{
-    margin-top:50px;
+    cursor: pointer;
 }
 
 
-
-.select_all_btn{
-    border:none;
-    background-color: #2f5e2c;
-    color: white;
-    width: 150px;
-    height: 30px;
-    font-size: 16px;
-    margin: auto;
-    border-radius: 5px;
-}
-
-.select_delete_btn{
-    border:none;
-    background-color: #2f5e2c;
-    color: white;
-    width: 150px;
-    height: 30px;
-    font-size: 16px;
-    margin: auto;
-    border-radius: 5px;
-}
-
-#price_total{
-    margin-left:900px;
-}
-
-#summary{
-    margin-left:80px;
-}
 
 
