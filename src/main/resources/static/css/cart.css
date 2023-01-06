@@ -1,0 +1,116 @@
+body{
+    margin: 0;
+}
+
+
+h2{
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+span{
+    margin: 0;
+}
+
+
+.cart{
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+}
+
+table{
+    border-top: solid 1.5px black;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+}
+
+thead{
+    /* text-align: justify; */
+    font-weight: bold;
+}
+
+tbody{
+    font-size: 12px;
+}
+
+td{
+    padding: 15px 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+/* #summary{
+    text-align: right;
+} */
+
+.price{
+    /* font-weight: bold; s*/
+}
+
+.cart__mainbtns{
+    width: 420px;
+    height: 200px;
+    padding-top: 40px;
+    display: block;
+    margin: auto;
+}
+
+.cart__orderbtn{
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.cart__orderbtn.left{
+    background-color: white;
+    border: 1px lightgray solid;
+}
+
+.cart__orderbtn.right{
+    background-color: #2f5e2c;
+    color: white;
+    border: none;
+}
+
+/* 밑쪽에 버튼 */
+.btns{
+    margin-top:50px;
+}
+
+
+
+.select_all_btn{
+    border:none;
+    background-color: #2f5e2c;
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.select_delete_btn{
+    border:none;
+    background-color: #2f5e2c;
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+#price_total{
+    margin-left:900px;
+}
+
+#summary{
+    margin-left:80px;
+}
+
+

@@ -1,6 +1,7 @@
 package com.likelion.cheg.domain.product;
 
 
+import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@ToString(exclude = "cart")
 public class Product {
 
     @Id

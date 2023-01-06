@@ -1,0 +1,77 @@
+
+.product_detail{
+    display:flex;
+}
+.product_img{
+    margin-right:50px;
+    border:2px gray;
+}
+.product_info .brand{
+    font-weight: bold;
+    font-size:20px;
+    margin-bottom: 10px;
+}
+
+.product_info .name{
+    font-size:15px;
+    margin-bottom: 50px;
+}
+
+.product_info li{
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.product_info .price .price_text{
+    font-weight: bold;
+    margin-right:100px;
+}
+.product_info .price .price_content{
+    font-weight: bold;
+    font-size:20px;
+}
+.product_info .delivery .delivery_text{
+    font-weight: bold;
+    margin-right:80px;
+}
+.product_info .amount .amount_text{
+    font-weight: bold;
+    margin-right:110px;
+}
+
+/* 버튼 */
+.product_btn{
+    display:flex;
+    justify-content: right;
+    margin-right:100px;
+    margin-top:50px;
+}
+.cart_btn{
+    border:none;
+    border-radius: 2px;
+    color:white;
+    width:150px;
+    height:45px;
+    background-color: rgb(56, 56, 56);
+    margin-right:20px;
+    cursor: pointer;
+}
+.buy_btn{
+    border:none;
+    border-radius: 2px;
+    color:white;
+    width:150px;
+    height: 45px;
+    background-color: rgb(49, 90, 46);
+    margin-right:20px;
+    cursor: pointer;
+}
+
+
+/*수량 인풋태그*/
+amount input {
+    width:50%;
+    height: 25px;
+    border-radius: 6px;
+    background-color:transparent;
+}

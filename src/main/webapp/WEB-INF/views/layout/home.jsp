@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>홈</title>
     <link rel="stylesheet" href="/css/home.css">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
@@ -36,7 +36,7 @@
 
     <div class="product-list">
         <c:forEach var="p" items="${productList}">
-            <img src="${p.url}" alt="">
+            <a href="/detail/${p.id}"><img src="${p.url}" alt=""></a>
             <div>${p.brand}</div>
             <div>${p.name}</div>
             <div>${p.price}원</div>

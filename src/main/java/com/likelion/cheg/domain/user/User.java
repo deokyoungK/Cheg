@@ -1,8 +1,6 @@
 package com.likelion.cheg.domain.user;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.likelion.cheg.domain.cart.Cart;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
+@ToString(exclude = "cart")
 public class User {
 
 	@Id
@@ -33,6 +32,8 @@ public class User {
 	private String email;
 	private String address;
 	private String role;
+
+
 	private LocalDateTime createDate;
 	
 	@PrePersist //db에 insert되기 직전에 실행
