@@ -9,6 +9,6 @@
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
-    <div>여기는 장바구니</div>
+    <div>여기는 마이페이지</div>
 </body>
 </html>
