@@ -11,7 +11,8 @@
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
-    여기가 결제페이지
+    <img src="${product.url}" alt="">
+    ${amount}개
 
 
 

@@ -23,7 +23,7 @@ function onCart(){
                 contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
                 dataType: "json" //응답받을 데이터의 형식
             }).done(res => {
-                alert("성공");
+                alert("상품을 장바구니에 담았습니다.");
                 
             }).fail(error => {
                 alert("실패");
@@ -37,25 +37,14 @@ function detailToPayment(productId){
 
     var amount = document.getElementById('amount_input').value;
 
-    var data = {
-        productId: productId,
-        amount: amount
-    };
-
     $.ajax({
-        type: "get",
+        type: "post",
         url: `/api/payment/${productId}/${amount}`,
-        data: JSON.stringify(data), //(자바스크립트 데이터를 JSON으로 변환하여 보낸다.)
         contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
         dataType: "json" //응답받을 데이터의 형식
     }).done(res => {
-        alert("성공");
-
+        location.href="http://localhost:8080/detailPayment/"+res.data[0]+"/"+res.data[1];
     }).fail(error => {
         alert("실패");
     });
-
-
-
-
 }

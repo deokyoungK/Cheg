@@ -1,7 +1,9 @@
 //물건 수량 감소
 function count_down(cartId){
-    if($('#count_' + cartId).text() == "0개"){
+    if($('#count_' + cartId).text() == "0개") {
         alert("최소 갯수입니다.");
+    }else if($('#count_' + cartId).text() == "1개"){
+        delete_cart(cartId);
     }else{
 
         $.ajax({
@@ -87,24 +89,4 @@ function delete_cart(cartId){
             alert("삭제 실패");
         });
     }
-}
-
-//결제페이지로 장바구니 아이템 가져가기
-function bringToPayment(e){
-    var price = $("#summary").text();
-    if(price == "0원"){
-        alert("상품이 없습니다.");
-        e.preventDefault();
-    }else{
-        var principalId = $("#principalId").val();
-
-
-    }
-
-
-
-
-
-
-
 }

@@ -55,7 +55,7 @@
             <button id="cart_btn" class="cart_btn" onclick="onCart();">장바구니 담기</button>
         </div>
         <div class="buy">
-            <button class="buy_btn" onclick = "detailToPayment(${product.id});">즉시 구매하기</button>
+            <a href=""></a><button class="buy_btn" onclick = "detailToPayment(${product.id});">즉시 구매하기</button>
         </div>
     </div>
 
