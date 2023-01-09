@@ -29,10 +29,31 @@ function onCart(){
                 alert("실패");
             });
         }
-
-
     }
+}
 
+//상세에서 결제페이지로 이동
+function detailToPayment(productId){
+
+    var amount = document.getElementById('amount_input').value;
+
+    var data = {
+        productId: productId,
+        amount: amount
+    };
+
+    $.ajax({
+        type: "get",
+        url: `/api/payment/${productId}/${amount}`,
+        data: JSON.stringify(data), //(자바스크립트 데이터를 JSON으로 변환하여 보낸다.)
+        contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
+        dataType: "json" //응답받을 데이터의 형식
+    }).done(res => {
+        alert("성공");
+
+    }).fail(error => {
+        alert("실패");
+    });
 
 
 

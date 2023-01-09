@@ -89,3 +89,22 @@ function delete_cart(cartId){
     }
 }
 
+//결제페이지로 장바구니 아이템 가져가기
+function bringToPayment(e){
+    var price = $("#summary").text();
+    if(price == "0원"){
+        alert("상품이 없습니다.");
+        e.preventDefault();
+    }else{
+        var principalId = $("#principalId").val();
+
+
+    }
+
+
+
+
+
+
+
+}

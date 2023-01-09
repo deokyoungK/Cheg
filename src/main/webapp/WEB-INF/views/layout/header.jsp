@@ -5,6 +5,8 @@
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
+
+
 <!-- principalId 담아두는곳 -->
 <input type="hidden" id="principalId" value="${principal.user.id}">
 <input type="hidden" id="principalName" value="${principal.user.name}">

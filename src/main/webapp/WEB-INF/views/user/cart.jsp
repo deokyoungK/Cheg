@@ -58,7 +58,7 @@
                 <span id='summary'>${price}원</span>
             </div>
             <div>
-                <a href="/payment/${principal.user.id}"><button class="cart__btn right">주문하기</button></a>
+                <a href="../payment/${principal.user.id}/0"><button class="cart__btn right" onclick = "bringToPayment(event);">주문하기</button></a>
             </div>
         </div>
     </div>
