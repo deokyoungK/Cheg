@@ -1,3 +1,7 @@
+body{
+    padding-top: 92px;
+}
+
 .swiper {
     width: 100%; /* 배너 너비 */
     height: 440px; /* 배너 높이 */
@@ -70,6 +74,33 @@
 
 .category-list:hover{
     text-decoration:underline;
+}
+
+.product-category2{
+    display: flex;
+    justify-content: space-between;
+    width: 74%;
+    margin: 0px auto;
+    padding: 40px 0px ;
+}
+
+.category{
+    width: 200px;
+    height: 100px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: #333333;
+    font-size: 15px;
+    font-family: 'Pretendard-Regular';
+}
+
+.category img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 5px;
 }
 
 .product-card {

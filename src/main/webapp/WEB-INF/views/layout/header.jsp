@@ -13,6 +13,7 @@
 
 <!-- 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/header.js"></script>
 
 <!-- Style -->
 <link rel="stylesheet" href="/css/home.css">
@@ -20,9 +21,6 @@
 <!-- fontawesome-->
 <script src="https://kit.fontawesome.com/226cf9ba84.js" crossorigin="anonymous"></script>
 
-
-<!-- navbar시작 -->
-<div class="bar"></div>
 <nav class="navbar">
 
     <div class="navbar__logo">
@@ -31,18 +29,18 @@
 
     <ul class="navbar__right">
         <div class="search-padding">
-            <div class="search-box">
-                <input class="search-input" type="text" name="search">
-                <img class="search-btn" src="images/search.png">    
+            <div class=search-box"">
+                <img class="search-img" src="images/search.png">    
+                <input class="search-input" type="text" name="search" placeholder="상품과 브랜드를 검색해보세요." onkeyup="enterkey();">
             </div>
         </div>
 
         <c:choose>
             <c:when test="${principal == null}">
-                <li class="right-sub fromLeft"><a href="/auth/login" class="nav-txt">
+                <li class="right-sub"><a href="/auth/login" class="nav-txt">
                     Login
                 </a></li>
-                <li class="right-sub fromLeft"><a href="/auth/signup" class="nav-txt">
+                <li class="right-sub"><a href="/auth/signup" class="nav-txt">
                     Join
                 </a></li>
             </c:when>

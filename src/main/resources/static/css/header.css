@@ -12,9 +12,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin : 0;
-    background-color: #F6F5EF;
+    /* background-color: #F6F5EF; */
+    background-color: white;
 }
 
 a {
@@ -22,34 +30,96 @@ a {
     color: #000;
 }
 
-.bar{
-    width: 100%;
-    height: 10px;
-    display: flex;
-    background-color: #2f5e2c;
-}
 
 .navbar {
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px 48px ;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    max-width: 1920px;
+    min-width: 1323px;
+    border-bottom: 1px solid rgb(233, 236, 239);
+    height: 92px;
 }
 
 .navbar__logo {
     /* font-family: 'SEBANG_Gothic_Bold'; */
+    font-family: 'SBAggroB';
     font-size: 24px;
     color: #000;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    margin-left: 2%
+    /* margin-left: 2% */
 }
 
 .navbar__right {
     list-style: none;
     display: flex;
-    margin-right: 2%;
+    /* margin-right: 2%; */
     padding-left: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.search-padding{
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    /* width: calc((100% - 4px) - 72px); */
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 10px 20px;
+    background-color: rgb(247, 248, 249);
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.search-box {
+    font-family: 'Pretendard-Regular';
+    background-color:transparent;
+    border-style: none;
+    font-size: 20x;
+    line-height: 1.2;
+    padding: 6px 8px;
+    border-radius: 8px;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    background-color: rgb(247, 248, 249);
+    width: 100%;
+    justify-content: space-between;
+}
+
+.search-img{
+   width: 15px;
+   height: 15px;
+   opacity: 20%;
+   margin-right: 4px;
+}
+
+.search-input:focus {outline: none;}
+
+.search-input{
+    font-family: 'Pretendard';
+    font-weight: 400px;
+    background-color:transparent;
+    border-style: none;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding: 0px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 1.2;
+    opacity: 60%;
 }
 
 .navbar__left {
@@ -90,18 +160,9 @@ a {
     margin:0;
     text-transform:uppercase;
     color: #0D1117;
+    align-items: center;
+    justify-content: center;
  }
-
-/* .right-sub:after {
-    display:block;
-    content: '';
-    border-bottom: solid 1px #2f5e2c;  
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
-  }
-
-.right-sub:hover:after { transform: scaleX(1); }
-.right-sub.fromLeft:after{  transform-origin:  0% 50%; } */
 
 
 .logout-btn {
@@ -119,52 +180,19 @@ a {
 
 .nav-txt {
     font-family: 'Pretendard-Regular';
-    font-size: 14px;
-    color: #0D1117;
+    font-size: 15px;
+    color: #222222;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .sub-welcome {
     margin-top: 2px;
-    color: #0D1117;
+    color: #222222;
 }
 
-/* .search {
-    font-family: 'Pretendard-Regular';
-    background-color:transparent;
-    border-style: none;
-    font-size: 12px;
-    color: #0D1117;
-    border-bottom: solid 1px #2f5e2c;
-    margin-top: 1px;  
-} */
 
-/* .search-box:focus {outline: none;} */
-
-.search-box {
-    font-family: 'Pretendard-Regular';
-    background-color:transparent;
-    border-style: none;
-    font-size: 12px;
-    color: #0D1117;
-    border-bottom: solid 1px #2f5e2c;
-    margin-top: 1px;
-}
-
-.search-btn{
-   width: 18px;
-   height: 18px;
-   opacity: 80%;
-   cursor: pointer;
-}
-
-.search-input:focus {outline: none;}
-
-.search-input{
-    font-family: 'Pretendard-Regular';
-    background-color:transparent;
-    border-style: none;
-}
-
-.search-padding{
+/* .search-padding{
     padding: 4px 13px;
-}
+} */

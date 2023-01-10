@@ -108,11 +108,13 @@ body {
     border:none;
     background-color: #4d6db0;
 }
+
 .google-btn{
-    background-color: #fffff;
+    background-color: #ffffff;
     border: 1px solid rgb(221, 221, 221);
     color: #111111;
 }
+
 .naver-btn{
     border:none;
     background-color: #2DB400;
