@@ -1,7 +1,6 @@
-package com.likelion.cheg.domain.orderItem;
+package com.likelion.cheg.domain.delivery;
 
 import com.likelion.cheg.domain.order.Order;
-import com.likelion.cheg.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,28 +12,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-public class OrderItem {
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="order_id")
     private Order order;
 
-    @OneToOne
-    @JoinColumn(name="product_id")
-    private Product product;
-
-    private int quantity;
-
+    private String delivery_address;
+    private String delivery_status;
     private LocalDateTime createDate;
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+
 
 
 }

@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //super삭제 - 기존 시큐리티가 가지고 있는 기능이 다 비활성화됨.
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/user/**","/cart/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
             .formLogin()

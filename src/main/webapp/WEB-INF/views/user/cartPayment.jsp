@@ -7,10 +7,26 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/payment.css">
+	<%--아임포트 라이브러리--%>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
+	<c:forEach var="c" items="${cartList}">
+		<div>
+			<img style="width:50px;"class="img" src="${c.product.url}">
+			${c.product.name}
+			${c.product_count}개
+			${c.total_price}원
+		</div>
+	</c:forEach>
+	<input type="hidden" id="flag" value="1">
+
+
+	<button onclick="iamport();">결제하기</button>
+
 	<form>
 		<div class="division">
 			<div>
@@ -46,7 +62,7 @@
 
 						<div class="delivery-info-division">
 							<div class="delivery-info-txt">이름</div>
-							<input type="text" id="uname" placeholder="" required>
+							<input type="text" id="name" placeholder="" required>
 						</div>
 
 						<div class="delivery-info-division">
@@ -147,20 +163,7 @@
 </body>
 
 <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+<script type="text/javascript" src="/js/payment.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
-<script>
-/** 우편번호 찾기 */
-function execDaumPostcode() {
-    daum.postcode.load(function(){
-        new daum.Postcode({
-            oncomplete: function(data) {
-              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-              $("#postcode").val(data.zonecode);
-              $("#address").val(data.roadAddress);
-            }
-        }).open();
-    });
-}
-</script>
 </html>

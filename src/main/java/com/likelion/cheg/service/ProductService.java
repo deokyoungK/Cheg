@@ -22,6 +22,7 @@ public class ProductService {
         List<Product> productList = productRepository.findAllDesc();
         return productList;
     }
+
     @Transactional
     public Product loadProduct(int id){
         Product product = productRepository.findById(id).orElseThrow(()->{
@@ -29,10 +30,5 @@ public class ProductService {
         });
         return product;
     }
-
-
-
-
-
 
 }

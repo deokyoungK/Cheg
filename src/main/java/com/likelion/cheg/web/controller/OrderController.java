@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.*;
 @RequiredArgsConstructor
 @Controller
-public class PaymentController {
+public class OrderController {
 
     private final ProductService productService;
     private final CartService cartService;

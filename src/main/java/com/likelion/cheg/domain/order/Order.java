@@ -1,10 +1,13 @@
 package com.likelion.cheg.domain.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.likelion.cheg.domain.delivery.Delivery;
+import com.likelion.cheg.domain.orderItem.OrderItem;
 import com.likelion.cheg.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -23,7 +26,17 @@ public class Order {
     @JoinColumn(name="member_id")
     private User user;
 
-    private int order_number;
+    @OneToMany(mappedBy = "order")
+    @JsonIgnoreProperties({"order"})
+    private List<OrderItem> orderItemList;
+
+    @OneToOne
+    @JsonIgnoreProperties({"order"})
+    @JoinColumn(name="delivery_id")
+    private Delivery delivery;
+
+    private int order_status;
+    private String order_number;
 
     private LocalDateTime createDate;
 

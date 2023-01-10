@@ -40,8 +40,6 @@ public class User {
 	private String address;
 	private String role;
 
-
-
 	private LocalDateTime createDate;
 	
 	@PrePersist //db에 insert되기 직전에 실행
