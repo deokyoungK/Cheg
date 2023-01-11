@@ -11,8 +11,7 @@ div {
     display: block;
 }
 
-
-form{
+.border{
     padding: 0px 48px 100px;
     background-color: #f9f9f9;
 }

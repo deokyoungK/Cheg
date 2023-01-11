@@ -1,11 +1,46 @@
 //결제
 function iamport(){
 
-    var principalId = $("#principalId").val();
-    var address = "서울 서초구 서초동";
-    var productId = 7;
-    var amount = 20;
     var flag = $("#flag").val();
+    var principalId = $("#principalId").val();
+    var name = $("#name").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    var postcode = $("#postcode").val();
+    var address = $("#address").val() + " " + $("#detailAddress").val();
+
+    var productName;
+    var productId = $("#productId").val();
+    var detailName = $("#productName").val();
+    var cartName = $("#cartName").val();
+    var amount = $("#amount").val();
+    var price = $("#total-price").text();
+
+    var validation = {
+
+    }
+    //유효성 검증
+    $.ajax({
+        type : "POST",
+        url : `/api/order`,
+        data: JSON.stringify(req_data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(rsp=>{
+        alert("서비스로직까지 성공");
+        console.log(rsp.data);
+
+    }).fail(error=>{
+        alert("서비스로직까지는 실패");
+    });
+
+
+    //상세, 장바구니 구분
+    if(flag==0){
+        productName = detailName;
+    }else{
+        productName = cartName;
+    }
 
     //가맹점 식별코드
     IMP.init("imp20807674");
@@ -13,22 +48,21 @@ function iamport(){
         pg : 'kcp',
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '상품1' , //결제창에서 보여질 이름
-        amount : 2, //실제 결제되는 가격
-        buyer_email : 'kang48450@gmail.com',
-        buyer_name : '강덕영',
-        buyer_tel : '010-5022-2951',
+        name : productName,
+        amount : price+"d",
+        buyer_email : email,
+        buyer_name : name,
+        buyer_tel : phone,
         buyer_addr : address,
-        buyer_postcode : '123-456'
+        buyer_postcode : postcode
     }, function(res) {
-        console.log(res);
+
         // 결제검증
         $.ajax({
             type : "POST",
             url : "/verifyIamport/" + res.imp_uid
         }).done(function(data) {
 
-            // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
             if(res.paid_amount == data.response.amount){
                 alert("결제 및 결제검증완료");
 
@@ -67,8 +101,6 @@ function iamport(){
         });
     });
 }
-
-
 
 
 /* 우편번호 찾기 */

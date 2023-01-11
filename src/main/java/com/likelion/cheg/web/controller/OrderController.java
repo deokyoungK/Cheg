@@ -20,14 +20,30 @@ public class OrderController {
     @GetMapping("/detailPayment/{productId}/{amount}")
     public String detailPayment(@PathVariable int productId, @PathVariable int amount, Model model){
         Product product = productService.loadProduct(productId);
+        int price = product.getPrice()*amount;
+
         model.addAttribute("amount",amount);
         model.addAttribute("product",product);
+        model.addAttribute("price",price);
         return "user/detailPayment";
     }
 
     @GetMapping("/cartPayment/{userId}")
     public String CartPayment(@PathVariable int userId, Model model){
         List<Cart> cartList = cartService.loadCart(userId);
+
+        int price=0;
+        int amount=0;
+        String name = "";
+        for(Cart cart : cartList){
+            price += cart.getTotal_price();
+            amount += cart.getProduct_count();
+            name += cart.getProduct().getName();
+        }
+
+        model.addAttribute("name",name);
+        model.addAttribute("amount",amount);
+        model.addAttribute("price",price);
         model.addAttribute("cartList",cartList);
         return "user/cartPayment";
     }

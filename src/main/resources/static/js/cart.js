@@ -90,3 +90,12 @@ function delete_cart(cartId){
         });
     }
 }
+
+//수량0개인지 체크
+function checkNum(e){
+    var summary = $('#summary').text();
+    if(summary == "0원"){
+        alert("상품이 없습니다.");
+        e.preventDefault();
+    }
+}

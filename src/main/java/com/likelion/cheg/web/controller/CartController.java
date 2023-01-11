@@ -15,10 +15,10 @@ public class CartController {
     private final CartService cartService;
     @GetMapping("/cart/{id}")
     public String goCart(@PathVariable int id, Model model){
-        List<Cart> cartList =  cartService.loadCart(id);
+        List<Cart> cartList = cartService.loadCart(id);
         int price=0;
-        for(Cart cart:cartList){
-            price +=cart.getTotal_price();
+        for(Cart cart : cartList){
+            price += cart.getTotal_price();
         }
         model.addAttribute("carts",cartList);
         model.addAttribute("price",price);
