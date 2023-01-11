@@ -13,7 +13,7 @@
 
 <section class="cart">
     <table class="cart__list">
-
+        <h1 class="cart-txt">장바구니</h1>
         <thead>
         <tr>
             <td>삭제</td>
@@ -58,7 +58,7 @@
                 <span id='summary'>${price}원</span>
             </div>
             <div>
-                <a href="../cartPayment/${principal.user.id}/"><button class="cart__btn right" onclick = "checkNum(event);">주문하기</button></a>
+                <a href="../cartPayment/${principal.user.id}/"><button class="cart__btn right" onclick = "bringToPayment(event);">주문하기</button></a>
             </div>
         </div>
     </div>

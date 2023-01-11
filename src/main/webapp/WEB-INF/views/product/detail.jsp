@@ -11,9 +11,11 @@
 <body>
     <%@ include file="../layout/header.jsp"%>
     <input type="hidden" id="productId" value="${product.id}">
+
     <div class="product_detail">
+       
         <div class="product_img">
-            <div><img width=300px src="${product.url}"></div>
+            <img src="${product.url}">
         </div>
 
         <div class="product_info">
@@ -26,40 +28,47 @@
 
             <li>
                 <div class="price">
-                    <span class="price_text">판매가</span>
+                    <!-- <span class="price_text">판매가</span> -->
                     <span class="price_content">${product.price}원</span>
                 </div>
             </li>
             <hr>
             <li>
                 <div class="delivery">
-                    <span class="delivery_text">배송정보</span>
-                    <span class="delivery_content"></span> 무료/해외배송/관부가세 포함
+                    <div class="delivery_text">배송비</div>
+                    <span class="delivery_content">전상품 무료배송
+                        <span class="help-text">(대형가구와 같은 대형 상품 제외)</span>
+                    </span>
+                </div>
+                <div class="delivery">
+                    <span class="delivery_text">관부과세</span>
+                    <span class="delivery_content">관부과세 없음</span>
+                </div>
+                <div class="delivery">
+                    <span class="delivery_text">배송 예정일</span>
+                    <span class="delivery_content">1~2일 이내</span>
+                </div>
+                <div class="delivery">
+                    <span class="delivery_text">반품/교환</span>
+                    <span class="delivery_content">수령 후 반품/교환 가능</span>
                 </div>
             </li>
             <hr>
             <li>
                 <div class="amount">
-                    <span class="amount_text">수량</span>
+                    <div class="amount_text">수량</div>
                     <span class="amount_content">
-                        <input id="amount_input" type="number" placeholder="수량을 입력하세요."max="10"min="1">
+                        <input class="amount_input" id="amount_input" type="number" placeholder="1"max="10"min="1">
                     </span>
                 </div>
             </li>
 
+            <div class="product_btn">
+                <button id="cart_btn" class="cart_btn" onclick="onCart();">장바구니</button>
+                <button class="buy_btn" onclick = "detailToPayment(${product.id});">즉시 구매하기</button>
+            </div>
         </div>
     </div>
-
-    <div class="product_btn">
-        <div class="cart">
-            <button id="cart_btn" class="cart_btn" onclick="onCart();">장바구니 담기</button>
-        </div>
-        <div class="buy">
-            <a href=""></a><button class="buy_btn" onclick = "detailToPayment(${product.id});">즉시 구매하기</button>
-        </div>
-    </div>
-
-
 
 </body>
 <script src="/js/detail.js"></script>

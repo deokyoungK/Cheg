@@ -34,6 +34,13 @@ td{
     padding: 15px 10px;
     border-bottom: 1px solid lightgray;
 }
+ .cart-txt{
+    font-family: 'Pretendard';
+    font-size: 32px;
+    color: #21272a;    
+    line-height: 20px;
+    margin-bottom: 40px;
+ }
 
 /*하단 버튼 영역*/
 .cart__total{
