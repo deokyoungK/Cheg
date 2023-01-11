@@ -32,17 +32,18 @@
 
 						<div class="orderer-info-division">
 							<div class="orderer-info-txt">이름</div>
-							<input type="text" id="uname" placeholder="" >
+							<input type="text" id="uname" value="${principal.user.name}">
 						</div>
 
 						<div class="orderer-info-division">
 							<div class="orderer-info-txt">연락처</div>
-							<input type="text" id="uphone" placeholder="여백없이 입력">
+
+							<input type="text" id="uphone" value="${principal.user.phone}">
 						</div>
 
 						<div class="orderer-info-division">
 							<div class="orderer-info-txt">이메일</div>
-							<input type="email" id="email" >
+							<input type="email" id="email" value="${principal.user.email}">
 						</div>
 					</div>
 				</div>
@@ -54,12 +55,12 @@
 
 						<div class="delivery-info-division">
 							<div class="delivery-info-txt">이름</div>
-							<input type="text" id="name" placeholder="">
+							<input type="text" id="name" required />
 						</div>
 
 						<div class="delivery-info-division">
 							<div class="delivery-info-txt">연락처</div>
-							<input type="text" id="phone" placeholder="여백없이 입력" >
+							<input type="text" id="phone" placeholder="여백없이 입력해주세요." required >
 						</div>
 
 						

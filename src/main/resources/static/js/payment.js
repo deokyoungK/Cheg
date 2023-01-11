@@ -16,90 +16,101 @@ function iamport(){
     var amount = $("#amount").val();
     var price = $("#total-price").text();
 
-    var validation = {
-
-    }
-    //유효성 검증
-    $.ajax({
-        type : "POST",
-        url : `/api/order`,
-        data: JSON.stringify(req_data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
-    }).done(rsp=>{
-        alert("서비스로직까지 성공");
-        console.log(rsp.data);
-
-    }).fail(error=>{
-        alert("서비스로직까지는 실패");
-    });
-
-
-    //상세, 장바구니 구분
+    //상품이름 정할때 상세, 장바구니 구분
     if(flag==0){
         productName = detailName;
     }else{
         productName = cartName;
     }
 
-    //가맹점 식별코드
-    IMP.init("imp20807674");
-    IMP.request_pay({
-        pg : 'kcp',
-        pay_method : 'card',
-        merchant_uid : 'merchant_' + new Date().getTime(),
-        name : productName,
-        amount : price+"d",
-        buyer_email : email,
-        buyer_name : name,
-        buyer_tel : phone,
-        buyer_addr : address,
-        buyer_postcode : postcode
-    }, function(res) {
 
-        // 결제검증
-        $.ajax({
-            type : "POST",
-            url : "/verifyIamport/" + res.imp_uid
-        }).done(function(data) {
+    //유효성 검증(배송정보-이름,연락처,우편번호에 대해)
+    var val_data = {
+        name: name,
+        phone: phone,
+        postcode: postcode
+    }
 
-            if(res.paid_amount == data.response.amount){
-                alert("결제 및 결제검증완료");
+    $.ajax({
+        type : "POST",
+        url : `/api/validation`,
+        data: JSON.stringify(val_data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(r=>{
+        alert("배송정보 유효성검사 성공");
 
-                //비회원은 id를 0으로
-                if(principalId == ""){
-                    principalId = 0;
+
+        //가맹점 식별코드
+        IMP.init("imp20807674");
+        IMP.request_pay({
+            pg : 'kcp',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : productName,
+            amount : price+"d",
+            buyer_email : email,
+            buyer_name : name,
+            buyer_tel : phone,
+            buyer_addr : address,
+            buyer_postcode : postcode
+        }, function(res) {
+
+            // 결제검증
+            $.ajax({
+                type : "POST",
+                url : "/verifyIamport/" + res.imp_uid
+            }).done(function(data) {
+
+                if(res.paid_amount == data.response.amount){
+                    alert("결제 및 결제검증완료");
+
+                    //비회원은 id를 0으로
+                    if(principalId == ""){
+                        principalId = 0;
+                    }
+
+                    var req_data = {
+                        user_id: principalId, //비회원.회원 구분
+                        address: address,
+                        product_id: productId,
+                        amount: amount,
+                        flag: flag //상세,장바구니 구분
+                    };
+
+                    //비즈니스로직
+                    $.ajax({
+                        type : "POST",
+                        url : `/api/order`,
+                        data: JSON.stringify(req_data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    }).done(rsp=>{
+                        alert("서비스로직까지 성공");
+                        console.log(rsp.data);
+
+                    }).fail(error=>{
+                        alert("서비스로직까지는 실패");
+                    });
+
+
+                } else {
+                    alert("결제 실패");
                 }
-
-                var req_data = {
-                    user_id: principalId, //비회원.회원 구분
-                    address: address,
-                    product_id: productId,
-                    amount: amount,
-                    flag: flag //상세,장바구니 구분
-                };
-
-                //서비스로직
-                $.ajax({
-                    type : "POST",
-                    url : `/api/order`,
-                    data: JSON.stringify(req_data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                }).done(rsp=>{
-                    alert("서비스로직까지 성공");
-                    console.log(rsp.data);
-
-                }).fail(error=>{
-                    alert("서비스로직까지는 실패");
-                });
-
-
-            } else {
-                alert("결제 실패");
-            }
+            });
         });
+
+
+
+    }).fail(error=>{
+        alert("배송정보를 확인해주세요.");
+        return;
     });
+
+
+
+
+
 }
 
 

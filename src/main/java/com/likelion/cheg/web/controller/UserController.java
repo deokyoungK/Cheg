@@ -20,6 +20,6 @@ public class UserController {
         Optional<User> user = userRepository.findById(userId);
         model.addAttribute("user",user);
         return "user/mypage";
-        
+
     }
 }

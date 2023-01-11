@@ -58,7 +58,7 @@
                 <div class="amount">
                     <div class="amount_text">수량</div>
                     <span class="amount_content">
-                        <input class="amount_input" id="amount_input" type="number" placeholder="1"max="10"min="1">
+                        <input class="amount_input" id="amount_input" type="number" placeholder="0"max="10"min="1">
                     </span>
                 </div>
             </li>
