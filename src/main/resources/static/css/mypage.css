@@ -24,6 +24,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 500px;
 }
 
 .user_detail{
@@ -95,6 +96,7 @@
 .purchase_list{
     -webkit-box-align: center;
     align-items: center;
+    min-width: 500px;
 }
 
 .purchase_list_title{
@@ -104,7 +106,8 @@
     display: flex;
     max-width: 100%;
     border-bottom: 3px solid #222;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    min-width: 500px;
 }
 
 .title_txt{
@@ -174,8 +177,6 @@
     font-family: 'Pretendard';
     font-size: 14px;
     color: #555555;
-    /* padding: 6px 0; */
-    /* margin: 4px 0px; */
     align-items: center;
     justify-content: center;
 }
@@ -190,8 +191,13 @@
     margin-inline-end: 0px;
 }
 
+.width-wrap{
+    /* width: calc(100% - 96px); */
+}
+
 .list_item_column{
     width: 40px;
+    /* width: calc(100% - 96px); */
     /* padding: 0 30px; */
 }
 
@@ -201,3 +207,81 @@
     align-items: center;
 }
 
+.group_title{
+    font-family: 'Pretendard';
+    color: #222222;
+    /* border-bottom: 1px solid #ebebeb; */
+    font-size: 18px;
+    letter-spacing: -.27px;
+    margin: 0px;
+}
+
+.title{
+    font-family: 'Pretendard';
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+    position: relative;
+}
+
+.profile_box{
+    /* max-width: 90%; */
+    min-width: 500px;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 12px;
+}
+.profile_group{
+    min-width: 480px;
+    padding: 30px 14px;
+} 
+
+.input_item{
+    color: #222222;
+}
+
+.input_txt{
+    border: none;
+    width: 100%;
+    font-family: 'Pretendard';
+    font-size: 16px;
+    color: #222222;
+}
+
+.input_txt:focus{
+    outline: none;}
+
+.unit{
+    padding: 25px 60px 18px 0;
+    position: relative;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.modify-box{
+    text-align: right;
+    margin-right: 1%;
+}
+
+.modify-btn{
+    padding: 0 14px;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    display :inline-block;
+    cursor: pointer;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+    font-family: 'Pretendard';
+    font-size: 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    height: 38px;
+}

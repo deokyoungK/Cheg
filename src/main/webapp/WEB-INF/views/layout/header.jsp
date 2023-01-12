@@ -46,14 +46,14 @@
             </c:when>
 
             <c:otherwise>
-                <li class="nav-txt sub-welcome" >
-                        ${principal.user.name}님, 환영합니다!
                 </li>
                 <li><a href="/cart/${principal.user.id}" class="nav-txt right-sub fromLeft">Cart</a></li>
                 <li><a href="/mypage/${principal.user.id}" class="nav-txt right-sub fromLeft">Mypage</a></li>
                 <li class="sub-logout">
                     <button class="nav-txt logout-btn right-sub fromLeft" onclick="location.href='/logout'">logout</button>
                 </li>
+                <li class="sub-welcome" >
+                    ${principal.user.name}님
 
             </c:otherwise>
         </c:choose>

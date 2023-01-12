@@ -55,15 +55,15 @@
                 </div>
 
                 <div class="list_item_status">
-                    <div>
+                    <div class="width-wrap">
                         <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">개수</p>
                     </div>
                     
-                    <div>
+                    <div class="width-wrap">
                         <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">가격</p>
                     </div>
 
-                    <div>
+                    <div class="width-wrap">
                         <p class="list_item_column" style="color: #BB2649;">배송중</p>
                     </div>
 
@@ -72,49 +72,51 @@
         </div>
 
         <!-- 회원 정보 변경 -->
-        <div class="profile_info">
+        <form class="profile_info">
             <div class="purchase_list_title">
                 <h3 class="title_txt"> 회원 정보 수정 </h3>
             </div>
+            <div class="profile_box">
 
-            <div class="profile_group">
-                <h4 class="group_title">로그인 정보</h4>
+                <div class="profile_group">
+                    <h4 class="group_title">로그인 정보</h4>
 
-                <div class="unit">
-                    <h5 class="title">이메일 주소</h5>
-                
-                    <div class="input_box">
-                        <h6 class="input_title">이메일 주소 변경</h6>
+                    <div class="unit">
+                        <h5 class="title">이메일 주소</h5>
                         <div class="input_item">
                             <input type="email" autocomplete="off" class="input_txt text_fill" placeholder="jeji33911@naver.com">
                         </div>
                     </div>
+                
+                    <div class="unit">
+                        <h5 class="title">비밀번호</h5>
+                        <div class="input_item">
+                            <input type="password" placeholder="영문, 숫자, 특수문자 조합 8-16자" autocomplete="off" class="input_txt text_fill">
+                        </div>
+                    </div>
                 </div>
-            
-                <div class="unit">
-                    <h5 class="title">비밀번호</h5>
-                    <div class="input_item">
-                        <input type="password" placeholder="영문, 숫자, 특수문자 조합 8-16자" autocomplete="off" class="input_txt text_fill">
+                        
+                <div class="profile_group" >
+                    <h4 class="group_title">개인 정보</h4>
+                    <div class="unit">
+                        <h5 class="title">이름</h5>
+                        <div class="input_item">
+                            <input type="text" placeholder="고객님의 이름" autocomplete="off" class="input_txt">
+                        </div>
+                    </div>
+                        
+                    <div class="unit">
+                        <h5 class="title">휴대폰 번호</h5>
+                        <!-- <p class="desc">010-5***-*006</p> -->
+                        <input type="text" placeholder="010-5502-1006" autocomplete="off" class="input_txt">
                     </div>
                 </div>
             </div>
-                    
-            <div class="profile_group">
-                <h4 class="group_title">개인 정보</h4>
-                <div class="unit">
-                    <h5 class="title">이름</h5>
-                    <div class="input_item">
-                        <input type="text" placeholder="고객님의 이름" autocomplete="off" class="input_txt">
-                    </div>
-                </div>
-                    
-                <div class="unit">
-                    <h5 class="title">휴대폰 번호</h5>
-                    <!-- <p class="desc">010-5***-*006</p> -->
-                    <input type="text" placeholder="010-5502-1006" autocomplete="off" class="input_txt">
-                </div>
+
+            <div class="modify-box">
+                <input class="modify-btn" type="submit" onclick="" value="변경">
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
