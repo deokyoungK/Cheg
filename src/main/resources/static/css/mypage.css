@@ -1,0 +1,203 @@
+.mypage{
+    padding: 40px 150px 160px;
+    margin: 0px;
+}
+
+/* .mypage_title {
+    border-bottom: 3px solid #222;
+} */
+
+.mypage_title h3{
+    font-family: 'Pretendard';
+    font-size: 24px;
+    color: #222222;
+    padding: 5px 0px 16px;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.user_membership{
+    padding: 23px 0 23px 23px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_detail{
+    padding: 0px 20px;
+}
+
+.user_detail_name{
+    font-family: 'Pretendard';
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -.12px;
+    color: #000;
+}
+
+.user_detail_email{
+    line-height: 18px;
+    font-size: 16px;
+    letter-spacing: -.21px;
+    letter-spacing: -.05px;
+    color: rgba(34,34,34,.5);
+    margin-top: 3px;
+}
+
+.membership_detail{
+    display: flex;
+    position: relative;
+    margin-left: auto;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.membership_detail_content{
+    display: inline-block;
+    width: 159px;
+    text-align: center;
+}
+
+.membership_detail:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    background-color: #ebebeb;
+    width: 1px;
+}
+
+.info {
+    display: block;
+    line-height: 19px;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+}
+
+.info-sub{
+    line-height: 19px;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+    margin: 0px;
+}
+
+
+/* 구매 내역 */
+
+.purchase_list{
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.purchase_list_title{
+    margin-top: 42px;
+    /* padding-bottom: 16px; */
+    display: -webkit-box;
+    display: flex;
+    max-width: 100%;
+    border-bottom: 3px solid #222;
+    margin-bottom: 50px;
+}
+
+.title_txt{
+    font-size: 18px;
+    letter-spacing: -.27px;
+    font-family: 'Pretendard';
+    color: #222222;
+    font-weight: bold;
+}
+
+.purchase_list_display_item{
+    display: flex;
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px;
+}
+
+.purchase_list_product{
+    display: flex;
+    width: 100%;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.list_item_status{
+    display: flex;
+    text-align: right;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.list_item_img_wrap{
+    width: 80px;
+    height: 80px;
+    /* -o-object-fit: cover;
+    object-fit: cover; */
+    border-radius: 12px;
+}
+
+
+.list_item_img_wrap img{
+    width: 80px;
+    height: 80px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.list_item_title_wrap{
+    justify-content: center;
+    align-items: center;
+    margin-left: 16px;
+}
+
+.list_item_brand {
+    font-family: 'Pretendard';
+    font-size: 14px;
+    color: #222222;
+    font-weight: bold;
+    /* padding: 6px 0; */
+    text-decoration:underline;
+    margin-bottom: 4px;
+}
+
+.list_item_name{
+    font-family: 'Pretendard';
+    font-size: 14px;
+    color: #555555;
+    /* padding: 6px 0; */
+    /* margin: 4px 0px; */
+    align-items: center;
+    justify-content: center;
+}
+
+.list_item_column{
+    font-family: 'Pretendard';
+    font-size: 13px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.list_item_column{
+    width: 40px;
+    /* padding: 0 30px; */
+}
+
+/* 회원 정보 변경 */
+.purchase_list{
+    -webkit-box-align: center;
+    align-items: center;
+}
+
