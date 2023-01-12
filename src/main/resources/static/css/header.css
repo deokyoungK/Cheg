@@ -163,7 +163,7 @@ a {
     font-family: 'Pretendard-Regular';
     color: #000;
     display:inline-block; 
-    margin:0;
+    margin: 0;
     text-transform:uppercase;
     color: #0D1117;
     align-items: center;
@@ -178,6 +178,8 @@ a {
     border-style: none;
     font-size: 14px;
     color: #0D1117;
+    margin: 0;
+    padding: 0;
 }
 
 .logout-btn:hover{
@@ -188,7 +190,7 @@ a {
     font-family: 'Pretendard-Regular';
     font-size: 15px;
     color: #222222;
-    margin-left: 10px;
+    margin: 0px 4px;
     align-items: center;
     justify-content: center;
 }

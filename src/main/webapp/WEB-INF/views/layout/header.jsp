@@ -50,7 +50,7 @@
                 <li><a href="/cart/${principal.user.id}" class="nav-txt right-sub fromLeft">Cart</a></li>
                 <li><a href="/mypage/${principal.user.id}" class="nav-txt right-sub fromLeft">Mypage</a></li>
                 <li class="sub-logout">
-                    <button class="nav-txt logout-btn right-sub fromLeft" onclick="location.href='/logout'">logout</button>
+                    <button class="nav-txt logout-btn right-sub" onclick="location.href='/logout'">logout</button>
                 </li>
                 <li class="sub-welcome" >
                     ${principal.user.name}님

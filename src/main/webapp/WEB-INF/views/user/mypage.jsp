@@ -15,8 +15,8 @@
         <!-- 유저 기본 정보 -->
         <div class="user_membership">
             <div class="user_detail">
-                <strong class="user_detail_name">윤예지</strong>
-                <div class="user_detail_email">jeji3391@naver.com</div>
+                <strong class="user_detail_name">${principal.user.name}</strong>
+                <div class="user_detail_email">${principal.user.email}</div>
             </div>
 
             <div class="membership_detail">
@@ -84,7 +84,7 @@
                     <div class="unit">
                         <h5 class="title">이메일 주소</h5>
                         <div class="input_item">
-                            <input type="email" autocomplete="off" class="input_txt text_fill" placeholder="jeji33911@naver.com">
+                            <input type="email" autocomplete="off" class="input_txt text_fill" placeholder="${principal.user.email}">
                         </div>
                     </div>
                 
@@ -101,14 +101,14 @@
                     <div class="unit">
                         <h5 class="title">이름</h5>
                         <div class="input_item">
-                            <input type="text" placeholder="고객님의 이름" autocomplete="off" class="input_txt">
+                            <input type="text" placeholder="${principal.user.name}" autocomplete="off" class="input_txt">
                         </div>
                     </div>
                         
                     <div class="unit">
                         <h5 class="title">휴대폰 번호</h5>
                         <!-- <p class="desc">010-5***-*006</p> -->
-                        <input type="text" placeholder="010-5502-1006" autocomplete="off" class="input_txt">
+                        <input type="text" placeholder="${principal.user.phone}" autocomplete="off" class="input_txt">
                     </div>
                 </div>
             </div>
