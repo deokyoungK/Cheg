@@ -1,5 +1,7 @@
 //결제
-function iamport(){
+function iamport(e){
+    //form action 막기
+    e.preventDefault();
 
     var flag = $("#flag").val();
     var principalId = $("#principalId").val();
@@ -16,7 +18,8 @@ function iamport(){
     var amount = $("#amount").val();
     var price = $("#total-price").text();
 
-    //상품이름 정할때 상세, 장바구니 구분
+
+    //결제시에 상품이름 보여질때 상세, 장바구니 구분
     if(flag==0){
         productName = detailName;
     }else{
