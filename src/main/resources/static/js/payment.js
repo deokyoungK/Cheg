@@ -66,7 +66,7 @@ function iamport(e){
             }).done(function(data) {
 
                 if(res.paid_amount == data.response.amount){
-                    alert("결제 및 결제검증완료");
+                    alert("결제검증완료");
 
                     //비회원은 id를 0으로
                     if(principalId == ""){
@@ -89,7 +89,13 @@ function iamport(e){
                         contentType: "application/json; charset=utf-8",
                         dataType: "json"
                     }).done(rsp=>{
-                        alert("서비스로직까지 성공");
+                        alert("결제되었습니다.");
+                        //비회원은 홈으로
+                        if(principalId == 0){
+                            location.href= `/`;
+                        }else {
+                            location.href = `/mypage/${principalId}`;
+                        }
                         console.log(rsp.data);
 
                     }).fail(error=>{
@@ -102,8 +108,6 @@ function iamport(e){
                 }
             });
         });
-
-
 
     }).fail(error=>{
         alert("배송정보를 확인해주세요.");

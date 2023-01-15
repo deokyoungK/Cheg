@@ -20,8 +20,8 @@ function onCart(){
                 type: "post",
                 url: `/api/cart/${productId}/${amount}`,
                 data: JSON.stringify(data), //(자바스크립트 데이터를 JSON으로 변환하여 보낸다.)
-                contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
-                dataType: "json" //응답받을 데이터의 형식
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
             }).done(res => {
                 alert("상품을 장바구니에 담았습니다.");
                 location.href="http://localhost:8080/cart/"+principalId;

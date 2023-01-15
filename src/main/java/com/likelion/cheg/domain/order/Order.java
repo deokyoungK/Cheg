@@ -1,19 +1,21 @@
 package com.likelion.cheg.domain.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.orderItem.OrderItem;
 import com.likelion.cheg.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -27,7 +29,7 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order")
-    @JsonIgnoreProperties({"order"})
+    @JsonManagedReference
     private List<OrderItem> orderItemList;
 
     @OneToOne
@@ -38,6 +40,8 @@ public class Order {
     private int order_status;
     private String order_number;
 
+    private int order_price;
+    private int order_product_count; //상품갯수 -> 마이페이지에서 구분을 위해
     private LocalDateTime createDate;
 
     @PrePersist //db에 insert되기 직전에 실행

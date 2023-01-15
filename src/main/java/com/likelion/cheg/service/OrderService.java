@@ -29,9 +29,45 @@ public class OrderService {
     private final DeliveryRepository deliveryRepository;
     private final ProductRepository productRepository;
 
+    @Transactional
+    public void calculateCount(int userId){
+        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
+
+        //Order에 상품갯수 넣기
+        for(Order order : orderList){
+            order.setOrder_product_count(order.getOrderItemList().size());
+            orderRepository.save(order);
+        }
+    }
+
+
+    @Transactional
+    public void calculatePrice(int userId){
+        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
+
+        // Order에 주문상품가격 총합 넣기
+        for(Order order : orderList){
+            int price = 0;
+            for(int i=0;i<order.getOrderItemList().size();i++){
+                price += order.getOrderItemList().get(i).getTotal_price();
+
+            }
+            order.setOrder_price(price);
+            orderRepository.save(order);
+        }
+
+
+    }
     //※주문로직 리팩토링 필요※
     @Transactional
     public void makeOrder(int userId, int flag, String address, int productId, int amount){
+
+        //8자리 주문번호 생성
+        Random random = new Random();
+        String number = Integer.toString(random.nextInt(8)+1);
+        for(int i=0;i<7;i++){
+            number += Integer.toString(random.nextInt(9));
+        }
 
         //비회원
         if(userId == 0){
@@ -42,8 +78,6 @@ public class OrderService {
             deliveryRepository.save(delivery);
 
             //order객체 생성
-            UUID number = UUID.randomUUID();
-
             User user = new User();
             user.setName("비회원");
             user.setPassword("비회원_password");
@@ -70,6 +104,7 @@ public class OrderService {
             orderItem.setOrder(order);
             orderItem.setProduct(product);
             orderItem.setQuantity(amount);
+            orderItem.calculateTotalPrice();
             orderItemRepository.save(orderItem);
 
         }else{ //회원
@@ -81,8 +116,6 @@ public class OrderService {
             deliveryRepository.save(delivery);
 
             //order객체 생성
-            UUID number = UUID.randomUUID();
-
             User user = userRepository.findById(userId).orElseThrow(()->{
                 return new CustomException("유저를 찾을 수 없습니다.");
             });
@@ -91,7 +124,7 @@ public class OrderService {
             order.setUser(user);
             order.setDelivery(delivery);
             order.setOrder_status(1);
-            order.setOrder_number(number.toString());
+            order.setOrder_number(number);
 
             orderRepository.save(order);
 
@@ -109,6 +142,7 @@ public class OrderService {
                 orderItem.setOrder(order);
                 orderItem.setProduct(product);
                 orderItem.setQuantity(amount);
+                orderItem.calculateTotalPrice();
                 orderItemRepository.save(orderItem);
 
 
@@ -121,6 +155,7 @@ public class OrderService {
                     orderItem.setOrder(order);
                     orderItem.setProduct(cart.getProduct());
                     orderItem.setQuantity(cart.getProduct_count());
+                    orderItem.calculateTotalPrice();
                     orderItemRepository.save(orderItem);
 
                     //주문되면 장바구니에서는 삭제
@@ -131,5 +166,8 @@ public class OrderService {
 
         }
     }
+
+
+
 
 }

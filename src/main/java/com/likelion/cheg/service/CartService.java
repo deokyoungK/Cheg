@@ -29,7 +29,6 @@ public class CartService {
 
     @Transactional
     public void addCart(User user, int productId, int amount){
-
         Cart cart = cartRepository.findByUserIdAndProductId(user.getId(),productId);
 
         //새로 만든 cart라면 product_count를 amount로 하는 장바구니 생성

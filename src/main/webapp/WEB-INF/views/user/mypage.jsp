@@ -10,6 +10,8 @@
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
+
+
     <div class="mypage">
 
         <!-- 유저 기본 정보 -->
@@ -39,40 +41,61 @@
                 <h3 class="title_txt"> 구매 내역 </h3>
             </div>
 
+            <c:forEach var="order" items="${orderList}">
             <div class="purchase_list_display_item" style="background-color: rgb(255, 255, 255);">
                 <div class="purchase_list_product">
-
-                    <p class="list_item_name" style="margin-right: 30px;">201808272020</p>
+                    <p class="list_item_name" style="margin-right: 30px;">${order.order_number}</p>
 
                     <div class="list_item_img_wrap">
-                        <img alt="image" src="" class="list_item_img" style="background-color: rgb(255, 255, 255);">
+                        <img alt="image" src="${order.orderItemList[0].product.url}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
                     </div>
 
-                    <div class="list_item_title_wrap">
-                        <p class="list_item_brand">[EVENT] Nike x Ambush</p>
-                        <p class="list_item_name">Dunk High Black</p>
-                    </div>
+                    <c:choose>
+                        <c:when test="${order.order_product_count == 1}">
+                            <div class="list_item_title_wrap">
+                                <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
+                                <p class="list_item_name">${order.orderItemList[0].product.name}</p>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="list_item_title_wrap">
+                                <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
+                                <p class="list_item_name">${order.orderItemList[0].product.name}외 ${order.order_product_count-1}개 상품</p>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
 
                 <div class="list_item_status">
+                    <c:choose>
+                        <c:when test="${order.order_status == 1}">
+                            <div class="width-wrap">
+                                <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">주문완료</p>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="width-wrap">
+                                <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">주문취소</p>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="width-wrap">
-                        <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">개수</p>
-                    </div>
-                    
-                    <div class="width-wrap">
-                        <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">가격</p>
+                        <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">${order.order_price}원</p>
                     </div>
 
                     <div class="width-wrap">
-                        <p class="list_item_column" style="color: #BB2649;">배송중</p>
+                        <p class="list_item_column" style="color: #BB2649;">${order.delivery.delivery_status}</p>
                     </div>
 
                 </div>
             </div>
+            </c:forEach>
         </div>
 
         <!-- 회원 정보 변경 -->
-        <form class="profile_info">
+        <form id="profile_info" class="profile_info" onsubmit="update(${principal.user.id},event)">
             <div class="purchase_list_title">
                 <h3 class="title_txt"> 회원 정보 수정 </h3>
             </div>
@@ -84,14 +107,21 @@
                     <div class="unit">
                         <h5 class="title">이메일 주소</h5>
                         <div class="input_item">
-                            <input type="email" autocomplete="off" class="input_txt text_fill" placeholder="${principal.user.email}">
+                            <input type="email" name="email" class="input_txt text_fill" value="${principal.user.email}">
                         </div>
                     </div>
                 
                     <div class="unit">
+                        <h5 class="title">아이디</h5>
+                        <div class="input_item">
+                            <input type="text" class="input_txt text_fill" value="${principal.user.username}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="unit">
                         <h5 class="title">비밀번호</h5>
                         <div class="input_item">
-                            <input type="password" placeholder="영문, 숫자, 특수문자 조합 8-16자" autocomplete="off" class="input_txt text_fill">
+                            <input type="password" class="input_txt text_fill" value="${principal.user.password}" readonly />
                         </div>
                     </div>
                 </div>
@@ -101,14 +131,18 @@
                     <div class="unit">
                         <h5 class="title">이름</h5>
                         <div class="input_item">
-                            <input type="text" placeholder="${principal.user.name}" autocomplete="off" class="input_txt">
+                            <input type="text" name="name" class="input_txt" value="${principal.user.name}" required />
                         </div>
                     </div>
                         
                     <div class="unit">
                         <h5 class="title">휴대폰 번호</h5>
-                        <!-- <p class="desc">010-5***-*006</p> -->
-                        <input type="text" placeholder="${principal.user.phone}" autocomplete="off" class="input_txt">
+                        <input type="text" name="phone" class="input_txt" value="${principal.user.phone}" placeholder="공백없이 입력해주세요.">
+                    </div>
+
+                    <div class="unit">
+                        <h5 class="title">주소</h5>
+                        <input type="text" name="address" class="input_txt" value="${principal.user.address}" placeholder="주소를 입력해주세요.">
                     </div>
                 </div>
             </div>
@@ -119,4 +153,5 @@
         </form>
     </div>
 </body>
+<script type="text/javascript" src="/js/mypage.js"></script>
 </html>

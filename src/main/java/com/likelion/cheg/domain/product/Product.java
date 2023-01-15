@@ -19,9 +19,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //양방향 관계를 맺었지만 영속성 컨텍스트에서 카테고리가 상품의 정보를 알기 위해서는
-    //product.getCategory().getProducts().add(product)와 같이
-    //카테고리에도 product를 넣어주어야 한다.
     @JsonBackReference //순환참조 방지
     @ManyToOne
     @JoinColumn(name="category")
