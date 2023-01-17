@@ -25,13 +25,6 @@ public class AuthController {
     private final AuthService authService;
     private final ProductService productService;
 
-    @GetMapping("/")
-    public String home(Model model){
-        List<Product> productList = productService.loadAllProducts();
-        model.addAttribute("productList",productList);
-        return "layout/home";
-    }
-
     @GetMapping("/auth/login")
     public String loginForm(){
         return "auth/login";

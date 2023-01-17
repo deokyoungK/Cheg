@@ -31,4 +31,24 @@ public class ProductService {
         return product;
     }
 
+    @Transactional
+    public List<Product> searchProductByKeyword(String keyword){
+        List<Product> productList = productRepository.searchByKeyword(keyword);
+        return productList;
+    }
+
+    @Transactional
+    public List<Product> searchProductByCategory(String name){
+        List<Product> productReturn = new ArrayList<>();
+        List<Product> productList = productRepository.findAll();
+        for(Product product : productList){
+            if(product.getCategory().getName().equals(name)){
+                productReturn.add(product);
+            }
+        }
+        return productReturn;
+    }
+
+
+
 }
