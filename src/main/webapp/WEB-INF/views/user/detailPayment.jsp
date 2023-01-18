@@ -21,111 +21,114 @@
 
 
 <form action="" onsubmit="iamport(event)">
-	<h1 class="order-txt">주문/결제</h1>
+	
 	<div class="division">
 		<div class="wrap-left">
+			<h1 class="order-txt">주문/결제</h1>
+			<div >
 
-			<div class="orderer-info-box" >
-				<p class="orderer-info-box-title">주문자 정보</p>
+				<div class="orderer-info-box" >
+					<p class="orderer-info-box-title">주문자 정보</p>
 
-				<div class="order-info-box-inner">
+					<div class="order-info-box-inner">
 
-					<div class="orderer-info-division">
-						<div class="orderer-info-txt">이름</div>
-						<input type="text" id="uname" value="${principal.user.name}">
-					</div>
+						<div class="orderer-info-division">
+							<div class="orderer-info-txt">이름</div>
+							<input type="text" id="uname" value="${principal.user.name}">
+						</div>
 
-					<div class="orderer-info-division">
-						<div class="orderer-info-txt">연락처</div>
+						<div class="orderer-info-division">
+							<div class="orderer-info-txt">연락처</div>
 
-						<input type="text" id="uphone" value="${principal.user.phone}">
-					</div>
+							<input type="text" id="uphone" value="${principal.user.phone}">
+						</div>
 
-					<div class="orderer-info-division">
-						<div class="orderer-info-txt">이메일</div>
-						<input type="email" id="email" value="${principal.user.email}">
+						<div class="orderer-info-division">
+							<div class="orderer-info-txt">이메일</div>
+							<input type="email" id="email" value="${principal.user.email}">
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="delivery-info-box">
-				<p class="delivery-info-box-title">배송 정보</p>
+				<div class="delivery-info-box">
+					<p class="delivery-info-box-title">배송 정보</p>
 
-				<div class="delivery-info-box-inner">
+					<div class="delivery-info-box-inner">
 
-					<div class="delivery-info-division">
-						<div class="delivery-info-txt">이름</div>
-						<input type="text" id="name" required />
-					</div>
+						<div class="delivery-info-division">
+							<div class="delivery-info-txt">이름</div>
+							<input type="text" id="name" required />
+						</div>
 
-					<div class="delivery-info-division">
-						<div class="delivery-info-txt">연락처</div>
-						<input type="text" id="phone" placeholder="여백없이 입력해주세요." required >
-					</div>
+						<div class="delivery-info-division">
+							<div class="delivery-info-txt">연락처</div>
+							<input type="text" id="phone" placeholder="여백없이 입력해주세요." required >
+						</div>
 
 
-					<div class="delivery-info-division">
-						<div class="delivery-info-txt">주소</div>
+						<div class="delivery-info-division">
+							<div class="delivery-info-txt">주소</div>
 
-						<div class="post-box">
-							<div class="post-btn-box">
-								<input type="text" class="" name="postcode" id="postcode" placeholder="우편번호" readonly  required/>
-								<button type="button" class="post-find-btn" onclick="execDaumPostcode()">우편번호 찾기</button>
+							<div class="post-box">
+								<div class="post-btn-box">
+									<input type="text" class="" name="postcode" id="postcode" placeholder="우편번호" readonly  required/>
+									<button type="button" class="post-find-btn" onclick="execDaumPostcode()">우편번호 찾기</button>
+								</div>
+								<input
+										type="text"
+										name="address"
+										id="address"
+										placeholder="도로명 주소"
+										readonly
+								/>
+
+								<input
+										type="text"
+										name="detailAddress"
+										id="detailAddress"
+										placeholder="상세 주소"
+										required
+								/>
 							</div>
-							<input
-									type="text"
-									name="address"
-									id="address"
-									placeholder="도로명 주소"
-									readonly
-							/>
 
-							<input
-									type="text"
-									name="detailAddress"
-									id="detailAddress"
-									placeholder="상세 주소"
-									required
-							/>
 						</div>
 
+						<div class="delivery-ask-txt">배송 요청 사항</div>
+						<button type="button" class="delivery-ask-btn" onclick="">직접 수령할게요.</button>
+
 					</div>
-
-					<div class="delivery-ask-txt">배송 요청 사항</div>
-					<button type="button" class="delivery-ask-btn" onclick="">직접 수령할게요.</button>
-
 				</div>
-			</div>
 
 
-			<div class="delivery-product-box" >
-				<p class="delivery-product-title">배송 상품</p>
+				<div class="delivery-product-box" >
+					<p class="delivery-product-title">배송 상품</p>
 
-				<div class="delivery-product-box-inner">
+					<div class="delivery-product-box-inner">
 
-					<div class="delivery-product-top">
-						<a class="delivery-product-img" href=""><img class="delivery-product-img" src="${product.url}" alt=""></a>
-						<div class="delivery-product-info">
-							<div class="delivery-product-brand">${product.brand}</div>
-							<div class="delivery-product-name">${product.name}</div>
-							<div class="delivery-product-price">${product.price}</div>
+						<div class="delivery-product-top">
+							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="${product.url}" alt=""></a>
+							<div class="delivery-product-info">
+								<div class="delivery-product-brand">${product.brand}</div>
+								<div class="delivery-product-name">${product.name}</div>
+								<div class="delivery-product-price">${product.price}</div>
+							</div>
 						</div>
+
+
+						<div class="delivery-product-down">
+								<span class="order-count">
+									총
+									<span class="text-green">${amount}</span>
+									개
+								</span>
+
+							<span class="order-total-price">
+									${price}
+									원
+								</span>
+						</div>
+
 					</div>
-
-
-					<div class="delivery-product-down">
-							<span class="order-count">
-								총
-								<span class="text-green">${amount}</span>
-								개
-							</span>
-
-						<span class="order-total-price">
-								${price}
-								원
-							</span>
-					</div>
-
 				</div>
 			</div>
 		</div>

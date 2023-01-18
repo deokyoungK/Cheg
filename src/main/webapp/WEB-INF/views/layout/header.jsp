@@ -29,12 +29,12 @@
 
     <ul class="navbar__right">
         <div class="search-padding">
-            <div class=search-box"">
-                <form id="form" action="/search" method="GET">
-                    <img class="search-img" src="${pageContext.request.contextPath}/images/search.png">
-                    <input class="search-input" type="text" name="keyword" placeholder="상품과 브랜드를 검색해보세요." onkeyup="enterkey();">
-                </form>
-            </div>
+            <!-- <div class="search-box"> -->
+            <form id="form" action="/search" method="GET" class="search-box">
+                <img class="search-img" src="${pageContext.request.contextPath}/images/search.png">
+                <input class="search-input" type="text" name="keyword" placeholder="상품과 브랜드를 검색해보세요." onkeyup="enterkey();">
+            </form>
+            <!-- </div> -->
         </div>
 
         <c:choose>

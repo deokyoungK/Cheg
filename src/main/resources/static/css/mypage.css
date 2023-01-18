@@ -230,7 +230,7 @@
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    /* align-items: center; */
     border-radius: 12px;
 }
 .profile_group{

@@ -118,12 +118,12 @@
                         </div>
                     </div>
 
-                    <div class="unit">
+                    <!-- <div class="unit">
                         <h5 class="title">비밀번호</h5>
                         <div class="input_item">
                             <input type="password" class="input_txt text_fill" value="${principal.user.password}" readonly />
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                         
                 <div class="profile_group" >
