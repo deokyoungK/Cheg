@@ -20,7 +20,12 @@ public class AuthService {
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
-        user.setRole("ROLE_USER");
+
+        if(user.getUsername().equals("admin")){
+            user.setRole("ROLE_ADMIN");
+        }else{
+            user.setRole("ROLE_USER");
+        }
 
         User userEntity = userRepository.save(user);
         return userEntity;
