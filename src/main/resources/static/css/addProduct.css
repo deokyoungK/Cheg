@@ -1,0 +1,53 @@
+
+body{
+    margin: 0;
+    font-family: 'Pretendard';
+}
+
+.container h1{
+    color: #21272a;   
+}
+
+select {
+    /* 생략 */
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+
+  select:hover {
+      border-color: #888;
+  }
+
+  select:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 0 3px -moz-mac-focusring;
+      color: #222;
+      outline: none;
+    }
+
+  select:disabled {
+      opacity: 0.5;
+    }
+
+.cart__btn.right{
+    background-color: #21272a;
+    color: white;
+    border: none;
+    margin: 25px 0px 0px 0px;
+}    
+
+.cart__btn{
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: 'Pretendard';
 }
 
 h2{
@@ -53,29 +54,31 @@ td{
 }
 .cart__order{
     flex-direction: column;
-    margin-right:110px;
+    /* margin-right:110px; */
 }
 .cart__order div{
     margin-top:10px;
 }
+
 #summary{
     font-weight: bold;
+    text-align: center;
 }
 .cart__btn{
-    width: 120px;
+    width: 200px;
     height: 40px;
     font-size: 14px;
     border-radius: 4px;
 }
 
 .cart__btn.left{
-    background-color: #c2b8b8;
-    color:white;
-    border: 1px lightgray solid;
+    background-color:#ebebeb;
+    color:#21272a;
+    border: none;
     cursor: pointer;
 }
 .cart__btn.right{
-    background-color: #2f5e2c;
+    background-color: #21272a;
     color: white;
     border: none;
     cursor: pointer;

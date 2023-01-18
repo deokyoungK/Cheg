@@ -17,9 +17,9 @@
         <ul>
             <li class="admin-menu">관리자 메뉴</li>
             <li><a href="/">홈</a></li>
-            <li><a href="#">회원리스트</a></li>
-            <li><a href="#">상품리스트</a></li>
-            <li><a href="#">주문리스트</a></li>
+            <li><a class="adminlist-page" href="/admin">회원리스트</a></li>
+            <li><a class="productlist-page" href="/admin/productList">상품리스트</a></li>
+            <li><a class="orderlist-page" href="/admin/orderList">주문리스트</a></li>
 
         </ul>
 
@@ -31,7 +31,6 @@
                 <td>아이디(탈퇴여부)</td>
                 <td>이름</td>
                 <td>이메일</td>
-                <td>우편번호</td>
                 <td>주소</td>
                 <td>전화</td>
                 <td>가입일</td>
@@ -43,7 +42,6 @@
                     <td>google_107625354897149547598(가입)</td>
                     <td>윤예지</td>
                     <td>jeji3391@naver.com</td>
-                    <td>18030</td>
                     <td>화성시 봉담읍 동화길 82 104-1901</td>
                     <td>01055021006</td>
                     <td>2023.10.06</td>
@@ -51,10 +49,9 @@
             </tbody>
             <tbody>
                 <tr class="">
-                    <td>google_107625354897149547598</td>
+                    <td>google_107625354897149547598(가입)</td>
                     <td>윤예지</td>
                     <td>jeji3391@naver.com</td>
-                    <td>18030</td>
                     <td>화성시 봉담읍 동화길 82 104-1901</td>
                     <td>01055021006</td>
                     <td>2023.10.06</td>
@@ -62,10 +59,9 @@
             </tbody>
             <tbody>
                 <tr class="">
-                    <td>google_107625354897149547598</td>
+                    <td>google_107625354897149547598(가입)</td>
                     <td>윤예지</td>
                     <td>jeji3391@naver.com</td>
-                    <td>18030</td>
                     <td>화성시 봉담읍 동화길 82 104-1901</td>
                     <td>01055021006</td>
                     <td>2023.10.06</td>
@@ -73,6 +69,8 @@
             </tbody>
 
         </table>
+
+
     </section>
 
 

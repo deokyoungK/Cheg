@@ -39,11 +39,13 @@ tbody{
     font-size: 12px;
 }
 
+
 td{
     padding: 15px 5px;
-    width: 70px;
-    max-width: 100px;
-    min-width: 50px;
+    /* width: 100px; */
+    /* max-width: 100%; */
+    /* min-width: 50px; */
+    /* min-width: 150px;  */
     border-bottom: 1px solid lightgray;
 }
 
@@ -87,11 +89,23 @@ td{
 
 
   
-  li a.adminlist-page {
+  li a.productlist-page {
     background : #333;
     color: #fff;
   }
   
 
+.cart__btn.right{
+    background-color: #21272a;
+    color: white;
+    border: none;
+    margin: 25px 0px 0px 0px;
+}    
 
-  
+.cart__btn{
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
