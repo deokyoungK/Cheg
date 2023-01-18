@@ -1,6 +1,7 @@
 body{
     margin: 0;
 }
+
 h2{
     text-align: center;
     margin-top: 20px;
@@ -8,10 +9,12 @@ h2{
 span{
     margin: 0;
 }
-.cart{
+
+section{
     width: 80%;
     margin: auto;
     padding: 30px;
+    
 }
 
 table{
