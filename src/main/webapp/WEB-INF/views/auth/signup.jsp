@@ -26,7 +26,7 @@
                     <input type="password" name="password" placeholder="비밀번호" required="required" />
                     <input type="text" name="name" placeholder="이름" required="required"/>
                     <input type="text" name="phone" placeholder="전화번호" required="required" />
-                    <input type="email" name="email" placeholder="이메일" >
+                    <input type="email" name="email" placeholder="이메일" required="required" />
                     <button>회원가입</button>
                 </form>
             </div>

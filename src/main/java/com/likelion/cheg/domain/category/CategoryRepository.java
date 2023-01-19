@@ -11,4 +11,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Query(value="INSERT INTO category(name,createDate) VALUES(:name, NOW())",nativeQuery = true)
     int save(String name);
 
+    @Query(value="SELECT * FROM category c WHERE c.name=:name ",nativeQuery = true)
+    Category findByCategoryName(String name);
 }

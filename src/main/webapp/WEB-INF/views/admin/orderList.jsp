@@ -16,7 +16,6 @@
     
         <ul>
             <li class="admin-menu">관리자 메뉴</li>
-            <li><a href="/">홈</a></li>
             <li><a class="adminlist-page" href="/admin">회원리스트</a></li>
             <li><a class="productlist-page" href="/admin/productList">상품리스트</a></li>
             <li><a class="orderlist-page" href="/admin/orderList">주문리스트</a></li>
@@ -29,50 +28,23 @@
             <tr>
                 <td>주문번호</td>
                 <td>주문날짜</td>
-                <td>배송상태</td>
-                <td>이미지</td>
-                <td>브랜드</td>
+                <td>주문상태</td>
                 <td>상품명</td>
                 <td>고객아이디</td>
             </tr>
             </thead>
 
+            <c:forEach var="o" items="${orderList}">
             <tbody>
                 <tr class="">
-                    <td>107625354897149547598</td>
-                    <td>2023.10.06</td>
-                    <td>배송완료</td>
-                    <td><img style="width:50px;"class="img" src=""></td>
-                    <td>Barbour</td>
-                    <td>[커플룩/모자] 바버 강아지 옷 스웨터 강아지 바버 니트</td>
-                    <td>ezi Yoon</td>
+                    <td>${o.order_number}</td>
+                    <td>${o.createDate}</td>
+                    <td>${o.order_status}</td>
+                    <td>${o.orderItemList[0].product.name}</td>
+                    <td>${o.user.username}</td>
                 </tr>
             </tbody>
-
-            <tbody>
-                <tr class="">
-                    <td>107625354897149547598</td>
-                    <td>2023.10.06</td>
-                    <td>배송완료</td>
-                    <td><img style="width:50px;"class="img" src=""></td>
-                    <td>Barbour</td>
-                    <td>[커플룩/모자] 바버 강아지 옷 스웨터 강아지 바버 니트</td>
-                    <td>ezi Yoon</td>
-                </tr>
-            </tbody>
-
-            <tbody>
-                <tr class="">
-                    <td>107625354897149547598</td>
-                    <td>2023.10.06</td>
-                    <td>배송완료</td>
-                    <td><img style="width:50px;"class="img" src=""></td>
-                    <td>Barbour</td>
-                    <td>[커플룩/모자] 바버 강아지 옷 스웨터 강아지 바버 니트</td>
-                    <td>ezi Yoon</td>
-                </tr>
-            </tbody>
-
+            </c:forEach>
              
 
         </table>

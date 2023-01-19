@@ -30,6 +30,12 @@ public class OrderService {
     private final ProductRepository productRepository;
 
     @Transactional
+    public List<Order> loadAll(){
+        List<Order> orderList = orderRepository.findAll();
+        return orderList;
+    }
+
+    @Transactional
     public void calculateCount(int userId){
         List<Order> orderList = orderRepository.loadOrderByUserId(userId);
 
@@ -39,8 +45,6 @@ public class OrderService {
             orderRepository.save(order);
         }
     }
-
-
     @Transactional
     public void calculatePrice(int userId){
         List<Order> orderList = orderRepository.loadOrderByUserId(userId);
@@ -55,12 +59,10 @@ public class OrderService {
             order.setOrder_price(price);
             orderRepository.save(order);
         }
-
-
     }
     //※주문로직 리팩토링 필요※
     @Transactional
-    public void makeOrder(int userId, int flag, String address, int productId, int amount){
+    public Order makeOrder(int userId, int flag, String address, int productId, int amount){
 
         //8자리 주문번호 생성
         Random random = new Random();
@@ -107,6 +109,7 @@ public class OrderService {
             orderItem.calculateTotalPrice();
             orderItemRepository.save(orderItem);
 
+            return order;
         }else{ //회원
 
             //delivery객체 생성
@@ -145,7 +148,7 @@ public class OrderService {
                 orderItem.calculateTotalPrice();
                 orderItemRepository.save(orderItem);
 
-
+                return order;
             }else{ //장바구니에서 결제한 회원
 
                 //orderitem객체 생성, order에 매핑
@@ -161,13 +164,13 @@ public class OrderService {
                     //주문되면 장바구니에서는 삭제
                     cartRepository.deleteById(cart.getId());
                 }
+
+                return order;
             }
 
 
         }
     }
-
-
 
 
 }

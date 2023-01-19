@@ -1,5 +1,6 @@
 package com.likelion.cheg.web.dto.auth;
 
+import com.likelion.cheg.Annotation.phone.Phone;
 import com.likelion.cheg.domain.user.User;
 import lombok.Data;
 
@@ -14,9 +15,11 @@ public class SignupDto {
     private String password;
     @NotBlank
     private String name;
-    @NotBlank
+
+    @Phone
     private String phone;
 
+    @NotBlank
     private String email;
 
     public User toEntity() {

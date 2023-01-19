@@ -1,5 +1,6 @@
 package com.likelion.cheg.web.api;
 
+import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.dto.CMResponseDto;
 import com.likelion.cheg.dto.delivery.DeliveryDto;
@@ -45,7 +46,7 @@ public class OrderApiController {
 
     @PostMapping("api/order")
     public ResponseEntity<?> Order(@RequestBody PaymentDto paymentDto){
-        orderService.makeOrder(paymentDto.getUser_id(),paymentDto.getFlag(),paymentDto.getAddress(),paymentDto.getProduct_id(),paymentDto.getAmount());
+        Order order = orderService.makeOrder(paymentDto.getUser_id(),paymentDto.getFlag(),paymentDto.getAddress(),paymentDto.getProduct_id(),paymentDto.getAmount());
         return new ResponseEntity<>(new CMResponseDto<>(1,"성공",""), HttpStatus.OK);
     }
 

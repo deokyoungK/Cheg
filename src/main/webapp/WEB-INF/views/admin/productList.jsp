@@ -16,7 +16,6 @@
     
         <ul>
             <li class="admin-menu">관리자 메뉴</li>
-            <li><a href="/">홈</a></li>
             <li><a class="adminlist-page" href="/admin">회원리스트</a></li>
             <li><a class="productlist-page" href="/admin/productList">상품리스트</a></li>
             <li><a class="orderlist-page" href="/admin/orderList">주문리스트</a></li>
@@ -30,48 +29,20 @@
             <tr>
                 <td>카테고리</td>
                 <td>브랜드</td>
-                <!-- <td></td> -->
                 <td>상품명</td>
-                <!-- <td></td> -->
                 <td>가격</td>
-                <!-- <td></td> -->
             </tr>
             </thead>
-
+            <c:forEach var="p" items="${productList}">
             <tbody>
                 <tr class="">
-                    <td>목줄</td>
-                    <td>HERMES</td>
-                    <!-- <td></td> -->
-                    <td>에르메스 강아지 반려견 메도르 Medor Roabar 슬림 얇은 애견 목줄 3종류 다크 아이리쉬 하네스</td>
-                    <!-- <td></td> -->
-                    <td>1248800원</td>
-                    <!-- <td></td> -->
+                    <td>${p.category.name}</td>
+                    <td>${p.brand}</td>
+                    <td>${p.name}</td>
+                    <td>${p.price}원</td>
                 </tr>
             </tbody>
-            
-            <tbody>
-                <tr class="">
-                    <td>목줄</td>
-                    <td>HERMES</td>
-                    <!-- <td></td> -->
-                    <td>에르메스 강아지 반려견 메도르 Medor Roabar 슬림 얇은 애견 목줄 3종류 다크 아이리쉬 하네스</td>
-                    <!-- <td></td> -->
-                    <td>1248800원</td>
-                    <!-- <td></td> -->
-                </tr>
-            </tbody>
-            <tbody>
-                <tr class="">
-                    <td>목줄</td>
-                    <td>HERMES</td>
-                    <!-- <td></td> -->
-                    <td>에르메스 강아지 반려견 메도르 Medor Roabar 슬림 얇은 애견 목줄 3종류 다크 아이리쉬 하네스</td>
-                    <!-- <td></td> -->
-                    <td>1248800원</td>
-                    <!-- <td></td> -->
-                </tr>
-            </tbody>
+            </c:forEach>
         </table>
         <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
     </section>
