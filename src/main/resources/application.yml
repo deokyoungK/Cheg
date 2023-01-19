@@ -98,5 +98,5 @@ spring:
             client-authentication-method: POST
 
 
-#file:
-#  path: C:/Users/kang4/spring/shopping mall/upload/
+file:
+  path: C:/Users/kang4/spring/tmp7/upload/

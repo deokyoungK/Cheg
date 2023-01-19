@@ -15,7 +15,7 @@
     <div class="product_detail">
        
         <div class="product_img">
-            <img src="${product.url}">
+            <img src="/upload/${product.url}" style="width:500px;height:480px;">
         </div>
 
         <div class="product_info">

@@ -22,44 +22,35 @@
 	
 	<div class="container">
 		
-		<form name="newProduct" action="./processAddProduct.jsp" class="form-horizontal" method="post" 
+		<form name="newProduct" action="/admin/addProduct" class="form-horizontal" method="post"
 		enctype="multipart/form-data">
-		
-			
+
             <div class="dropdown">
 			    <div class="form-group row">
 				    <label class="col-sm-2">카테고리</label>
 				    <div class="com-sm-3">
-					<!-- <input type="text" id="" name="" class="form-control"> -->
-                        <select id="select_value" name="select_value" onchange="addressKindChange(this)">
-                            <option value="">하네스</option>
-                            <option value="">자켓</option>
-                            <option value="">목줄</option>
-                            <option value="">패딩</option>
-                            <option value="">스웨터</option>
+                        <select id="select_value" name="category" onchange="addressKindChange(this)">
+							<c:forEach var="c" items="${categoryList}">
+								<option value="${c.name}">${c.name}</option>
+							</c:forEach>
                         </select>
                     </div>
 				</div>
 			</div>
 
-            <div class="form-group row">
-				<label class="col-sm-2">url</label>
-				<div class="com-sm-3">
-					<input type="" name="" class="form-control">
-				</div>
-			</div>
+
 
 			<div class="form-group row">
 				<label class="col-sm-2">브랜드</label>
 				<div class="com-sm-3">
-					<input type="" name="" class="form-control">
+					<input type="" name="brand" class="form-control">
 				</div>
 			</div>
             
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" id="" name="" class="form-control">
+					<input type="text" id="" name="name" class="form-control">
 				</div>
 			</div>
 
@@ -74,14 +65,14 @@
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" id="" name="" class="form-control">
+					<input type="text" id="" name="price" class="form-control" placeholder="숫자만 입력하세요." >
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이미지</label>
 				<div>
-					<input type="file" name="productImage" class="form-control">
+					<input type="file" name="file" class="form-control">
 				</div>
 			</div>
 			

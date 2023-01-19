@@ -24,12 +24,15 @@ public class Product {
     @JoinColumn(name="category")
     private Category category;
 
+
     private String url;
     private String brand;
     private String name;
     private int price;
     private String description;
     private LocalDateTime createDate;
+
+
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {

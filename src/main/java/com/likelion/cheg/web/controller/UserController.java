@@ -5,7 +5,6 @@ import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.dto.mypage.MypageResponseDto;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Optional;
 import java.util.*;
 
 @RequiredArgsConstructor

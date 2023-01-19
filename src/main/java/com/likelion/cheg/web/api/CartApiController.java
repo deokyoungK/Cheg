@@ -2,8 +2,8 @@ package com.likelion.cheg.web.api;
 
 import com.likelion.cheg.config.auth.PrincipalDetail;
 import com.likelion.cheg.domain.cart.Cart;
-import com.likelion.cheg.dto.CMResponseDto;
 import com.likelion.cheg.service.CartService;
+import com.likelion.cheg.web.dto.CMResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

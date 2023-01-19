@@ -25,10 +25,14 @@
     <section class="client">
         <table class="client_list">
             <h1 class="client-txt">상품리스트</h1>
+            <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
+            <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
+
             <thead>
             <tr>
                 <td>카테고리</td>
                 <td>브랜드</td>
+                <td>사진</td>
                 <td>상품명</td>
                 <td>가격</td>
             </tr>
@@ -38,13 +42,13 @@
                 <tr class="">
                     <td>${p.category.name}</td>
                     <td>${p.brand}</td>
+                    <td><img src="/upload/${p.url}" alt="" style="width:50px;height:50px;"/></td>
                     <td>${p.name}</td>
                     <td>${p.price}원</td>
                 </tr>
             </tbody>
             </c:forEach>
         </table>
-        <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
     </section>
 
    

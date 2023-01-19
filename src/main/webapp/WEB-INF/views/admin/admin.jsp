@@ -27,11 +27,11 @@
             <h1 class="client-txt">회원리스트</h1>
             <thead>
             <tr>
-                <td>아이디(탈퇴여부)</td>
+                <td>아이디</td>
                 <td>이름</td>
                 <td>이메일</td>
                 <td>주소</td>
-                <td>전화</td>
+                <td>연락처</td>
                 <td>가입일</td>
             </tr>
             </thead>

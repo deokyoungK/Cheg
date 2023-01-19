@@ -30,7 +30,7 @@
         <c:forEach var="c" items="${carts}">
             <tr class="cart__list__detail">
                 <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_cart(${c.id});"></i></td>
-                <td><img style="width:50px;"class="img" src="${c.product.url}"></td>
+                <td><img style="width:50px;"class="img" src="/upload/${c.product.url}"></td>
                 <td>${c.product.name}</td>
 
                 <td><i style="font-size:20px; cursor:pointer;" class="fa-regular fa-circle-down" id="down_${c.id}" onclick="count_down(${c.id});"></i></td>

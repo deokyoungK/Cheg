@@ -1,6 +1,6 @@
 package com.likelion.cheg.web.dto.auth;
 
-import com.likelion.cheg.Annotation.phone.Phone;
+import com.likelion.cheg.annotation.phone.Phone;
 import com.likelion.cheg.domain.user.User;
 import lombok.Data;
 

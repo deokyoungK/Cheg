@@ -1,4 +1,4 @@
-package com.likelion.cheg.Annotation.phone;
+package com.likelion.cheg.annotation.phone;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

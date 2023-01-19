@@ -1,10 +1,11 @@
-package com.likelion.cheg.dto.delivery;
+package com.likelion.cheg.web.dto.delivery;
 
 
-import com.likelion.cheg.Annotation.phone.Phone;
+import com.likelion.cheg.annotation.phone.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor

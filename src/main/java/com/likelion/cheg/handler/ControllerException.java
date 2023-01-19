@@ -5,7 +5,7 @@ import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.handler.ex.CustomValidationException;
 import com.likelion.cheg.util.Script;
-import com.likelion.cheg.web.dto.CMRespDto;
+import com.likelion.cheg.web.dto.CMResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,8 +34,8 @@ public class ControllerException {
 
     //api통신 - 데이터리턴
     @ExceptionHandler(CustomValidationApiException.class)
-    public ResponseEntity<CMRespDto<?>> validationApiException(CustomValidationApiException e) {
-        return new ResponseEntity<>(new CMRespDto<>(-1,e.getMessage(),e.getErrorMap()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CMResponseDto<?>> validationApiException(CustomValidationApiException e) {
+        return new ResponseEntity<>(new CMResponseDto<>(-1,e.getMessage(),e.getErrorMap()), HttpStatus.BAD_REQUEST);
 
     }
 }

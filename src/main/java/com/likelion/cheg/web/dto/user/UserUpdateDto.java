@@ -1,7 +1,6 @@
 package com.likelion.cheg.web.dto.user;
 
-import com.likelion.cheg.Annotation.phone.Phone;
-import com.likelion.cheg.domain.user.User;
+import com.likelion.cheg.annotation.phone.Phone;
 import lombok.Data;
 
 import javax.validation.constraints.Email;

@@ -19,7 +19,6 @@
 <input type="hidden" id="productName" value="${product.name}">
 
 
-
 <form action="" onsubmit="iamport(event)">
 	
 	<div class="division">
@@ -106,7 +105,7 @@
 					<div class="delivery-product-box-inner">
 
 						<div class="delivery-product-top">
-							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="${product.url}" alt=""></a>
+							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${product.url}" alt=""></a>
 							<div class="delivery-product-info">
 								<div class="delivery-product-brand">${product.brand}</div>
 								<div class="delivery-product-name">${product.name}</div>

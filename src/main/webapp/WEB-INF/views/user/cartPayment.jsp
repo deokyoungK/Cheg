@@ -100,7 +100,7 @@
 				<div class="delivery-product-box-inner">
 
 					<div class="delivery-product-top">
-						<a class="delivery-product-img" href=""><img class="delivery-product-img" src="${c.product.url}" alt=""></a>
+						<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${c.product.url}" alt=""></a>
 						<div class="delivery-product-info">
 							<div class="delivery-product-brand">${c.product.brand}</div>
 							<div class="delivery-product-name">${c.product.name}</div>
