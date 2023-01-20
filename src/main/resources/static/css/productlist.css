@@ -94,12 +94,11 @@ td{
     color: #fff;
   }
   
-
 .cart__btn.right{
     background-color: #21272a;
     color: white;
     border: none;
-    margin: 25px 0px 0px 0px;
+    margin: 25px 2px;
 }    
 
 .cart__btn{
@@ -108,4 +107,9 @@ td{
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.product-btn{
+    display: flex;
+    justify-content: space-between;
 }

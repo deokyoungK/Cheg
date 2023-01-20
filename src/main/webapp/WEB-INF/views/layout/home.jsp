@@ -49,7 +49,7 @@
             <a href="/category/자켓" class="category"><img src="${pageContext.request.contextPath}/images/jacket.png"  alt="NULL">자켓</a>
             <a href="/category/목줄" class="category"><img src="${pageContext.request.contextPath}/images/leash.png"  alt="NULL">목줄</a>
             <a href="/category/패딩" class="category"><img src="${pageContext.request.contextPath}/images/padding4.png"  alt="NULL">패딩</a>
-            <a href="/category/스웨터" class="category"><img src="${pageContext.request.contextPath}/images/top.png"  alt="NULL">스웨터</a>
+            <a href="/category/스웨터" class="category"><img src="${pageContext.request.contextPath}/images/sweater.png"  alt="NULL">스웨터</a>
         </div>
         <c:choose>
             <c:when test="${fn:length(productList) == 0}">

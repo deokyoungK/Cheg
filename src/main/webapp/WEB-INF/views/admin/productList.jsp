@@ -24,9 +24,14 @@
 
     <section class="client">
         <table class="client_list">
-            <h1 class="client-txt">상품리스트</h1>
-            <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
-            <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
+
+            <div class="product-btn">
+                <h1 class="client-txt">상품리스트</h1>
+                <div class="product-btn">
+                    <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
+                    <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
+                </div>
+            </div>
 
             <thead>
             <tr>

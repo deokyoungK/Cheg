@@ -59,6 +59,7 @@ a {
     font-weight: bold;
     /* margin-left: 2% */
     overflow: hidden;
+    
 }
 
 .navbar__right {
@@ -217,3 +218,7 @@ a {
 /* .search-padding{
     padding: 4px 13px;
 } */
+
+.admin-txt{
+    width: max-content;
+}

@@ -27,8 +27,11 @@
         <c:forEach var="c" items="${categoryList}">
             ${c.name}
         </c:forEach>
-        <input type="text" name="category">
-        <a href=""><button class="cart__btn right" onclick = "">등록하기</button></a>
+
+        <div>
+            <input class="category-input cart__btn" type="text" name="category">
+            <a href=""><button class="cart__btn right" onclick = "">등록하기</button></a>
+        </div>
 
     </form>
 </div>

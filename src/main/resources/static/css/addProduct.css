@@ -51,3 +51,7 @@ select {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.category-input{
+    border: solid 1px #e9ecef;
+}
