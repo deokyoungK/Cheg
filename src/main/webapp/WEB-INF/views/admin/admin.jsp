@@ -33,6 +33,7 @@
                 <td>주소</td>
                 <td>연락처</td>
                 <td>가입일</td>
+                <td>회원탈퇴</td>
             </tr>
             </thead>
             <c:forEach var="u" items="${userList}">
@@ -44,6 +45,7 @@
                     <td>${u.address}</td>
                     <td>${u.phone}</td>
                     <td>${u.createDate}</td>
+                    <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_user(${u.id});"></i></td>
                 </tr>
             </tbody>
             </c:forEach>
@@ -55,4 +57,5 @@
 
     </div>
 </body>
+<script src="/js/admin.js"></script>
 </html>

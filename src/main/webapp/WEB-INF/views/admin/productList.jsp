@@ -39,7 +39,9 @@
                 <td>브랜드</td>
                 <td>사진</td>
                 <td>상품명</td>
+                <td>상품상세</td>
                 <td>가격</td>
+                <td>삭제</td>
             </tr>
             </thead>
             <c:forEach var="p" items="${productList}">
@@ -49,7 +51,9 @@
                     <td>${p.brand}</td>
                     <td><img src="/upload/${p.url}" alt="" style="width:50px;height:50px;"/></td>
                     <td>${p.name}</td>
+                    <td>${p.description}</td>
                     <td>${p.price}원</td>
+                    <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_product(${p.id});"></i></td>
                 </tr>
             </tbody>
             </c:forEach>
@@ -60,4 +64,5 @@
 
     </div>
 </body>
+<script src="/js/admin.js"></script>
 </html>

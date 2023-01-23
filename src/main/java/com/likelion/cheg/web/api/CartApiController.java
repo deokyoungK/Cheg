@@ -42,7 +42,7 @@ public class CartApiController {
     @PostMapping("api/cart/{cartId}/delete")
     public ResponseEntity<?> deleteCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
         cartService.deleteCart(cartId);
-        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",""), HttpStatus.OK);
+        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 삭제 성공",""), HttpStatus.OK);
     }
 
 }

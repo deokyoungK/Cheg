@@ -28,6 +28,15 @@ public class ProductService {
     private String uploadFolder;
 
     @Transactional
+    public void deleteProduct(int productId){
+        try{
+            productRepository.deleteById(productId);
+        }catch(Exception e){
+            throw new CustomException(e.getMessage());
+        }
+    }
+
+    @Transactional
     public Product addProduct(ProductUploadDto productUploadDto){
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();

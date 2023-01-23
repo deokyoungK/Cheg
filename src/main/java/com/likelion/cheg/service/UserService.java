@@ -2,6 +2,7 @@ package com.likelion.cheg.service;
 
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
+import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,15 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Transactional
+    public void deleteUser(int userId){
+        try{
+            userRepository.deleteById(userId);
+        }catch(Exception e){
+            throw new CustomException(e.getMessage());
+        }
+    }
 
     @Transactional
     public User update(int userId, UserUpdateDto userUpdateDto){

@@ -43,14 +43,14 @@
 			<div class="form-group row">
 				<label class="col-sm-2">브랜드</label>
 				<div class="com-sm-3">
-					<input type="" name="brand" class="form-control">
+					<input type="" name="brand" class="form-control" required>
 				</div>
 			</div>
             
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" id="" name="name" class="form-control">
+					<input type="text" name="name" class="form-control" required>
 				</div>
 			</div>
 
@@ -65,7 +65,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" id="" name="price" class="form-control" placeholder="숫자만 입력하세요." >
+					<input type="text" id="" name="price" class="form-control" placeholder="숫자만 입력하세요." required>
 				</div>
 			</div>
 

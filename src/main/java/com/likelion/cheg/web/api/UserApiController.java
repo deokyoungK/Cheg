@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,12 @@ import java.util.Map;
 public class UserApiController {
 
     private final UserService userService;
+
+    @PostMapping("api/user/{userId}/delete")
+    public ResponseEntity deleteUser(@PathVariable int userId){
+        userService.deleteUser(userId);
+        return new ResponseEntity<>(new CMResponseDto<>(1,"회원 탈퇴 성공",""),HttpStatus.OK);
+    }
 
     @PutMapping("api/update/{userId}")
     public ResponseEntity<?> update(
