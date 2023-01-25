@@ -30,7 +30,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference
-    private List<OrderItem> orderItemList;
+    private List<OrderItem> orderItemList = new ArrayList<>();
 
     @OneToOne
     @JsonIgnoreProperties({"order"})
@@ -48,5 +48,14 @@ public class Order {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+    public Order(User user, Delivery delivery, int order_status, String order_number){
+        this.user = user;
+        this.delivery = delivery;
+        this.order_status = order_status;
+        this.order_number = order_number;
+    }
+
+
 
 }

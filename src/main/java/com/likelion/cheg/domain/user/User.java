@@ -45,6 +45,12 @@ public class User {
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
-	
+
+	public User(String name, String password, String username, String role){
+		this.name = name;
+		this.password = password;
+		this.username = username;
+		this.role = role;
+	}
 
 }

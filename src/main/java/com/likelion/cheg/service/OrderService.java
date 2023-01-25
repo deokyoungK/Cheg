@@ -14,6 +14,7 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import javax.transaction.Transactional;
@@ -56,11 +57,14 @@ public class OrderService {
                 price += order.getOrderItemList().get(i).getTotal_price();
 
             }
+
             order.setOrder_price(price);
             orderRepository.save(order);
         }
     }
-    //※주문로직 리팩토링 필요※
+
+
+
     @Transactional
     public Order makeOrder(int userId, int flag, String address, int productId, int amount){
 
@@ -71,106 +75,74 @@ public class OrderService {
             number += Integer.toString(random.nextInt(9));
         }
 
-        //비회원
+        //delivery 생성
+        Delivery delivery = new Delivery(address,"배송전");
+        deliveryRepository.save(delivery);
+
+        //비회원, 회원구분
         if(userId == 0){
-            //delivery객체 생성
-            Delivery delivery = new Delivery();
-            delivery.setDelivery_address(address);
-            delivery.setDelivery_status("배송전");
-            deliveryRepository.save(delivery);
-
-            //order객체 생성
-            User user = new User();
-            user.setName("비회원");
-            user.setPassword("비회원_password");
-            user.setUsername("비회원_"+number);
-            user.setRole("ROLE_GUEST");
+            //비회원user 생성 후 order 생성
+            User user = new User("비회원","비회원_password","비회원_"+number,"ROLE_GUEST");
             userRepository.save(user);
-
-            Order order = new Order();
-            order.setUser(user);
-            order.setDelivery(delivery);
-            order.setOrder_status(1);
-            order.setOrder_number(number.toString());
+            Order order = new Order(user,delivery,1,number.toString());
+            order.getDelivery().setOrder(order);
             orderRepository.save(order);
 
-
-            //delivery객체 기준 order에 매핑
-            order.getDelivery().setOrder(order);
-
-            //orderitem객체 생성, order에 매핑
-            Product product = productRepository.findById(productId).orElseThrow(()->{
-                return new CustomException("상품을 찾을 수 없습니다.");
-            });
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-            orderItem.setProduct(product);
-            orderItem.setQuantity(amount);
-            orderItem.calculateTotalPrice();
-            orderItemRepository.save(orderItem);
-
-            return order;
-        }else{ //회원
-
-            //delivery객체 생성
-            Delivery delivery = new Delivery();
-            delivery.setDelivery_address(address);
-            delivery.setDelivery_status("배송전");
-            deliveryRepository.save(delivery);
-
-            //order객체 생성
+            Order myOrder = makeOrderItem(order,0,productId,amount,userId);
+            return myOrder;
+        }else{
+            //회원찾은 후 order 생성
             User user = userRepository.findById(userId).orElseThrow(()->{
-                return new CustomException("유저를 찾을 수 없습니다.");
+                return new CustomException("회원를 찾을 수 없습니다.");
             });
-
-            Order order = new Order();
-            order.setUser(user);
-            order.setDelivery(delivery);
-            order.setOrder_status(1);
-            order.setOrder_number(number);
-
+            Order order = new Order(user,delivery,1,number.toString());
+            order.getDelivery().setOrder(order);
             orderRepository.save(order);
 
-            //delivery객체 기준 order에 매핑
-            order.getDelivery().setOrder(order);
-
-
-            //상세에서 결제한 회원
-            if(flag == 0){
-                //orderitem객체 생성, order에 매핑
-                Product product = productRepository.findById(productId).orElseThrow(()->{
-                    return new CustomException("상품을 찾을 수 없습니다.");
-                });
-                OrderItem orderItem = new OrderItem();
-                orderItem.setOrder(order);
-                orderItem.setProduct(product);
-                orderItem.setQuantity(amount);
-                orderItem.calculateTotalPrice();
-                orderItemRepository.save(orderItem);
-
-                return order;
-            }else{ //장바구니에서 결제한 회원
-
-                //orderitem객체 생성, order에 매핑
-                List<Cart> cartList = cartRepository.loadCartByUserId(userId);
-                for(Cart cart : cartList){
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.setOrder(order);
-                    orderItem.setProduct(cart.getProduct());
-                    orderItem.setQuantity(cart.getProduct_count());
-                    orderItem.calculateTotalPrice();
-                    orderItemRepository.save(orderItem);
-
-                    //주문되면 장바구니에서는 삭제
-                    cartRepository.deleteById(cart.getId());
-                }
-
-                return order;
-            }
-
-
+            Order myOrder = makeOrderItem(order,flag,productId,amount,userId);
+            return myOrder;
         }
     }
 
+    @Transactional
+    public Order makeOrderItem(Order order, int flag, int productId, int amount, int userId){
+        //flag는 상세(0)/장바구니(1) 구분
+        //productId는 [상세]결제일 때 상품Id로 orderitem을 만들기 위해 필요
+        //amount는 [상세]결제일 때 orderitem을 만들기 위해 필요
+        //userId는 [장바구니]결제일 때 유저 장바구니상품을 orderitem으로 만들기 위해 필요
+
+        if(flag == 0){ //[상세]에서 결제
+            Product product = productRepository.findById(productId).orElseThrow(()->{
+                return new CustomException("상품을 찾을 수 없습니다.");
+            });
+
+            OrderItem orderItem = new OrderItem(order, product, amount);
+
+            //order에 매핑
+            order.getOrderItemList().add(orderItem);
+
+            orderItem.calculateTotalPrice();
+            orderItemRepository.save(orderItem);
+            return order;
+
+        }else{ //[장바구니]에서 결제
+            List<Cart> cartList = cartRepository.loadCartByUserId(userId);
+            for(Cart cart : cartList){
+                OrderItem orderItem = new OrderItem(order, cart.getProduct(), cart.getProduct_count());
+
+                //order에 매핑
+                order.getOrderItemList().add(orderItem);
+
+                orderItem.calculateTotalPrice();
+                orderItemRepository.save(orderItem);
+
+                //주문되면 장바구니에서는 삭제
+                cartRepository.deleteById(cart.getId());
+
+            }
+            return order;
+        }
+
+    }
 
 }
