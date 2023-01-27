@@ -63,7 +63,7 @@ public class OrderTest {
 
 
         //상품 생성
-        Category category = categoryService.findOne("패딩");
+        Category category = categoryService.findOne("신발");
         Product product1 = new Product();
         product1.setCategory(category);
         product1.setName("테스트제품1");

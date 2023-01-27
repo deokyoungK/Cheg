@@ -30,6 +30,13 @@ public class OrderService {
     private final DeliveryRepository deliveryRepository;
     private final ProductRepository productRepository;
 
+
+    @Transactional
+    public List<Order> searchOrderByKeyword(String keyword){
+        List<Order> orderList = orderRepository.searchByKeyword(keyword);
+        return orderList;
+    }
+
     @Transactional
     public List<Order> loadAll(){
         List<Order> orderList = orderRepository.findAll();

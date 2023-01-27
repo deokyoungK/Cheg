@@ -44,9 +44,9 @@
                 
                     <h1 class="client-txt">상품리스트</h1>
                     <div class="admin-search">
-                        <form id="form" action="/search" method="GET" class="admin-box">
-                            <input class="admin-search_input" type="text">
-                            <button class="admin-search_btn">검색</button>
+                        <form id="form" action="/admin/search/product" method="GET" class="admin-box">
+                            <input name="keyword" class="admin-search_input" type="text" placeholder="상품명 or 브랜드 입력">
+                            <button type="submit" class="admin-search_btn">검색</button>
                         </form>
                     
     

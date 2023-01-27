@@ -1,5 +1,6 @@
 package com.likelion.cheg.service;
 
+import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -39,4 +41,11 @@ public class UserService {
         user.setPhone(userUpdateDto.getPhone());
         return user;
     }
+
+    @Transactional
+    public List<User> searchUserByKeyword(String keyword){
+        List<User> userList = userRepository.searchByKeyword(keyword);
+        return userList;
+    }
+
 }

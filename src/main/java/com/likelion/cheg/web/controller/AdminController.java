@@ -33,6 +33,7 @@ public class AdminController {
     private final UserRepository userRepository;
     private final OrderService orderService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
 
     @GetMapping("/admin")
@@ -92,5 +93,24 @@ public class AdminController {
         return "redirect:/admin/addCategory";
     }
 
+    @GetMapping("/admin/search/user")
+    public String searchUser(@RequestParam(value="keyword") String keyword, Model model){
+        List<User> userList = userService.searchUserByKeyword(keyword);
+        model.addAttribute("userList",userList);
+        return "admin/admin";
+    }
 
+    @GetMapping("/admin/search/product")
+    public String searchProduct(@RequestParam(value="keyword") String keyword, Model model){
+        List<Product> productList = productService.searchProductByKeyword(keyword);
+        model.addAttribute("productList",productList);
+        return "admin/productList";
+    }
+
+    @GetMapping("/admin/search/order")
+    public String searchOrder(@RequestParam(value="keyword") String keyword, Model model){
+        List<Order> orderList = orderService.searchOrderByKeyword(keyword);
+        model.addAttribute("orderList",orderList);
+        return "admin/orderList";
+    }
 }
