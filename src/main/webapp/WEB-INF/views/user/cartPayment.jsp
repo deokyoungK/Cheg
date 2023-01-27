@@ -86,8 +86,8 @@
 
 					</div>
 
-					<div class="delivery-ask-txt">배송 요청 사항</div>
-					<button type="button" class="delivery-ask-btn" onclick="">직접 수령할게요.</button>
+					<!-- <div class="delivery-ask-txt">배송 요청 사항</div>
+					<button type="button" class="delivery-ask-btn" onclick="">직접 수령할게요.</button> -->
 
 				</div>
 			</div>

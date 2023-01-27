@@ -15,23 +15,49 @@
     <div class="amdin-wrap">
     
         <ul>
-            <li class="admin-menu">관리자 메뉴</li>
-            <li><a class="adminlist-page" href="/admin">회원리스트</a></li>
-            <li><a class="productlist-page" href="/admin/productList">상품리스트</a></li>
-            <li><a class="orderlist-page" href="/admin/orderList">주문리스트</a></li>
+            <li class="admin-menu admin">관리자 메뉴</li>
+            <li><a class="adminlist-page admin" href="/admin">회원리스트</a></li>
+            <li><a class="productlist-page admin" href="/admin/productList">상품리스트</a></li>
+            <li><a class="orderlist-page admin" href="/admin/orderList">주문리스트</a></li>
 
         </ul>
 
     <section class="client">
         <table class="client_list">
 
-            <div class="product-btn">
+            <!-- <div class="product-btn">
                 <h1 class="client-txt">상품리스트</h1>
+                <div class="admin-search">
+                    <form id="form" action="/search" method="GET" class="admin-box">
+                        <input class="admin-search_input" type="text">
+                        <button class="admin-search_btn">검색</button>
+                    </form>
+                </div>
+
                 <div class="product-btn">
                     <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
                     <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
                 </div>
+            </div> -->
+
+            <div class="client-wrap">
+                
+                    <h1 class="client-txt">상품리스트</h1>
+                    <div class="admin-search">
+                        <form id="form" action="/search" method="GET" class="admin-box">
+                            <input class="admin-search_input" type="text">
+                            <button class="admin-search_btn">검색</button>
+                        </form>
+                    
+    
+                    
+                        <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
+                        <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
+                    
+                </div>
             </div>
+
+
 
             <thead>
             <tr>

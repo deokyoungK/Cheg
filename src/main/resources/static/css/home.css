@@ -38,54 +38,20 @@ body{
 
 
 .product-container {
-    /* background-color: white; */
-    margin-top: 30px;
-}
-
-.product-category{
-    display: flex;
-    margin: 50px auto;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 700px;
-    border-bottom: 1px solid #555555;
-    border-top: 1px solid #555555;
-    padding: 10px 0px;
-}
-
-.category-txt{
-    font-family: 'Pretendard-Regular';
-    font-size: 14px;
-    color: #222222;
-    font-weight: bold;
-    margin: 0px;
-    padding: 10px 50px 10px 0px;
-
-}
-
-.category-list{
-    font-family: 'Pretendard-Regular';
-    font-size: 14px;
-    color: #222222;
-    padding: 10px 10px;
-    
-}
-
-.category-list:hover{
-    text-decoration:underline;
+    margin: 30px auto;
+    max-width: 1280px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .product-category2{
     display: flex;
     justify-content: space-between;
-    width: 1040px;
-    margin: 0px auto;
     padding: 40px 0px ;
+    max-width: 1280px;
 }
 
 .category{
-    width: 200px;
     height: 100px;
     justify-content: center;
     text-align: center;
@@ -105,10 +71,7 @@ body{
 
 .product-card {
     font-family: 'Pretendard-Regular';
-    width: 280px;
-    height: 400px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin: 30px 0px;
 }
 
 .product-card:hover {
@@ -118,16 +81,15 @@ body{
 .product-list {
     font-family: 'Pretendard-Regular';
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;    
     border-radius: 12px;
-    margin: 30px 0px;
+    justify-content: space-between;
+    margin-top: 30px;
 }
 
 .product-img {
-    width: 260px;
-    height: 260px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 12px;
 }
@@ -138,7 +100,7 @@ body{
     font-size: 13px;
     color: #222222;
     font-weight: bold;
-    padding: 6px 0;
+    padding: 6px;
     text-decoration:underline;
     
 }
@@ -147,7 +109,7 @@ body{
     font-family: 'Pretendard';
     font-size: 13px;
     color: #555555;
-    padding: 6px 0;
+    padding: 6px;
     
 }
 
@@ -156,4 +118,5 @@ body{
     font-size: 14px;
     color: #222222;
     font-weight: bold;
+    padding: 6px;
 }

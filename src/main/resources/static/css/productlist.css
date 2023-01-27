@@ -1,4 +1,6 @@
-body{
+
+
+  body{
     margin: 0;
     font-family: 'Pretendard';
 }
@@ -15,6 +17,7 @@ span{
 
 .amdin-wrap{
     display: flex;
+    
 }
 
 .client{
@@ -39,13 +42,11 @@ tbody{
     font-size: 12px;
 }
 
-
 td{
     padding: 15px 5px;
-    /* width: 100px; */
-    /* max-width: 100%; */
-    /* min-width: 50px; */
-    /* min-width: 150px;  */
+    width: 70px;
+    max-width: 100px;
+    min-width: 50px;
     border-bottom: 1px solid lightgray;
 }
 
@@ -54,7 +55,6 @@ td{
     font-size: 32px;
     color: #21272a;    
     line-height: 20px;
-    margin-bottom: 40px;
  }
 
 
@@ -74,7 +74,7 @@ td{
     font-weight: bold;
   }
 
-  li a {
+  .admin {
     text-decoration: none;
     padding: 10px;
     display: block;
@@ -82,18 +82,50 @@ td{
     font-weight: bold;
   }
   
-  li a:hover {
+  .admin:hover {
     background: #333;
     color: #fff;
   }
 
-
-  
-  li a.productlist-page {
+  .admin.orderlist-page {
     background : #333;
     color: #fff;
+  }  
+
+.client-wrap{
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
   }
-  
+
+
+  .admin-search{
+    margin-left: 30px;
+    /* align-items: center;
+    justify-content: center; */
+  }
+
+  .admin-search_input{
+    border: 1px solid #333;
+    padding: 4px;
+    border-radius: 4px;
+    width: 200px;
+    height: 20px;
+  }
+
+  .admin-search_btn{
+    width: 50px;
+    height: 30px;
+    /* padding: 10px; */
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #21272a;
+    color: white;
+    border: none;    
+  }
+
+
 .cart__btn.right{
     background-color: #21272a;
     color: white;
@@ -107,9 +139,4 @@ td{
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.product-btn{
-    display: flex;
-    justify-content: space-between;
 }
