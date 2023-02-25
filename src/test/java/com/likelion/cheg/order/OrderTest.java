@@ -24,6 +24,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.*;
 @RunWith(SpringRunner.class)
@@ -31,6 +34,8 @@ import java.util.*;
 @Transactional
 public class OrderTest {
 
+    @PersistenceContext
+    EntityManager em;
     @Autowired
     OrderService orderService;
     @Autowired
@@ -48,79 +53,90 @@ public class OrderTest {
     @Autowired
     AuthService authService;
 
+    //User,Category,Product 생성메서드
+    private User createUser(String username) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword("123");
+        user.setName("안뇽");
+        user.setPhone("01050222941");
+        user.setEmail("kang48450@gmail.com");
+        user.setAddress("서울");
+        em.persist(user);
+        return user;
+    }
+    private Category createCategory(String name) {
+        Category category = new Category();
+        category.setName(name);
+        em.persist(category);
+        return category;
+    }
+    private Product createProduct(Category category, String name, int price) {
+        Product product = new Product();
+        product.setName(name);
+        product.setName(name);
+        product.setPrice(price);
+        em.persist(product);
+        return product;
+    }
+    private Cart createCart(User user,Product product, int productCount){
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cart.setProduct(product);
+        cart.setProduct_count(productCount);
+        user.getCarts().add(cart);
+        em.persist(cart);
+        return cart;
+    }
     @Test
-    @DisplayName("회원 주문 테스트")
-    public void order(){
-        User user1 = new User();
-        user1.setUsername("테스트용id1");
-        user1.setPassword("123");
-        user1.setName("안뇽");
-        user1.setPhone("01050222941");
-        user1.setEmail("kang48450@gmail.com");
-        user1.setAddress("서울");
-
-        User user = authService.signup(user1);
-
-
+    @DisplayName("회원 상세페이지 주문 테스트")
+    public void order_member_detail(){
+        //user생성 후 회원가입
+        User user = createUser("테스트용_아디1");
+        //카테고리 생성
+        Category category = createCategory("테스트용_카테고리");
         //상품 생성
-        Category category = categoryService.findOne("신발");
-        Product product1 = new Product();
-        product1.setCategory(category);
-        product1.setName("테스트제품1");
-        product1.setPrice(1);
-        productRepository.save(product1);
+        Product product = createProduct(category,"테스트용_상품",100);
 
-        Product product2 = new Product();
-        product2.setCategory(category);
-        product2.setName("테스트제품2");
-        product2.setPrice(2);
-        productRepository.save(product2);
+        //(1)회원이 상세페이지에서 주문
+        Order order = orderService.makeOrder(user.getId(),0,user.getAddress(), product.getId(), 2);
 
-        //장바구니 생성 -> 1,2번상품 각각 10,20개씩
-        Cart cart1 = new Cart();
-        cart1.setUser(user);
-        cart1.setProduct(product1);
-        cart1.setProduct_count(10);
-        user.getCarts().add(cart1);
+        //(1)order 확인
+        assertThat(order.getUser().getUsername()).isEqualTo(user.getUsername());
+        assertThat(order.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
+        //(1)orderItem확인
+        assertThat(order.getOrderItemList().size()).isEqualTo(1);
+        assertThat(order.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order.getId());
+    }
 
-        Cart cart2 = new Cart();
-        cart2.setUser(user);
-        cart2.setProduct(product2);
-        cart2.setProduct_count(20);
-        user.getCarts().add(cart2);
+    @Test
+    @DisplayName("회원 장바구니 주문 테스트")
+    public void order_member_cart(){
+        //user생성 후 회원가입
+        User user = createUser("테스트용_아디2");
+        //카테고리 생성
+        Category category = createCategory("테스트용_카테고리");
+        //상품 생성
+        Product product = createProduct(category,"테스트용_상품",10);
 
-        cartRepository.save(cart1);
-        cartRepository.save(cart2);
-
+        //장바구니 생성
+        Cart cart = createCart(user,product,2);
 
         //주문 전 장바구니 갯수 확인
         int cart_number = user.getCarts().size();
 
-        //(1)회원이 상세페이지에서 주문
-        Order order1 = orderService.makeOrder(user.getId(),0,user.getAddress(), product1.getId(), 2);
         //(2)회원이 장바구니에서 주문
-        Order order2 = orderService.makeOrder(user.getId(),1,user.getAddress(), product1.getId(), 2);
-
-        //(1)order 확인
-        assertThat(order1.getUser().getUsername()).isEqualTo(user.getUsername());
-        assertThat(order1.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
-        //(1)orderItem확인
-        assertThat(order1.getOrderItemList().size()).isEqualTo(1);
-        assertThat(order1.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order1.getId());
-
+        Order order = orderService.makeOrder(user.getId(),1,user.getAddress(), product.getId(), 2);
 
         //(2)order 확인
-        assertThat(order2.getUser().getUsername()).isEqualTo(user.getUsername());
-        assertThat(order2.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
+        assertThat(order.getUser().getUsername()).isEqualTo(user.getUsername());
+        assertThat(order.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
         //(2)orderItem확인
-        assertThat(order2.getOrderItemList().size()).isEqualTo(2);
-        assertThat(order2.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order2.getId());
+        assertThat(order.getOrderItemList().size()).isEqualTo(1);
+        assertThat(order.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order.getId());
         //(2)장바구니 사라졌는지 확인(실제구동에서는 되는데 테스트시 작동안됨.. -> 이유찾는중)
 //        assertThat(cart_number).isEqualTo(2);
 //        assertThat(user.getCarts().size()).isEqualTo(0);
 
-
     }
-
-
 }
