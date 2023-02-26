@@ -28,6 +28,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+
 import java.util.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -53,7 +55,7 @@ public class OrderTest {
     @Autowired
     AuthService authService;
 
-    //User,Category,Product 생성메서드
+    //User,Category,Product,Cart 생성메서드
     private User createUser(String username) {
         User user = new User();
         user.setUsername(username);
@@ -89,10 +91,9 @@ public class OrderTest {
         return cart;
     }
     @Test
-    @DisplayName("회원 상세페이지 주문 테스트")
-    public void order_member_detail(){
+    public void 회원_상세페이지_주문_테스트(){
         //user생성 후 회원가입
-        User user = createUser("테스트용_아디1");
+        User user = createUser("테스트용_아디1111");
         //카테고리 생성
         Category category = createCategory("테스트용_카테고리");
         //상품 생성
@@ -102,18 +103,17 @@ public class OrderTest {
         Order order = orderService.makeOrder(user.getId(),0,user.getAddress(), product.getId(), 2);
 
         //(1)order 확인
-        assertThat(order.getUser().getUsername()).isEqualTo(user.getUsername());
-        assertThat(order.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
+        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrder_status(),1);
+        assertEquals("주문 시 배송정보 확인.",order.getDelivery().getDelivery_address(),user.getAddress());
         //(1)orderItem확인
-        assertThat(order.getOrderItemList().size()).isEqualTo(1);
-        assertThat(order.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order.getId());
+        assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
+        assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());
     }
 
     @Test
-    @DisplayName("회원 장바구니 주문 테스트")
-    public void order_member_cart(){
+    public void 회원_장바구니_주문_테스트(){
         //user생성 후 회원가입
-        User user = createUser("테스트용_아디2");
+        User user = createUser("테스트용_아디2222");
         //카테고리 생성
         Category category = createCategory("테스트용_카테고리");
         //상품 생성
@@ -121,7 +121,6 @@ public class OrderTest {
 
         //장바구니 생성
         Cart cart = createCart(user,product,2);
-
         //주문 전 장바구니 갯수 확인
         int cart_number = user.getCarts().size();
 
@@ -129,11 +128,11 @@ public class OrderTest {
         Order order = orderService.makeOrder(user.getId(),1,user.getAddress(), product.getId(), 2);
 
         //(2)order 확인
-        assertThat(order.getUser().getUsername()).isEqualTo(user.getUsername());
-        assertThat(order.getDelivery().getDelivery_address()).isEqualTo(user.getAddress());
+        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrder_status(),1);
+        assertEquals("주문 시 배송정보 확인.",order.getDelivery().getDelivery_address(),user.getAddress());
         //(2)orderItem확인
-        assertThat(order.getOrderItemList().size()).isEqualTo(1);
-        assertThat(order.getOrderItemList().get(0).getOrder().getId()).isEqualTo(order.getId());
+        assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
+        assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());
         //(2)장바구니 사라졌는지 확인(실제구동에서는 되는데 테스트시 작동안됨.. -> 이유찾는중)
 //        assertThat(cart_number).isEqualTo(2);
 //        assertThat(user.getCarts().size()).isEqualTo(0);

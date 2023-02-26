@@ -1,8 +1,6 @@
 package com.likelion.cheg.domain.cart;
 
-import com.likelion.cheg.domain.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -20,4 +18,9 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     //userid로 조회
     @Query(value="SELECT * FROM CART c WHERE c.user_id = :userId",nativeQuery = true)
     List<Cart> loadCartByUserId(@Param("userId") int userId);
+
+    //cartid로 삭제
+    @Query(value="DELETE FROM CART c WHERE c.id = :cartId",nativeQuery = true)
+    void deleteByCartId(@Param("cartId") int cartId);
+
 }

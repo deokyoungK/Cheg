@@ -19,7 +19,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호증가전략이 db를 따라간다.
 	private int id;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"user"})
 	private List<Cart> carts = new ArrayList<>();
 

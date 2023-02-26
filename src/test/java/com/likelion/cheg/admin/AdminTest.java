@@ -27,7 +27,6 @@ public class AdminTest {
     @Autowired
     MockMvc mockMvc;
 
-
     @Test
     @DisplayName("익명사용자 첫화면 get")
     public void index_anonymous() throws Exception {

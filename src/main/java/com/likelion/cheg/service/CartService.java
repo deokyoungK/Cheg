@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
+import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.*;
 public class CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public List<Cart> loadCart(int id){
@@ -28,7 +30,7 @@ public class CartService {
     }
 
     @Transactional
-    public void addCart(User user, int productId, int amount){
+    public Cart addCart(User user, int productId, int amount){
         Cart cart = cartRepository.findByUserIdAndProductId(user.getId(),productId);
 
         //새로 만든 cart라면 product_count를 amount로 하는 장바구니 생성
@@ -40,12 +42,16 @@ public class CartService {
             newCart.setUser(user);
             newCart.setProduct(product);
             newCart.setProduct_count(amount);
+            user.getCarts().add(newCart);
             cartRepository.save(newCart);
+            return newCart;
         }else{ //원래 있다면 product_count + amount해주고 저장
             int prev = cart.getProduct_count();
             cart.setProduct_count(prev+amount);
             cartRepository.save(cart);
+            return cart;
         }
+
     }
 
     @Transactional
@@ -83,11 +89,13 @@ public class CartService {
     }
 
     @Transactional
-    public void deleteCart(int cartId){
-        try{
-            cartRepository.deleteById(cartId);
-        }catch(Exception e){
-            throw new CustomException(e.getMessage());
-        }
+    public void deleteCart(User user, int cartId){
+
+        Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
+            return new CustomException("찾을 수 없는 장바구니입니다.");
+        });
+        user.getCarts().remove(cart);
+        cartRepository.delete(cart);
+
     }
 }
