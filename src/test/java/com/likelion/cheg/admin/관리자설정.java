@@ -2,7 +2,6 @@ package com.likelion.cheg.admin;
 
 
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,24 +21,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-public class AdminTest {
-
+public class 관리자설정 {
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("익명사용자 첫화면 get")
-    public void index_anonymous() throws Exception {
-        mockMvc.perform(get("/").with(anonymous()))
+    public void 관리자페이지() throws Exception {
+        mockMvc.perform(get("/admin").with(user("admin").roles("ADMIN")))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-
-
     @Test
-    @DisplayName("관리자 페이지 get")
-    public void index_user() throws Exception {
-        mockMvc.perform(get("/admin").with(user("admin").roles("ADMIN")))
+    public void 익명사용자_첫화면() throws Exception {
+        mockMvc.perform(get("/").with(anonymous()))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

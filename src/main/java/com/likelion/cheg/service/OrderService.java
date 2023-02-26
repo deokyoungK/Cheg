@@ -70,18 +70,14 @@ public class OrderService {
         }
     }
 
-
-
     @Transactional
     public Order makeOrder(int userId, int flag, String address, int productId, int amount){
-
         //8자리 주문번호 생성
         Random random = new Random();
         String number = Integer.toString(random.nextInt(8)+1);
         for(int i=0;i<7;i++){
             number += Integer.toString(random.nextInt(9));
         }
-
         //delivery 생성
         Delivery delivery = new Delivery(address,"배송전");
         deliveryRepository.save(delivery);
@@ -133,6 +129,9 @@ public class OrderService {
             return order;
 
         }else{ //[장바구니]에서 결제
+            User user = userRepository.findById(userId).orElseThrow(()->{
+                return new CustomException("사용자를 찾을 수 없습니다.");
+            });
             List<Cart> cartList = cartRepository.loadCartByUserId(userId);
             for(Cart cart : cartList){
                 OrderItem orderItem = new OrderItem(order, cart.getProduct(), cart.getProduct_count());
@@ -145,7 +144,7 @@ public class OrderService {
 
                 //주문되면 장바구니에서는 삭제
                 cartRepository.deleteById(cart.getId());
-
+                user.getCarts().remove(cart);
             }
             return order;
         }

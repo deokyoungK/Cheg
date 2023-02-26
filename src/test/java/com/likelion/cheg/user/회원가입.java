@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-public class AuthTest {
+public class 회원가입 {
 
     @Autowired
     UserService userService;
