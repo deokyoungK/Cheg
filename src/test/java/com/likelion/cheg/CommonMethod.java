@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -14,11 +15,12 @@ public class CommonMethod {
 
     @Autowired
     EntityManager em;
-
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
     public User createUser(String username) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword("123");
+        user.setPassword(bCryptPasswordEncoder.encode("123"));
         user.setName("안뇽");
         user.setPhone("01050222941");
         user.setEmail("kang48450@gmail.com");

@@ -33,10 +33,9 @@ public class 회원가입 {
     AuthService authService;
 
     @Test
-    @DisplayName("회원가입")
-    public void signup(){
+    public void 회원가입(){
         User user = new User();
-        user.setUsername("오리sㄴ");
+        user.setUsername("오리");
         user.setPassword("123");
         user.setName("강덕영");
         user.setRole("ROLE_USER");
@@ -48,8 +47,7 @@ public class 회원가입 {
     }
 
     @Test
-    @DisplayName("중복아이디 예외처리")
-    public void duplicateCheck(){
+    public void 중복아이디_예외처리(){
         User user1 = new User();
         user1.setUsername("중복닉네임");
         user1.setPassword("123");

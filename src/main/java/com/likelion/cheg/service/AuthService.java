@@ -25,7 +25,8 @@ public class AuthService {
     public User signup(User user){
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        user.setPassword(encPassword);
+
+        user.setPassword(encPassword); //암호화된 패스워드 저장
 
         if(user.getUsername().equals("admin")){
             user.setRole("ROLE_ADMIN");
