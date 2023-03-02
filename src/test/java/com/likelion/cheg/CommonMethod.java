@@ -25,6 +25,7 @@ public class CommonMethod {
         user.setPhone("01050222941");
         user.setEmail("kang48450@gmail.com");
         user.setAddress("서울");
+        user.setRole("ROLE_USER");
         em.persist(user);
         return user;
     }

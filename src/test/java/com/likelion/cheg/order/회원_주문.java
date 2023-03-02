@@ -57,7 +57,7 @@ public class 회원_주문 {
     @Test
     public void 회원_상세페이지_주문_테스트(){
         //user생성 후 회원가입
-        User user = commonMethod.createUser("테스트용_아디112322");
+        User user = commonMethod.createUser("테스트용_아디1123asd22");
         //카테고리 생성
         Category category = commonMethod.createCategory("테스트용_카테고리");
         //상품 생성
@@ -77,7 +77,7 @@ public class 회원_주문 {
     @Test
     public void 회원_장바구니_주문_테스트(){
         //user생성 후 회원가입
-        User user = commonMethod.createUser("테스트용_아디222222");
+        User user = commonMethod.createUser("테스트용_아디22asd2222");
         //카테고리 생성
         Category category = commonMethod.createCategory("테스트용_카테고리");
         //상품 생성

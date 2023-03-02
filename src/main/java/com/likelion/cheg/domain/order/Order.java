@@ -64,7 +64,7 @@ public class Order {
     }
 
     //주문 생성 메서드
-    public static Order createOrder(User user, Delivery delivery, OrderItem... orderItems) {
+    public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
         //8자리 주문번호 생성
         Random random = new Random();
         String number = Integer.toString(random.nextInt(8)+1);
@@ -83,15 +83,6 @@ public class Order {
 
         return order;
     }
-
-
-    public Order(User user, Delivery delivery, int order_status, String order_number){
-        this.user = user;
-        this.delivery = delivery;
-        this.order_status = order_status;
-        this.order_number = order_number;
-    }
-
 
 
 }

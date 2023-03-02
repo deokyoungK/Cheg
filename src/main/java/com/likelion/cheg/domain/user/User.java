@@ -50,11 +50,21 @@ public class User {
 		this.createDate = LocalDateTime.now();
 	}
 
-	public User(String name, String password, String username, String role){
-		this.name = name;
-		this.password = password;
-		this.username = username;
-		this.role = role;
+
+	//비회원 생성 메서드
+	public static User createAnonymous(){
+		//8자리 주문번호 생성
+		Random random = new Random();
+		String number = Integer.toString(random.nextInt(8)+1);
+		for(int i=0;i<7;i++){
+			number += Integer.toString(random.nextInt(9));
+		}
+		User user = new User();
+		user.setUsername("비회원_" + number);
+		user.setPassword("비회원_비밀번호");
+		user.setName("비회원");
+		user.setRole("ROLE_GUEST");
+		return user;
 	}
 
 }

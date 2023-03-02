@@ -31,9 +31,11 @@ public class Delivery {
         this.createDate = LocalDateTime.now();
     }
 
-    public Delivery(String address, String status){
-        this.delivery_address = address;
-        this.delivery_status = status;
+    public static Delivery createDelivery(String address, String status){
+        Delivery delivery = new Delivery();
+        delivery.setDelivery_address(address);
+        delivery.setDelivery_status(status);
+        return delivery;
     }
 
 

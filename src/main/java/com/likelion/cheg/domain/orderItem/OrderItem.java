@@ -56,12 +56,6 @@ public class OrderItem {
         return orderItem;
     }
 
-
-
-
-
-
-
     public OrderItem(Order order, Product product, int quantity){
         this.order = order;
         this.product = product;
