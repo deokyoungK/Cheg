@@ -2,6 +2,7 @@ package com.likelion.cheg.domain.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.likelion.cheg.domain.cart.Cart;
+import com.likelion.cheg.domain.order.Order;
 import lombok.*;
 import java.util.*;
 import javax.persistence.*;
@@ -22,6 +23,9 @@ public class User {
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"user"})
 	private List<Cart> carts = new ArrayList<>();
+
+	@OneToMany
+	private List<Order> orders = new ArrayList<>();
 
 	@Column(length = 100, unique = true)
 	private String username;

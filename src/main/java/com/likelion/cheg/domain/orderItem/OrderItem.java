@@ -22,14 +22,14 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToOne
+    @JoinColumn(name="product_id")
+    private Product product;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="order_id")
     private Order order;
-
-    @OneToOne
-    @JoinColumn(name="product_id")
-    private Product product;
 
     private int quantity;
 
@@ -46,6 +46,21 @@ public class OrderItem {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+    //주문상품 생성 메서드
+    public static OrderItem createOrderItem(Product product, int product_price, int quantity){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setTotal_price(product_price * quantity);
+        orderItem.setQuantity(quantity);
+        return orderItem;
+    }
+
+
+
+
+
+
 
     public OrderItem(Order order, Product product, int quantity){
         this.order = order;

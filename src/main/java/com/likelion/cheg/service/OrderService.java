@@ -62,9 +62,7 @@ public class OrderService {
             int price = 0;
             for(int i=0;i<order.getOrderItemList().size();i++){
                 price += order.getOrderItemList().get(i).getTotal_price();
-
             }
-
             order.setOrder_price(price);
             orderRepository.save(order);
         }
@@ -87,17 +85,33 @@ public class OrderService {
             //비회원user 생성 후 order 생성
             User user = new User("비회원","비회원_password","비회원_"+number,"ROLE_GUEST");
             userRepository.save(user);
-            Order order = new Order(user,delivery,1,number.toString());
-            order.getDelivery().setOrder(order);
+
+//            Order order = new Order(user,delivery,1,number.toString());
+//            order.getDelivery().setOrder(order);
+//            orderRepository.save(order);
+//            Order myOrder = makeOrderItem(order,0,productId,amount,userId);
+
+            //상품 찾기
+            Product product = productRepository.findById(productId).orElseThrow(()->{
+                return new CustomException("상품을 찾을 수 없습니다.");
+            });
+            //주문상품 생성
+            OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
+
+            //주문 생성
+            Order order = Order.createOrder(user,delivery,orderItem);
+
+            //주문 저장
             orderRepository.save(order);
 
-            Order myOrder = makeOrderItem(order,0,productId,amount,userId);
-            return myOrder;
+            return order;
         }else{
             //회원찾은 후 order 생성
             User user = userRepository.findById(userId).orElseThrow(()->{
                 return new CustomException("회원를 찾을 수 없습니다.");
             });
+
+
             Order order = new Order(user,delivery,1,number.toString());
             order.getDelivery().setOrder(order);
             orderRepository.save(order);

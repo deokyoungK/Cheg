@@ -58,9 +58,9 @@ public class 로그인 {
     @Test
     public void 로그인_성공() throws Exception{
         //회원가입
-        User user = commonMethod.createUser("로그인 테스트용_IDd2p");
+        User user = commonMethod.createUser("로그인 테스트용_ID");
 
-        String username = "로그인 테스트용_ID2";
+        String username = "로그인 테스트용_ID";
         String password = "123";
 
         mockMvc.perform(formLogin("/auth/login").user(username).password(password))
