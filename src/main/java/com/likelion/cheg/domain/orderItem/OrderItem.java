@@ -35,11 +35,6 @@ public class OrderItem {
 
     private int total_price;
 
-    //해당 상품에 대한 주문상품 총 가격 계산하기.
-    public void calculateTotalPrice(){
-        this.total_price = product.getPrice() * quantity;
-    }
-
     private LocalDateTime createDate;
 
     @PrePersist //db에 insert되기 직전에 실행
@@ -55,12 +50,5 @@ public class OrderItem {
         orderItem.setQuantity(quantity);
         return orderItem;
     }
-
-    public OrderItem(Order order, Product product, int quantity){
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-    }
-
 
 }

@@ -27,10 +27,6 @@ public class UserController {
 
     @GetMapping("/mypage/{userId}")
     public String myPage(@PathVariable int userId, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail){
-
-        orderService.calculatePrice(userId);
-        orderService.calculateCount(userId);
-
         List<Order> orderList = orderRepository.loadOrderByUserId(userId);
         model.addAttribute("orderList",orderList);
         return "user/mypage";

@@ -42,30 +42,30 @@ public class OrderService {
         return orderList;
     }
 
-    @Transactional
-    public void calculateCount(int userId){
-        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
-
-        //Order에 상품갯수 넣기
-        for(Order order : orderList){
-            order.setOrder_product_count(order.getOrderItemList().size());
-            orderRepository.save(order);
-        }
-    }
-    @Transactional
-    public void calculatePrice(int userId){
-        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
-
-        // Order에 주문상품가격 총합 넣기
-        for(Order order : orderList){
-            int price = 0;
-            for(int i=0;i<order.getOrderItemList().size();i++){
-                price += order.getOrderItemList().get(i).getTotal_price();
-            }
-            order.setOrder_price(price);
-            orderRepository.save(order);
-        }
-    }
+//    @Transactional
+//    public void calculateCount(int userId){
+//        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
+//
+//        //Order에 상품갯수 넣기
+//        for(Order order : orderList){
+//            order.setOrder_product_count(order.getOrderItemList().size());
+//            orderRepository.save(order);
+//        }
+//    }
+//    @Transactional
+//    public void calculatePrice(int userId){
+//        List<Order> orderList = orderRepository.loadOrderByUserId(userId);
+//
+//        // Order에 주문상품가격 총합 넣기
+//        for(Order order : orderList){
+//            int price = 0;
+//            for(int i=0;i<order.getOrderItemList().size();i++){
+//                price += order.getOrderItemList().get(i).getTotal_price();
+//            }
+//            order.setOrder_price(price);
+//            orderRepository.save(order);
+//        }
+//    }
 
     @Transactional
     public Order makeOrder(int userId, int flag, String address, int productId, int amount){

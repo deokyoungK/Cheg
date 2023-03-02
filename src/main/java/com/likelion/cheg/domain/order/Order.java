@@ -37,10 +37,10 @@ public class Order {
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
-    private int order_status;
-    private String order_number;
+    private int order_status; //주문상태 (0 or 1)
+    private String order_number; //주문번호
 
-    private int order_price;
+    private int order_price; //주문총액
     private int order_product_count; //상품갯수 -> 마이페이지에서 구분을 위해
     private LocalDateTime createDate;
 
@@ -76,11 +76,14 @@ public class Order {
         order.setUser(user);
         order.setOrder_number(number.toString());
         order.setDelivery(delivery);
+        int sum = 0;
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
+            sum += orderItem.getTotal_price();
         }
         order.setOrder_status(1);
-
+        order.setOrder_price(sum);
+        order.setOrder_product_count(orderItems.size());
         return order;
     }
 
