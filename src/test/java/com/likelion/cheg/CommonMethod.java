@@ -37,6 +37,7 @@ public class CommonMethod {
     }
     public Product createProduct(Category category, String name, int price) {
         Product product = new Product();
+        product.setCategory(category);
         product.setName(name);
         product.setName(name);
         product.setPrice(price);
