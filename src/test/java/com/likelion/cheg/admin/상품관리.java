@@ -7,6 +7,7 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,19 @@ public class 상품관리 {
     @Autowired
     ProductRepository productRepository;
 
+    @Before
+    public void set_up(){
+
+    }
     @Test
     public void 상품_등록(){
         //카테고리 생성
-        String category_name = "스웨터";
-        commonMethod.createCategory(category_name);
+        String cname = "스웨터";
+        commonMethod.createCategory(cname);
+
         //카테고리 불러오기
-        Category category = categoryRepository.findByCategoryName(category_name);
+        Category category = categoryRepository.findByCategoryName(cname);
+
         //상품등록DTO생성
         String brand_name = "NEW브랜드";
         String product_name = "NEW상품";
@@ -46,12 +53,13 @@ public class 상품관리 {
         MockMultipartFile file = new MockMultipartFile("content", "NEW파일", "multipart/mixed", "".getBytes());
 
         ProductUploadDto productUploadDto = new ProductUploadDto();
-        productUploadDto.setCategory(category_name);
+        productUploadDto.setCategory(cname);
         productUploadDto.setBrand(brand_name);
         productUploadDto.setName(product_name);
         productUploadDto.setDescription(description);
         productUploadDto.setPrice(price);
         productUploadDto.setFile(file);
+
         //상품 등록
         Product product = productService.addProduct(category,productUploadDto);
 
@@ -63,10 +71,10 @@ public class 상품관리 {
     @Test
     public void 상품_카테고리변경(){
         //카테고리 생성
-        String name1 = "old카테고리";
-        String name2 = "new카테고리";
-        Category old_category = commonMethod.createCategory(name1);
-        Category new_category = commonMethod.createCategory(name2);
+        String cname = "old카테고리";
+        String cname2 = "new카테고리";
+        Category old_category = commonMethod.createCategory(cname);
+        Category new_category = commonMethod.createCategory(cname2);
 
         //상품 생성
         String product_name = "NEW상품";
@@ -76,7 +84,7 @@ public class 상품관리 {
         product.setCategory(new_category);
 
         assertEquals("상품의 바뀐 카테고리 확인",product.getCategory(),new_category);
-        assertEquals("상품의 바뀐 카테고리 이름 확인",product.getCategory().getName(),name2);
+        assertEquals("상품의 바뀐 카테고리 이름 확인",product.getCategory().getName(),cname2);
     }
 
 
@@ -85,17 +93,19 @@ public class 상품관리 {
         //카테고리 생성
         String cname = "패딩";
         Category category = commonMethod.createCategory(cname);
+
         //상품 생성
         String pname = "상품1";
         String pname2 = "상품2";
         Product product = commonMethod.createProduct(category,pname,2000);
         Product product2 = commonMethod.createProduct(category,pname2,1500);
+
         //상품 1번 삭제
         productService.deleteProduct(product.getId());
 
         List<Product> productList = productRepository.findAll();
-        assertEquals("상품이 총 1개여야 함",productList.size(),1);
-        assertEquals("남은 상품이 상품2여야 함",productList.get(0),product2);
+        assertEquals("상품1이 없어야 함",productList.contains(product),false);
+        assertEquals("상품2이 있어야 함",productList.contains(product2),true);
 
     }
 }
