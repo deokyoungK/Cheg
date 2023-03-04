@@ -49,7 +49,7 @@ public class Order {
         this.createDate = LocalDateTime.now();
     }
 
-    //연관관계 메서드
+    //연관 관계 매핑 메서드
     public void setUser(User user){
         this.user = user;
         user.getOrders().add(this);
@@ -86,6 +86,4 @@ public class Order {
         order.setOrder_product_count(orderItems.size());
         return order;
     }
-
-
 }

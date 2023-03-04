@@ -129,9 +129,7 @@ public class OrderService {
                 Order order = Order.createOrder(user,delivery,orderItemList);
                 orderRepository.save(order);
                 return order;
-
             }
-
         }
     }
 

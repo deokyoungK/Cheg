@@ -4,17 +4,19 @@ package com.likelion.cheg.domain.product;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.category.CategoryRepository;
+import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity
 @ToString(exclude = {"cart","category"})
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,8 +34,6 @@ public class Product {
     private String description;
     private LocalDateTime createDate;
 
-
-
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {
         this.createDate = LocalDateTime.now();
@@ -50,6 +50,23 @@ public class Product {
             category.getProducts().add(this);
         }
     }
+    //상품 생성 메서드
+    public static Product createProduct(Category category, ProductUploadDto productUploadDto){
+        UUID uuid = UUID.randomUUID();
+        String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();
+
+        Product product = new Product();
+        product.setCategory(category);
+        product.setUrl(imageFileName);
+        product.setBrand(productUploadDto.getBrand());
+        product.setName(productUploadDto.getName());
+        product.setDescription(productUploadDto.getDescription());
+        product.setPrice(Integer.parseInt(productUploadDto.getPrice()));
+
+        return product;
+    }
+
+
 
 
 }

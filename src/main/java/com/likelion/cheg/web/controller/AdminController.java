@@ -13,6 +13,7 @@ import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.service.UserService;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.*;
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class AdminController {
 
     private final ProductService productService;
     private final UserRepository userRepository;
     private final OrderService orderService;
     private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
     private final UserService userService;
 
 
@@ -73,7 +76,9 @@ public class AdminController {
 
     @PostMapping("/admin/addProduct")
     public String uploadProduct(@Validated ProductUploadDto productUploadDto, BindingResult bindingResult){
-
+        System.out.println("==========================");
+        System.out.println(productUploadDto.getFile());
+        System.out.println("==========================");
         if(bindingResult.hasErrors()){
             Map<String,String> errorMap = new HashMap<>();
             for(FieldError error : bindingResult.getFieldErrors()){
@@ -82,7 +87,8 @@ public class AdminController {
             throw new CustomValidationException("상품등록 유효성 검사 실패",errorMap);
         }else{
             //상품등록
-            Product product = productService.addProduct(productUploadDto);
+            Category category = categoryRepository.findByCategoryName(productUploadDto.getCategory());
+            Product product = productService.addProduct(category, productUploadDto);
             return "redirect:/admin/productList";
         }
     }

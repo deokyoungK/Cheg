@@ -37,7 +37,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Product addProduct(ProductUploadDto productUploadDto){
+    public Product addProduct(Category category, ProductUploadDto productUploadDto){
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();
         Path imageFilePath = Paths.get(uploadFolder+imageFileName);
@@ -50,15 +50,7 @@ public class ProductService {
         }
 
         //상품 저장
-        Category category = categoryRepository.findByCategoryName(productUploadDto.getCategory());
-
-        Product product = new Product();
-        product.setCategory(category);
-        product.setUrl(imageFileName);
-        product.setBrand(productUploadDto.getBrand());
-        product.setName(productUploadDto.getName());
-        product.setDescription(productUploadDto.getDescription());
-        product.setPrice(Integer.parseInt(productUploadDto.getPrice()));
+        Product product = Product.createProduct(category,productUploadDto);
         productRepository.save(product);
         return product;
     }

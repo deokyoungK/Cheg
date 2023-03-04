@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-public class 관리자설정 {
+public class 페이지설정 {
     @Autowired
     MockMvc mockMvc;
 
