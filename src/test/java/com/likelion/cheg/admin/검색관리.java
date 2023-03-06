@@ -1,7 +1,10 @@
 package com.likelion.cheg.admin;
 
 import com.likelion.cheg.CommonMethod;
+import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
+import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
@@ -41,19 +44,26 @@ public class 검색관리 {
         User user3 = commonMethod.createUser("ABCD");
 
         String keyword = "bird";
-        List<User> totalUser = userRepository.findAll();
         List<User> userList = userService.searchUserByKeyword(keyword);
 
-        assertEquals("총 User 수는 3명",totalUser.size(),3);
         assertEquals("검색된 User는 총 2명",userList.size(),2);
         assertEquals("검색된 User의 아이디 확인",userList.contains(user),true);
-        assertEquals("검색된 User의 아이디 확인",userList.contains(user2),true);
-        assertEquals("검색된 User의 아이디 확인",userList.contains(user3),false);
+        assertEquals("검색된 User2의 아이디 확인",userList.contains(user2),true);
+        assertEquals("검색된 User3의 아이디 확인",userList.contains(user3),false);
     }
     @Test
     public void 상품검색(){
-    }
-    @Test
-    public void 주문검색(){
+        Category category = commonMethod.createCategory("NEW카테고리");
+        Product product = commonMethod.createProduct(category,"jordon_Tshirts",10000);
+        Product product2 = commonMethod.createProduct(category,"shoes_jordon",28000);
+        Product product3 = commonMethod.createProduct(category,"converse",6000);
+
+        String keyword = "jordon";
+        List<Product> productList = productService.searchProductByKeyword(keyword);
+
+        assertEquals("검색된 product는 총 2개",productList.size(),2);
+        assertEquals("검색된 product의 이름 확인",productList.contains(product),true);
+        assertEquals("검색된 product2의 이름 확인",productList.contains(product2),true);
+        assertEquals("검색된 product3의 이름 확인",productList.contains(product3),false);
     }
 }

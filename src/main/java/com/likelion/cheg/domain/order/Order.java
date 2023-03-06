@@ -67,14 +67,14 @@ public class Order {
     public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
         //8자리 주문번호 생성
         Random random = new Random();
-        String number = Integer.toString(random.nextInt(8)+1);
+        String number = "23_";
         for(int i=0;i<7;i++){
             number += Integer.toString(random.nextInt(9));
         }
 
         Order order = new Order();
         order.setUser(user);
-        order.setOrder_number(number.toString());
+        order.setOrder_number(number);
         order.setDelivery(delivery);
         int sum = 0;
         for (OrderItem orderItem : orderItems) {

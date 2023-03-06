@@ -2,6 +2,7 @@ package com.likelion.cheg;
 
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,8 @@ public class CommonMethod {
         em.persist(cart);
         return cart;
     }
+
+
+
+
 }
