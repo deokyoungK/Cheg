@@ -51,9 +51,7 @@ public class Product {
         }
     }
     //상품 생성 메서드
-    public static Product createProduct(Category category, ProductUploadDto productUploadDto){
-        UUID uuid = UUID.randomUUID();
-        String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();
+    public static Product createProduct(Category category, String imageFileName, ProductUploadDto productUploadDto){
 
         Product product = new Product();
         product.setCategory(category);

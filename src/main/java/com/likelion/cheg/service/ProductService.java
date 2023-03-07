@@ -49,8 +49,9 @@ public class ProductService {
             e.printStackTrace();
         }
 
-        //상품 저장
-        Product product = Product.createProduct(category,productUploadDto);
+        //상품 생성 후 저장
+        Product product = Product.createProduct(category,imageFileName,productUploadDto);
+
         productRepository.save(product);
         return product;
     }
@@ -64,7 +65,7 @@ public class ProductService {
     @Transactional
     public Product loadProduct(int id){
         Product product = productRepository.findById(id).orElseThrow(()->{
-           return new CustomException("상품을 찾을 수 없습니다.");
+            return new CustomException("상품을 찾을 수 없습니다.");
         });
         return product;
     }
