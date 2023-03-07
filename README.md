@@ -11,7 +11,6 @@
      <img src="https://img.shields.io/badge/springboot-6DB33F?style=plastic&logo=springboot&logoColor=white">
      <img src="https://img.shields.io/badge/Apache Maven-C71A36?style=plastic&logo=Apache Maven&logoColor=white">
      <img src="https://img.shields.io/badge/Hibernate-59666C?style=plastic&logo=Hibernate&logoColor=white">
-     <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=plastic&logo=Spring Security&logoColor=white">
      <img src="https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=MYSQL&logoColor=white"/>
      <img src="https://img.shields.io/badge/GitHub-181717?style=plastic&logo=Spring Security&logoColor=white">
      <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=plastic&logo=IntelliJ IDEA&logoColor=white"/>
