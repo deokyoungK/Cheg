@@ -1,6 +1,6 @@
 
 
-  body{
+body{
     margin: 0;
     font-family: 'Pretendard';
 }
@@ -17,7 +17,7 @@ span{
 
 .amdin-wrap{
     display: flex;
-    
+
 }
 
 .client{
@@ -50,70 +50,70 @@ td{
     border-bottom: 1px solid lightgray;
 }
 
- .client-txt{
+.client-txt{
     font-family: 'Pretendard';
     font-size: 32px;
-    color: #21272a;    
+    color: #21272a;
     line-height: 20px;
- }
+}
 
 
- ul {
+ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
     width: 200px;
-  }
-  
-  .admin-menu{
+}
+
+.admin-menu{
     text-decoration: none;
     padding: 10px;
     display: block;
     background : #ebebeb;
     color: #333;
     font-weight: bold;
-  }
+}
 
-  .admin {
+.admin {
     text-decoration: none;
     padding: 10px;
     display: block;
     color: #333;
     font-weight: bold;
-  }
-  
-  .admin:hover {
+}
+
+.admin:hover {
     background: #333;
     color: #fff;
-  }
+}
 
-  .admin.orderlist-page {
+.admin.productlist-page {
     background : #333;
     color: #fff;
-  }  
+}
 
 .client-wrap{
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-  }
+}
 
 
-  .admin-search{
+.admin-search{
     margin-left: 30px;
     /* align-items: center;
     justify-content: center; */
-  }
+}
 
-  .admin-search_input{
+.admin-search_input{
     border: 1px solid #333;
     padding: 4px;
     border-radius: 4px;
     width: 200px;
     height: 20px;
-  }
+}
 
-  .admin-search_btn{
+.admin-search_btn{
     width: 50px;
     height: 30px;
     /* padding: 10px; */
@@ -122,8 +122,8 @@ td{
     cursor: pointer;
     background-color: #21272a;
     color: white;
-    border: none;    
-  }
+    border: none;
+}
 
 
 .cart__btn.right{
@@ -131,7 +131,7 @@ td{
     color: white;
     border: none;
     margin: 25px 2px;
-}    
+}
 
 .cart__btn{
     width: 200px;
