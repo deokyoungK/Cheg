@@ -34,7 +34,7 @@
 - 아이디, 비밀번호 입력
 - 소셜로그인(페이스북, 네이버, 카카오, 구글) 지원
 - Spring security, OAuth2
-<img src="https://user-images.githubusercontent.com/74487747/223664189-df565dbf-0ecc-486e-bba1-16c03be57919.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223664189-df565dbf-0ecc-486e-bba1-16c03be57919.png" width="700">
 
 ### 회원가입
 
@@ -43,7 +43,7 @@
     - 전화번호 : -없이 10~11자
     - 이메일 :  이메일 형식
 - 비밀번호 암호화 후 DB에 저장
-<img src="https://user-images.githubusercontent.com/74487747/223665229-d592c8f9-7850-4c4d-b304-c5b9d5d01b84.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223665229-d592c8f9-7850-4c4d-b304-c5b9d5d01b84.png" width="700">
 
 ### 메인 페이지
 
@@ -51,14 +51,14 @@
 - 등록된 순 상품 4열 배치(grid)
 - 카테고리별 상품 필터링 제공
 - 검색기능 제공
-<img src="https://user-images.githubusercontent.com/74487747/223668952-b557458e-60e7-4a8b-9002-240b8bfa9af7.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223668952-b557458e-60e7-4a8b-9002-240b8bfa9af7.png" width="700">
 
 ### 장바구니 페이지
 
 - 회원만 이용 가능
 - 장바구니 수량 증가/감소
 - 장바구니 담기/삭제
-<img src="https://user-images.githubusercontent.com/74487747/223669198-fa0c0476-6b5b-4424-b652-80ff88631a73.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223669198-fa0c0476-6b5b-4424-b652-80ff88631a73.png" width="700">
 
 ### 구매 페이지
 
@@ -71,7 +71,7 @@
 - 결제
     - IMPORT API 활용
     - 결제 금액에 대한 검증 후 결제 완료
-<img src="https://user-images.githubusercontent.com/74487747/223669523-cb7380d3-d586-4efa-b250-ecd760a44d92.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223669523-cb7380d3-d586-4efa-b250-ecd760a44d92.png" width="700">
 
 ### 마이 페이지
 
@@ -82,6 +82,7 @@
     - 이메일 : 이메일 형식
     - 전화번호 : -없이 10~11자
     - 이름 : 필수 입력
+<img src="https://user-images.githubusercontent.com/74487747/223955206-8db97bbb-a087-48a6-9d9b-13f2209e5549.png" width="700">
 
 ### 관리자 페이지
 
@@ -92,7 +93,7 @@
     - 카테고리, 브랜드, 상품명, 상세 내용, 가격, 이미지 등록
     - 상품명, 가격 : 필수 입력
     - 이미지 : 이미지 파일 업로드, 상품 등록 후 /upload에 저장
-<img src="https://user-images.githubusercontent.com/74487747/223673174-3a01d364-c5a4-41be-aaf4-7c9db2adbfd6.png" width="600">
+<img src="https://user-images.githubusercontent.com/74487747/223673174-3a01d364-c5a4-41be-aaf4-7c9db2adbfd6.png" width="700">
 
 ## ERD
 ![화면 캡처 2023-03-07 023452](https://user-images.githubusercontent.com/74487747/223187254-e34ce0a0-8932-4419-8352-78d1e1a7a70f.png)
