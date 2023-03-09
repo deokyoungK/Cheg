@@ -28,7 +28,6 @@ public class OrderApiController {
         return new ResponseEntity<>(new CMResponseDto<>(1,"성공", new int[]{productId, amount}), HttpStatus.OK);
     }
 
-
     @PostMapping("api/validation")
     public ResponseEntity<?> validation(@Validated @RequestBody DeliveryDto deliveryDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){

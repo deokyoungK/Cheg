@@ -49,7 +49,7 @@ public class 상품관리 {
         String brand_name = "NEW브랜드";
         String product_name = "NEW상품";
         String description = "설명";
-        String price = "10000";
+        String price = "100";
         MockMultipartFile file = new MockMultipartFile("content", "NEW파일", "multipart/mixed", "".getBytes());
 
         ProductUploadDto productUploadDto = new ProductUploadDto();

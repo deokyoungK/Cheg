@@ -13,7 +13,6 @@
 
 
     <div class="mypage">
-
         <!-- 유저 기본 정보 -->
         <div class="user_membership">
             <div class="user_detail">
@@ -45,9 +44,8 @@
             <div class="purchase_list_display_item" style="background-color: rgb(255, 255, 255);">
                 <div class="purchase_list_product">
                     <p class="list_item_name" style="margin-right: 30px;">${order.order_number}</p>
-
                     <div class="list_item_img_wrap">
-                        <img alt="image" src="${order.orderItemList[0].product.url}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
+                        <img alt="image" src="/upload/${order.orderItemList[0].product.url}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
                     </div>
 
                     <c:choose>

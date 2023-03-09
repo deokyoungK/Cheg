@@ -28,7 +28,7 @@ public class OrderService {
     private final UserRepository userRepository;
     private final DeliveryRepository deliveryRepository;
     private final ProductRepository productRepository;
-
+    private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public List<Order> searchOrderByKeyword(String keyword){
@@ -84,10 +84,12 @@ public class OrderService {
                 return new CustomException("상품을 찾을 수 없습니다.");
             });
             //주문상품 생성
-            List<OrderItem> orderItemList = new ArrayList<>();
+            List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
             OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-            orderItemList.add(orderItem);
+            orderItemRepository.save(orderItem);
+
             //주문 생성
+            orderItemList.add(orderItem);
             Order order = Order.createOrder(user,delivery,orderItemList);
             orderRepository.save(order);
 
@@ -103,16 +105,16 @@ public class OrderService {
                     return new CustomException("상품을 찾을 수 없습니다.");
                 });
                 //주문상품 생성
-                List<OrderItem> orderItemList = new ArrayList<>();
+                List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
                 OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-                orderItemList.add(orderItem);
+                orderItemRepository.save(orderItem);
                 //주문 생성
+                orderItemList.add(orderItem);
                 Order order = Order.createOrder(user,delivery, orderItemList );
                 orderRepository.save(order);
 
                 return order;
             }else{  //장바구니일때
-
                 //장바구니 찾기
                 List<Cart> cartList = cartRepository.loadCartByUserId(userId);
                 List<OrderItem> orderItemList = new ArrayList<>();
@@ -120,7 +122,7 @@ public class OrderService {
                     //주문상품 생성
                     OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProduct_count());
                     orderItemList.add(orderItem);
-
+                    orderItemRepository.save(orderItem);
                     //장바구니에서는 삭제
                     cartRepository.deleteById(cart.getId());
                     user.getCarts().remove(cart);
