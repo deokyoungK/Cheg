@@ -29,13 +29,11 @@ public class OrderItem {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="order_id")
-    private Order order;
+    private Order order; //주문
 
-    private int quantity;
-
-    private int total_price;
-
-    private LocalDateTime createDate;
+    private int quantity; //주문상품 수량
+    private int total_price; //주문상품 총 금액
+    private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {

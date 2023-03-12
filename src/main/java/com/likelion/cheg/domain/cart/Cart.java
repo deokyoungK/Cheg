@@ -23,8 +23,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
-
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
@@ -33,10 +31,10 @@ public class Cart {
     @JoinColumn(name="product_id")
     private Product product;
 
-    private int product_count;
+    private int product_count; //장바구니 수
 
-    @Transient
-    private int total_price;
+    @Transient //컬럼생성 X
+    private int total_price; //장바구니 총 가격
 
     //해당 상품에 대한 장바구니 총 가격 계산하기.
     public void calculateTotalPrice(){

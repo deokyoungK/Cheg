@@ -20,11 +20,11 @@ public class Delivery {
 
     @OneToOne
     @JoinColumn(name="order_id")
-    private Order order;
+    private Order order; //주문
 
-    private String delivery_address;
-    private String delivery_status;
-    private LocalDateTime createDate;
+    private String delivery_address; //배송주소
+    private String delivery_status; //배송상태
+    private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {

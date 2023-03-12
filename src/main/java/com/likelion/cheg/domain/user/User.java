@@ -22,34 +22,33 @@ public class User {
 
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"user"})
-	private List<Cart> carts = new ArrayList<>();
+	private List<Cart> carts = new ArrayList<>(); //장바구니
 
 	@OneToMany
-	private List<Order> orders = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>(); //주문
 
 	@Column(length = 100, unique = true)
-	private String username;
+	private String username; //아이디
 
 	@Column(nullable=false)
-	private String password;
+	private String password; //비밀번호
 
 	@Column(nullable=false)
-	private String name;
+	private String name; //이름
 
 	@Column
-	private String phone;
+	private String phone; //전화번호
 
-	private String email;
-	private String address;
-	private String role;
+	private String email; //이메일
+	private String address; //주소
+	private String role; //역할(관리자: ROLE_ADMIN, 회원: ROLE_USER, 비회원: ROLE_GUEST)
 
-	private LocalDateTime createDate;
+	private LocalDateTime createDate; //날짜
 	
 	@PrePersist //db에 insert되기 직전에 실행
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
-
 
 	//비회원 생성 메서드
 	public static User createAnonymous(){

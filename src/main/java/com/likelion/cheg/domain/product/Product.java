@@ -24,15 +24,14 @@ public class Product {
     @JsonBackReference //순환참조 방지
     @ManyToOne
     @JoinColumn(name="category")
-    private Category category;
+    private Category category; //상품 카테고리
 
-
-    private String url;
-    private String brand;
-    private String name;
-    private int price;
-    private String description;
-    private LocalDateTime createDate;
+    private String url; //상품_이미지 경로
+    private String brand; //상품 브랜드
+    private String name; //상품명
+    private int price; //상품가격
+    private String description; //상품설명
+    private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {

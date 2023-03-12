@@ -30,19 +30,19 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference
-    private List<OrderItem> orderItemList = new ArrayList<>();
+    private List<OrderItem> orderItemList = new ArrayList<>(); //주문상품
 
     @OneToOne
     @JsonIgnoreProperties({"order"})
     @JoinColumn(name="delivery_id")
-    private Delivery delivery;
+    private Delivery delivery; //배송
 
     private int order_status; //주문상태 (0 or 1)
     private String order_number; //주문번호
 
     private int order_price; //주문총액
     private int order_product_count; //상품갯수 -> 마이페이지에서 구분을 위해
-    private LocalDateTime createDate;
+    private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {
