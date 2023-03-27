@@ -1,12 +1,21 @@
 version: "3"
 services:
-  db:
-    image: mysql:latest
+  test_database:
+    image: mysql:5.7
     restart: always
-    container_name: mydb
-    ports:
-      - "3306:3306"
     environment:
-      MYSQL_DATABASE: "shop"
-      MYSQL_ROOT_PASSWORD: "1234"
-      MYSQL_PASSWORD: "1234"
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "13306:3306"
+
+  app:
+    build: .
+    restart: on-failure
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - test_database
