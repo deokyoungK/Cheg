@@ -8,9 +8,13 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.likelion</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging> <!--war로 작성 -->
+
+
 	<name>Cheg</name>
 	<description>shop project for likelion</description>
 	<properties>
@@ -114,7 +118,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 
 	</dependencies>
 
