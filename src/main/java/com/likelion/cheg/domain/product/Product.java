@@ -16,6 +16,7 @@ import java.util.UUID;
 @Data
 @Entity
 @ToString(exclude = {"cart","category"})
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

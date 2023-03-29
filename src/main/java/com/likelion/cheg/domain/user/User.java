@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @ToString(exclude = "cart")
+@Table(name = "user")
 public class User {
 
 	@Id

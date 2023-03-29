@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @ToString(exclude = {"user","product"})
+@Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
