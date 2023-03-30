@@ -1,5 +1,7 @@
 package com.likelion.cheg.service;
 
+import com.likelion.cheg.domain.cart.Cart;
+import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
@@ -23,6 +25,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final CartRepository cartRepository;
 
     @Value("${file.path}")
     private String uploadFolder;
@@ -30,7 +33,9 @@ public class ProductService {
     @Transactional
     public void deleteProduct(int productId){
         try{
-            productRepository.deleteById(productId);
+            productRepository.deleteById(productId); //상품 삭제
+            cartRepository.deleteByProductId(productId); //상품 관련 장바구니 삭제
+
         }catch(Exception e){
             throw new CustomException(e.getMessage());
         }
