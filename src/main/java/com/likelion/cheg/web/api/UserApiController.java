@@ -50,7 +50,7 @@ public class UserApiController {
         } else {
             User user = userService.update(userId,userUpdateDto);
             principalDetail.setUser(user); //세션정보 변경
-            return new ResponseEntity<>(new CMResponseDto<>(1, "회원정보 변경 성공", user), HttpStatus.OK);
+            return new ResponseEntity<>(new CMResponseDto<>(1, "회원정보 변경 성공", ""), HttpStatus.OK);
         }
 
 
