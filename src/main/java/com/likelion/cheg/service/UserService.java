@@ -1,5 +1,7 @@
 package com.likelion.cheg.service;
 
+import com.likelion.cheg.domain.cart.CartRepository;
+import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
@@ -18,11 +20,14 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final OrderRepository orderRepository;
     @Transactional
     public void deleteUser(int userId){
         try{
-            userRepository.deleteById(userId);
+            userRepository.deleteById(userId); //회원 삭제
+            orderRepository.deleteByUserId(userId); //회원 주문 삭제
+
+
         }catch(Exception e){
             throw new CustomException(e.getMessage());
         }

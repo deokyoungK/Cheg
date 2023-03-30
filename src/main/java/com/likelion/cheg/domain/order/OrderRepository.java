@@ -2,6 +2,7 @@ package com.likelion.cheg.domain.order;
 
 import com.likelion.cheg.domain.cart.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -17,4 +18,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query(value="SELECT * FROM orders o WHERE o.order_number LIKE %:keyword%",nativeQuery = true)
     List<Order> searchByKeyword(String keyword);
 
+    //userid로 삭제
+    @Modifying
+    @Query(value="DELETE FROM orders o WHERE o.member_id = :userId",nativeQuery = true)
+    void deleteByUserId(@Param("userId") int userId);
 }
