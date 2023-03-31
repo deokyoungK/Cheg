@@ -52,7 +52,5 @@ public class UserApiController {
             principalDetail.setUser(user); //세션정보 변경
             return new ResponseEntity<>(new CMResponseDto<>(1, "회원정보 변경 성공", ""), HttpStatus.OK);
         }
-
-
     }
 }

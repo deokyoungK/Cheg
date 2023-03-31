@@ -27,7 +27,6 @@ public class UserService {
             userRepository.deleteById(userId); //회원 삭제
             orderRepository.deleteByUserId(userId); //회원 주문 삭제
 
-
         }catch(Exception e){
             throw new CustomException(e.getMessage());
         }

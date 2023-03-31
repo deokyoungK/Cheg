@@ -32,17 +32,12 @@
                             <input name="keyword" class="admin-search_input" type="text" placeholder="상품명 or 브랜드 입력">
                             <button type="submit" class="admin-search_btn">검색</button>
                         </form>
-                    
-    
-                    
+
                         <a href="/admin/addProduct"><button class="cart__btn right" > 상품등록 </button></a>
                         <a href="/admin/addCategory"><button class="cart__btn right" > 카테고리등록 </button></a>
                     
                 </div>
             </div>
-
-
-
             <thead>
             <tr>
                 <td>카테고리</td>
