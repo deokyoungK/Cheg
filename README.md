@@ -10,19 +10,21 @@
 
 - **개발 환경 및 언어**
      <div>
-         <img src="https://img.shields.io/badge/springboot-6DB33F?style=plastic&logo=springboot&logoColor=white">
-         <img src="https://img.shields.io/badge/Apache Maven-C71A36?style=plastic&logo=Apache Maven&logoColor=white">
-         <img src="https://img.shields.io/badge/Hibernate-59666C?style=plastic&logo=Hibernate&logoColor=white">
-         <img src="https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=MYSQL&logoColor=white"/>
-         <img src="https://img.shields.io/badge/GitHub-181717?style=plastic&logo=Spring Security&logoColor=white">
-         <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=plastic&logo=IntelliJ IDEA&logoColor=white"/>
-     </div>
-     <div>
-         <img src="https://img.shields.io/badge/java-007396?style=plastic&logo=java&logoColor=white">
          <img src="https://img.shields.io/badge/html5-E34F26?style=plastic&logo=html5&logoColor=white">
          <img src="https://img.shields.io/badge/css-1572B6?style=plastic&logo=css3&logoColor=white">
          <img src="https://img.shields.io/badge/javascript-F7DF1E?style=plastic&logo=javascript&logoColor=black">
          <img src="https://img.shields.io/badge/jquery-0769AD?style=plastic&logo=jquery&logoColor=white">
+     </div>
+     <div>
+         <img src="https://img.shields.io/badge/java-007396?style=plastic&logo=java&logoColor=white">
+         <img src="https://img.shields.io/badge/springboot-6DB33F?style=plastic&logo=springboot&logoColor=white">
+         <img src="https://img.shields.io/badge/Spring Data JPA-40AEF0?style=plastic&logo=Spring Data JPA&logoColor=white"/>  
+         <img src="https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=MYSQL&logoColor=white"/>
+         <img src="https://img.shields.io/badge/GitHub-181717?style=plastic&logo=Spring Security&logoColor=white">
+     </div>
+         <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=plastic&logo=Amazon EC2&logoColor=white"/>
+     <div>
+     
      </div>
  
 - **테스트**
