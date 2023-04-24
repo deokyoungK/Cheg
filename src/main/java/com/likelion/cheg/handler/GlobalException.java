@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ControllerAdvice
-public class ControllerException {
+public class GlobalException {
 
     //클라이언트통신 - javascript리턴
     @ExceptionHandler(CustomValidationException.class)

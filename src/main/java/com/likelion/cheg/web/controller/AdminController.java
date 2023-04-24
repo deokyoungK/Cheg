@@ -35,9 +35,7 @@ public class AdminController {
     private final UserRepository userRepository;
     private final OrderService orderService;
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
     private final UserService userService;
-
 
     @GetMapping("/admin")
     public String admin(Model model){
@@ -76,9 +74,6 @@ public class AdminController {
 
     @PostMapping("/admin/addProduct")
     public String uploadProduct(@Validated ProductUploadDto productUploadDto, BindingResult bindingResult){
-        System.out.println("==========================");
-        System.out.println(productUploadDto.getFile());
-        System.out.println("==========================");
         if(bindingResult.hasErrors()){
             Map<String,String> errorMap = new HashMap<>();
             for(FieldError error : bindingResult.getFieldErrors()){
@@ -87,8 +82,7 @@ public class AdminController {
             throw new CustomValidationException("상품등록 유효성 검사 실패",errorMap);
         }else{
             //상품등록
-            Category category = categoryRepository.findByCategoryName(productUploadDto.getCategory());
-            Product product = productService.addProduct(category, productUploadDto);
+            Product product = productService.addProduct(productUploadDto);
             return "redirect:/admin/productList";
         }
     }

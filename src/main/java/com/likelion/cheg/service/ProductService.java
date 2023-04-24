@@ -42,12 +42,15 @@ public class ProductService {
     }
 
     @Transactional
-    public Product addProduct(Category category, ProductUploadDto productUploadDto){
+    public Product addProduct(ProductUploadDto productUploadDto){
         UUID uuid = UUID.randomUUID();
+        //url 파싱
         String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();
-        Path imageFilePath = Paths.get(uploadFolder+imageFileName);
+        //카테고리 파싱
+        Category category = categoryRepository.findByCategoryName(productUploadDto.getCategory());
 
         // 통신, I/O -> 예외가 발생할 수 있다.
+        Path imageFilePath = Paths.get(uploadFolder+imageFileName);
         try {
             Files.write(imageFilePath,productUploadDto.getFile().getBytes());
         }catch(Exception e) {
@@ -55,7 +58,12 @@ public class ProductService {
         }
 
         //상품 생성 후 저장
-        Product product = Product.createProduct(category,imageFileName,productUploadDto);
+        Product product = Product.createProduct(category,
+                productUploadDto.getBrand(),
+                productUploadDto.getName(),
+                productUploadDto.getDescription(),
+                productUploadDto.getPrice(),
+                imageFileName);
 
         productRepository.save(product);
         return product;

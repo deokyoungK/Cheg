@@ -81,11 +81,6 @@ public class User {
 				.name("비회원")
 				.role(Role.ROLE_GUEST)
 				.build();
-//		User user = new User();
-//		user.setUsername("비회원_" + number);
-//		user.setPassword("비회원_비밀번호");
-//		user.setName("비회원");
-//		user.setRole(Role.ROLE_GUEST);
 		return user;
 	}
 

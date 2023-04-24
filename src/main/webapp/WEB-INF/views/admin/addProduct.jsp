@@ -37,9 +37,6 @@
                     </div>
 				</div>
 			</div>
-
-
-
 			<div class="form-group row">
 				<label class="col-sm-2">브랜드</label>
 				<div class="com-sm-3">

@@ -38,35 +38,32 @@ public class 상품관리 {
     }
     @Test
     public void 상품_등록(){
-        //카테고리 생성
-        String cname = "스웨터";
-        commonMethod.createCategory(cname);
-
-        //카테고리 불러오기
-        Category category = categoryRepository.findByCategoryName(cname);
-
         //상품등록DTO생성
-        String brand_name = "NEW브랜드";
-        String product_name = "NEW상품";
+        String category = "NEW카테고리22";
+        String brand = "NEW브랜드";
+        String product = "NEW상품";
         String description = "설명";
-        String price = "100";
+        int price = 100;
         MockMultipartFile file = new MockMultipartFile("content", "NEW파일", "multipart/mixed", "".getBytes());
 
+        //category이름으로 Category 하나 생성
+        commonMethod.createCategory(category);
+
         ProductUploadDto productUploadDto = new ProductUploadDto();
-        productUploadDto.setCategory(cname);
-        productUploadDto.setBrand(brand_name);
-        productUploadDto.setName(product_name);
+        productUploadDto.setCategory(category);
+        productUploadDto.setBrand(brand);
+        productUploadDto.setName(product);
         productUploadDto.setDescription(description);
         productUploadDto.setPrice(price);
         productUploadDto.setFile(file);
 
         //상품 등록
-        Product product = productService.addProduct(category,productUploadDto);
+        Product uploadProduct = productService.addProduct(productUploadDto);
 
-        assertEquals("상품 카테고리 확인",product.getCategory(),category);
-        assertEquals("상품 URL 확인",product.getUrl().contains(file.getOriginalFilename()),true);
-        assertEquals("상품 이름 확인",product.getName(),product_name);
-        assertEquals("상품 가격 확인",product.getPrice(), Integer.parseInt(price));
+        assertEquals("상품 카테고리 확인",uploadProduct.getCategory().getName(),category);
+        assertEquals("상품 URL 확인",uploadProduct.getUrl().contains(file.getOriginalFilename()),true);
+        assertEquals("상품 이름 확인",uploadProduct.getName(),product);
+        assertEquals("상품 가격 확인",uploadProduct.getPrice(), price);
     }
     @Test
     public void 상품_카테고리변경(){

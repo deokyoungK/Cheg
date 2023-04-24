@@ -1,19 +1,17 @@
 package com.likelion.cheg.domain.product;
-
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
-import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-@Data
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
 @Entity
 @ToString(exclude = {"cart","category"})
 @Table(name = "product")
@@ -51,15 +49,24 @@ public class Product {
         }
     }
     //상품 생성 메서드
-    public static Product createProduct(Category category, String imageFileName, ProductUploadDto productUploadDto){
+    public static Product createProduct(Category category, String brand, String name, String description, int price, String url){
 
-        Product product = new Product();
-        product.setCategory(category);
-        product.setUrl(imageFileName);
-        product.setBrand(productUploadDto.getBrand());
-        product.setName(productUploadDto.getName());
-        product.setDescription(productUploadDto.getDescription());
-        product.setPrice(Integer.parseInt(productUploadDto.getPrice()));
+//        Product product = new Product();
+//        product.setCategory(category);
+//        product.setUrl(imageFileName);
+//        product.setBrand(productUploadDto.getBrand());
+//        product.setName(productUploadDto.getName());
+//        product.setDescription(productUploadDto.getDescription());
+//        product.setPrice(productUploadDto.getPrice());
+
+        Product product = Product.builder()
+                .category(category)
+                .brand(brand)
+                .name(name)
+                .description(description)
+                .price(price)
+                .url(url)
+                .build();
 
         return product;
     }

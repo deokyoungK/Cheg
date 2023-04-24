@@ -41,11 +41,17 @@ public class CommonMethod {
         return category;
     }
     public Product createProduct(Category category, String name, int price) {
-        Product product = new Product();
-        product.setCategory(category);
-        product.setName(name);
-        product.setName(name);
-        product.setPrice(price);
+//        Product product = new Product();
+//        product.setCategory(category);
+//        product.setName(name);
+//        product.setName(name);
+//        product.setPrice(price);
+        Product product = Product.builder()
+                .category(category)
+                .name(name)
+                .price(price)
+                .build();
+
         em.persist(product);
         return product;
     }
