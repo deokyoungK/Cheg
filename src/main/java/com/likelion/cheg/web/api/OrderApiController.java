@@ -47,6 +47,4 @@ public class OrderApiController {
         Order order = orderService.makeOrder(paymentDto.getUser_id(),paymentDto.getFlag(),paymentDto.getAddress(),paymentDto.getProduct_id(),paymentDto.getAmount());
         return new ResponseEntity<>(new CMResponseDto<>(1,"성공",""), HttpStatus.OK);
     }
-
-
 }

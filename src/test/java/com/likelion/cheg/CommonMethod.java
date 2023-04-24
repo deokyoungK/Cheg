@@ -2,6 +2,7 @@ package com.likelion.cheg;
 
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
@@ -26,7 +27,7 @@ public class CommonMethod {
         user.setPhone("01050222941");
         user.setEmail("kang48450@gmail.com");
         user.setAddress("서울");
-        user.setRole("ROLE_USER");
+        user.setRole(Role.ROLE_USER);
         em.persist(user);
         return user;
     }

@@ -1,6 +1,7 @@
 package com.likelion.cheg.service;
 
 
+import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
@@ -29,9 +30,9 @@ public class AuthService {
         user.setPassword(encPassword); //암호화된 패스워드 저장
 
         if(user.getUsername().equals("admin")){
-            user.setRole("ROLE_ADMIN");
+            user.setRole(Role.ROLE_ADMIN);
         }else{
-            user.setRole("ROLE_USER");
+            user.setRole(Role.ROLE_USER);
         }
 
         User userEntity = userRepository.save(user);

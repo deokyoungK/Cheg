@@ -21,8 +21,8 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.39.81.107:3306/shop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
-#    url: jdbc:mysql://localhost:3306/shop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://3.39.81.107:3306/shop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/shop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
     username: root
     password: 1234
 
@@ -70,8 +70,8 @@ spring:
           google:
             clientId: '467513416157-dk0p7noq44cub5740ugesn2hviclbe2k.apps.googleusercontent.com'
             clientSecret: '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'
-            #redirect-uri: http://localhost:8080/login/oauth2/code/google
-            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+#            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
             scope:
               - email
               - profile
@@ -79,8 +79,8 @@ spring:
           naver:
             clientId: 'bfRiojNYtwqORcejN7Io'
             client-secret: 'TgTVVgDEut'
-            #redirect-uri: http://localhost:8080/login/oauth2/code/naver
-            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+#            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope:
               - name
@@ -91,8 +91,8 @@ spring:
           kakao:
             clientId: '152d3da5b5efbe4ac4b37b56ada69e21'
             client-secret: 'tCCf0mlLyANITSYhCp4eIalN71fpMmNh'
-            #redirect-uri: http://localhost:8080/login/oauth2/code/kakao
-            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            redirect-uri: http://ec2-3-39-81-107.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             scope:
               - profile_nickname
@@ -102,10 +102,10 @@ spring:
             client-authentication-method: POST
 
 #배포용 파일 경로
-file:
-  path: /home/ubuntu/upload/
+#file:
+#  path: /home/ubuntu/upload/
 
 #local용 file 경로
-#file:
-#  path: C:/Users/kang4/spring/tmp7/upload/
+file:
+  path: C:/Users/kang4/spring/tmp7/upload/
 

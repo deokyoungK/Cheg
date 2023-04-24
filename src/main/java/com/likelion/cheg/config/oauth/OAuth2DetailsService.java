@@ -1,6 +1,7 @@
 package com.likelion.cheg.config.oauth;
 
 import com.likelion.cheg.config.auth.PrincipalDetail;
+import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 					.password(password)
 					.email(email)
 					.name(name)
-					.role("ROLE_USER")
+					.role(Role.ROLE_USER)
 					.build();
 			return new PrincipalDetail(userRepository.save(user));
 		}else {

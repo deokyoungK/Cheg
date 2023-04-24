@@ -6,8 +6,6 @@ import com.likelion.cheg.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -26,11 +24,9 @@ public class Category {
 
     private String name;
 
-    //mappedBy="category" --> 연관관계의 주인이 아님
     @JsonBackReference //순환참조 방지
     @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<Product>();
-
 
     private LocalDateTime createDate;
 

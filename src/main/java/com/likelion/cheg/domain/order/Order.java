@@ -1,6 +1,5 @@
 package com.likelion.cheg.domain.order;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.likelion.cheg.domain.delivery.Delivery;

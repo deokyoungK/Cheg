@@ -2,6 +2,7 @@ package com.likelion.cheg.domain.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.likelion.cheg.domain.cart.Cart;
+import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import lombok.*;
 import java.util.*;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호증가전략이 db를 따라간다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
@@ -42,7 +43,10 @@ public class User {
 
 	private String email; //이메일
 	private String address; //주소
-	private String role; //역할(관리자: ROLE_ADMIN, 회원: ROLE_USER, 비회원: ROLE_GUEST)
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role; //역할(관리자: ROLE_ADMIN, 회원: ROLE_USER, 비회원: ROLE_GUEST)
 
 	private LocalDateTime createDate; //날짜
 	
@@ -63,7 +67,7 @@ public class User {
 		user.setUsername("비회원_" + number);
 		user.setPassword("비회원_비밀번호");
 		user.setName("비회원");
-		user.setRole("ROLE_GUEST");
+		user.setRole(Role.ROLE_USER);
 		return user;
 	}
 

@@ -1,6 +1,7 @@
 package com.likelion.cheg.user;
 
 
+import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.service.AuthService;
@@ -38,7 +39,7 @@ public class 회원가입 {
         user.setUsername("오리");
         user.setPassword("123");
         user.setName("강덕영");
-        user.setRole("ROLE_USER");
+        user.setRole(Role.ROLE_USER);
 
         User user1 = authService.signup(user);
         User findUser = userRepository.findByUsername(user1.getUsername());

@@ -26,7 +26,7 @@ public class PrincipalDetail implements UserDetails,OAuth2User{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collectors = new ArrayList<>();
-		collectors.add(()->{return user.getRole();});
+		collectors.add(()->{return user.getRole().name();});
 		return collectors;
 	}
 
