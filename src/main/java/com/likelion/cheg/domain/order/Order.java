@@ -63,7 +63,6 @@ public class Order {
         Delivery.builder()
                 .order(this)
                 .build();
-
     }
 
     //Order 생성 메서드

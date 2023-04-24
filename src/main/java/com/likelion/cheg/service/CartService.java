@@ -5,23 +5,23 @@ import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
-import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.web.dto.cart.AddCartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+
 @RequiredArgsConstructor
 @Service
 public class CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
 
     @Transactional
-    public List<Cart> loadCart(int id){
-        List<Cart> cartList = cartRepository.loadCartByUserId(id);
+    public List<Cart> loadCart(int userId){
+        List<Cart> cartList = cartRepository.loadCartByUserId(userId);
         //cart마다 총가격 넣어주기.
         for(Cart cart:cartList){
             cart.calculateTotalPrice();
@@ -30,28 +30,25 @@ public class CartService {
     }
 
     @Transactional
-    public Cart addCart(User user, int productId, int amount){
-        Cart cart = cartRepository.findByUserIdAndProductId(user.getId(),productId);
+    public Cart addCart(User user, AddCartDto addCartDto){
+        //cart 찾기
+        Cart cart = cartRepository.findByUserIdAndProductId(user.getId(),addCartDto.getProductId());
 
-        //새로 만든 cart라면 product_count를 amount로 하는 장바구니 생성
+        //새로 만든 cart라면 장바구니 생성
         if(cart == null){
-            Product product = productRepository.findById(productId).orElseThrow(()->{
+            Product product = productRepository.findById(addCartDto.getProductId()).orElseThrow(()->{
                 return new CustomException("상품을 찾을 수 없습니다.");
             });
-            Cart newCart = new Cart();
-            newCart.setUser(user);
-            newCart.setProduct(product);
-            newCart.setProduct_count(amount);
-            user.getCarts().add(newCart);
+
+            Cart newCart = Cart.createCart(user,product,addCartDto.getProductCount());
             cartRepository.save(newCart);
+
             return newCart;
-        }else{ //원래 있다면 product_count + amount해주고 저장
-            int prev = cart.getProduct_count();
-            cart.setProduct_count(prev+amount);
-            cartRepository.save(cart);
+
+        }else{ //원래 있다면 수량 더하기
+            cart.changeCount(cart.getProductCount()+addCartDto.getProductCount());
             return cart;
         }
-
     }
 
     @Transactional
@@ -61,13 +58,8 @@ public class CartService {
         });
 
         //수량 0개가 아닐때 감소시킴.
-        if(cart.getProduct_count() != 0) {
-            int prev = cart.getProduct_count();
-            cart.setProduct_count(prev - 1);
-
-            //계산을 해주고 commit해야함.
-            cart.calculateTotalPrice();
-            cartRepository.save(cart);
+        if(cart.getProductCount() != 0) {
+            cart.changeCount(-1);
         }
         return cart;
     }
@@ -78,13 +70,7 @@ public class CartService {
             return new CustomException("찾을 수 없는 장바구니 입니다.");
         });
 
-        int prev = cart.getProduct_count();
-        cart.setProduct_count(prev + 1);
-
-        //계산을 해주고 commit해야함.
-        cart.calculateTotalPrice();
-        cartRepository.save(cart);
-
+        cart.changeCount(1);
         return cart;
     }
 

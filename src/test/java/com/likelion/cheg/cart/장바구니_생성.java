@@ -6,6 +6,7 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.service.CartService;
+import com.likelion.cheg.web.dto.cart.AddCartDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,16 @@ public class 장바구니_생성 {
         //product생성
         Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
 
-        Cart cart = cartService.addCart(user,product.getId(),2);
+        //addCartDto생성
+        AddCartDto addCartDto = new AddCartDto();
+        addCartDto.setProductId(product.getId());
+        addCartDto.setProductCount(3);
+
+        Cart cart = cartService.addCart(user,addCartDto);
 
         assertEquals("장바구니-사용자 매핑이 잘 이루어졌는지",cart.getUser(),user);
         assertEquals("장바구니-상품 매핑이 잘 이루어졌는지.",cart.getProduct(),product);
-        assertEquals("장바구니에 상품 수량이 맞게 들어갔는지",cart.getProduct_count(),2);
+        assertEquals("장바구니에 상품 수량이 맞게 들어갔는지",cart.getProductCount(),3);
     }
 
 

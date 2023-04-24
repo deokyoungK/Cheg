@@ -36,8 +36,8 @@ public class OrderController {
         int amount=0;
         String name = "";
         for(Cart cart : cartList){
-            price += cart.getTotal_price();
-            amount += cart.getProduct_count();
+            price += cart.getCartTotalPrice();
+            amount += cart.getProductCount();
             name += cart.getProduct().getName();
         }
 

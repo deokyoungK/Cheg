@@ -34,11 +34,11 @@
                 <td>${c.product.name}</td>
 
                 <td><i style="font-size:20px; cursor:pointer;" class="fa-regular fa-circle-down" id="down_${c.id}" onclick="count_down(${c.id});"></i></td>
-                <td id="count_${c.id}">${c.product_count}개</td>
+                <td id="count_${c.id}">${c.productCount}개</td>
                 <td><i style="font-size:20px; cursor:pointer;" class= "fa-regular fa-circle-up" id="up_${c.id}" onclick="count_up(${c.id});"></i></td>
 
                 <td>
-                    <span id='total_price_${c.id}' class="price">${c.total_price}원</span>
+                    <span id='total_price_${c.id}' class="price">${c.cartTotalPrice}원</span>
                 </td>
             </tr>
         </c:forEach>

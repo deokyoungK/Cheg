@@ -2,18 +2,15 @@ package com.likelion.cheg.domain.cart;
 
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 import javax.persistence.*;
 
-
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Entity
 @ToString(exclude = {"user","product"})
 @Table(name = "cart")
@@ -30,14 +27,35 @@ public class Cart {
     @JoinColumn(name="product_id")
     private Product product;
 
-    private int product_count; //장바구니 수
+    private int productCount; //장바구니 수
 
-    @Transient //컬럼생성 X
-    private int total_price; //장바구니 총 가격
+    @Transient
+    private int cartTotalPrice; //장바구니 총 가격
 
-    //해당 상품에 대한 장바구니 총 가격 계산하기.
+    //해당 상품에 대한 장바구니 총 가격 계산
     public void calculateTotalPrice(){
-         this.total_price = product.getPrice() * product_count;
+         this.cartTotalPrice = product.getPrice() * productCount;
     }
 
+    //수량 변경
+    public void changeCount(int amount){
+        this.productCount = productCount + amount;
+        this.calculateTotalPrice();
+    }
+
+    //Cart 생성 메서드
+    public static Cart createCart(User user, Product product, int productCount){
+        Cart cart = Cart.builder()
+                .user(user)
+                .product(product)
+                .productCount(productCount)
+                .build();
+
+        //연관관계 매핑
+        user.getCarts().add(cart);
+        //장바구니 총 가격 계산
+        cart.calculateTotalPrice();
+        return cart;
+
+    }
 }

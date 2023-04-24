@@ -21,10 +21,10 @@ function count_down(cartId){
             }
 
             //수량 갱신
-            $('#count_' + cartId).text(res.data[index].product_count+"개");
+            $('#count_' + cartId).text(res.data[index].productCount+"개");
 
             //가격 갱신
-            $('#total_price_'+cartId).text(res.data[index].total_price+"원");
+            $('#total_price_'+cartId).text(res.data[index].cartTotalPrice+"원");
 
             //장바구니 총 가격 갱신
             var sum = 0;
@@ -57,10 +57,10 @@ function count_up(cartId){
         }
 
         //수량 갱신
-        $('#count_' + cartId).text(res.data[index].product_count+"개");
+        $('#count_' + cartId).text(res.data[index].productCount+"개");
 
         //가격 갱신
-        $('#total_price_'+cartId).text(res.data[index].total_price+"원");
+        $('#total_price_'+cartId).text(res.data[index].cartTotalPrice+"원");
 
         //장바구니 총 가격 갱신
         var sum = 0;

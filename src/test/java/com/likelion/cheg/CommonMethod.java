@@ -53,16 +53,13 @@ public class CommonMethod {
         return product;
     }
     public Cart createCart(User user, Product product, int productCount){
-        Cart cart = new Cart();
-        cart.setUser(user);
-        cart.setProduct(product);
-        cart.setProduct_count(productCount);
+        Cart cart = Cart.builder()
+                    .user(user)
+                    .product(product)
+                    .productCount(productCount)
+                    .build();
         user.getCarts().add(cart);
         em.persist(cart);
         return cart;
     }
-
-
-
-
 }

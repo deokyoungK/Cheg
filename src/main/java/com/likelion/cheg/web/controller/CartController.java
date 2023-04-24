@@ -13,18 +13,15 @@ import java.util.*;
 public class CartController {
 
     private final CartService cartService;
-    @GetMapping("/cart/{id}")
-    public String goCart(@PathVariable int id, Model model){
-        List<Cart> cartList = cartService.loadCart(id);
+    @GetMapping("/cart/{userId}")
+    public String goCart(@PathVariable int userId, Model model){
+        List<Cart> cartList = cartService.loadCart(userId);
         int price=0;
         for(Cart cart : cartList){
-            price += cart.getTotal_price();
+            price += cart.getCartTotalPrice();
         }
         model.addAttribute("carts",cartList);
         model.addAttribute("price",price);
         return "user/cart";
     }
-
-
-
 }

@@ -120,7 +120,7 @@ public class OrderService {
                 List<OrderItem> orderItemList = new ArrayList<>();
                 for(Cart cart : cartList){
                     //주문상품 생성
-                    OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProduct_count());
+                    OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
                     orderItemList.add(orderItem);
                     orderItemRepository.save(orderItem);
                     //장바구니에서는 삭제

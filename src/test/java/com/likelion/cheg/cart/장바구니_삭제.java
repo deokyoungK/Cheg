@@ -6,6 +6,7 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.service.CartService;
+import com.likelion.cheg.web.dto.cart.AddCartDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,17 @@ public class 장바구니_삭제 {
         Product product1 = commonMethod.createProduct(category,"장바구니테스트_상품1",35000);
         Product product2 = commonMethod.createProduct(category,"장바구니테스트_상품2",20000);
 
-        Cart cart1 = cartService.addCart(user, product1.getId(), 2);
-        Cart cart2= cartService.addCart(user, product2.getId(), 3);
+        //addCartDto생성
+        AddCartDto addCartDto = new AddCartDto();
+        addCartDto.setProductId(product1.getId());
+        addCartDto.setProductCount(2);
+
+        AddCartDto addCartDto2 = new AddCartDto();
+        addCartDto2.setProductId(product2.getId());
+        addCartDto2.setProductCount(3);
+
+        Cart cart1 = cartService.addCart(user, addCartDto);
+        Cart cart2= cartService.addCart(user, addCartDto2);
 
         cartService.deleteCart(user,cart2.getId());
 

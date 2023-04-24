@@ -42,7 +42,7 @@ public class 장바구니_수량변경 {
 
         cartService.upCart(cart.getId());
 
-        assertEquals("장바구니 수량이 1증가했는지",cart.getProduct_count(),6);
+        assertEquals("장바구니 수량이 1증가했는지",cart.getProductCount(),6);
     }
     @Test
     public void 장바구니_수량감소(){
@@ -57,7 +57,7 @@ public class 장바구니_수량변경 {
 
         cartService.downCart(cart.getId());
 
-        assertEquals("장바구니 수량이 1감소했는지",cart.getProduct_count(),2);
+        assertEquals("장바구니 수량이 1감소했는지",cart.getProductCount(),2);
     }
 
 }
