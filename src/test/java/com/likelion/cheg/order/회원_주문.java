@@ -68,7 +68,7 @@ public class 회원_주문 {
 
         //(1)order 확인
         assertEquals("주문 시 상태는 1이 되어야함.",order.getOrder_status(),1);
-        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDelivery_address(),user.getAddress());
+        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDeliveryAddress(),user.getAddress());
         //(1)orderItem확인
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
         assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());
@@ -88,16 +88,16 @@ public class 회원_주문 {
         //주문 전 장바구니 갯수 확인
         int cart_number = user.getCarts().size();
 
-        //(2)회원이 장바구니에서 주문
+        //회원이 장바구니에서 주문
         Order order = orderService.makeOrder(user.getId(),1,user.getAddress(), product.getId(), 2);
 
-        //(2)order 확인
+        //order 확인
         assertEquals("주문 시 상태는 1이 되어야함.",order.getOrder_status(),1);
-        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDelivery_address(),user.getAddress());
-        //(2)orderItem확인
+        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDeliveryAddress(),user.getAddress());
+        //orderItem확인
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
         assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());
-        //(2)장바구니 사라졌는지 확인
+        //장바구니 사라졌는지 확인
         assertEquals("처음 장바구니 수량은 1",cart_number,1);
         assertEquals("주문 후 장바구니 수량은 0이 되는지",user.getCarts().size(),0);
 

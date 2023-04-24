@@ -1,16 +1,15 @@
 package com.likelion.cheg.domain.delivery;
 
 import com.likelion.cheg.domain.order.Order;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Entity
 @Table(name = "delivery")
 public class Delivery {
@@ -23,8 +22,8 @@ public class Delivery {
     @JoinColumn(name="order_id")
     private Order order; //주문
 
-    private String delivery_address; //배송주소
-    private String delivery_status; //배송상태
+    private String deliveryAddress; //배송주소
+    private String deliveryStatus; //배송상태
     private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
@@ -32,13 +31,12 @@ public class Delivery {
         this.createDate = LocalDateTime.now();
     }
 
-    public static Delivery createDelivery(String address, String status){
-        Delivery delivery = new Delivery();
-        delivery.setDelivery_address(address);
-        delivery.setDelivery_status(status);
+    //Delivery 생성 메서드
+    public static Delivery createDelivery(String deliveryAddress, String deliveryStatus){
+        Delivery delivery = Delivery.builder()
+                .deliveryAddress(deliveryAddress)
+                .deliveryStatus(deliveryStatus)
+                .build();
         return delivery;
     }
-
-
-
 }

@@ -67,7 +67,7 @@ public class 비회원_주문 {
 
         //(1)order 확인
         assertEquals("주문 시 상태는 1이 되어야함.",order.getOrder_status(),1);
-        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDelivery_address(),"익명사용자의 주소");
+        assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDeliveryAddress(),"익명사용자의 주소");
         //(1)orderItem확인
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
         assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());

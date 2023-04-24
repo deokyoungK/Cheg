@@ -11,6 +11,7 @@ import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -59,10 +60,13 @@ public class Order {
     }
     public void setDelivery(Delivery delivery){
         this.delivery = delivery;
-        delivery.setOrder(this);
+        Delivery.builder()
+                .order(this)
+                .build();
+
     }
 
-    //주문 생성 메서드
+    //Order 생성 메서드
     public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
         //8자리 주문번호 생성
         Random random = new Random();
@@ -70,7 +74,6 @@ public class Order {
         for(int i=0;i<7;i++){
             number += Integer.toString(random.nextInt(9));
         }
-
         Order order = new Order();
         order.setUser(user);
         order.setOrder_number(number);
@@ -84,5 +87,12 @@ public class Order {
         order.setOrder_price(sum);
         order.setOrder_product_count(orderItems.size());
         return order;
+//        return builder()
+//                .user(user)
+//                .order_number(number)
+//                .delivery(delivery)
+//                .orderItemList(orderItems)
+//                .order_status(1)
+//                .order_price(sum)
     }
 }
