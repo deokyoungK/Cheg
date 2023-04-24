@@ -1,11 +1,13 @@
 package com.likelion.cheg.user;
 
 
+import com.likelion.cheg.CommonMethod;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.service.AuthService;
 import com.likelion.cheg.service.UserService;
+import com.likelion.cheg.web.dto.auth.SignupDto;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -33,34 +35,40 @@ public class 회원가입 {
     @Autowired
     AuthService authService;
 
+    CommonMethod commonMethod;
     @Test
     public void 회원가입(){
-        User user = new User();
-        user.setUsername("오리");
-        user.setPassword("123");
-        user.setName("강덕영");
-        user.setRole(Role.ROLE_USER);
+        SignupDto signupDto = new SignupDto();
+        signupDto.setUsername("오리");
+        signupDto.setPassword("123");
+        signupDto.setName("강덕영");
+        signupDto.setEmail("kang48450@gmail.com");
+        signupDto.setPhone("01050222961");
+        User user = authService.signup(signupDto);
 
-        User user1 = authService.signup(user);
-        User findUser = userRepository.findByUsername(user1.getUsername());
+        User findUser = userRepository.findByUsername(user.getUsername());
 
-        assertThat(user1.getId()).isEqualTo(findUser.getId());
+        assertThat(user.getId()).isEqualTo(findUser.getId());
     }
 
     @Test
     public void 중복아이디_예외처리(){
-        User user1 = new User();
-        user1.setUsername("중복닉네임");
-        user1.setPassword("123");
-        user1.setName("강덕영");
+        SignupDto signupDto = new SignupDto();
+        signupDto.setUsername("중복닉네임");
+        signupDto.setPassword("123");
+        signupDto.setName("강덕영");
+        signupDto.setEmail("kang48450@gmail.com");
+        signupDto.setPhone("01050222961");
 
-        User user2 = new User();
-        user2.setUsername("중복닉네임");
-        user2.setPassword("456");
-        user2.setName("윤예지");
+        SignupDto signupDto2 = new SignupDto();
+        signupDto2.setUsername("중복닉네임");
+        signupDto2.setPassword("111");
+        signupDto2.setName("눈네지");
+        signupDto2.setEmail("yoon@gmail.com");
+        signupDto2.setPhone("01050222961");
 
-        authService.signup(user1);
-        RuntimeException e = assertThrows(DataIntegrityViolationException.class, () -> authService.signup(user2));
+        authService.signup(signupDto);
+        RuntimeException e = assertThrows(DataIntegrityViolationException.class, () -> authService.signup(signupDto2));
         System.out.println("==================");
         System.out.println(e.getMessage());
         System.out.println("==================");

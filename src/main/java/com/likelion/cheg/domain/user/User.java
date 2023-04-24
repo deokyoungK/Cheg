@@ -25,9 +25,11 @@ public class User {
 
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"user"})
+	@Builder.Default
 	private List<Cart> carts = new ArrayList<>(); //장바구니
 
 	@OneToMany
+	@Builder.Default
 	private List<Order> orders = new ArrayList<>(); //주문
 
 	@Column(length = 100, unique = true)

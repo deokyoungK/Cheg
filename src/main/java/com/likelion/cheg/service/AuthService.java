@@ -44,6 +44,7 @@ public class AuthService {
                 .email(signupDto.getEmail())
                 .role(role)
                 .build();
+
         userRepository.save(user);
         return user;
     }

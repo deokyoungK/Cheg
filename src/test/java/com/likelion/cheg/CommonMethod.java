@@ -19,15 +19,18 @@ public class CommonMethod {
     EntityManager em;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    
     public User createUser(String username) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(bCryptPasswordEncoder.encode("123"));
-        user.setName("안뇽");
-        user.setPhone("01050222941");
-        user.setEmail("kang48450@gmail.com");
-        user.setAddress("서울");
-        user.setRole(Role.ROLE_USER);
+        User user = User.builder()
+                .username(username)
+                .password(bCryptPasswordEncoder.encode("123"))
+                .name("안뇽")
+                .phone("01050222941")
+                .email("kang@email.com")
+                .address("서울")
+                .role(Role.ROLE_USER)
+                .build();
+
         em.persist(user);
         return user;
     }

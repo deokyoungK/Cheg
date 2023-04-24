@@ -107,5 +107,5 @@ spring:
 
 #local용 file 경로
 file:
-  path: C:/Users/kang4/spring/tmp7/upload/
+  path: C:/Users/kang4/spring/cheg/upload/
 
