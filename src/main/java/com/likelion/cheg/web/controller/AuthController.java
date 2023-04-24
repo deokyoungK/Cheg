@@ -56,8 +56,7 @@ public class AuthController {
             }
             throw new CustomValidationException("회원가입 유효성 검사 실패",errorMap);
         }else{
-            User user = signupDto.toEntity();
-            User userEntity = authService.signup(user);
+            User user = authService.signup(signupDto);
             return "auth/login";
         }
 

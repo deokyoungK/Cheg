@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class UserUpdateDto {
-
     @Email
     private String email;
     private String address;
@@ -16,9 +15,4 @@ public class UserUpdateDto {
     private String name;
     @Phone
     private String phone;
-
-
-
-
-
 }

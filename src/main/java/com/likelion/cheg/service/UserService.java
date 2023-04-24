@@ -39,10 +39,11 @@ public class UserService {
             return new CustomValidationApiException("찾을 수 없는 id입니다.");
         });
 
-        user.setEmail(userUpdateDto.getEmail());
-        user.setAddress(userUpdateDto.getAddress());
-        user.setName(userUpdateDto.getName());
-        user.setPhone(userUpdateDto.getPhone());
+        user.changeUser(userUpdateDto.getName(),
+                userUpdateDto.getAddress(),
+                userUpdateDto.getEmail(),
+                userUpdateDto.getPhone());
+
         return user;
     }
 

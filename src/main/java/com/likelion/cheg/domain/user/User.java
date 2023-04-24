@@ -9,12 +9,13 @@ import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @ToString(exclude = "cart")
+@Getter
 @Table(name = "user")
 public class User {
 
@@ -55,6 +56,15 @@ public class User {
 		this.createDate = LocalDateTime.now();
 	}
 
+	//회원 수정 메서드
+	public void changeUser(String name, String address, String email, String phone){
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+	}
+
+
 	//비회원 생성 메서드
 	public static User createAnonymous(){
 		//8자리 주문번호 생성
@@ -63,11 +73,17 @@ public class User {
 		for(int i=0;i<7;i++){
 			number += Integer.toString(random.nextInt(9));
 		}
-		User user = new User();
-		user.setUsername("비회원_" + number);
-		user.setPassword("비회원_비밀번호");
-		user.setName("비회원");
-		user.setRole(Role.ROLE_USER);
+		User user = User.builder()
+				.username("비회원_" + number)
+				.password("비회원_비밀번호")
+				.name("비회원")
+				.role(Role.ROLE_GUEST)
+				.build();
+//		User user = new User();
+//		user.setUsername("비회원_" + number);
+//		user.setPassword("비회원_비밀번호");
+//		user.setName("비회원");
+//		user.setRole(Role.ROLE_GUEST);
 		return user;
 	}
 

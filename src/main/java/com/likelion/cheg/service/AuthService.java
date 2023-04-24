@@ -7,6 +7,7 @@ import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.handler.ex.CustomValidationException;
+import com.likelion.cheg.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,21 +23,29 @@ public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    //회원가입 시 역할과 암호화된 비밀번호를 insert
     @Transactional
-    public User signup(User user){
-        String rawPassword = user.getPassword();
+    public User signup(SignupDto signupDto){
+        String rawPassword = signupDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        Role role;
 
-        user.setPassword(encPassword); //암호화된 패스워드 저장
-
-        if(user.getUsername().equals("admin")){
-            user.setRole(Role.ROLE_ADMIN);
+        if(signupDto.getUsername().equals("admin")){
+            role = Role.ROLE_ADMIN;
         }else{
-            user.setRole(Role.ROLE_USER);
+            role = Role.ROLE_USER;
         }
 
-        User userEntity = userRepository.save(user);
-        return userEntity;
+        User user = User.builder()
+                .username(signupDto.getUsername())
+                .password(encPassword)
+                .name(signupDto.getName())
+                .phone(signupDto.getPhone())
+                .email(signupDto.getEmail())
+                .role(role)
+                .build();
+        userRepository.save(user);
+        return user;
     }
 
     @Transactional
