@@ -37,6 +37,7 @@ public class AdminController {
     private final CategoryService categoryService;
     private final UserService userService;
 
+
     @GetMapping("/admin")
     public String admin(Model model){
         List<User> userList = userRepository.findAll();
@@ -44,6 +45,25 @@ public class AdminController {
         return "admin/admin";
     }
 
+    /**
+     카테고리 관련
+     **/
+    @GetMapping("/admin/addCategory")
+    public String addCategory(Model model){
+        List<Category> categoryList = categoryService.loadAllCateogory();
+        model.addAttribute("categoryList",categoryList);
+        return "admin/addCategory";
+    }
+
+    @PostMapping("/admin/addCategory")
+    public String addCategory(String categoryName){
+        categoryService.saveCategory(categoryName);
+        return "redirect:/admin/addCategory";
+    }
+
+    /**
+     상품 관련
+     **/
     @GetMapping("/admin/productList")
     public String productList(Model model){
         List<Product> productList = productService.loadAllProducts();
@@ -51,25 +71,11 @@ public class AdminController {
         return "admin/productList";
     }
 
-    @GetMapping("/admin/orderList")
-    public String orderList(Model model){
-        List<Order> orderList = orderService.loadAll();
-        model.addAttribute("orderList",orderList);
-        return "admin/orderList";
-    }
-
     @GetMapping("/admin/addProduct")
     public String addProduct(Model model){
         List<Category> categoryList = categoryService.loadAllCateogory();
         model.addAttribute("categoryList",categoryList);
         return "admin/addProduct";
-    }
-
-    @GetMapping("/admin/addCategory")
-    public String addCategory(Model model){
-        List<Category> categoryList = categoryService.loadAllCateogory();
-        model.addAttribute("categoryList",categoryList);
-        return "admin/addCategory";
     }
 
     @PostMapping("/admin/addProduct")
@@ -87,12 +93,20 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/admin/addCategory")
-    public String addCategory(String category){
-        Category newCategory = categoryService.saveOne(category);
-        return "redirect:/admin/addCategory";
+    /**
+     주문 관련
+     **/
+    @GetMapping("/admin/orderList")
+    public String orderList(Model model){
+        List<Order> orderList = orderService.loadAll();
+        model.addAttribute("orderList",orderList);
+        return "admin/orderList";
     }
 
+
+    /**
+     검색 관련
+     **/
     @GetMapping("/admin/search/user")
     public String searchUser(@RequestParam(value="keyword") String keyword, Model model){
         List<User> userList = userService.searchUserByKeyword(keyword);

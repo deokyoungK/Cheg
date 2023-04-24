@@ -34,18 +34,15 @@ public class CommonMethod {
         em.persist(user);
         return user;
     }
-    public Category createCategory(String name) {
-        Category category = new Category();
-        category.setName(name);
+    public Category createCategory(String categoryName) {
+        Category category = Category.builder()
+                .name(categoryName)
+                .build();
+
         em.persist(category);
         return category;
     }
     public Product createProduct(Category category, String name, int price) {
-//        Product product = new Product();
-//        product.setCategory(category);
-//        product.setName(name);
-//        product.setName(name);
-//        product.setPrice(price);
         Product product = Product.builder()
                 .category(category)
                 .name(name)

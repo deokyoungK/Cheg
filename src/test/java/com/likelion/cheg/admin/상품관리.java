@@ -70,17 +70,17 @@ public class 상품관리 {
         //카테고리 생성
         String cname = "old카테고리";
         String cname2 = "new카테고리";
-        Category old_category = commonMethod.createCategory(cname);
-        Category new_category = commonMethod.createCategory(cname2);
+        Category oldCategory = commonMethod.createCategory(cname);
+        Category newCategory = commonMethod.createCategory(cname2);
 
         //상품 생성
-        String product_name = "NEW상품";
-        Product product = commonMethod.createProduct(old_category,product_name,1000);
+        String productName = "NEW상품";
+        Product product = commonMethod.createProduct(oldCategory,productName,1000);
 
         //카테고리 변경
-        product.setCategory(new_category);
+        product.changeCategory(newCategory);
 
-        assertEquals("상품의 바뀐 카테고리 확인",product.getCategory(),new_category);
+        assertEquals("상품의 바뀐 카테고리 확인",product.getCategory(),newCategory);
         assertEquals("상품의 바뀐 카테고리 이름 확인",product.getCategory().getName(),cname2);
     }
 

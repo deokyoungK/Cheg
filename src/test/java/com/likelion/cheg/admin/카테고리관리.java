@@ -22,8 +22,8 @@ public class 카테고리관리 {
 
     @Test
     public void 카테고리_등록(){
-        String name = "NEW카테고리";
-        Category category = categoryService.saveOne(name);
-        assertEquals("카테고리 이름 확인",category.getName(),name);
+        String categoryName = "NEW카테고리2123123";
+        Category category = categoryService.saveCategory(categoryName);
+        assertEquals("카테고리 이름 확인",category.getName(),categoryName);
     }
 }

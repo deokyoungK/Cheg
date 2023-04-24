@@ -3,17 +3,16 @@ package com.likelion.cheg.domain.category;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.likelion.cheg.domain.product.Product;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 @Entity
 @Table(name = "category")
 public class Category {
@@ -26,6 +25,7 @@ public class Category {
 
     @JsonBackReference //순환참조 방지
     @OneToMany(mappedBy = "category")
+    @Builder.Default
     private List<Product> products = new ArrayList<Product>();
 
     private LocalDateTime createDate;
@@ -39,9 +39,11 @@ public class Category {
         this.name = name;
     }
 
+    //카테고리 생성 메서드
     public static Category createCategory(String name){
-        Category category = new Category();
-        category.setName(name);
+        Category category = Category.builder()
+                .name(name)
+                .build();
         return category;
     }
 

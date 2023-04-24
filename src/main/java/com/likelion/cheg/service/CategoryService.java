@@ -27,8 +27,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category saveOne(String name){
-        Category category = Category.createCategory(name);
+    public Category saveCategory(String categoryName){
+        Category category = Category.createCategory(categoryName);
         categoryRepository.save(category);
         return category;
     }

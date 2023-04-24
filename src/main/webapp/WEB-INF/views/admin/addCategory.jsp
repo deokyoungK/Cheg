@@ -21,18 +21,14 @@
 </div>
 
 <div class="container">
-
     <form name="newCategory" action="/admin/addCategory" class="form-horizontal" method="post">
-
         <c:forEach var="c" items="${categoryList}">
             ${c.name}
         </c:forEach>
-
         <div>
-            <input class="category-input cart__btn" type="text" name="category">
+            <input class="category-input cart__btn" type="text" name="categoryName">
             <a href=""><button class="cart__btn right" onclick = "">등록하기</button></a>
         </div>
-
     </form>
 </div>
 </body>

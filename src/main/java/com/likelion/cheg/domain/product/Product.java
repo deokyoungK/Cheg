@@ -38,7 +38,7 @@ public class Product {
     }
 
     //카테고리 변경
-    public void setCategory(Category category){
+    public void changeCategory(Category category){
         //이미 카테고리가 있을 경우 관계 제거
         if(this.category != null){
             this.category.getProducts().remove(this);
@@ -48,17 +48,9 @@ public class Product {
             category.getProducts().add(this);
         }
     }
+
     //상품 생성 메서드
     public static Product createProduct(Category category, String brand, String name, String description, int price, String url){
-
-//        Product product = new Product();
-//        product.setCategory(category);
-//        product.setUrl(imageFileName);
-//        product.setBrand(productUploadDto.getBrand());
-//        product.setName(productUploadDto.getName());
-//        product.setDescription(productUploadDto.getDescription());
-//        product.setPrice(productUploadDto.getPrice());
-
         Product product = Product.builder()
                 .category(category)
                 .brand(brand)
@@ -67,11 +59,6 @@ public class Product {
                 .price(price)
                 .url(url)
                 .build();
-
         return product;
     }
-
-
-
-
 }
