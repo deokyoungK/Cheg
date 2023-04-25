@@ -12,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-@ToString(exclude = {"user","product"})
-@Table(name = "cart")
+//@ToString(exclude = {"user","product"})
+@Table(name = "CART")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

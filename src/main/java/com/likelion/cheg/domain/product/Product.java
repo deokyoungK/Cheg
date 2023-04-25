@@ -13,14 +13,13 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Entity
-@ToString(exclude = {"cart","category"})
-@Table(name = "product")
+//@ToString(exclude = {"cart","category"})
+@Table(name = "PRODUCT")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonBackReference //순환참조 방지
     @ManyToOne
     @JoinColumn(name="category")
     private Category category; //상품 카테고리

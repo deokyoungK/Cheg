@@ -1,5 +1,6 @@
 package com.likelion.cheg.domain.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.likelion.cheg.domain.delivery.Delivery;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 public class Order {
 
     @Id
@@ -28,19 +29,19 @@ public class Order {
     @JoinColumn(name="member_id")
     private User user;
 
-    @OneToMany(mappedBy = "order")
-    @JsonManagedReference
     @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItemList = new ArrayList<>(); //주문상품
 
+    @JsonIgnore
     @OneToOne
-    @JsonIgnoreProperties({"order"})
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private OrderStatus orderStatus; //주문상태 (0 or 1)
+    private OrderStatus orderStatus; //주문상태("주문완료","주문취소")
 
     private String orderNumber; //주문번호
 
@@ -56,6 +57,7 @@ public class Order {
     private void setOrderPrice(int orderPrice){
         this.orderPrice = orderPrice;
     }
+
     //연관 관계 매핑 메서드
     private void setUser(User user){
         this.user = user;

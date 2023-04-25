@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "delivery")
+@Table(name = "DELIVERY")
 public class Delivery {
 
     @Id
@@ -27,7 +27,7 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DeliveryStatus deliveryStatus; //배송상태
+    private DeliveryStatus deliveryStatus; //배송상태("배송전","배송준비","배송완료")
 
     private LocalDateTime createDate; //날짜
 

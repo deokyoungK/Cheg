@@ -30,14 +30,14 @@ public class CartApiController {
 
     @PostMapping("api/cart/{cartId}/down")
     public ResponseEntity<?> downCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
-        Cart cart = cartService.downCart(cartId);
+        cartService.downCart(cartId);
         List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
         return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량감소 성공",cartList), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/up")
     public ResponseEntity<?> upCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
-        Cart cart = cartService.upCart(cartId);
+        cartService.upCart(cartId);
         List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
         return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",cartList), HttpStatus.OK);
     }

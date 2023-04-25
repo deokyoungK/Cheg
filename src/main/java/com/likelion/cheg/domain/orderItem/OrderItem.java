@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "orderItem")
+@Table(name = "ORDERITEM")
 public class OrderItem {
 
     @Id
@@ -27,7 +27,6 @@ public class OrderItem {
     private Product product;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name="order_id")
     private Order order; //주문
 

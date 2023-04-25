@@ -31,7 +31,6 @@
                     <p class="info-sub"> 포인트 </p></a>
                 </div>
             </div>
-
         </div>
 
         <!-- 구매 내역 -->

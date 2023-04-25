@@ -2,6 +2,7 @@ package com.likelion.cheg.domain.category;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.likelion.cheg.domain.product.Product;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "category")
+@Table(name = "CATEGORY")
 public class Category {
 
     @Id
@@ -23,9 +24,9 @@ public class Category {
 
     private String name;
 
-    @JsonBackReference //순환참조 방지
-    @OneToMany(mappedBy = "category")
+    @JsonIgnore
     @Builder.Default
+    @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<Product>();
 
     private LocalDateTime createDate;

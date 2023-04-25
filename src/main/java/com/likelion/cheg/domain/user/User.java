@@ -1,5 +1,5 @@
 package com.likelion.cheg.domain.user;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.enumType.Role;
@@ -14,22 +14,23 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = "cart")
+//@ToString(exclude = "cart")
 @Getter
-@Table(name = "user")
+@Table(name = "USER")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"user"})
 	@Builder.Default
+	@JsonIgnore
+	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	private List<Cart> carts = new ArrayList<>(); //장바구니
 
-	@OneToMany
 	@Builder.Default
+	@JsonIgnore
+	@OneToMany
 	private List<Order> orders = new ArrayList<>(); //주문
 
 	@Column(length = 100, unique = true)
