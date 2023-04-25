@@ -7,19 +7,21 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
-//@ToString(exclude = {"user","product"})
 @Table(name = "CART")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name="user_id")
     private User user;
 

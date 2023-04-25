@@ -1,7 +1,4 @@
 package com.likelion.cheg.domain.orderItem;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
 import lombok.*;

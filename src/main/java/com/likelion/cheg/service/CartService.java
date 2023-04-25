@@ -7,6 +7,7 @@ import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
+import com.likelion.cheg.web.dto.cart.CartResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,24 @@ public class CartService {
     private final ProductRepository productRepository;
 
     @Transactional
+    public List<CartResponseDto> makeResponseDto(List<Cart> cartList){
+        List<CartResponseDto> cartResponseDtos = new ArrayList<>();
+        for(Cart cart : cartList){
+            CartResponseDto cartResponseDto = new CartResponseDto();
+            cartResponseDto.setCartId(cart.getId());
+            cartResponseDto.setProductCount(cart.getProductCount());
+            cartResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
+
+            cartResponseDtos.add(cartResponseDto);
+        }
+        return cartResponseDtos;
+    }
+
+    @Transactional
     public List<Cart> loadCart(int userId){
         List<Cart> cartList = cartRepository.loadCartByUserId(userId);
         //cart마다 총가격 넣어주기.
-        for(Cart cart:cartList){
+        for(Cart cart : cartList){
             cart.calculateTotalPrice();
         }
         return cartList;

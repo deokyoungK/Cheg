@@ -1,7 +1,5 @@
 package com.likelion.cheg.domain.category;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.likelion.cheg.domain.product.Product;
 import lombok.*;

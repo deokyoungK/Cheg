@@ -1,7 +1,5 @@
 package com.likelion.cheg.domain.product;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.likelion.cheg.domain.category.Category;
-import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +11,6 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Entity
-//@ToString(exclude = {"cart","category"})
 @Table(name = "PRODUCT")
 public class Product {
     @Id

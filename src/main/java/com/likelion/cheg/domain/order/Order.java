@@ -1,8 +1,6 @@
 package com.likelion.cheg.domain.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.OrderStatus;
 import com.likelion.cheg.domain.orderItem.OrderItem;

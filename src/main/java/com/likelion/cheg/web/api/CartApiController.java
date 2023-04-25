@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.service.CartService;
 import com.likelion.cheg.web.dto.CMResponseDto;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
+import com.likelion.cheg.web.dto.cart.CartResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,21 +26,22 @@ public class CartApiController {
     public ResponseEntity<?> addCart(@RequestBody AddCartDto addCartDto, @AuthenticationPrincipal PrincipalDetail principalDetail){
         cartService.addCart(principalDetail.getUser(),addCartDto);
         return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 추가 성공", ""), HttpStatus.OK);
-
     }
 
     @PostMapping("api/cart/{cartId}/down")
     public ResponseEntity<?> downCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
         cartService.downCart(cartId);
-        List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
-        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량감소 성공",cartList), HttpStatus.OK);
+        List<Cart> carts = cartService.loadCart(principalDetail.getUser().getId());
+        List<CartResponseDto> cartResponseDtos = cartService.makeResponseDto(carts);
+        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량감소 성공",cartResponseDtos), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/up")
     public ResponseEntity<?> upCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
         cartService.upCart(cartId);
-        List<Cart> cartList = cartService.loadCart(principalDetail.getUser().getId());
-        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",cartList), HttpStatus.OK);
+        List<Cart> carts = cartService.loadCart(principalDetail.getUser().getId());
+        List<CartResponseDto> cartResponseDtos = cartService.makeResponseDto(carts);
+        return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 수량증가 성공",cartResponseDtos), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/delete")

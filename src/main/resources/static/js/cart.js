@@ -15,7 +15,7 @@ function count_down(cartId){
             //해당 cart찾기
             var index = -1;
             for(var i=0; i<res.data.length;i++){
-                if(res.data[i].id == cartId){
+                if(res.data[i].cartId == cartId){
                     index = i;
                 }
             }
@@ -29,7 +29,7 @@ function count_down(cartId){
             //장바구니 총 가격 갱신
             var sum = 0;
             for(var i=0; i<res.data.length; i++){
-                sum += parseInt($('#total_price_'+res.data[i].id).text());
+                sum += parseInt($('#total_price_'+res.data[i].cartId).text());
             }
             $('#summary').text(sum+"원");
 
@@ -51,7 +51,7 @@ function count_up(cartId){
         //해당 cart찾기
         var index = -1;
         for(var i=0; i<res.data.length;i++){
-            if(res.data[i].id == cartId){
+            if(res.data[i].cartId == cartId){
                 index = i;
             }
         }
@@ -65,7 +65,7 @@ function count_up(cartId){
         //장바구니 총 가격 갱신
         var sum = 0;
         for(var i=0; i<res.data.length; i++){
-            sum += parseInt($('#total_price_'+res.data[i].id).text());
+            sum += parseInt($('#total_price_'+res.data[i].cartId).text());
         }
         $('#summary').text(sum+"원");
 

@@ -1,6 +1,5 @@
 package com.likelion.cheg.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
@@ -9,12 +8,13 @@ import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.*;
+
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@ToString(exclude = "cart")
 @Getter
 @Table(name = "USER")
 public class User {
@@ -25,7 +25,7 @@ public class User {
 
 	@Builder.Default
 	@JsonIgnore
-	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user",fetch = EAGER)
 	private List<Cart> carts = new ArrayList<>(); //장바구니
 
 	@Builder.Default
@@ -66,7 +66,6 @@ public class User {
 		this.email = email;
 		this.phone = phone;
 	}
-
 
 	//비회원 생성 메서드
 	public static User createAnonymous(){
