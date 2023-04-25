@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.delivery.Delivery;
+import com.likelion.cheg.domain.enumType.DeliveryStatus;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.orderItem.OrderItemRepository;
 import com.likelion.cheg.domain.product.Product;
@@ -73,7 +74,7 @@ public class 비회원_주문 {
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
         assertEquals("주문상품이 주문을 잘 참조하고 있는지",order.getOrderItemList().get(0).getOrder().getId(),order.getId());
         //delivery확인
-        assertEquals("배송상태는 '배송전'",order.getDelivery().getDeliveryStatus(),"배송전");
+        assertEquals("배송상태는 '배송전'",order.getDelivery().getDeliveryStatus(), DeliveryStatus.배송전);
         assertEquals("배송이 주문을 잘 참조하고 있는지",order.getDelivery().getOrder().getId(),order.getId());
 
     }

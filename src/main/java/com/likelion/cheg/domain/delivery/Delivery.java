@@ -1,5 +1,6 @@
 package com.likelion.cheg.domain.delivery;
 
+import com.likelion.cheg.domain.enumType.DeliveryStatus;
 import com.likelion.cheg.domain.order.Order;
 import lombok.*;
 
@@ -23,7 +24,11 @@ public class Delivery {
     private Order order; //주문
 
     private String deliveryAddress; //배송주소
-    private String deliveryStatus; //배송상태
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private DeliveryStatus deliveryStatus; //배송상태
+
     private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
@@ -37,10 +42,10 @@ public class Delivery {
     }
 
     //Delivery 생성 메서드
-    public static Delivery createDelivery(String deliveryAddress, String deliveryStatus){
+    public static Delivery createDelivery(String deliveryAddress, DeliveryStatus deliveryStatus){
         Delivery delivery = Delivery.builder()
                 .deliveryAddress(deliveryAddress)
-                .deliveryStatus(deliveryStatus)
+                .deliveryStatus(deliveryStatus.배송전)
                 .build();
         return delivery;
     }

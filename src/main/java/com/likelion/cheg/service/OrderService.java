@@ -4,6 +4,7 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.delivery.DeliveryRepository;
+import com.likelion.cheg.domain.enumType.DeliveryStatus;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.orderItem.OrderItem;
@@ -71,7 +72,7 @@ public class OrderService {
     public Order makeOrder(int userId, int flag, String address, int productId, int amount){
 
         //delivery 생성
-        Delivery delivery = Delivery.createDelivery(address,"배송전");
+        Delivery delivery = Delivery.createDelivery(address, DeliveryStatus.배송전);
 
         if(userId == 0){ //비회원의 경우
             //비회원 생성
