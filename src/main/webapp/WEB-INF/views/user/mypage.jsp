@@ -67,7 +67,7 @@
 
                 <div class="list_item_status">
                     <c:choose>
-                        <c:when test="${order.orderStatus == 1}">
+                        <c:when test="${order.orderStatus == '주문완료'}">
                             <div class="width-wrap">
                                 <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">주문완료</p>
                             </div>

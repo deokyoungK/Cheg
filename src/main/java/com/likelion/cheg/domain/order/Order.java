@@ -3,6 +3,7 @@ package com.likelion.cheg.domain.order;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.likelion.cheg.domain.delivery.Delivery;
+import com.likelion.cheg.domain.enumType.OrderStatus;
 import com.likelion.cheg.domain.orderItem.OrderItem;
 import com.likelion.cheg.domain.user.User;
 import lombok.*;
@@ -37,7 +38,10 @@ public class Order {
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 
-    private int orderStatus; //주문상태 (0 or 1)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus orderStatus; //주문상태 (0 or 1)
+
     private String orderNumber; //주문번호
 
     private int orderPrice; //주문총액
@@ -80,7 +84,7 @@ public class Order {
     public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
         Order order = Order.builder()
                 .orderNumber(createOrderNumber())
-                .orderStatus(1)
+                .orderStatus(OrderStatus.주문완료)
                 .orderProductCount(orderItems.size())
                 .build();
 

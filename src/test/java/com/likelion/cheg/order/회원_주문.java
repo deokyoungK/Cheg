@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.enumType.DeliveryStatus;
+import com.likelion.cheg.domain.enumType.OrderStatus;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.orderItem.OrderItemRepository;
 import com.likelion.cheg.domain.product.Product;
@@ -68,7 +69,7 @@ public class 회원_주문 {
         Order order = orderService.makeOrder(user.getId(),0,user.getAddress(), product.getId(), 2);
 
         //order 확인
-        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(),1);
+        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(), OrderStatus.주문완료);
         assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDeliveryAddress(),user.getAddress());
         //orderItem확인
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
@@ -96,7 +97,7 @@ public class 회원_주문 {
         Order order = orderService.makeOrder(user.getId(),1,user.getAddress(), product.getId(), 2);
 
         //order 확인
-        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(),1);
+        assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(),OrderStatus.주문완료);
         assertEquals("주문 시 배송정보_유효성 확인.",order.getDelivery().getDeliveryAddress(),user.getAddress());
         //orderItem확인
         assertEquals("주문상품 갯수 = 장바구니 갯수",order.getOrderItemList().size(),1);
