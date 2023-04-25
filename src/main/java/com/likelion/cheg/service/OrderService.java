@@ -72,12 +72,10 @@ public class OrderService {
 
         //delivery 생성
         Delivery delivery = Delivery.createDelivery(address,"배송전");
-        deliveryRepository.save(delivery);
 
         if(userId == 0){ //비회원의 경우
             //비회원 생성
             User user = User.createAnonymous();
-            userRepository.save(user);
 
             //상품 찾기
             Product product = productRepository.findById(productId).orElseThrow(()->{
@@ -86,11 +84,14 @@ public class OrderService {
             //주문상품 생성
             List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
             OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-            orderItemRepository.save(orderItem);
 
             //주문 생성
             orderItemList.add(orderItem);
             Order order = Order.createOrder(user,delivery,orderItemList);
+
+            userRepository.save(user);
+            deliveryRepository.save(delivery);
+            orderItemRepository.save(orderItem);
             orderRepository.save(order);
 
             return order;
@@ -107,10 +108,13 @@ public class OrderService {
                 //주문상품 생성
                 List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
                 OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-                orderItemRepository.save(orderItem);
+
                 //주문 생성
                 orderItemList.add(orderItem);
                 Order order = Order.createOrder(user,delivery, orderItemList );
+
+                deliveryRepository.save(delivery);
+                orderItemRepository.save(orderItem);
                 orderRepository.save(order);
 
                 return order;
@@ -122,13 +126,18 @@ public class OrderService {
                     //주문상품 생성
                     OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
                     orderItemList.add(orderItem);
-                    orderItemRepository.save(orderItem);
+
                     //장바구니에서는 삭제
                     cartRepository.deleteById(cart.getId());
                     user.getCarts().remove(cart);
                 }
                 //주문 생성
                 Order order = Order.createOrder(user,delivery,orderItemList);
+
+                deliveryRepository.save(delivery);
+                for(OrderItem orderItem : order.getOrderItemList()){
+                    orderItemRepository.save(orderItem);
+                }
                 orderRepository.save(order);
                 return order;
             }

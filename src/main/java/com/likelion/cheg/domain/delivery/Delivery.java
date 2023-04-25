@@ -31,6 +31,11 @@ public class Delivery {
         this.createDate = LocalDateTime.now();
     }
 
+    //변경 필요
+    public void setOrder(Order order){
+        this.order = order;
+    }
+
     //Delivery 생성 메서드
     public static Delivery createDelivery(String deliveryAddress, String deliveryStatus){
         Delivery delivery = Delivery.builder()

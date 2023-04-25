@@ -104,8 +104,8 @@
 						<div class="delivery-product-info">
 							<div class="delivery-product-brand">${c.product.brand}</div>
 							<div class="delivery-product-name">${c.product.name}</div>
-							<div class="delivery-product-name">${c.product_count}개</div>
-							<div class="delivery-product-price">${c.total_price}원</div>
+							<div class="delivery-product-name">${c.productCount}개</div>
+							<div class="delivery-product-price">${c.cartTotalPrice}원</div>
 						</div>
 					</div>
 					</c:forEach>

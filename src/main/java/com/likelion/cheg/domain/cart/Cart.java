@@ -30,7 +30,7 @@ public class Cart {
     private int productCount; //장바구니 수
 
     @Transient
-    private int cartTotalPrice; //장바구니 총 가격
+    private int cartTotalPrice; //장바구니 총 금액
 
     //해당 상품에 대한 장바구니 총 가격 계산
     public void calculateTotalPrice(){

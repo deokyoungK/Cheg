@@ -46,7 +46,7 @@ function detailToPayment(productId){
         contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
         dataType: "json" //응답받을 데이터의 형식
     }).done(res => {
-        location.href="http://3.39.81.107:8080/detailPayment/"+res.data[0]+"/"+res.data[1];
+        location.href="http://localhost:8080/detailPayment/"+res.data[0]+"/"+res.data[1];
     }).fail(error => {
         alert("실패");
     });

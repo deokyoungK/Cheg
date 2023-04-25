@@ -43,13 +43,13 @@
             <c:forEach var="order" items="${orderList}">
             <div class="purchase_list_display_item" style="background-color: rgb(255, 255, 255);">
                 <div class="purchase_list_product">
-                    <p class="list_item_name" style="margin-right: 30px;">${order.order_number}</p>
+                    <p class="list_item_name" style="margin-right: 30px;">${order.orderNumber}</p>
                     <div class="list_item_img_wrap">
                         <img alt="image" src="/upload/${order.orderItemList[0].product.url}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
                     </div>
 
                     <c:choose>
-                        <c:when test="${order.order_product_count == 1}">
+                        <c:when test="${order.orderProductCount == 1}">
                             <div class="list_item_title_wrap">
                                 <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
                                 <p class="list_item_name">${order.orderItemList[0].product.name}</p>
@@ -58,7 +58,7 @@
                         <c:otherwise>
                             <div class="list_item_title_wrap">
                                 <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
-                                <p class="list_item_name">${order.orderItemList[0].product.name}외 ${order.order_product_count-1}개 상품</p>
+                                <p class="list_item_name">${order.orderItemList[0].product.name}외 ${order.orderProductCount-1}개 상품</p>
                             </div>
                         </c:otherwise>
                     </c:choose>
@@ -67,7 +67,7 @@
 
                 <div class="list_item_status">
                     <c:choose>
-                        <c:when test="${order.order_status == 1}">
+                        <c:when test="${order.orderStatus == 1}">
                             <div class="width-wrap">
                                 <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">주문완료</p>
                             </div>
@@ -80,11 +80,11 @@
                     </c:choose>
 
                     <div class="width-wrap">
-                        <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">${order.order_price}원</p>
+                        <p class="list_item_column" style="color: rgb(34, 34, 34); margin-right: 60px;">${order.orderPrice}원</p>
                     </div>
 
                     <div class="width-wrap">
-                        <p class="list_item_column" style="color: #BB2649;">${order.delivery.delivery_status}</p>
+                        <p class="list_item_column" style="color: #BB2649;">${order.delivery.deliveryStatus}</p>
                     </div>
 
                 </div>
@@ -115,13 +115,6 @@
                             <input type="text" class="input_txt text_fill" value="${principal.user.username}" readonly />
                         </div>
                     </div>
-
-                    <!-- <div class="unit">
-                        <h5 class="title">비밀번호</h5>
-                        <div class="input_item">
-                            <input type="password" class="input_txt text_fill" value="${principal.user.password}" readonly />
-                        </div>
-                    </div> -->
                 </div>
                         
                 <div class="profile_group" >

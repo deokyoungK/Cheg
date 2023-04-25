@@ -11,11 +11,10 @@ import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -30,6 +29,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference
+    @Builder.Default
     private List<OrderItem> orderItemList = new ArrayList<>(); //주문상품
 
     @OneToOne
@@ -37,11 +37,11 @@ public class Order {
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 
-    private int order_status; //주문상태 (0 or 1)
-    private String order_number; //주문번호
+    private int orderStatus; //주문상태 (0 or 1)
+    private String orderNumber; //주문번호
 
-    private int order_price; //주문총액
-    private int order_product_count; //상품갯수 -> 마이페이지에서 구분을 위해
+    private int orderPrice; //주문총액
+    private int orderProductCount; //상품갯수 -> 마이페이지에서 구분을 위해
     private LocalDateTime createDate; //날짜
 
     @PrePersist //db에 insert되기 직전에 실행
@@ -49,49 +49,53 @@ public class Order {
         this.createDate = LocalDateTime.now();
     }
 
+    private void setOrderPrice(int orderPrice){
+        this.orderPrice = orderPrice;
+    }
     //연관 관계 매핑 메서드
-    public void setUser(User user){
+    private void setUser(User user){
         this.user = user;
         user.getOrders().add(this);
     }
-    public void addOrderItem(OrderItem orderItem){
+    private void addOrderItem(OrderItem orderItem){
         orderItemList.add(orderItem);
         orderItem.setOrder(this);
     }
-    public void setDelivery(Delivery delivery){
+    private void setDelivery(Delivery delivery){
         this.delivery = delivery;
-        Delivery.builder()
-                .order(this)
-                .build();
+        delivery.setOrder(this);
     }
 
-    //Order 생성 메서드
-    public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
-        //8자리 주문번호 생성
+    //주문번호 생성 메서드
+    private static String createOrderNumber(){
         Random random = new Random();
         String number = "23_";
         for(int i=0;i<7;i++){
             number += Integer.toString(random.nextInt(9));
         }
-        Order order = new Order();
-        order.setUser(user);
-        order.setOrder_number(number);
-        order.setDelivery(delivery);
+        return number;
+    }
+
+    //Order 생성 메서드
+    public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
+        Order order = Order.builder()
+                .orderNumber(createOrderNumber())
+                .orderStatus(1)
+                .orderProductCount(orderItems.size())
+                .build();
+
+        //주문 금액 세팅
         int sum = 0;
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
-            sum += orderItem.getTotal_price();
+            sum += orderItem.getOrderItemTotalPrice();
         }
-        order.setOrder_status(1);
-        order.setOrder_price(sum);
-        order.setOrder_product_count(orderItems.size());
+        order.setOrderPrice(sum);
+
+        //양방향 연관관계 매핑
+        order.setUser(user);
+        order.setDelivery(delivery);
+
         return order;
-//        return builder()
-//                .user(user)
-//                .order_number(number)
-//                .delivery(delivery)
-//                .orderItemList(orderItems)
-//                .order_status(1)
-//                .order_price(sum)
     }
 }

@@ -2,6 +2,7 @@ package com.likelion.cheg;
 
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
