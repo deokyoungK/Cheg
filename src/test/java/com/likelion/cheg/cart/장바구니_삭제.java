@@ -57,6 +57,4 @@ public class 장바구니_삭제 {
         assertEquals("장바구니 한개만 남는지",user.getCarts().size(),1);
         assertEquals("남은 한개가 cart1인지",user.getCarts().get(0),cart1);
     }
-
-
 }

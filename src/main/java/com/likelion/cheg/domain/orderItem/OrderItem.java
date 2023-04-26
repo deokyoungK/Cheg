@@ -21,13 +21,11 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @OneToOne(fetch = LAZY)
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name="product_id")
     private Product product;
 
-//    @ManyToOne(fetch = LAZY)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="order_id")
     private Order order; //주문
 

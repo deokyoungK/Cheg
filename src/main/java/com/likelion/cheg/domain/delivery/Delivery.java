@@ -21,8 +21,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @OneToOne(mappedBy = "delivery",fetch = LAZY)
-    @OneToOne
+    @OneToOne(mappedBy = "delivery",fetch = LAZY)
     @JoinColumn(name="order_id")
     private Order order; //주문
 

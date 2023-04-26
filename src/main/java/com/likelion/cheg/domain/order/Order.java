@@ -25,20 +25,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @ManyToOne(fetch = LAZY)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="member_id")
     private User user;
 
-//    @OneToMany(mappedBy = "order", fetch = LAZY)
     @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItemList = new ArrayList<>(); //주문상품
 
-//    @OneToOne(fetch = LAZY)
     @JsonIgnore
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 

@@ -48,9 +48,9 @@
             <c:forEach var="o" items="${orderList}">
             <tbody>
                 <tr class="">
-                    <td>${o.order_number}</td>
+                    <td>${o.orderNumber}</td>
                     <td>${o.createDate}</td>
-                    <td>${o.order_status}</td>
+                    <td>${o.orderStatus}</td>
                     <td>${o.orderItemList[0].product.name}</td>
                     <td>${o.user.username}</td>
                 </tr>
