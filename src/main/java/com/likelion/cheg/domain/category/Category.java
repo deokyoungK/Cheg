@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +26,7 @@ public class Category {
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = LAZY)
     private List<Product> products = new ArrayList<Product>();
 
     private LocalDateTime createDate;

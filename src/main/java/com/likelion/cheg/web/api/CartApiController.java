@@ -24,7 +24,7 @@ public class CartApiController {
 
     @PostMapping("api/cart/add")
     public ResponseEntity<?> addCart(@RequestBody AddCartDto addCartDto, @AuthenticationPrincipal PrincipalDetail principalDetail){
-        cartService.addCart(principalDetail.getUser(),addCartDto);
+        cartService.addCart(principalDetail.getUser().getId(),addCartDto);
         return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 추가 성공", ""), HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class CartApiController {
 
     @PostMapping("api/cart/{cartId}/delete")
     public ResponseEntity<?> deleteCart(@PathVariable int cartId, @AuthenticationPrincipal PrincipalDetail principalDetail){
-        cartService.deleteCart(principalDetail.getUser(),cartId);
+        cartService.deleteCart(principalDetail.getUser().getId(),cartId);
         return new ResponseEntity<>(new CMResponseDto<>(1,"장바구니 삭제 성공",""), HttpStatus.OK);
     }
 

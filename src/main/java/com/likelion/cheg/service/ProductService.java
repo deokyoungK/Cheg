@@ -70,14 +70,14 @@ public class ProductService {
     }
 
     @Transactional
-    public List<Product> loadAllProducts(){
+    public List<Product> loadProductsDESC(){
         List<Product> productList = productRepository.findAllDesc();
         return productList;
     }
 
     @Transactional
-    public Product loadProduct(int id){
-        Product product = productRepository.findById(id).orElseThrow(()->{
+    public Product loadProduct(int productId){
+        Product product = productRepository.findById(productId).orElseThrow(()->{
             return new CustomException("상품을 찾을 수 없습니다.");
         });
         return product;
@@ -100,7 +100,4 @@ public class ProductService {
         }
         return productReturn;
     }
-
-
-
 }

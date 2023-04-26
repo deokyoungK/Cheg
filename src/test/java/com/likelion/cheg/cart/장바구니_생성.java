@@ -44,7 +44,7 @@ public class 장바구니_생성 {
         addCartDto.setProductId(product.getId());
         addCartDto.setProductCount(3);
 
-        Cart cart = cartService.addCart(user,addCartDto);
+        Cart cart = cartService.addCart(user.getId(),addCartDto);
 
         assertEquals("장바구니-사용자 매핑이 잘 이루어졌는지",cart.getUser(),user);
         assertEquals("장바구니-상품 매핑이 잘 이루어졌는지.",cart.getProduct(),product);

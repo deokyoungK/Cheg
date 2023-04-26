@@ -1,9 +1,13 @@
 package com.likelion.cheg.domain.product;
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.orderItem.OrderItem;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 
 @AllArgsConstructor
@@ -17,7 +21,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="category")
     private Category category; //상품 카테고리
 

@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+//    @OneToOne(mappedBy = "delivery",fetch = LAZY)
     @OneToOne
     @JoinColumn(name="order_id")
     private Order order; //주문

@@ -49,10 +49,10 @@ public class 장바구니_삭제 {
         addCartDto2.setProductId(product2.getId());
         addCartDto2.setProductCount(3);
 
-        Cart cart1 = cartService.addCart(user, addCartDto);
-        Cart cart2= cartService.addCart(user, addCartDto2);
+        Cart cart1 = cartService.addCart(user.getId(), addCartDto);
+        Cart cart2= cartService.addCart(user.getId(), addCartDto2);
 
-        cartService.deleteCart(user,cart2.getId());
+        cartService.deleteCart(user.getId(),cart2.getId());
 
         assertEquals("장바구니 한개만 남는지",user.getCarts().size(),1);
         assertEquals("남은 한개가 cart1인지",user.getCarts().get(0),cart1);

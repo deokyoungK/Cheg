@@ -3,11 +3,11 @@ package com.likelion.cheg.domain.cart;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Builder
@@ -17,15 +17,17 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Table(name = "CART")
 public class Cart {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = EAGER)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="product_id")
     private Product product;
 
@@ -55,6 +57,7 @@ public class Cart {
 
         //연관관계 매핑
         user.getCarts().add(cart);
+
         //장바구니 총 가격 계산
         cart.calculateTotalPrice();
         return cart;

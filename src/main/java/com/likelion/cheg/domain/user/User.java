@@ -25,12 +25,12 @@ public class User {
 
 	@Builder.Default
 	@JsonIgnore
-	@OneToMany(mappedBy = "user",fetch = EAGER)
+	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Cart> carts = new ArrayList<>(); //장바구니
 
 	@Builder.Default
 	@JsonIgnore
-	@OneToMany
+	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
 
 	@Column(length = 100, unique = true)

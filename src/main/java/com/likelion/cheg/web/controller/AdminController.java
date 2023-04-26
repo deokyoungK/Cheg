@@ -1,7 +1,6 @@
 package com.likelion.cheg.web.controller;
 
 import com.likelion.cheg.domain.category.Category;
-import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
@@ -14,8 +13,6 @@ import com.likelion.cheg.service.UserService;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +63,7 @@ public class AdminController {
      **/
     @GetMapping("/admin/productList")
     public String productList(Model model){
-        List<Product> productList = productService.loadAllProducts();
+        List<Product> productList = productService.loadProductsDESC();
         model.addAttribute("productList",productList);
         return "admin/productList";
     }

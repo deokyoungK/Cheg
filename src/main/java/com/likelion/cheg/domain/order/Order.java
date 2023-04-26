@@ -11,6 +11,8 @@ import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,15 +25,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+//    @ManyToOne(fetch = LAZY)
     @ManyToOne
     @JoinColumn(name="member_id")
     private User user;
 
+//    @OneToMany(mappedBy = "order", fetch = LAZY)
     @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItemList = new ArrayList<>(); //주문상품
 
+//    @OneToOne(fetch = LAZY)
     @JsonIgnore
     @OneToOne
     @JoinColumn(name="delivery_id")

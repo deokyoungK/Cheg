@@ -19,14 +19,14 @@ public class ProductController {
 
     @GetMapping("/")
     public String home(Model model){
-        List<Product> productList = productService.loadAllProducts();
+        List<Product> productList = productService.loadProductsDESC();
         model.addAttribute("productList",productList);
         return "layout/home";
     }
 
-    @GetMapping("/detail/{id}")
-    public String getDetail(@PathVariable int id, Model model){
-        Product product = productService.loadProduct(id);
+    @GetMapping("/detail/{productId}")
+    public String getDetail(@PathVariable int productId, Model model){
+        Product product = productService.loadProduct(productId);
         model.addAttribute("product",product);
         return "product/detail";
     }
