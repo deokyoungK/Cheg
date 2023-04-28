@@ -36,6 +36,8 @@ public class 검색관리 {
     CommonMethod commonMethod;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     public void 회원검색(){
@@ -44,7 +46,7 @@ public class 검색관리 {
         User user3 = commonMethod.createUser("ABCD");
 
         String keyword = "bird";
-        List<User> userList = userService.searchUserByKeyword(keyword);
+        List<User> userList = userRepository.searchByKeyword(keyword);
 
         assertEquals("검색된 User는 총 2명",userList.size(),2);
         assertEquals("검색된 User의 아이디 확인",userList.contains(user),true);
@@ -59,7 +61,7 @@ public class 검색관리 {
         Product product3 = commonMethod.createProduct(category,"converse",6000);
 
         String keyword = "jordon";
-        List<Product> productList = productService.searchProductByKeyword(keyword);
+        List<Product> productList = productRepository.searchByKeyword(keyword);
 
         assertEquals("검색된 product는 총 2개",productList.size(),2);
         assertEquals("검색된 product의 이름 확인",productList.contains(product),true);

@@ -27,10 +27,11 @@ public class 페이지설정 {
 
     @Test
     public void 관리자페이지() throws Exception {
-        mockMvc.perform(get("/admin").with(user("admin").roles("ADMIN")))
+        mockMvc.perform(get("/admin/users").with(user("admin").roles("ADMIN")))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
     @Test
     public void 익명사용자_첫화면() throws Exception {
         mockMvc.perform(get("/").with(anonymous()))

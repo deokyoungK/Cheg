@@ -74,7 +74,6 @@
 									placeholder="도로명 주소"
 									readonly
 							/>
-
 							<input
 									type="text"
 									name="detailAddress"
@@ -83,9 +82,7 @@
 									required
 							/>
 						</div>
-
 					</div>
-
 					<!-- <div class="delivery-ask-txt">배송 요청 사항</div>
 					<button type="button" class="delivery-ask-btn" onclick="">직접 수령할게요.</button> -->
 
@@ -96,30 +93,30 @@
 			<div class="delivery-product-box" >
 				<p class="delivery-product-title">배송 상품</p>
 
-				<c:forEach var="c" items="${cartList}">
+				<c:forEach var="c" items="${responseMap['list']}">
 				<div class="delivery-product-box-inner">
-
 					<div class="delivery-product-top">
-						<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${c.product.url}" alt=""></a>
+						<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${c.productUrl}" alt=""></a>
 						<div class="delivery-product-info">
-							<div class="delivery-product-brand">${c.product.brand}</div>
-							<div class="delivery-product-name">${c.product.name}</div>
+							<div class="delivery-product-brand">${c.productBrand}</div>
+							<div class="delivery-product-name">${c.productName}</div>
 							<div class="delivery-product-name">${c.productCount}개</div>
 							<div class="delivery-product-price">${c.cartTotalPrice}원</div>
 						</div>
 					</div>
-					</c:forEach>
+				</div>
+				</c:forEach>
 
 					<div class="delivery-product-down">
 							<span class="order-count">
 								총
-								<span class="text-green">${amount}</span>
+								<span class="text-green">${responseMap['amount']}</span>
 								개
 							</span>
 
 						<span class="order-total-price">
-								${price}원
-							</span>
+								${responseMap['cartListTotalPrice']}원
+						</span>
 					</div>
 				</div>
 			</div>
@@ -133,12 +130,12 @@
 
 						<div class="payment-division">
 							<div class="payment-left">주문 상품 수</div>
-							<div class="payment-right">${amount}개</div>
+							<div class="payment-right">${responseMap['amount']}개</div>
 						</div>
 
 						<div class="payment-division">
 							<div class="payment-left">총 상품 가격</div>
-							<div class="payment-right">${price}원</div>
+							<div class="payment-right">${responseMap['cartListTotalPrice']}원</div>
 						</div>
 
 						<div class="payment-division">
@@ -149,7 +146,7 @@
 
 					<div class="payment-division">
 						<div class="total-payment-left">최종 결제 금액</div>
-						<div class="total-payment-right" id="total-price">${price}원</div>
+						<div class="total-payment-right" id="total-price">${responseMap['cartListTotalPrice']}원</div>
 					</div>
 				</div>
 

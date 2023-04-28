@@ -1,4 +1,4 @@
-package com.likelion.cheg.web.dto.payment;
+package com.likelion.cheg.web.dto.pay;
 
 import lombok.Data;
 

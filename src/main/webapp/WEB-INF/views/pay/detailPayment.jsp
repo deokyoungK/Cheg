@@ -105,11 +105,11 @@
 					<div class="delivery-product-box-inner">
 
 						<div class="delivery-product-top">
-							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${product.url}" alt=""></a>
+							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${payDetailDto.url}" alt=""></a>
 							<div class="delivery-product-info">
-								<div class="delivery-product-brand">${product.brand}</div>
-								<div class="delivery-product-name">${product.name}</div>
-								<div class="delivery-product-price">${product.price}</div>
+								<div class="delivery-product-brand">${payDetailDto.brand}</div>
+								<div class="delivery-product-name">${payDetailDto.name}</div>
+								<div class="delivery-product-price">${payDetailDto.price}</div>
 							</div>
 						</div>
 
@@ -117,12 +117,12 @@
 						<div class="delivery-product-down">
 								<span class="order-count">
 									총
-									<span class="text-green">${amount}</span>
+									<span class="text-green">${payDetailDto.amount}</span>
 									개
 								</span>
 
 							<span class="order-total-price">
-									${price}
+									${payDetailDto.totalPrice}
 									원
 								</span>
 						</div>
@@ -140,12 +140,12 @@
 
 						<div class="payment-division">
 							<div class="payment-left">주문 상품 수</div>
-							<div class="payment-right">${amount}개</div>
+							<div class="payment-right">${payDetailDto.amount}개</div>
 						</div>
 
 						<div class="payment-division">
 							<div class="payment-left">총 상품 가격</div>
-							<div class="payment-right">${price}원</div>
+							<div class="payment-right">${payDetailDto.totalPrice}원</div>
 						</div>
 
 						<div class="payment-division">
@@ -156,7 +156,7 @@
 
 					<div class="payment-division">
 						<div class="total-payment-left">최종 결제 금액</div>
-						<div class="total-payment-right" id="total-price">${price}원</div>
+						<div class="total-payment-right" id="total-price">${payDetailDto.totalPrice}원</div>
 					</div>
 				</div>
 

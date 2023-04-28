@@ -5,7 +5,7 @@ import com.likelion.cheg.handler.ex.CustomValidationException;
 import com.likelion.cheg.service.OrderService;
 import com.likelion.cheg.web.dto.CMResponseDto;
 import com.likelion.cheg.web.dto.delivery.DeliveryDto;
-import com.likelion.cheg.web.dto.payment.PaymentDto;
+import com.likelion.cheg.web.dto.pay.PaymentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

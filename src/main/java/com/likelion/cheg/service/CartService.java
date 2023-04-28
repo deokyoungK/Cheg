@@ -9,8 +9,8 @@ import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
 import com.likelion.cheg.web.dto.cart.CartResponseDto;
+import com.likelion.cheg.web.dto.pay.PayCartResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,6 +24,38 @@ public class CartService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
+    //장바구니결제페이지에 필요한 DTO, 값들 Map으로 묶어서 생성
+    public Map<String, Object> makeCartResponseDto(List<Cart> cartList){
+        Map<String, Object> values = new HashMap<>();
+
+        int cartListTotalPrice = 0;
+        int amount = 0;
+        String name = "";
+        List<PayCartResponseDto> payCartResponseDtos = new ArrayList<>();
+
+        for(Cart cart : cartList){
+            cartListTotalPrice += cart.getCartTotalPrice();
+            amount += cart.getProductCount();
+            name += cart.getProduct().getName();
+
+            PayCartResponseDto payCartResponseDto = new PayCartResponseDto();
+            payCartResponseDto.setProductUrl(cart.getProduct().getUrl());
+            payCartResponseDto.setProductBrand(cart.getProduct().getBrand());
+            payCartResponseDto.setProductName(cart.getProduct().getName());
+            payCartResponseDto.setProductCount(cart.getProductCount());
+            payCartResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
+            payCartResponseDtos.add(payCartResponseDto);
+        }
+        values.put("list",payCartResponseDtos);
+        values.put("cartListTotalPrice",cartListTotalPrice);
+        values.put("amount",amount);
+        values.put("name",name);
+
+        return values;
+    }
+
+
+    //장바구니 수량 변경 시 화면 렌더링에 필요한 DTO 생성(API)
     @Transactional
     public List<CartResponseDto> makeResponseDto(List<Cart> cartList){
         List<CartResponseDto> cartResponseDtos = new ArrayList<>();
