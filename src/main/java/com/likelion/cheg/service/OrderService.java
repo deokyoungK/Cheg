@@ -14,6 +14,7 @@ import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.web.dto.order.OrderMyPageResponseDto;
 import com.likelion.cheg.web.dto.order.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
@@ -32,6 +33,21 @@ public class OrderService {
     private final DeliveryRepository deliveryRepository;
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
+
+    public List<OrderMyPageResponseDto> makeMyPageResponseDto(List<Order> orderList){
+        List<OrderMyPageResponseDto> orderListDtos = orderList.stream()
+                .map(order -> new OrderMyPageResponseDto(
+                        order.getOrderNumber(),
+                        order.getOrderProductCount(),
+                        order.getOrderStatus(),
+                        order.getOrderPrice(),
+                        order.getOrderItemList().get(0).getProduct().getBrand(),
+                        order.getOrderItemList().get(0).getProduct().getUrl(),
+                        order.getOrderItemList().get(0).getProduct().getName(),
+                        order.getDelivery().getDeliveryStatus()))
+                .collect(Collectors.toList());
+        return orderListDtos;
+    }
 
     public List<OrderResponseDto> makeResponseDto(List<Order> orderList){
         List<OrderResponseDto> orderListDtos = orderList.stream()

@@ -39,25 +39,25 @@
                 <h3 class="title_txt"> 구매 내역 </h3>
             </div>
 
-            <c:forEach var="order" items="${orderList}">
+            <c:forEach var="order" items="${orderListDto}">
             <div class="purchase_list_display_item" style="background-color: rgb(255, 255, 255);">
                 <div class="purchase_list_product">
                     <p class="list_item_name" style="margin-right: 30px;">${order.orderNumber}</p>
                     <div class="list_item_img_wrap">
-                        <img alt="image" src="/upload/${order.orderItemList[0].product.url}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
+                        <img alt="image" src="/upload/${order.productUrl}" class="list_item_img" style="background-color: rgb(255, 255, 255);">
                     </div>
 
                     <c:choose>
                         <c:when test="${order.orderProductCount == 1}">
                             <div class="list_item_title_wrap">
-                                <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
-                                <p class="list_item_name">${order.orderItemList[0].product.name}</p>
+                                <p class="list_item_brand">${order.productBrand}</p>
+                                <p class="list_item_name">${order.productName}</p>
                             </div>
                         </c:when>
                         <c:otherwise>
                             <div class="list_item_title_wrap">
-                                <p class="list_item_brand">${order.orderItemList[0].product.brand}</p>
-                                <p class="list_item_name">${order.orderItemList[0].product.name}외 ${order.orderProductCount-1}개 상품</p>
+                                <p class="list_item_brand">${order.productBrand}</p>
+                                <p class="list_item_name">${order.productName}외 ${order.orderProductCount-1}개 상품</p>
                             </div>
                         </c:otherwise>
                     </c:choose>
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="width-wrap">
-                        <p class="list_item_column" style="color: #BB2649;">${order.delivery.deliveryStatus}</p>
+                        <p class="list_item_column" style="color: #BB2649;">${order.deliveryStatus}</p>
                     </div>
 
                 </div>

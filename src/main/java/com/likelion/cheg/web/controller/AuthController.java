@@ -59,7 +59,5 @@ public class AuthController {
             User user = authService.signup(signupDto);
             return "auth/login";
         }
-
-
     }
 }
