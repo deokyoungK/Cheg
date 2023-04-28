@@ -8,6 +8,7 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
+import com.likelion.cheg.web.dto.cart.CartApiResponseDto;
 import com.likelion.cheg.web.dto.cart.CartResponseDto;
 import com.likelion.cheg.web.dto.pay.PayCartResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,31 @@ public class CartService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    //장바구니결제페이지에 필요한 DTO, 값들 Map으로 묶어서 생성
+    //장바구니 페이지에 필요한 DTO, 값 Map으로 묶어서 생성(VIEW)
+    public Map<String, Object> makeCartDto(List<Cart> cartList){
+        Map<String, Object> values = new HashMap<>();
+        int cartListTotalPrice = 0;
+        List<CartResponseDto> cartResponseDtos = new ArrayList<>();
+
+        for(Cart cart : cartList){
+            cartListTotalPrice += cart.getCartTotalPrice();
+
+            CartResponseDto cartResponseDto = new CartResponseDto();
+            cartResponseDto.setId(cart.getId());
+            cartResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
+            cartResponseDto.setProductCount(cart.getProductCount());
+            cartResponseDto.setProductUrl(cart.getProduct().getUrl());
+            cartResponseDto.setProductName(cart.getProduct().getName());
+
+            cartResponseDtos.add(cartResponseDto);
+        }
+        values.put("list",cartResponseDtos);
+        values.put("cartListTotalPrice",cartListTotalPrice);
+
+        return values;
+    }
+
+    //장바구니 결제 페이지에 필요한 DTO, 값들 Map으로 묶어서 생성(VIEW)
     public Map<String, Object> makeCartResponseDto(List<Cart> cartList){
         Map<String, Object> values = new HashMap<>();
 
@@ -57,17 +82,17 @@ public class CartService {
 
     //장바구니 수량 변경 시 화면 렌더링에 필요한 DTO 생성(API)
     @Transactional
-    public List<CartResponseDto> makeResponseDto(List<Cart> cartList){
-        List<CartResponseDto> cartResponseDtos = new ArrayList<>();
+    public List<CartApiResponseDto> makeApiResponseDto(List<Cart> cartList){
+        List<CartApiResponseDto> cartApiResponseDtos = new ArrayList<>();
         for(Cart cart : cartList){
-            CartResponseDto cartResponseDto = new CartResponseDto();
-            cartResponseDto.setCartId(cart.getId());
-            cartResponseDto.setProductCount(cart.getProductCount());
-            cartResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
+            CartApiResponseDto cartApiResponseDto = new CartApiResponseDto();
+            cartApiResponseDto.setCartId(cart.getId());
+            cartApiResponseDto.setProductCount(cart.getProductCount());
+            cartApiResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
 
-            cartResponseDtos.add(cartResponseDto);
+            cartApiResponseDtos.add(cartApiResponseDto);
         }
-        return cartResponseDtos;
+        return cartApiResponseDtos;
     }
 
     @Transactional

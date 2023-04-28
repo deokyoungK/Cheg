@@ -3,10 +3,8 @@ package com.likelion.cheg.web.dto.cart;
 import lombok.Data;
 
 @Data
-public class CartResponseDto {
-    private int id;
+public class CartApiResponseDto {
+    private int cartId;
     private int productCount;
     private int cartTotalPrice;
-    private String productUrl;
-    private String productName;
 }

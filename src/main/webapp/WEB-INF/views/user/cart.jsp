@@ -27,11 +27,11 @@
         </thead>
 
         <tbody>
-        <c:forEach var="c" items="${carts}">
+        <c:forEach var="c" items="${responseMap['list']}">
             <tr class="cart__list__detail">
                 <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_cart(${c.id});"></i></td>
-                <td><img style="width:50px;"class="img" src="/upload/${c.product.url}"></td>
-                <td>${c.product.name}</td>
+                <td><img style="width:50px;"class="img" src="/upload/${c.productUrl}"></td>
+                <td>${c.productName}</td>
 
                 <td><i style="font-size:20px; cursor:pointer;" class="fa-regular fa-circle-down" id="down_${c.id}" onclick="count_down(${c.id});"></i></td>
                 <td id="count_${c.id}">${c.productCount}개</td>
@@ -53,7 +53,7 @@
         <div class="cart__order">
             <div>
                 <span id="price_total">Total</span>
-                <span id='summary'>${price}원</span>
+                <span id='summary'>${responseMap['cartListTotalPrice']}원</span>
             </div>
             <div>
                 <a href="../cartPayment/${principal.user.id}/"><button class="cart__btn right" onclick = "checkNum(event);">주문하기</button></a>
