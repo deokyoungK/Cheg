@@ -35,22 +35,20 @@
             </div>
             <thead>
             <tr>
-                <td>주문번호</td>
-                <td>주문날짜</td>
-                <td>주문상태</td>
-                <td>상품명</td>
-                <td>고객아이디</td>
+                <td>주문 번호</td>
+                <td>회원 아이디</td>
+                <td>주문 상태</td>
+                <td>주문 날짜</td>
             </tr>
             </thead>
 
-            <c:forEach var="o" items="${orderList}">
+            <c:forEach var="o" items="${orderListDto}">
             <tbody>
                 <tr class="">
                     <td>${o.orderNumber}</td>
-                    <td>${o.createDate}</td>
+                    <td>${o.username}</td>
                     <td>${o.orderStatus}</td>
-                    <td>${o.orderItemList[0].product.name}</td>
-                    <td>${o.user.username}</td>
+                    <td>${o.createDate}</td>
                 </tr>
             </tbody>
             </c:forEach>

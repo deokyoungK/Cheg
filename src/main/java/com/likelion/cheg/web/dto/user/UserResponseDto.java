@@ -16,5 +16,4 @@ public class UserResponseDto {
     private String phone;
     private LocalDateTime createDate;
 
-
 }

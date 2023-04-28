@@ -37,11 +37,6 @@ public class OrderService {
         return orderList;
     }
 
-    @Transactional
-    public List<Order> loadAll(){
-        List<Order> orderList = orderRepository.findAll();
-        return orderList;
-    }
 
     @Transactional
     public Order makeOrder(int userId, int flag, String address, int productId, int amount){
