@@ -28,17 +28,13 @@ public class OrderApiController {
         return new ResponseEntity<>(new CMResponseDto<>(1,"성공", new int[]{productId, amount}), HttpStatus.OK);
     }
 
-    @PostMapping("api/validation")
-    public ResponseEntity<?> validation(@Validated @RequestBody DeliveryDto deliveryDto, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            Map<String,String> errorMap = new HashMap<>();
-            for(FieldError error : bindingResult.getFieldErrors()){
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-            throw new CustomValidationException("배송정보 유효성 검사 실패",errorMap);
-        }else{
-            return new ResponseEntity<>(new CMResponseDto<>(1,"성공",""), HttpStatus.OK);
-        }
+    @PostMapping("api/delivery/validation")
+    public ResponseEntity<?> deliveryValidation(@Validated @RequestBody DeliveryDto deliveryDto){
+        System.out.println("===========");
+        System.out.println(deliveryDto.getPostcode());
+        System.out.println("===========");
+        return new ResponseEntity<>(new CMResponseDto<>(1,"배송정보 유효성 검사 성공",""), HttpStatus.OK);
+
     }
 
 

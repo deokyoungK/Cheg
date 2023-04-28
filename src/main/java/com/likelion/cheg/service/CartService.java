@@ -49,36 +49,6 @@ public class CartService {
         return values;
     }
 
-    //장바구니 결제 페이지에 필요한 DTO, 값들 Map으로 묶어서 생성(VIEW)
-    public Map<String, Object> makeCartResponseDto(List<Cart> cartList){
-        Map<String, Object> values = new HashMap<>();
-
-        int cartListTotalPrice = 0;
-        int amount = 0;
-        String name = "";
-        List<PayCartResponseDto> payCartResponseDtos = new ArrayList<>();
-
-        for(Cart cart : cartList){
-            cartListTotalPrice += cart.getCartTotalPrice();
-            amount += cart.getProductCount();
-            name += cart.getProduct().getName();
-
-            PayCartResponseDto payCartResponseDto = new PayCartResponseDto();
-            payCartResponseDto.setProductUrl(cart.getProduct().getUrl());
-            payCartResponseDto.setProductBrand(cart.getProduct().getBrand());
-            payCartResponseDto.setProductName(cart.getProduct().getName());
-            payCartResponseDto.setProductCount(cart.getProductCount());
-            payCartResponseDto.setCartTotalPrice(cart.getCartTotalPrice());
-            payCartResponseDtos.add(payCartResponseDto);
-        }
-        values.put("list",payCartResponseDtos);
-        values.put("cartListTotalPrice",cartListTotalPrice);
-        values.put("amount",amount);
-        values.put("name",name);
-
-        return values;
-    }
-
 
     //장바구니 수량 변경 시 화면 렌더링에 필요한 DTO 생성(API)
     @Transactional

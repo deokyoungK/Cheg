@@ -28,6 +28,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+
+
     //클라이언트통신 - javascript리턴
     @ExceptionHandler(CustomValidationException.class)
     public String validationException(CustomValidationException e){

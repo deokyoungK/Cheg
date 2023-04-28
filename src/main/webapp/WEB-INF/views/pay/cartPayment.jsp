@@ -14,7 +14,7 @@
 <body>
 <%@ include file="../layout/header.jsp"%>
 <input type="hidden" id="flag" value="1">
-<input type="hidden" id="cartName" value="${name}">
+<input type="hidden" id="cartName" value="${responseMap['name']}">
 
 <form action="" onsubmit="iamport(event)">
 	<h1 class="order-txt">주문/결제</h1>

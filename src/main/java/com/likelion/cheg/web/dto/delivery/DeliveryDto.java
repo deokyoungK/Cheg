@@ -13,12 +13,12 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class DeliveryDto {
 
-    @NotBlank(message="NAME_IS_MANDATORY")
+    @NotBlank(message="배송자 이름을 입력해주세요.")
     private String name;
 
-    @Phone
+    @Phone(message = "전화번호 형식이 올바르지 않습니다.")
     private String phone;
 
-    @NotBlank(message = "POSTCODE_IS_MANDATORY")
+    @NotBlank(message = "주소는 필수 입력란입니다.")
     private String postcode;
 }

@@ -40,7 +40,7 @@ public class OrderController {
             return new CustomException("사용자를 찾을 수 없습니다.");
         });
         List<Cart> cartList = cartService.loadCart(userId);
-        Map<String,Object> responseMap = cartService.makeCartResponseDto(cartList);
+        Map<String,Object> responseMap = payService.makeCartResponseDto(cartList);
         model.addAttribute("responseMap",responseMap);
         return "pay/cartPayment";
     }

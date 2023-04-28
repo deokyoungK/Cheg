@@ -14,9 +14,9 @@
 <body>
 <%@ include file="../layout/header.jsp"%>
 <input type="hidden" id="flag" value="0">
-<input type="hidden" id="productId" value="${product.id}">
-<input type="hidden" id="amount" value="${amount}">
-<input type="hidden" id="productName" value="${product.name}">
+<input type="hidden" id="productId" value="${payDetailDto.id}">
+<input type="hidden" id="amount" value="${payDetailDto.amount}">
+<input type="hidden" id="productName" value="${payDetailDto.name}">
 
 
 <form action="" onsubmit="iamport(event)">
@@ -25,7 +25,6 @@
 		<div class="wrap-left">
 			<h1 class="order-txt">주문/결제</h1>
 			<div >
-
 				<div class="orderer-info-box" >
 					<p class="orderer-info-box-title">주문자 정보</p>
 
@@ -56,12 +55,12 @@
 
 						<div class="delivery-info-division">
 							<div class="delivery-info-txt">이름</div>
-							<input type="text" id="name" required />
+							<input type="text" id="name" >
 						</div>
 
 						<div class="delivery-info-division">
 							<div class="delivery-info-txt">연락처</div>
-							<input type="text" id="phone" placeholder="여백없이 입력해주세요." required >
+							<input type="text" id="phone" placeholder="여백없이 입력해주세요." >
 						</div>
 
 
@@ -70,7 +69,7 @@
 
 							<div class="post-box">
 								<div class="post-btn-box">
-									<input type="text" class="" name="postcode" id="postcode" placeholder="우편번호" readonly  required/>
+									<input type="text" class="" name="postcode" id="postcode" placeholder="우편번호" readonly  >
 									<button type="button" class="post-find-btn" onclick="execDaumPostcode()">우편번호 찾기</button>
 								</div>
 								<input
@@ -86,7 +85,7 @@
 										name="detailAddress"
 										id="detailAddress"
 										placeholder="상세 주소"
-										required
+
 								/>
 							</div>
 
