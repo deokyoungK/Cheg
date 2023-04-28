@@ -7,13 +7,17 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
+import com.likelion.cheg.web.dto.user.UserResponseDto;
 import com.likelion.cheg.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -21,6 +25,28 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+
+    public Page<User> getUsers(int page, int size){
+        return userRepository.findAll(PageRequest.of(page,size));
+    }
+
+
+
+    public List<UserResponseDto> makeResponseDto(List<User> userList){
+        List<UserResponseDto> userListDtos = userList.stream()
+                .map(user -> new UserResponseDto(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAddress(),
+                        user.getPhone(),
+                        user.getCreateDate()))
+                .collect(Collectors.toList());
+        return userListDtos;
+    }
+
+
     @Transactional
     public void deleteUser(int userId){
         try{
@@ -45,12 +71,6 @@ public class UserService {
                 userUpdateDto.getPhone());
 
         return user;
-    }
-
-    @Transactional
-    public List<User> searchUserByKeyword(String keyword){
-        List<User> userList = userRepository.searchByKeyword(keyword);
-        return userList;
     }
 
 }

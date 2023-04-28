@@ -22,45 +22,44 @@
 
         </ul>
 
-    <section class="client">
-        <table class="client_list">
-            <div class="client-wrap">
-                <h1 class="client-txt">회원리스트</h1>
-                <div class="admin-search">
-                    <form id="form" action="/admin/search/user" method="GET" class="admin-box">
-                        <input name="keyword"class="admin-search_input" type="text" placeholder="찾는 아이디 입력">
-                        <button type="submit" class="admin-search_btn">검색</button>
-                    </form>
+        <section class="client">
+            <table class="client_list">
+                <div class="client-wrap">
+                    <h1 class="client-txt">회원리스트</h1>
+                    <div class="admin-search">
+                        <form id="form" action="/admin/search/user" method="GET" class="admin-box">
+                            <input name="keyword"class="admin-search_input" type="text" placeholder="찾는 아이디 입력">
+                            <button type="submit" class="admin-search_btn">검색</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <thead>
-            <tr>
-                <td>아이디</td>
-                <td>이름</td>
-                <td>이메일</td>
-                <td>주소</td>
-                <td>연락처</td>
-                <td>가입일</td>
-                <td>회원탈퇴</td>
-            </tr>
-            </thead>
-            <c:forEach var="u" items="${userListDto}">
-            <tbody>
-                <tr class="">
-                    <td>${u.username}</td>
-                    <td>${u.name}</td>
-                    <td>${u.email}</td>
-                    <td>${u.address}</td>
-                    <td>${u.phone}</td>
-                    <td>${u.createDate}</td>
-                    <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_user(${u.id});"></i></td>
+                <thead>
+                <tr>
+                    <td>아이디</td>
+                    <td>이름</td>
+                    <td>이메일</td>
+                    <td>주소</td>
+                    <td>연락처</td>
+                    <td>가입일</td>
+                    <td>회원탈퇴</td>
                 </tr>
-            </tbody>
-            </c:forEach>
-        </table>
+                </thead>
+                <c:forEach var="u" items="${userListDto}">
+                <tbody>
+                    <tr class="">
+                        <td>${u.username}</td>
+                        <td>${u.name}</td>
+                        <td>${u.email}</td>
+                        <td>${u.address}</td>
+                        <td>${u.phone}</td>
+                        <td>${u.createDate}</td>
+                        <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_user(${u.id});"></i></td>
+                    </tr>
+                </tbody>
+                </c:forEach>
+            </table>
+        </section>
 
-
-    </section>
 
 
     </div>

@@ -14,10 +14,12 @@ import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.web.dto.order.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
@@ -31,10 +33,15 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
 
-    @Transactional
-    public List<Order> searchOrderByKeyword(String keyword){
-        List<Order> orderList = orderRepository.searchByKeyword(keyword);
-        return orderList;
+    public List<OrderResponseDto> makeResponseDto(List<Order> orderList){
+        List<OrderResponseDto> orderListDtos = orderList.stream()
+                .map(order -> new OrderResponseDto(
+                        order.getOrderNumber(),
+                        order.getCreateDate(),
+                        order.getOrderStatus(),
+                        order.getUser().getUsername()))
+                .collect(Collectors.toList());
+        return orderListDtos;
     }
 
 

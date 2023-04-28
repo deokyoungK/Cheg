@@ -1,6 +1,5 @@
 package com.likelion.cheg.domain.user;
 
-import com.likelion.cheg.domain.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

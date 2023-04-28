@@ -7,6 +7,7 @@ import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +31,23 @@ public class ProductService {
 
     @Value("${file.path}")
     private String uploadFolder;
+
+    public List<ProductResponseDto> makeResponseDto(List<Product> productList){
+        List<ProductResponseDto> productListDtos = productList.stream()
+                .map(product -> new ProductResponseDto(
+                        product.getId(),
+                        product.getCategory(),
+                        product.getBrand(),
+                        product.getUrl(),
+                        product.getName(),
+                        product.getDescription(),
+                        product.getPrice()))
+                .collect(Collectors.toList());
+        return productListDtos;
+    }
+
+
+
 
     @Transactional
     public void deleteProduct(int productId){
@@ -83,11 +102,7 @@ public class ProductService {
         return product;
     }
 
-    @Transactional
-    public List<Product> searchProductByKeyword(String keyword){
-        List<Product> productList = productRepository.searchByKeyword(keyword);
-        return productList;
-    }
+
 
     @Transactional
     public List<Product> searchProductByCategory(String name){
