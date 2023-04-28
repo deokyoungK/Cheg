@@ -52,14 +52,14 @@
             <a href="/category/스웨터" class="category"><img src="${pageContext.request.contextPath}/images/sweater.png"  alt="NULL">스웨터</a>
         </div>
         <c:choose>
-            <c:when test="${fn:length(productList) == 0}">
+            <c:when test="${fn:length(productListDto) == 0}">
                 <div class="product-list">
                 <div style="font-size:30px;padding:50px;">해당 상품이 없습니다.</div>
                 </div>
             </c:when>
             <c:otherwise>
                 <div class="product-list">
-                    <c:forEach var="p" items="${productList}" >
+                    <c:forEach var="p" items="${productListDto}" >
                         <div class="product-card">
                             <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="/upload/${p.url}" alt=""></a>
                             <div class="product-brand">${p.brand}</div>

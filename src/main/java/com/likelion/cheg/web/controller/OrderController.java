@@ -2,6 +2,8 @@ package com.likelion.cheg.web.controller;
 
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.product.Product;
+import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.service.CartService;
 import com.likelion.cheg.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +18,14 @@ public class OrderController {
 
     private final ProductService productService;
     private final CartService cartService;
+    private final ProductRepository productRepository;
 
     @GetMapping("/detailPayment/{productId}/{amount}")
     public String detailPayment(@PathVariable int productId, @PathVariable int amount, Model model){
-        Product product = productService.loadProduct(productId);
-        int price = product.getPrice()*amount;
+        Product product = productRepository.findById(productId).orElseThrow(()->{
+            return new CustomException("상품을 찾을 수 없습니다.");
+        });
+        int price = product.getPrice() * amount;
 
         model.addAttribute("amount",amount);
         model.addAttribute("product",product);

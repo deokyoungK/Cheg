@@ -7,6 +7,8 @@ import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.web.dto.product.ProductDetailResponseDto;
+import com.likelion.cheg.web.dto.product.ProductHomeResponseDto;
 import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,30 @@ public class ProductService {
     private final CartRepository cartRepository;
 
     @Value("${file.path}")
-    private String uploadFolder;
+    String uploadFolder;
+
+    public List<ProductHomeResponseDto> makeHomeResponseDto(List<Product> productList){
+        List<ProductHomeResponseDto> productListDtos = productList.stream()
+                .map(product -> new ProductHomeResponseDto(
+                        product.getId(),
+                        product.getUrl(),
+                        product.getBrand(),
+                        product.getName(),
+                        product.getPrice()))
+                .collect(Collectors.toList());
+        return productListDtos;
+    }
+
+    public ProductDetailResponseDto makeDetailResponseDto(Product product){
+        ProductDetailResponseDto productDto = new ProductDetailResponseDto(
+                product.getId(),
+                product.getUrl(),
+                product.getBrand(),
+                product.getName(),
+                product.getPrice()
+        );
+        return productDto;
+    }
 
     public List<ProductResponseDto> makeResponseDto(List<Product> productList){
         List<ProductResponseDto> productListDtos = productList.stream()
@@ -93,15 +118,6 @@ public class ProductService {
         List<Product> productList = productRepository.findAllDesc();
         return productList;
     }
-
-    @Transactional
-    public Product loadProduct(int productId){
-        Product product = productRepository.findById(productId).orElseThrow(()->{
-            return new CustomException("상품을 찾을 수 없습니다.");
-        });
-        return product;
-    }
-
 
 
     @Transactional

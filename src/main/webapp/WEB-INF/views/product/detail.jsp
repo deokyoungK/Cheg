@@ -10,26 +10,25 @@
 </head>
 <body>
     <%@ include file="../layout/header.jsp"%>
-    <input type="hidden" id="productId" value="${product.id}">
+    <input type="hidden" id="productId" value="${productDto.id}">
 
     <div class="product_detail">
        
         <div class="product_img">
-            <img src="/upload/${product.url}" style="width:500px;height:480px;">
+            <img src="/upload/${productDto.url}" style="width:500px;height:480px;">
         </div>
 
         <div class="product_info">
             <div class="brand">
-                ${product.brand}
+                ${productDto.brand}
             </div>
             <div class="name">
-                ${product.name}
+                ${productDto.name}
             </div>
 
             <li>
                 <div class="price">
-                    <!-- <span class="price_text">판매가</span> -->
-                    <span class="price_content">${product.price}원</span>
+                    <span class="price_content">${productDto.price}원</span>
                 </div>
             </li>
             <hr>
@@ -65,7 +64,7 @@
 
             <div class="product_btn">
                 <button id="cart_btn" class="cart_btn" onclick="onCart();">장바구니</button>
-                <button class="buy_btn" onclick = "detailToPayment(${product.id});">즉시 구매하기</button>
+                <button class="buy_btn" onclick = "detailToPayment(${productDto.id});">즉시 구매하기</button>
             </div>
         </div>
     </div>
