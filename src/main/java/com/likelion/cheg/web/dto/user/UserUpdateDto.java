@@ -8,11 +8,11 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class UserUpdateDto {
-    @Email
+    @Email(message = "이메일 형식이 올바르지 않습니다.")
     private String email;
     private String address;
-    @NotBlank
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
-    @Phone
+    @Phone(message = "전화번호 형식이 올바르지 않습니다.")
     private String phone;
 }

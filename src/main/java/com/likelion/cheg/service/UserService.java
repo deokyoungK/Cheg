@@ -26,11 +26,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
-    public Page<User> getUsers(int page, int size){
-        return userRepository.findAll(PageRequest.of(page,size));
-    }
-
-
 
     public List<UserResponseDto> makeResponseDto(List<User> userList){
         List<UserResponseDto> userListDtos = userList.stream()
@@ -60,7 +55,6 @@ public class UserService {
 
     @Transactional
     public User update(int userId, UserUpdateDto userUpdateDto){
-
         User user = userRepository.findById(userId).orElseThrow(()->{
             return new CustomValidationApiException("찾을 수 없는 id입니다.");
         });

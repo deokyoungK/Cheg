@@ -29,28 +29,19 @@ public class UserApiController {
     private final UserService userService;
 
     @PostMapping("api/user/{userId}/delete")
-    public ResponseEntity deleteUser(@PathVariable int userId){
+    public ResponseEntity<CMResponseDto> deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>(new CMResponseDto<>(1,"회원 탈퇴 성공",""),HttpStatus.OK);
     }
 
-    @PutMapping("api/update/{userId}")
-    public ResponseEntity<?> update(
+    @PostMapping("api/update/{userId}")
+    public ResponseEntity<CMResponseDto> update(
             @PathVariable int userId,
             @Validated UserUpdateDto userUpdateDto,
-            BindingResult bindingResult,
             @AuthenticationPrincipal PrincipalDetail principalDetail) {
 
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-            throw new CustomValidationApiException("회원정보 변경 유효성 검사 실패", errorMap);
-        } else {
-            User user = userService.update(userId,userUpdateDto);
-            principalDetail.setUser(user); //세션정보 변경
-            return new ResponseEntity<>(new CMResponseDto<>(1, "회원정보 변경 성공", ""), HttpStatus.OK);
-        }
+        User user = userService.update(userId,userUpdateDto);
+        principalDetail.setUser(user); //세션정보 변경
+        return new ResponseEntity<>(new CMResponseDto<>(1, "회원정보 변경 성공", ""), HttpStatus.OK);
     }
 }

@@ -104,7 +104,7 @@
                     <div class="unit">
                         <h5 class="title">이메일 주소</h5>
                         <div class="input_item">
-                            <input type="email" name="email" class="input_txt text_fill" value="${principal.user.email}">
+                            <input type="text" name="email" class="input_txt text_fill" value="${principal.user.email}" placeholder="이메일 형식에 맞게 입력해주세요.">
                         </div>
                     </div>
                 
@@ -121,7 +121,7 @@
                     <div class="unit">
                         <h5 class="title">이름</h5>
                         <div class="input_item">
-                            <input type="text" name="name" class="input_txt" value="${principal.user.name}" required />
+                            <input type="text" name="name" class="input_txt" value="${principal.user.name}">
                         </div>
                     </div>
                         
