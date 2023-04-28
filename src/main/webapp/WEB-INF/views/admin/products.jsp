@@ -16,9 +16,9 @@
     
         <ul>
             <li class="admin-menu admin">관리자 메뉴</li>
-            <li><a class="adminlist-page admin" href="/admin">회원리스트</a></li>
-            <li><a class="productlist-page admin" href="/admin/productList">상품리스트</a></li>
-            <li><a class="orderlist-page admin" href="/admin/orderList">주문리스트</a></li>
+            <li><a class="adminlist-page admin" href="/admin/users">회원리스트</a></li>
+            <li><a class="productlist-page admin" href="/admin/products">상품리스트</a></li>
+            <li><a class="orderlist-page admin" href="/admin/orders">주문리스트</a></li>
 
         </ul>
 
@@ -49,7 +49,7 @@
                 <td>삭제</td>
             </tr>
             </thead>
-            <c:forEach var="p" items="${productList}">
+            <c:forEach var="p" items="${productListDto}">
             <tbody>
                 <tr class="">
                     <td>${p.category.name}</td>

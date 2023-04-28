@@ -49,7 +49,7 @@
 
             <c:otherwise>
                 <c:if test="${principal.user.role == 'ROLE_ADMIN'}">
-                    <li><a href="/admin" class="nav-txt right-sub fromLeft admin-txt">관리자페이지</a></li>
+                    <li><a href="/admin/users" class="nav-txt right-sub fromLeft admin-txt">관리자페이지</a></li>
                 </c:if>
                 <li><a href="/cart/${principal.user.id}" class="nav-txt right-sub fromLeft admin-txt">Cart</a></li>
                 <li><a href="/mypage/${principal.user.id}" class="nav-txt right-sub fromLeft admin-txt">Mypage</a></li>

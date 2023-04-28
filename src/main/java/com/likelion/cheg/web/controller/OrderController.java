@@ -25,8 +25,9 @@ public class OrderController {
         model.addAttribute("amount",amount);
         model.addAttribute("product",product);
         model.addAttribute("price",price);
-        return "user/detailPayment";
+        return "pay/detailPayment";
     }
+
 
     @GetMapping("/cartPayment/{userId}")
     public String CartPayment(@PathVariable int userId, Model model){
@@ -45,6 +46,6 @@ public class OrderController {
         model.addAttribute("amount",amount);
         model.addAttribute("price",price);
         model.addAttribute("cartList",cartList);
-        return "user/cartPayment";
+        return "pay/cartPayment";
     }
 }

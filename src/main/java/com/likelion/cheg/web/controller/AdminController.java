@@ -1,6 +1,7 @@
 package com.likelion.cheg.web.controller;
 
 import com.likelion.cheg.domain.category.Category;
+import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
@@ -10,7 +11,10 @@ import com.likelion.cheg.service.CategoryService;
 import com.likelion.cheg.service.OrderService;
 import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.service.UserService;
+import com.likelion.cheg.web.dto.category.CategoryResponseDto;
+import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
+import com.likelion.cheg.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +26,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -32,14 +39,24 @@ public class AdminController {
     private final UserRepository userRepository;
     private final OrderService orderService;
     private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
     private final UserService userService;
 
-
-    @GetMapping("/admin")
+    @GetMapping("/admin/users")
     public String admin(Model model){
         List<User> userList = userRepository.findAll();
-        model.addAttribute("userList",userList);
-        return "admin/admin";
+        List<UserResponseDto> userListDto = userList.stream()
+                        .map(user -> new UserResponseDto(
+                                user.getId(),
+                                user.getUsername(),
+                                user.getName(),
+                                user.getEmail(),
+                                user.getAddress(),
+                                user.getPhone(),
+                                user.getCreateDate()))
+                        .collect(Collectors.toList());
+        model.addAttribute("userListDto",userListDto);
+        return "admin/users";
     }
 
     /**
@@ -47,9 +64,12 @@ public class AdminController {
      **/
     @GetMapping("/admin/addCategory")
     public String addCategory(Model model){
-        List<Category> categoryList = categoryService.loadAllCateogory();
-        model.addAttribute("categoryList",categoryList);
-        return "admin/addCategory";
+        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryResponseDto> categoryListDto = categoryList.stream()
+                        .map(category -> new CategoryResponseDto(category.getName()))
+                        .collect(Collectors.toList());
+        model.addAttribute("categoryListDto",categoryListDto);
+        return "admin/createCategory";
     }
 
     @PostMapping("/admin/addCategory")
@@ -61,18 +81,31 @@ public class AdminController {
     /**
      상품 관련
      **/
-    @GetMapping("/admin/productList")
+    @GetMapping("/admin/products")
     public String productList(Model model){
         List<Product> productList = productService.loadProductsDESC();
-        model.addAttribute("productList",productList);
-        return "admin/productList";
+        List<ProductResponseDto> productListDto = productList.stream()
+                        .map(product -> new ProductResponseDto(
+                                product.getId(),
+                                product.getCategory(),
+                                product.getBrand(),
+                                product.getUrl(),
+                                product.getName(),
+                                product.getDescription(),
+                                product.getPrice()))
+                        .collect(Collectors.toList());
+        model.addAttribute("productListDto",productListDto);
+        return "admin/products";
     }
 
     @GetMapping("/admin/addProduct")
     public String addProduct(Model model){
-        List<Category> categoryList = categoryService.loadAllCateogory();
-        model.addAttribute("categoryList",categoryList);
-        return "admin/addProduct";
+        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryResponseDto> categoryListDto = categoryList.stream()
+                .map(category -> new CategoryResponseDto(category.getName()))
+                .collect(Collectors.toList());
+        model.addAttribute("categoryListDto",categoryListDto);
+        return "admin/createProduct";
     }
 
     @PostMapping("/admin/addProduct")
@@ -86,18 +119,18 @@ public class AdminController {
         }else{
             //상품등록
             Product product = productService.addProduct(productUploadDto);
-            return "redirect:/admin/productList";
+            return "redirect:/admin/products";
         }
     }
 
     /**
      주문 관련
      **/
-    @GetMapping("/admin/orderList")
+    @GetMapping("/admin/orders")
     public String orderList(Model model){
         List<Order> orderList = orderService.loadAll();
         model.addAttribute("orderList",orderList);
-        return "admin/orderList";
+        return "admin/orders";
     }
 
 
@@ -108,20 +141,20 @@ public class AdminController {
     public String searchUser(@RequestParam(value="keyword") String keyword, Model model){
         List<User> userList = userService.searchUserByKeyword(keyword);
         model.addAttribute("userList",userList);
-        return "admin/admin";
+        return "admin/users";
     }
 
     @GetMapping("/admin/search/product")
     public String searchProduct(@RequestParam(value="keyword") String keyword, Model model){
         List<Product> productList = productService.searchProductByKeyword(keyword);
         model.addAttribute("productList",productList);
-        return "admin/productList";
+        return "admin/products";
     }
 
     @GetMapping("/admin/search/order")
     public String searchOrder(@RequestParam(value="keyword") String keyword, Model model){
         List<Order> orderList = orderService.searchOrderByKeyword(keyword);
         model.addAttribute("orderList",orderList);
-        return "admin/orderList";
+        return "admin/orders";
     }
 }

@@ -22,7 +22,7 @@
 
 <div class="container">
     <form name="newCategory" action="/admin/addCategory" class="form-horizontal" method="post">
-        <c:forEach var="c" items="${categoryList}">
+        <c:forEach var="c" items="${categoryListDto}">
             ${c.name}
         </c:forEach>
         <div>

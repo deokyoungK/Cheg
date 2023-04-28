@@ -46,8 +46,6 @@
 
     </table>
 
-
-
     <div class="cart__total">
         <div>
             <a href="/"><button class="cart__btn left">쇼핑 계속하기</button></a>

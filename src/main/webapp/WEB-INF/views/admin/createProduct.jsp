@@ -30,7 +30,7 @@
 				    <label class="col-sm-2">카테고리</label>
 				    <div class="com-sm-3">
                         <select id="select_value" name="category" onchange="addressKindChange(this)">
-							<c:forEach var="c" items="${categoryList}">
+							<c:forEach var="c" items="${categoryListDto}">
 								<option value="${c.name}">${c.name}</option>
 							</c:forEach>
                         </select>

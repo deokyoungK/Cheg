@@ -30,10 +30,13 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
   servlet:
     multipart:
