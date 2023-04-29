@@ -1,19 +1,17 @@
 package com.likelion.cheg.service;
 
-import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
-import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.product.ProductDetailResponseDto;
 import com.likelion.cheg.web.dto.product.ProductHomeResponseDto;
 import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -81,7 +79,7 @@ public class ProductService {
             cartRepository.deleteByProductId(productId); //상품 관련 장바구니 삭제
 
         }catch(Exception e){
-            throw new CustomException(e.getMessage());
+            throw new CustomBusinessException(e.getMessage());
         }
     }
 

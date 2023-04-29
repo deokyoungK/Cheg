@@ -2,11 +2,10 @@ package com.likelion.cheg.web.controller;
 
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
-import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.web.dto.product.ProductDetailResponseDto;
 import com.likelion.cheg.web.dto.product.ProductHomeResponseDto;
-import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +33,7 @@ public class ProductController {
     @GetMapping("/detail/{productId}")
     public String getDetail(@PathVariable int productId, Model model){
         Product product = productRepository.findById(productId).orElseThrow(()->{
-            return new CustomException("상품을 찾을 수 없습니다.");
+            return new CustomBusinessException("상품을 찾을 수 없습니다.");
         });
         ProductDetailResponseDto productDto = productService.makeDetailResponseDto(product);
         model.addAttribute("productDto",productDto);

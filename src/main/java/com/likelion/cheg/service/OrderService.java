@@ -13,11 +13,10 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.order.OrderMyPageResponseDto;
 import com.likelion.cheg.web.dto.order.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -73,7 +72,7 @@ public class OrderService {
 
             //상품 찾기
             Product product = productRepository.findById(productId).orElseThrow(()->{
-                return new CustomException("상품을 찾을 수 없습니다.");
+                return new CustomBusinessException("상품을 찾을 수 없습니다.");
             });
             //주문상품 생성
             List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
@@ -92,12 +91,12 @@ public class OrderService {
         }else{ //회원의 경우
             //회원 찾기
             User user = userRepository.findById(userId).orElseThrow(()->{
-                return new CustomException("회원를 찾을 수 없습니다.");
+                return new CustomBusinessException("회원를 찾을 수 없습니다.");
             });
             if(flag == 0){  //상세페이지일때
                 //상품 찾기
                 Product product = productRepository.findById(productId).orElseThrow(()->{
-                    return new CustomException("상품을 찾을 수 없습니다.");
+                    return new CustomBusinessException("상품을 찾을 수 없습니다.");
                 });
                 //주문상품 생성
                 List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언

@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
+    TEST_ERROR(HttpStatus.OK,"001","")
+
+
 
     ;
     ErrorCode(HttpStatus httpStatus, String errorCode,String message){

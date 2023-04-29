@@ -4,9 +4,7 @@ package com.likelion.cheg.service;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.handler.ex.CustomException;
-import com.likelion.cheg.handler.ex.CustomValidationApiException;
-import com.likelion.cheg.handler.ex.CustomValidationException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,7 +52,7 @@ public class AuthService {
     public void uniqueUsernameCheck(String username){
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByUsername(username));
         if(optionalUser.isPresent()){
-            throw new CustomException("이미 존재하는 아이디입니다.");
+            throw new CustomBusinessException("이미 존재하는 아이디입니다.");
         }
     }
 

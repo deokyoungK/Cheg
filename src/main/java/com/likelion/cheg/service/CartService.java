@@ -6,11 +6,10 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
 import com.likelion.cheg.web.dto.cart.CartApiResponseDto;
 import com.likelion.cheg.web.dto.cart.CartResponseDto;
-import com.likelion.cheg.web.dto.pay.PayCartResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -78,11 +77,11 @@ public class CartService {
     @Transactional
     public Cart addCart(int userId, AddCartDto addCartDto){
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomException("사용자를 찾을 수 없습니다.");
+            return new CustomBusinessException("사용자를 찾을 수 없습니다.");
         });
         Cart cart = cartRepository.findByUserIdAndProductId(userId,addCartDto.getProductId());
         Product product = productRepository.findById(addCartDto.getProductId()).orElseThrow(()->{
-            return new CustomException("상품을 찾을 수 없습니다.");
+            return new CustomBusinessException("상품을 찾을 수 없습니다.");
         });
 
         if(user.getCarts().contains(cart)){ //이미 있으면
@@ -98,7 +97,7 @@ public class CartService {
     @Transactional
     public Cart downCart(int cartId){
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomException("찾을 수 없는 장바구니 입니다.");
+            return new CustomBusinessException("찾을 수 없는 장바구니 입니다.");
         });
 
         //수량 0개가 아닐때 감소시킴.
@@ -111,7 +110,7 @@ public class CartService {
     @Transactional
     public Cart upCart(int cartId){
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomException("찾을 수 없는 장바구니 입니다.");
+            return new CustomBusinessException("찾을 수 없는 장바구니 입니다.");
         });
 
         cart.changeCount(1);
@@ -121,10 +120,10 @@ public class CartService {
     @Transactional
     public void deleteCart(int userId, int cartId){
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomException("사용자를 찾을 수 없습니다.");
+            return new CustomBusinessException("사용자를 찾을 수 없습니다.");
         });
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomException("찾을 수 없는 장바구니입니다.");
+            return new CustomBusinessException("찾을 수 없는 장바구니입니다.");
         });
 
         user.getCarts().remove(cart);

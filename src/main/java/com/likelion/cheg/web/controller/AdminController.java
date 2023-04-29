@@ -8,7 +8,6 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.handler.ex.CustomValidationException;
 import com.likelion.cheg.service.CategoryService;
 import com.likelion.cheg.service.OrderService;
 import com.likelion.cheg.service.ProductService;
@@ -91,18 +90,11 @@ public class AdminController {
     }
 
     @PostMapping("/admin/addProduct")
-    public String uploadProduct(@Validated ProductUploadDto productUploadDto, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            Map<String,String> errorMap = new HashMap<>();
-            for(FieldError error : bindingResult.getFieldErrors()){
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-            throw new CustomValidationException("상품등록 유효성 검사 실패",errorMap);
-        }else{
-            //상품등록
-            Product product = productService.addProduct(productUploadDto);
-            return "redirect:/admin/products";
-        }
+    public String uploadProduct(@Validated ProductUploadDto productUploadDto){
+        //상품등록
+        productService.addProduct(productUploadDto);
+        return "redirect:/admin/products";
+
     }
 
     /**

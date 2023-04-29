@@ -1,18 +1,13 @@
 package com.likelion.cheg.service;
 
-import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.order.OrderRepository;
-import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
-import com.likelion.cheg.handler.ex.CustomException;
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.web.dto.user.UserResponseDto;
 import com.likelion.cheg.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,7 +44,7 @@ public class UserService {
             orderRepository.deleteByUserId(userId); //회원 주문 삭제
 
         }catch(Exception e){
-            throw new CustomException(e.getMessage());
+            throw new CustomBusinessException(e.getMessage());
         }
     }
 

@@ -1,10 +1,9 @@
 package com.likelion.cheg.handler;
 
 
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
-import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
-import com.likelion.cheg.handler.ex.CustomValidationException;
 import com.likelion.cheg.util.Script;
 import com.likelion.cheg.web.dto.CMResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -38,29 +37,29 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.createErrorResponse(HttpStatus.METHOD_NOT_ALLOWED.toString(), e.getMessage());
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(errorResponse);
     }
-//
-//
-//    //클라이언트통신 - javascript리턴
-//    @ExceptionHandler(CustomValidationException.class)
-//    public String validationException(CustomValidationException e){
-//        if(e.getErrorMap() == null) {
-//            return Script.back(e.getMessage());
-//        }else {
-//            return Script.back(e.getErrorMap().toString());
-//        }
-//    }
 
+    /**
+     * 비즈니스 로직 에러 -> API전달
+     */
+    @ExceptionHandler(CustomBusinessApiException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessApiException(CustomBusinessApiException e){
+        log.error("handleCustomBusinessAPIException",e);
+        ErrorResponse errorResponse = ErrorResponse.createErrorResponse(e.getErrorCode().getErrorCode(),e.getMessage());
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(errorResponse);
+    }
 
-
-
-
-    @ExceptionHandler(CustomException.class)
-    public String Exception(CustomException e){
+    /**
+     * 비즈니스 로직 에러 -> 바로 alert()
+     */
+    @ExceptionHandler(CustomBusinessException.class)
+    public String handleBusinessException(CustomBusinessException e){
+        log.error("handleCustomBusinessException",e);
         return Script.back(e.getMessage());
     }
 
-
-
+    /**
+     * 그 외 에러
+     */
     @ExceptionHandler(CustomValidationApiException.class)
     public ResponseEntity<CMResponseDto<?>> validationApiException(CustomValidationApiException e) {
         return new ResponseEntity<>(new CMResponseDto<>(-1,e.getMessage(),e.getErrorMap()), HttpStatus.BAD_REQUEST);

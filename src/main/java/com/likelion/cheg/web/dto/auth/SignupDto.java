@@ -7,13 +7,9 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@ToString
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class SignupDto {
 
+@Data
+public class SignupDto {
     @NotBlank
     private String username;
     @NotBlank
