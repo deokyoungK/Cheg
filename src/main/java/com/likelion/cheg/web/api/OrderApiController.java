@@ -30,9 +30,6 @@ public class OrderApiController {
 
     @PostMapping("api/delivery/validation")
     public ResponseEntity<?> deliveryValidation(@Validated @RequestBody DeliveryDto deliveryDto){
-        System.out.println("===========");
-        System.out.println(deliveryDto.getPostcode());
-        System.out.println("===========");
         return new ResponseEntity<>(new CMResponseDto<>(1,"배송정보 유효성 검사 성공",""), HttpStatus.OK);
 
     }
