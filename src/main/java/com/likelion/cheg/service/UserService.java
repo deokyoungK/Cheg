@@ -3,8 +3,9 @@ package com.likelion.cheg.service;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
+import com.likelion.cheg.handler.ErrorCode;
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
-import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.web.dto.user.UserResponseDto;
 import com.likelion.cheg.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class UserService {
     @Transactional
     public User update(int userId, UserUpdateDto userUpdateDto){
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomValidationApiException("찾을 수 없는 id입니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
         });
 
         user.changeUser(userUpdateDto.getName(),

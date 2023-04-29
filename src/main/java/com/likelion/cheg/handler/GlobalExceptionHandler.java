@@ -3,9 +3,7 @@ package com.likelion.cheg.handler;
 
 import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
-import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.util.Script;
-import com.likelion.cheg.web.dto.CMResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,11 +58,10 @@ public class GlobalExceptionHandler {
     /**
      * 그 외 에러
      */
-    @ExceptionHandler(CustomValidationApiException.class)
-    public ResponseEntity<CMResponseDto<?>> validationApiException(CustomValidationApiException e) {
-        return new ResponseEntity<>(new CMResponseDto<>(-1,e.getMessage(),e.getErrorMap()), HttpStatus.BAD_REQUEST);
-
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<ErrorResponse> handleException(Exception e) {
+        log.error("Exception", e);
+        ErrorResponse errorResponse = ErrorResponse.createErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
-
-
 }

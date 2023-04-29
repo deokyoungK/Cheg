@@ -25,18 +25,6 @@ public class CategoryService {
 
 
     @Transactional
-    public List<Category> loadAllCateogory(){
-        List<Category> categoryList = categoryRepository.findAll();
-        return categoryList;
-    }
-
-    @Transactional
-    public Category findOne(String name){
-        Category category = categoryRepository.findByCategoryName(name);
-        return category;
-    }
-
-    @Transactional
     public Category saveCategory(String categoryName){
         Category category = Category.createCategory(categoryName);
         categoryRepository.save(category);

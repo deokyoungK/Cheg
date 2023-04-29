@@ -18,14 +18,6 @@ public class CartController {
     public String goCart(@PathVariable int userId, Model model){
         List<Cart> cartList = cartService.loadCart(userId);
         Map<String, Object> responseMap = cartService.makeCartDto(cartList);
-//        int price=0;
-//        for(Cart cart : cartList){
-//            price += cart.getCartTotalPrice();
-//        }
-//
-//        model.addAttribute("carts",cartList);
-//        model.addAttribute("price",price);
-//
         model.addAttribute("responseMap",responseMap);
         return "user/cart";
     }

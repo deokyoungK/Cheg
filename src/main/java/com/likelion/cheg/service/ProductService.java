@@ -69,9 +69,6 @@ public class ProductService {
         return productListDtos;
     }
 
-
-
-
     @Transactional
     public void deleteProduct(int productId){
         try{

@@ -137,48 +137,5 @@ public class OrderService {
         }
     }
 
-//    @Transactional
-//    public Order makeOrderItem(Order order, int flag, int productId, int amount, int userId){
-//        //flag는 상세(0)/장바구니(1) 구분
-//        //productId는 [상세]결제일 때 상품Id로 orderitem을 만들기 위해 필요
-//        //amount는 [상세]결제일 때 orderitem을 만들기 위해 필요
-//        //userId는 [장바구니]결제일 때 유저 장바구니상품을 orderitem으로 만들기 위해 필요
-//
-//        if(flag == 0){ //[상세]에서 결제
-//            Product product = productRepository.findById(productId).orElseThrow(()->{
-//                return new CustomException("상품을 찾을 수 없습니다.");
-//            });
-//
-//            OrderItem orderItem = new OrderItem(order, product, amount);
-//
-//            //order에 매핑
-//            order.getOrderItemList().add(orderItem);
-//
-//            orderItem.calculateTotalPrice();
-//            orderItemRepository.save(orderItem);
-//            return order;
-//
-//        }else{ //[장바구니]에서 결제
-//            User user = userRepository.findById(userId).orElseThrow(()->{
-//                return new CustomException("사용자를 찾을 수 없습니다.");
-//            });
-//            List<Cart> cartList = cartRepository.loadCartByUserId(userId);
-//            for(Cart cart : cartList){
-//                OrderItem orderItem = new OrderItem(order, cart.getProduct(), cart.getProduct_count());
-//
-//                //order에 매핑
-//                order.getOrderItemList().add(orderItem);
-//
-//                orderItem.calculateTotalPrice();
-//                orderItemRepository.save(orderItem);
-//
-//                //주문되면 장바구니에서는 삭제
-//                cartRepository.deleteById(cart.getId());
-//                user.getCarts().remove(cart);
-//            }
-//            return order;
-//        }
-
-//    }
 
 }

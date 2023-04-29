@@ -5,8 +5,13 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
-
-    TEST_ERROR(HttpStatus.OK,"001","")
+    //Notfound
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND,"001","사용자를 찾을 수 없습니다."),
+    NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND,"001","상품를 찾을 수 없습니다."),
+    NOT_FOUND_CART(HttpStatus.NOT_FOUND,"001","장바구니를 찾을 수 없습니다."),
+    NOT_FOUND_ORDER(HttpStatus.NOT_FOUND,"001","주문을 찾을 수 없습니다."),
+    NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND,"001","카테고리를 찾을 수 없습니다."),
+    NOT_FOUND_DELIVERY(HttpStatus.NOT_FOUND,"001","배송 정보를 찾을 수 없습니다."),
 
 
 
