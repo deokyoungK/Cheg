@@ -30,6 +30,7 @@ public class AuthService {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         Role role;
 
+        //단순히 ADMIN이라는 username으로 회원가입했을 때 ADMIN부여
         if(signupDto.getUsername().equals("admin")){
             role = Role.ROLE_ADMIN;
         }else{

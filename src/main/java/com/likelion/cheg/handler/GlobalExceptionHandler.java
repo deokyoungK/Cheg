@@ -1,6 +1,7 @@
 package com.likelion.cheg.handler;
 
 
+import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.handler.ex.CustomException;
 import com.likelion.cheg.handler.ex.CustomValidationApiException;
 import com.likelion.cheg.handler.ex.CustomValidationException;
@@ -37,27 +38,34 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.createErrorResponse(HttpStatus.METHOD_NOT_ALLOWED.toString(), e.getMessage());
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(errorResponse);
     }
+//
+//
+//    //클라이언트통신 - javascript리턴
+//    @ExceptionHandler(CustomValidationException.class)
+//    public String validationException(CustomValidationException e){
+//        if(e.getErrorMap() == null) {
+//            return Script.back(e.getMessage());
+//        }else {
+//            return Script.back(e.getErrorMap().toString());
+//        }
+//    }
 
 
-    //클라이언트통신 - javascript리턴
-    @ExceptionHandler(CustomValidationException.class)
-    public String validationException(CustomValidationException e){
-        if(e.getErrorMap() == null) {
-            return Script.back(e.getMessage());
-        }else {
-            return Script.back(e.getErrorMap().toString());
-        }
-    }
+
+
 
     @ExceptionHandler(CustomException.class)
     public String Exception(CustomException e){
         return Script.back(e.getMessage());
     }
 
-    //api통신 - 데이터리턴
+
+
     @ExceptionHandler(CustomValidationApiException.class)
     public ResponseEntity<CMResponseDto<?>> validationApiException(CustomValidationApiException e) {
         return new ResponseEntity<>(new CMResponseDto<>(-1,e.getMessage(),e.getErrorMap()), HttpStatus.BAD_REQUEST);
 
     }
+
+
 }
