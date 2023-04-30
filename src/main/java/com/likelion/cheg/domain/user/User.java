@@ -33,19 +33,22 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
 
-	@Column(length = 100, unique = true)
+	@Column(length = 20, unique = true)
 	private String username; //아이디
 
 	@Column(nullable=false)
 	private String password; //비밀번호
 
-	@Column(nullable=false)
+	@Column(length = 10, nullable=false)
 	private String name; //이름
 
-	@Column
+	@Column(nullable=false)
 	private String phone; //전화번호
 
+	@Column(nullable=false)
 	private String email; //이메일
+
+
 	private String address; //주소
 
 	@Enumerated(EnumType.STRING)
