@@ -1,10 +1,9 @@
-package com.likelion.cheg.user;
+package com.likelion.cheg.auth;
 
 import com.likelion.cheg.CommonMethod;
 
 import com.likelion.cheg.domain.user.User;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import org.springframework.boot.test.context.SpringBootTest;
-
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-public class 로그인 {
+public class SecurityTest {
     @Autowired
     MockMvc mockMvc;
     @Autowired
@@ -56,7 +51,7 @@ public class 로그인 {
     }
 
     @Test
-    public void 로그인_성공() throws Exception{
+    public void 로그인성공테스트() throws Exception{
         //회원가입
         User user = commonMethod.createUser("로그인 테스트용_ID");
 
@@ -72,7 +67,7 @@ public class 로그인 {
     }
 
     @Test
-    public void 로그인_실패() throws Exception{
+    public void 로그인실패테스트() throws Exception{
         String username = "존재하지 않는 아이디";
         String password = "123";
 
