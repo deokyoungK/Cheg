@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SuccessResponse<T> {
+public class CMResponse<T> {
 	private int code; //1성공 -1실패
 	private String message;
 	private T data;

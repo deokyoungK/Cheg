@@ -59,7 +59,20 @@ public class User {
 		this.createDate = LocalDateTime.now();
 	}
 
-	//회원 수정 메서드
+	//User 생성 메서드
+	public static User createUser(String username, String password, String name, String phone, String email, Role role){
+		return User.builder()
+				.username(username)
+				.password(password)
+				.name(name)
+				.phone(phone)
+				.email(email)
+				.role(role)
+				.build();
+	}
+
+
+	//User 수정 메서드
 	public void changeUser(String name, String address, String email, String phone){
 		this.name = name;
 		this.address = address;

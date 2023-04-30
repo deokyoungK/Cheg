@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
      * 비즈니스 로직 에러 -> API전달
      */
     @ExceptionHandler(CustomBusinessApiException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessApiException(CustomBusinessApiException e){
+    protected ResponseEntity<ErrorResponse> handleBusinessApiException(CustomBusinessApiException e){
         log.error("handleCustomBusinessAPIException",e);
         ErrorResponse errorResponse = ErrorResponse.createErrorResponse(e.getErrorCode().getErrorCode(),e.getMessage());
         return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(errorResponse);
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
      * 비즈니스 로직 에러 -> 바로 alert()
      */
     @ExceptionHandler(CustomBusinessException.class)
-    public String handleBusinessException(CustomBusinessException e){
+    protected String handleBusinessException(CustomBusinessException e){
         log.error("handleCustomBusinessException",e);
         return Script.back(e.getMessage());
     }

@@ -1,7 +1,7 @@
 package com.likelion.cheg.web.api;
 
 import com.likelion.cheg.service.ProductService;
-import com.likelion.cheg.web.dto.SuccessResponse;
+import com.likelion.cheg.web.dto.CMResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ProductApiController {
     @PostMapping("api/{productId}/delete")
     public ResponseEntity deleteProduct(@PathVariable int productId){
         productService.deleteProduct(productId);
-        return new ResponseEntity<>(new SuccessResponse<>(1,"상품 삭제 성공",""),HttpStatus.OK);
+        return new ResponseEntity<>(new CMResponse<>(1,"상품 삭제 성공",""),HttpStatus.OK);
     }
 
 }
