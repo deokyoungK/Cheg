@@ -35,11 +35,18 @@ function onCart(){
 
 //상세에서 결제페이지로 이동
 function detailToPayment(productId){
+    var principalId = $("#principalId").val();
     var amount = document.getElementById('amount_input').value;
+
     if(amount<1){
         alert("1개 이상 선택해야 합니다.");
         return;
     }
+    if(principalId == 0){
+        alert("로그인 후 이용 가능합니다.");
+        location.href="http://localhost:8080/auth/login"
+    }
+
     $.ajax({
         type: "post",
         url: `/api/payment/${productId}/${amount}`,

@@ -16,6 +16,7 @@ import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.order.OrderMyPageResponseDto;
 import com.likelion.cheg.web.dto.order.OrderResponseDto;
+import com.likelion.cheg.web.dto.pay.PaymentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -61,81 +62,48 @@ public class OrderService {
 
 
     @Transactional
-    public Order makeOrder(int userId, int flag, String address, int productId, int amount){
+    public Order makeOrder(int userId, PaymentDto paymentDto){
+        //회원 찾기
+        User user = userRepository.findById(userId).orElseThrow(()->{
+            return new CustomBusinessException("회원를 찾을 수 없습니다.");
+        });
+
+        //상품 찾기
+        Product product = productRepository.findById(paymentDto.getProductId()).orElseThrow(()->{
+            return new CustomBusinessException("상품을 찾을 수 없습니다.");
+        });
 
         //delivery 생성
-        Delivery delivery = Delivery.createDelivery(address, DeliveryStatus.배송전);
+        Delivery delivery = Delivery.createDelivery(paymentDto.getAddress(), DeliveryStatus.배송전);
 
-        if(userId == 0){ //비회원의 경우
-            //비회원 생성
-            User user = User.createAnonymous();
-
-            //상품 찾기
-            Product product = productRepository.findById(productId).orElseThrow(()->{
-                return new CustomBusinessException("상품을 찾을 수 없습니다.");
-            });
+        List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
+        if(paymentDto.getFlag() == 0){  //상세페이지
             //주문상품 생성
-            List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
-            OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-
-            //주문 생성
+            OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),paymentDto.getAmount());
             orderItemList.add(orderItem);
-            Order order = Order.createOrder(user,delivery,orderItemList);
 
-            userRepository.save(user);
-            deliveryRepository.save(delivery);
-            orderItemRepository.save(orderItem);
-            orderRepository.save(order);
-
-            return order;
-        }else{ //회원의 경우
-            //회원 찾기
-            User user = userRepository.findById(userId).orElseThrow(()->{
-                return new CustomBusinessException("회원를 찾을 수 없습니다.");
-            });
-            if(flag == 0){  //상세페이지일때
-                //상품 찾기
-                Product product = productRepository.findById(productId).orElseThrow(()->{
-                    return new CustomBusinessException("상품을 찾을 수 없습니다.");
-                });
+        }else{  //장바구니
+            List<Cart> cartList = cartRepository.loadCartByUserId(userId);
+            for(Cart cart : cartList){
                 //주문상품 생성
-                List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
-                OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),amount);
-
-                //주문 생성
+                OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
                 orderItemList.add(orderItem);
-                Order order = Order.createOrder(user,delivery, orderItemList );
-
-                deliveryRepository.save(delivery);
-                orderItemRepository.save(orderItem);
-                orderRepository.save(order);
-
-                return order;
-            }else{  //장바구니일때
-                //장바구니 찾기
-                List<Cart> cartList = cartRepository.loadCartByUserId(userId);
-                List<OrderItem> orderItemList = new ArrayList<>();
-                for(Cart cart : cartList){
-                    //주문상품 생성
-                    OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
-                    orderItemList.add(orderItem);
-
-                    //장바구니에서는 삭제
-                    cartRepository.deleteById(cart.getId());
-                    user.getCarts().remove(cart);
-                }
-                //주문 생성
-                Order order = Order.createOrder(user,delivery,orderItemList);
-
-                deliveryRepository.save(delivery);
-                for(OrderItem orderItem : order.getOrderItemList()){
-                    orderItemRepository.save(orderItem);
-                }
-                orderRepository.save(order);
-                return order;
+                //장바구니에서는 삭제
+                cartRepository.deleteById(cart.getId());
+                user.getCarts().remove(cart);
             }
         }
+
+        //주문 생성
+        Order order = Order.createOrder(user,delivery,orderItemList);
+
+        //DB에 저장
+        deliveryRepository.save(delivery);
+        for(OrderItem orderItem : order.getOrderItemList()){
+            orderItemRepository.save(orderItem);
+        }
+        orderRepository.save(order);
+        return order;
+
     }
-
-
 }

@@ -33,7 +33,7 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
 
-	@Column(length = 20, unique = true)
+	@Column(length = 50, unique = true)
 	private String username; //아이디
 
 	@Column(nullable=false)
@@ -42,7 +42,6 @@ public class User {
 	@Column(length = 10, nullable=false)
 	private String name; //이름
 
-	@Column(nullable=false)
 	private String phone; //전화번호
 
 	@Column(nullable=false)

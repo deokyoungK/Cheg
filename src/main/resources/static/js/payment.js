@@ -69,14 +69,13 @@ function iamport(e){
                             }
 
                             var req_data = {
-                                user_id: principalId, //비회원.회원 구분
                                 address: address,
-                                product_id: productId,
+                                productId: productId,
                                 amount: amount,
                                 flag: flag //상세,장바구니 구분
                             };
 
-                            //비즈니스로직
+                            //비즈니스 로직
                             $.ajax({
                                 type: "POST",
                                 url: `/api/order`,
@@ -85,15 +84,11 @@ function iamport(e){
                                 dataType: "json",
                                 success: function (rsp) {
                                     alert("결제되었습니다.");
-                                    //비회원은 홈으로
-                                    if (principalId == 0) {
-                                        location.href = `/`;
-                                    } else {
-                                        location.href = `/mypage/${principalId}`;
-                                    }
+                                    location.href = `/mypage/${principalId}`;
+
                                 },
                                 error: function (xhr) {
-                                    alert("서비스로직까지는 실패");
+                                    alert("비즈니스 로직까지는 실패");
                                 }
                             });
 

@@ -15,7 +15,7 @@ import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.service.AuthService;
 import com.likelion.cheg.service.CartService;
 import com.likelion.cheg.service.CategoryService;
-import com.likelion.cheg.service.OrderService;
+import com.likelion.cheg.web.dto.pay.PaymentDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +33,12 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class 회원_주문 {
+public class OrderServiceTest {
 
     @PersistenceContext
     EntityManager em;
     @Autowired
-    OrderService orderService;
+    com.likelion.cheg.service.OrderService orderService;
     @Autowired
     CategoryService categoryService;
     @Autowired
@@ -65,8 +65,20 @@ public class 회원_주문 {
         //상품 생성
         Product product = commonMethod.createProduct(category,"테스트용_상품",100);
 
+
+        //paymentDTO생성
+        String address = "서울";
+        int amount = 2;
+        int flag = 0;
+        PaymentDto paymentDto = PaymentDto.builder()
+                .address(address)
+                .productId(product.getId())
+                .amount(amount)
+                .flag(flag)
+                .build();
+
         //회원이 상세페이지에서 주문
-        Order order = orderService.makeOrder(user.getId(),0,user.getAddress(), product.getId(), 2);
+        Order order = orderService.makeOrder(user.getId(),paymentDto);
 
         //order 확인
         assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(), OrderStatus.주문완료);
@@ -93,8 +105,19 @@ public class 회원_주문 {
         //주문 전 장바구니 갯수 확인
         int cart_number = user.getCarts().size();
 
+        //paymentDTO생성
+        String address = "서울";
+        int amount = 2;
+        int flag = 1;
+        PaymentDto paymentDto = PaymentDto.builder()
+                .address(address)
+                .productId(product.getId())
+                .amount(amount)
+                .flag(flag)
+                .build();
+
         //회원이 장바구니에서 주문
-        Order order = orderService.makeOrder(user.getId(),1,user.getAddress(), product.getId(), 2);
+        Order order = orderService.makeOrder(user.getId(),paymentDto);
 
         //order 확인
         assertEquals("주문 시 상태는 1이 되어야함.",order.getOrderStatus(),OrderStatus.주문완료);
