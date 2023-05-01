@@ -26,13 +26,12 @@ public class UserApiController {
         return new ResponseEntity<>(new CMResponse<>(1,"회원 탈퇴 성공",""),HttpStatus.OK);
     }
 
-    @PostMapping("api/update/{userId}")
+    @PostMapping("api/update")
     public ResponseEntity<CMResponse> update(
-            @PathVariable int userId,
             @Validated UserUpdateDto userUpdateDto,
             @AuthenticationPrincipal PrincipalDetail principalDetail) {
 
-        User user = userService.update(userId,userUpdateDto);
+        User user = userService.update(principalDetail.getUser().getId(),userUpdateDto);
         principalDetail.setUser(user); //세션정보 변경
         return new ResponseEntity<>(new CMResponse<>(1, "회원정보 변경 성공", ""), HttpStatus.OK);
     }

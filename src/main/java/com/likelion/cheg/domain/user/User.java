@@ -4,6 +4,8 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
+
 import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.*;
 
 
+@DynamicUpdate
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

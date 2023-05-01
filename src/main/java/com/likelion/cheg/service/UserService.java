@@ -49,6 +49,7 @@ public class UserService {
         }
     }
 
+
     @Transactional
     public User update(int userId, UserUpdateDto userUpdateDto){
         User user = userRepository.findById(userId).orElseThrow(()->{
@@ -62,5 +63,4 @@ public class UserService {
 
         return user;
     }
-
 }

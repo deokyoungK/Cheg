@@ -6,7 +6,7 @@ function update(userId,e) {
 
     $.ajax({
         type: "POST",
-        url: `/api/update/${userId}`,
+        url: "/api/update",
         data: data,
         contentType: "application/x-www-form-urlencoded; charset=utf8",
         dataType: "json",

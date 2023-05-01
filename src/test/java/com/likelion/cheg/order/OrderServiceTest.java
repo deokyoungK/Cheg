@@ -35,8 +35,6 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 @Transactional
 public class OrderServiceTest {
 
-    @PersistenceContext
-    EntityManager em;
     @Autowired
     com.likelion.cheg.service.OrderService orderService;
     @Autowired
