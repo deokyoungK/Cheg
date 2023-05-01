@@ -17,8 +17,8 @@ function delete_user(userId){
     var flag = confirm("삭제하시겠습니까?");
     if(flag){
         $.ajax({
-            type: "post",
-            url: `/api/user/${userId}/delete`,
+            type: "DELETE",
+            url: `/api/users/${userId}`,
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(res => {

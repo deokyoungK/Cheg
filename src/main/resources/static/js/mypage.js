@@ -5,8 +5,8 @@ function update(userId,e) {
     let data = $("#profile_info").serialize();  //key=value
 
     $.ajax({
-        type: "POST",
-        url: "/api/update",
+        type: "PUT",
+        url: `/api/users/${userId}`,
         data: data,
         contentType: "application/x-www-form-urlencoded; charset=utf8",
         dataType: "json",
