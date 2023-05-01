@@ -9,7 +9,11 @@
 
 <body>
     <%@ include file="../layout/header.jsp"%>
-
+    <c:if test="${not empty error}">
+        <script>
+            alert("${exception}");
+        </script>
+    </c:if>
     <div class="wrap">
         <div class="login__form__container">
             <div class="login__form">
@@ -60,5 +64,4 @@
     </div>
 
 </body>
-
 </html>

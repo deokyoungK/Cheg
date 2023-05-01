@@ -25,7 +25,7 @@ public class UserApiController {
     }
 
     @PutMapping("api/users/{userId}")
-    public ResponseEntity<CMResponse> update(
+    public ResponseEntity<CMResponse> updateUser(
             @PathVariable int userId,
             @Validated UserUpdateDto userUpdateDto,
             @AuthenticationPrincipal PrincipalDetail principalDetail) {

@@ -4,6 +4,7 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,9 +20,7 @@ public class PrincipalDetailService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User userEntity = userRepository.findByUsername(username);
 		if(userEntity==null){
-			log.info("User가 null");
-			throw new UsernameNotFoundException(username);
-
+			throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
 		}
 		else
 			return new PrincipalDetail(userEntity);
