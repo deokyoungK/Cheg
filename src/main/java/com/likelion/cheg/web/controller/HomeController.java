@@ -39,9 +39,13 @@ public class HomeController {
 
     @GetMapping("/search")
     public String search(@RequestParam(value="keyword") String keyword, Model model){
-        List<Product> productList = productRepository.searchByKeyword(keyword);
+        List<Product> productList = productRepository.findAllByKeyword(keyword);
         List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
+
+        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryResponseDto> categoryListDto = categoryService.makeResponseDto(categoryList);
         model.addAttribute("productListDto",productListDto);
+        model.addAttribute("categoryListDto",categoryListDto);
         return "layout/home";
     }
 

@@ -115,15 +115,4 @@ public class ProductService {
     }
 
 
-    @Transactional
-    public List<Product> searchProductByCategory(String name){
-        List<Product> productReturn = new ArrayList<>();
-        List<Product> productList = productRepository.findAll();
-        for(Product product : productList){
-            if(product.getCategory().getName().equals(name)){
-                productReturn.add(product);
-            }
-        }
-        return productReturn;
-    }
 }

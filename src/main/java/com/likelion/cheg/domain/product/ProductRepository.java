@@ -7,13 +7,15 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+    //모든 상품 내림차순 조회
     @Query(value = "SELECT * FROM product p ORDER BY p.id DESC",nativeQuery = true)
     List<Product> findAllDesc();
 
-    @Query(value = "SELECT * FROM product p WHERE p.name LIKE %:keyword% OR p.brand LIKE %:keyword%",nativeQuery = true)
-    List<Product> searchByKeyword(String keyword);
+    //keyword로 상품조회
+    @Query("SELECT p FROM Product p WHERE p.name LIKE %:keyword% OR p.brand LIKE %:keyword%")
+    List<Product> findAllByKeyword(String keyword);
 
-    //카테고리별 상품조회(fetch join)
+    //categoryId로 상품조회(fetch join)
     @Query("SELECT p FROM Product p JOIN FETCH p.category c WHERE c.id = :categoryId ORDER BY p.id DESC")
     List<Product> findAllByCategoryId(int categoryId);
 }

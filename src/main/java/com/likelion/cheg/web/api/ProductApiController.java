@@ -29,16 +29,15 @@ public class ProductApiController {
         return new ResponseEntity<>(new CMResponse<>(1,"상품 삭제 성공",""),HttpStatus.OK);
     }
 
-
     @GetMapping("api/products/category/{categoryId}")
     public ResponseEntity<CMResponse> getProductsByCategory(@PathVariable int categoryId){
-        List<Product> productList = productRepository.findAllByCategoryId(categoryId);
+        List<Product> productList = new ArrayList<>();
+        if(categoryId == 0){ //전체 상품 조회
+            productList = productRepository.findAll();
+        }else{
+            productList = productRepository.findAllByCategoryId(categoryId);
+        }
         List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
         return new ResponseEntity<>(new CMResponse<>(1,"카테고리별 상품조회 성공",productListDto),HttpStatus.OK);
-
     }
-
-
-
-
 }

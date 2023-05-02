@@ -45,30 +45,29 @@
 
     <div class="product-container">
         <div class="product-category2">
+            <button id="category-button" class="category" onclick="showCategoryProduct(0)"><img src="${pageContext.request.contextPath}/images/harness.png">전체</button>
+
             <c:forEach var="c" items="${categoryListDto}" >
                 <button id="category-button" class="category" onclick="showCategoryProduct(${c.id})"><img src="${pageContext.request.contextPath}/images/harness.png">${c.name}</button>
             </c:forEach>
         </div>
 
-        <c:choose>
-            <c:when test="${fn:length(productListDto) == 0}">
-                <div class="product-list">
-                    <div style="font-size:30px;padding:50px;">상품이 없습니다.</div>
+        <div id = "search-result" class="search-result">
+            상품이 총 ${fn:length(productListDto)}개 입니다.
+        </div>
+
+
+        <div id="product-list" class="product-list">
+            <c:forEach var="p" items="${productListDto}" >
+                <div class="product-card">
+                    <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="/upload/${p.url}" alt=""></a>
+                    <div class="product-brand">${p.brand}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">${p.price}원</div>
                 </div>
-            </c:when>
-            <c:otherwise>
-                <div id = "product-list" class="product-list">
-                    <c:forEach var="p" items="${productListDto}" >
-                        <div class="product-card">
-                            <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="/upload/${p.url}" alt=""></a>
-                            <div class="product-brand">${p.brand}</div>
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-price">${p.price}원</div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:otherwise>
-        </c:choose>
+            </c:forEach>
+        </div>
+
     </div>
 
 </body>

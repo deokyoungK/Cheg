@@ -122,7 +122,7 @@ public class AdminController {
 
     @GetMapping("/admin/search/product")
     public String searchProduct(@RequestParam(value="keyword") String keyword, Model model){
-        List<Product> productList = productRepository.searchByKeyword(keyword);
+        List<Product> productList = productRepository.findAllByKeyword(keyword);
         List<ProductResponseDto> productListDto = productService.makeResponseDto(productList);
         model.addAttribute("productListDto",productListDto);
         return "admin/products";
