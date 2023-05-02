@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM product p WHERE p.name LIKE %:keyword% OR p.brand LIKE %:keyword%",nativeQuery = true)
     List<Product> searchByKeyword(String keyword);
 
+    //카테고리별 상품조회(fetch join)
+    @Query("SELECT p FROM Product p JOIN FETCH p.category c WHERE c.id = :categoryId ORDER BY p.id DESC")
+    List<Product> findAllByCategoryId(int categoryId);
 }

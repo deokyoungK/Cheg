@@ -18,7 +18,9 @@ public class CategoryService {
 
     public List<CategoryResponseDto> makeResponseDto(List<Category> categoryList){
         List<CategoryResponseDto> categoryListDtos = categoryList.stream()
-                .map(category -> new CategoryResponseDto(category.getName()))
+                .map(category -> new CategoryResponseDto(
+                        category.getId(),
+                        category.getName()))
                 .collect(Collectors.toList());
         return categoryListDtos;
     }

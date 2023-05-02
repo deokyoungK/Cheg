@@ -22,13 +22,6 @@ public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
 
-    @GetMapping("/")
-    public String home(Model model){
-        List<Product> productList = productRepository.findAllDesc();
-        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-        model.addAttribute("productListDto",productListDto);
-        return "layout/home";
-    }
 
     @GetMapping("/detail/{productId}")
     public String getDetail(@PathVariable int productId, Model model){
@@ -40,13 +33,6 @@ public class ProductController {
         return "product/detail";
     }
 
-    @GetMapping("/search")
-    public String search(@RequestParam(value="keyword") String keyword, Model model){
-        List<Product> productList = productRepository.searchByKeyword(keyword);
-        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-        model.addAttribute("productListDto",productListDto);
-        return "layout/home";
-    }
 
     @GetMapping("/category/{name}")
     public String category(@PathVariable String name, Model model){

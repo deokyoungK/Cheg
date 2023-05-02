@@ -45,20 +45,19 @@
 
     <div class="product-container">
         <div class="product-category2">
-            <a href="/category/하네스" class="category"><img src="${pageContext.request.contextPath}/images/harness.png">하네스</a>
-            <a href="/category/자켓" class="category"><img src="${pageContext.request.contextPath}/images/jacket.png"  alt="NULL">자켓</a>
-            <a href="/category/목줄" class="category"><img src="${pageContext.request.contextPath}/images/leash.png"  alt="NULL">목줄</a>
-            <a href="/category/패딩" class="category"><img src="${pageContext.request.contextPath}/images/padding4.png"  alt="NULL">패딩</a>
-            <a href="/category/스웨터" class="category"><img src="${pageContext.request.contextPath}/images/sweater.png"  alt="NULL">스웨터</a>
+            <c:forEach var="c" items="${categoryListDto}" >
+                <button id="category-button" class="category" onclick="showCategoryProduct(${c.id})"><img src="${pageContext.request.contextPath}/images/harness.png">${c.name}</button>
+            </c:forEach>
         </div>
+
         <c:choose>
             <c:when test="${fn:length(productListDto) == 0}">
                 <div class="product-list">
-                <div style="font-size:30px;padding:50px;">해당 상품이 없습니다.</div>
+                    <div style="font-size:30px;padding:50px;">상품이 없습니다.</div>
                 </div>
             </c:when>
             <c:otherwise>
-                <div class="product-list">
+                <div id = "product-list" class="product-list">
                     <c:forEach var="p" items="${productListDto}" >
                         <div class="product-card">
                             <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="/upload/${p.url}" alt=""></a>
@@ -73,6 +72,7 @@
     </div>
 
 </body>
+<script type="text/javascript" src="/js/home.js"></script>
 <script>
     var swiper = new Swiper(".mySwiper", {
         spaceBetween: 5,
