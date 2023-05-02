@@ -41,13 +41,8 @@ public class 장바구니_삭제 {
         Product product2 = commonMethod.createProduct(category,"장바구니테스트_상품2",20000);
 
         //addCartDto생성
-        AddCartDto addCartDto = new AddCartDto();
-        addCartDto.setProductId(product1.getId());
-        addCartDto.setProductCount(2);
-
-        AddCartDto addCartDto2 = new AddCartDto();
-        addCartDto2.setProductId(product2.getId());
-        addCartDto2.setProductCount(3);
+        AddCartDto addCartDto = new AddCartDto(product1.getId(),2);
+        AddCartDto addCartDto2 = new AddCartDto(product2.getId(),3);
 
         Cart cart1 = cartService.addCart(user.getId(), addCartDto);
         Cart cart2= cartService.addCart(user.getId(), addCartDto2);

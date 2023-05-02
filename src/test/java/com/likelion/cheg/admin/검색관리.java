@@ -61,7 +61,7 @@ public class 검색관리 {
         Product product3 = commonMethod.createProduct(category,"converse",6000);
 
         String keyword = "jordon";
-        List<Product> productList = productRepository.searchByKeyword(keyword);
+        List<Product> productList = productRepository.findAllByKeyword(keyword);
 
         assertEquals("검색된 product는 총 2개",productList.size(),2);
         assertEquals("검색된 product의 이름 확인",productList.contains(product),true);

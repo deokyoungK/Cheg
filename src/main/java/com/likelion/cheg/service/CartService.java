@@ -6,6 +6,8 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
+import com.likelion.cheg.handler.ErrorCode;
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
 import com.likelion.cheg.web.dto.cart.CartApiResponseDto;
@@ -77,11 +79,11 @@ public class CartService {
     @Transactional
     public Cart addCart(int userId, AddCartDto addCartDto){
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomBusinessException("사용자를 찾을 수 없습니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
         });
         Cart cart = cartRepository.findByUserIdAndProductId(userId,addCartDto.getProductId());
         Product product = productRepository.findById(addCartDto.getProductId()).orElseThrow(()->{
-            return new CustomBusinessException("상품을 찾을 수 없습니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_PRODUCT);
         });
 
         if(user.getCarts().contains(cart)){ //이미 있으면

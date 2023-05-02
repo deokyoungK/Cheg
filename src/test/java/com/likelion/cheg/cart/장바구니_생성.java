@@ -40,9 +40,7 @@ public class 장바구니_생성 {
         Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
 
         //addCartDto생성
-        AddCartDto addCartDto = new AddCartDto();
-        addCartDto.setProductId(product.getId());
-        addCartDto.setProductCount(3);
+        AddCartDto addCartDto = new AddCartDto(product.getId(),3);
 
         Cart cart = cartService.addCart(user.getId(),addCartDto);
 
