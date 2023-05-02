@@ -1,5 +1,8 @@
 package com.likelion.cheg.service;
 
+import com.likelion.cheg.domain.cart.Cart;
+import com.likelion.cheg.domain.cart.CartRepository;
+import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
@@ -21,7 +24,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-
+    private final CartRepository cartRepository;
 
     public List<UserResponseDto> makeResponseDto(List<User> userList){
         List<UserResponseDto> userListDtos = userList.stream()
@@ -40,13 +43,10 @@ public class UserService {
 
     @Transactional
     public void deleteUser(int userId){
-        try{
-            userRepository.deleteById(userId); //회원 삭제
-            orderRepository.deleteByUserId(userId); //회원 주문 삭제
+        User user = userRepository.findById(userId).orElseThrow(()->
+                new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER));
 
-        }catch(Exception e){
-            throw new CustomBusinessException(e.getMessage());
-        }
+        userRepository.deleteById(userId);
     }
 
 

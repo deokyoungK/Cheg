@@ -28,7 +28,7 @@ public class User {
 
 	@Builder.Default
 	@JsonIgnore
-	@OneToMany(mappedBy = "user", fetch = LAZY)
+	@OneToMany(mappedBy = "user", fetch = LAZY,cascade = CascadeType.ALL)
 	private List<Cart> carts = new ArrayList<>(); //장바구니
 
 	@Builder.Default
