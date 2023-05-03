@@ -13,6 +13,8 @@ import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
+import com.likelion.cheg.handler.ErrorCode;
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.order.OrderMyPageResponseDto;
 import com.likelion.cheg.web.dto.order.OrderResponseDto;
@@ -65,27 +67,26 @@ public class OrderService {
     public Order makeOrder(int userId, PaymentDto paymentDto){
         //회원 찾기
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomBusinessException("회원를 찾을 수 없습니다.");
-        });
-
-        //상품 찾기
-        Product product = productRepository.findById(paymentDto.getProductId()).orElseThrow(()->{
-            return new CustomBusinessException("상품을 찾을 수 없습니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
         });
 
         //delivery 생성
         Delivery delivery = Delivery.createDelivery(paymentDto.getAddress(), DeliveryStatus.배송전);
 
-        List<OrderItem> orderItemList = new ArrayList<>(); //리스트의 형태로 Order에 넣어줘야하기에 선언
+        //OrderItem 생성
+        List<OrderItem> orderItemList = new ArrayList<>();
         if(paymentDto.getFlag() == 0){  //상세페이지
-            //주문상품 생성
+            //상품 찾기
+            Product product = productRepository.findById(paymentDto.getProductId()).orElseThrow(()->{
+                return new CustomBusinessApiException(ErrorCode.NOT_FOUND_PRODUCT);
+            });
+
             OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),paymentDto.getAmount());
             orderItemList.add(orderItem);
 
         }else{  //장바구니
             List<Cart> cartList = cartRepository.loadCartByUserId(userId);
             for(Cart cart : cartList){
-                //주문상품 생성
                 OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
                 orderItemList.add(orderItem);
                 //장바구니에서는 삭제
@@ -94,7 +95,7 @@ public class OrderService {
             }
         }
 
-        //주문 생성
+        //Order 생성
         Order order = Order.createOrder(user,delivery,orderItemList);
 
         //DB에 저장
@@ -103,6 +104,7 @@ public class OrderService {
             orderItemRepository.save(orderItem);
         }
         orderRepository.save(order);
+
         return order;
 
     }

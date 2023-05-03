@@ -46,6 +46,7 @@
                 <td>상품명</td>
                 <td>상품상세</td>
                 <td>가격</td>
+                <td>재고</td>
                 <td>삭제</td>
             </tr>
             </thead>
@@ -58,6 +59,7 @@
                     <td>${p.name}</td>
                     <td>${p.description}</td>
                     <td>${p.price}원</td>
+                    <td>${p.stockQuantity}개</td>
                     <td><i style="font-size:20px; cursor:pointer;" class="fa-solid fa-square-minus" onclick="delete_product(${p.id});"></i></td>
                 </tr>
             </tbody>

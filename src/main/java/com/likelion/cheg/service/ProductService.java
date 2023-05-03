@@ -50,7 +50,9 @@ public class ProductService {
                 product.getUrl(),
                 product.getBrand(),
                 product.getName(),
-                product.getPrice()
+                product.getDescription(),
+                product.getPrice(),
+                product.getStockQuantity()
         );
         return productDto;
     }
@@ -64,7 +66,8 @@ public class ProductService {
                         product.getUrl(),
                         product.getName(),
                         product.getDescription(),
-                        product.getPrice()))
+                        product.getPrice(),
+                        product.getStockQuantity()))
                 .collect(Collectors.toList());
         return productListDtos;
     }
@@ -102,7 +105,8 @@ public class ProductService {
                 productUploadDto.getName(),
                 productUploadDto.getDescription(),
                 productUploadDto.getPrice(),
-                imageFileName);
+                imageFileName,
+                productUploadDto.getStockQuantity());
 
         productRepository.save(product);
         return product;

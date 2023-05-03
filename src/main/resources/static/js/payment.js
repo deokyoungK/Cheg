@@ -63,11 +63,6 @@ function iamport(e){
                         if (res.paid_amount == data.response.amount) {
                             alert("결제검증완료");
 
-                            //비회원은 id를 0으로
-                            if (principalId == "") {
-                                principalId = 0;
-                            }
-
                             var req_data = {
                                 address: address,
                                 productId: productId,
@@ -88,21 +83,35 @@ function iamport(e){
 
                                 },
                                 error: function (xhr) {
-                                    alert("비즈니스 로직까지는 실패");
+                                    var errorResponse = JSON.parse(xhr.responseText);
+                                    var errorCode = errorResponse.errorCode;
+                                    var errorMessage = errorResponse.errorMessage;
+                                    alert(errorMessage);
+                                    alert(res.imp_uid);
+                                    // 결제 취소 요청
+                                    IMP.cancelPayment(res.imp_uid, function (cancel_res) {
+                                        alert("서비스 문제로 결제가 취소되었습니다.");
+                                    });
                                 }
                             });
 
                         } else {
                             alert("결제 검증 실패");
+                            // 결제 취소 처리
+                            IMP.cancel_payment(res.imp_uid, function () {
+                                alert("결제 검증 문제로 결제가 취소되었습니다.");
+                            });
                         }
                     },
                     error: function () {
                     }
                 });
+
+
             });
         },
-        error: function (xhr) {
-            var errorResponse = JSON.parse(xhr.responseText);
+        error: function (x) {
+            var errorResponse = JSON.parse(x.responseText);
             var errorMessage = errorResponse.errorMessage;
             alert(errorMessage);
             return;

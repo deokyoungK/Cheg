@@ -13,6 +13,8 @@ public enum ErrorCode {
     NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND,"001","카테고리를 찾을 수 없습니다."),
     NOT_FOUND_DELIVERY(HttpStatus.NOT_FOUND,"001","배송 정보를 찾을 수 없습니다."),
 
+    //NOT ENOUGH
+    NOT_ENOUGH_STOCK(HttpStatus.FORBIDDEN,"002","상품 재고가 부족합니다."),
 
 
     ;

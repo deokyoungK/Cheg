@@ -50,6 +50,9 @@ public class OrderItem {
                 .orderItemTotalPrice(product_price * quantity)
                 .quantity(quantity)
                 .build();
+
+        //상품재고는 감소해야됨.
+        product.dereaseStockQuantity(quantity);
         return orderItem;
     }
 

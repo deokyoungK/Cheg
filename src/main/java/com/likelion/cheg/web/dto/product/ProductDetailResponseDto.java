@@ -10,5 +10,7 @@ public class ProductDetailResponseDto {
     private String url;
     private String brand;
     private String name;
+    private String description;
     private int price;
+    private int stockQuantity;
 }

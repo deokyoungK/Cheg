@@ -1,12 +1,12 @@
+//장바구니 추가
 function onCart() {
-
     var principalId = $("#principalId").val();
     var productId = $("#productId").val();
     var productCount = document.getElementById('amount_input').value;
 
     if (principalId == "") {
         alert("로그인 후 이용가능합니다.");
-        location.href = "http://localhost:8080/auth/login"
+        location.href = "/auth/login"
     } else {
         if (productCount < 1) {
             alert("1개 이상 선택해야 합니다.");
@@ -46,19 +46,21 @@ function detailToPayment(productId){
         alert("1개 이상 선택해야 합니다.");
         return;
     }
-    if(principalId == 0){
+    if(principalId == ""){
         alert("로그인 후 이용 가능합니다.");
-        location.href="http://localhost:8080/auth/login"
+        location.href="/auth/login"
+    }else{
+        $.ajax({
+            type: "post",
+            url: `/api/payment/${productId}/${amount}`,
+            contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
+            dataType: "json" //응답받을 데이터의 형식
+        }).done(res => {
+            location.href="/detailPayment/"+res.data[0]+"/"+res.data[1];
+        }).fail(error => {
+            alert("실패");
+        });
     }
 
-    $.ajax({
-        type: "post",
-        url: `/api/payment/${productId}/${amount}`,
-        contentType: "application/json; charset=utf-8",   //보낼 데이터의 형식
-        dataType: "json" //응답받을 데이터의 형식
-    }).done(res => {
-        location.href="http://localhost:8080/detailPayment/"+res.data[0]+"/"+res.data[1];
-    }).fail(error => {
-        alert("실패");
-    });
+
 }

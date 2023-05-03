@@ -62,7 +62,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" id="" name="price" class="form-control" placeholder="숫자만 입력하세요." required>
+					<input type="text" id="" name="price" class="form-control" placeholder="숫자만 입력하세요." >
 				</div>
 			</div>
 
@@ -70,6 +70,13 @@
 				<label class="col-sm-2">상품 이미지</label>
 				<div>
 					<input type="file" name="file" class="form-control">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2">상품 재고</label>
+				<div>
+					<input type="text" name="stockQuantity" class="form-control" placeholder="숫자만 입력하세요.">
 				</div>
 			</div>
 			
