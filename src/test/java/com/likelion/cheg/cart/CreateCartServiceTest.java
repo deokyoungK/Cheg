@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddCartServiceTest {
+public class CreateCartServiceTest {
 
     @InjectMocks
     private CartService cartService;
@@ -179,12 +179,5 @@ public class AddCartServiceTest {
         assertEquals(ErrorCode.NOT_FOUND_USER, ((CustomBusinessApiException) e).getErrorCode());
 
     }
-
-
-
-
-
-
-
 
 }

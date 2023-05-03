@@ -87,7 +87,7 @@ public class CartService {
         });
 
         if(user.getCarts().contains(cart)){ //이미 있으면
-            cart.changeCount(cart.getProductCount()+addCartDto.getProductCount());
+            cart.changeCount(addCartDto.getProductCount());
             return cart;
         }else{
             Cart newCart = Cart.createCart(user,product,addCartDto.getProductCount());
@@ -99,7 +99,7 @@ public class CartService {
     @Transactional
     public Cart downCart(int cartId){
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomBusinessException("찾을 수 없는 장바구니 입니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_CART);
         });
 
         //수량 0개가 아닐때 감소시킴.
@@ -112,7 +112,7 @@ public class CartService {
     @Transactional
     public Cart upCart(int cartId){
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomBusinessException("찾을 수 없는 장바구니 입니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_CART);
         });
 
         cart.changeCount(1);
