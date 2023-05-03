@@ -1,4 +1,4 @@
-package com.likelion.cheg.cart;
+package com.likelion.cheg.cart.integrationTest;
 
 import com.likelion.cheg.CommonMethod;
 import com.likelion.cheg.domain.cart.Cart;
@@ -21,7 +21,7 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class 장바구니_삭제 {
+public class 장바구니_생성 {
 
     @Autowired
     EntityManager em;
@@ -31,25 +31,23 @@ public class 장바구니_삭제 {
     CommonMethod commonMethod;
 
     @Test
-    public void 장바구니_삭제(){
+    public void 장바구니_생성(){
         //user생성 후 회원가입
-        User user = commonMethod.createUser("장바구니테스트_아이뒤");
+        User user = commonMethod.createUser("장바구니테스트_아이디");
         //카테고리 생성
         Category category = commonMethod.createCategory("장바구니테스트_카테고리");
         //product생성
-        Product product1 = commonMethod.createProduct(category,"장바구니테스트_상품1",35000);
-        Product product2 = commonMethod.createProduct(category,"장바구니테스트_상품2",20000);
+        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
 
         //addCartDto생성
-        AddCartDto addCartDto = new AddCartDto(product1.getId(),2);
-        AddCartDto addCartDto2 = new AddCartDto(product2.getId(),3);
+        AddCartDto addCartDto = new AddCartDto(product.getId(),3);
 
-        Cart cart1 = cartService.addCart(user.getId(), addCartDto);
-        Cart cart2= cartService.addCart(user.getId(), addCartDto2);
+        Cart cart = cartService.addCart(user.getId(),addCartDto);
 
-        cartService.deleteCart(user.getId(),cart2.getId());
-
-        assertEquals("장바구니 한개만 남는지",user.getCarts().size(),1);
-        assertEquals("남은 한개가 cart1인지",user.getCarts().get(0),cart1);
+        assertEquals("장바구니-사용자 매핑이 잘 이루어졌는지",cart.getUser(),user);
+        assertEquals("장바구니-상품 매핑이 잘 이루어졌는지.",cart.getProduct(),product);
+        assertEquals("장바구니에 상품 수량이 맞게 들어갔는지",cart.getProductCount(),3);
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.likelion.cheg.cart;
+package com.likelion.cheg.cart.integrationTest;
 
 import com.likelion.cheg.CommonMethod;
 import com.likelion.cheg.domain.cart.Cart;

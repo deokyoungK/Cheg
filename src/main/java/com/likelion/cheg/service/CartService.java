@@ -122,10 +122,10 @@ public class CartService {
     @Transactional
     public void deleteCart(int userId, int cartId){
         User user = userRepository.findById(userId).orElseThrow(()->{
-            return new CustomBusinessException("사용자를 찾을 수 없습니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
         });
         Cart cart = cartRepository.findById(cartId).orElseThrow(()->{
-            return new CustomBusinessException("찾을 수 없는 장바구니입니다.");
+            return new CustomBusinessApiException(ErrorCode.NOT_FOUND_CART);
         });
 
         user.getCarts().remove(cart);

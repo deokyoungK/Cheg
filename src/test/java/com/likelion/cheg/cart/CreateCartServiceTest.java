@@ -171,7 +171,6 @@ public class CreateCartServiceTest {
 
         //when
         when(userRepository.findById(userId)).thenReturn(Optional.empty()); //user가 존재 X
-        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
         Throwable e = assertThrows(CustomBusinessApiException.class,
                 () -> cartService.addCart(userId, addCartDto));
 
