@@ -7,7 +7,7 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.service.CartService;
-import com.likelion.cheg.service.PayService;
+import com.likelion.cheg.service.PaymentService;
 import com.likelion.cheg.web.dto.pay.PayDetailResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.*;
 @Controller
 public class OrderController {
 
-    private final PayService payService;
+    private final PaymentService payService;
     private final CartService cartService;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;

@@ -4,9 +4,15 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.web.dto.pay.PayCartResponseDto;
 import com.likelion.cheg.web.dto.pay.PayDetailResponseDto;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +20,13 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class PayService {
+public class PaymentService {
+
+    private final IamportClient iamportClient;
+
+    public PaymentService() {
+        this.iamportClient = new IamportClient("3361655256577743","rHKk028PjZVXOHCBs505RgTmkKCqO6kfLeGYT7TwGsTP8ohXb7RjQX1U8T1p4vVAfSIMJF8WyL3tDjoX");
+    }
 
     //DetailPayment페이지로 price(총금액), product(상품정보) 묶어서 DTO로 보내기
     public PayDetailResponseDto makeDetailResponseDto(Product product, int amount){
@@ -61,5 +73,6 @@ public class PayService {
 
         return values;
     }
+
 
 }

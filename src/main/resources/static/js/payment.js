@@ -58,56 +58,30 @@ function iamport(e){
                 // 결제검증
                 $.ajax({
                     type: "POST",
-                    url: "/verifyIamport/" + res.imp_uid,
+                    url: "/api/verifyIamport/" + res.imp_uid,
                     success: function (data) {
                         if (res.paid_amount == data.response.amount) {
                             alert("결제검증완료");
-
                             var req_data = {
                                 address: address,
                                 productId: productId,
                                 amount: amount,
                                 flag: flag //상세,장바구니 구분
                             };
-
                             //비즈니스 로직
-                            $.ajax({
-                                type: "POST",
-                                url: `/api/order`,
-                                data: JSON.stringify(req_data),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (rsp) {
-                                    alert("결제되었습니다.");
-                                    location.href = `/mypage/${principalId}`;
-
-                                },
-                                error: function (xhr) {
-                                    var errorResponse = JSON.parse(xhr.responseText);
-                                    var errorCode = errorResponse.errorCode;
-                                    var errorMessage = errorResponse.errorMessage;
-                                    alert(errorMessage);
-                                    alert(res.imp_uid);
-                                    // 결제 취소 요청
-                                    IMP.cancelPayment(res.imp_uid, function (cancel_res) {
-                                        alert("서비스 문제로 결제가 취소되었습니다.");
-                                    });
-                                }
-                            });
+                            orderProcess(req_data, principalId, res.imp_uid);
 
                         } else {
                             alert("결제 검증 실패");
-                            // 결제 취소 처리
-                            IMP.cancel_payment(res.imp_uid, function () {
-                                alert("결제 검증 문제로 결제가 취소되었습니다.");
-                            });
+                            //환불 요청
+                            cancelPayment(res.imp_uid);
                         }
                     },
                     error: function () {
+                        //환불 요청
+                        cancelPayment(res.imp_uid);
                     }
                 });
-
-
             });
         },
         error: function (x) {
@@ -117,8 +91,53 @@ function iamport(e){
             return;
         }
     });
-
 }
+
+//주문 비즈니스 로직
+function orderProcess(req_data, principalId, imp_uid){
+    $.ajax({
+        type: "POST",
+        url: `/api/order`,
+        data: JSON.stringify(req_data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rsp) {
+            alert("결제되었습니다.");
+            location.href = `/mypage/${principalId}`;
+
+        },
+        error: function (xhr) {
+            var errorResponse = JSON.parse(xhr.responseText);
+            var errorMessage = errorResponse.errorMessage;
+            alert(errorMessage);
+
+            // 결제 취소 요청
+            cancelPayment(imp_uid);
+        }
+    });
+}
+
+
+//결제 취소 요청
+function cancelPayment(imp_uid){
+    $.ajax({
+        type: "POST",
+        url: `/api/cancelPayment`,
+        data: JSON.stringify({impUid: imp_uid}),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rsp) {
+            alert("결제가 취소되었습니다.");
+        },
+        error: function (xhr) {
+            var errorResponse = JSON.parse(xhr.responseText);
+            var errorMessage = errorResponse.errorMessage;
+            alert(errorMessage);
+        }
+    });
+}
+
+
 
 
 /* 우편번호 찾기 */
