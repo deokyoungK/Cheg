@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
+import com.likelion.cheg.domain.point.Point;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -35,6 +36,10 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
+
+	@OneToOne
+	@JoinColumn(name = "point_id")
+	private Point point; //포인트
 
 	@Column(length = 50, unique = true)
 	private String username; //아이디

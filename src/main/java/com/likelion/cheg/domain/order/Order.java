@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.OrderStatus;
 import com.likelion.cheg.domain.orderItem.OrderItem;
+import com.likelion.cheg.domain.point.Point;
 import com.likelion.cheg.domain.user.User;
 import lombok.*;
 
@@ -38,6 +39,10 @@ public class Order {
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
+
+    @OneToOne
+    @JoinColumn(name = "point_id")
+    private Point point; //포인트
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

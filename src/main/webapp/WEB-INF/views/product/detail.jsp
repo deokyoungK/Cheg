@@ -66,7 +66,7 @@
                 <div class="amount">
                     <div class="amount_text">구매 수량</div>
                     <span class="amount_content">
-                        <input class="amount_input" id="amount_input" type="number" placeholder="0">
+                        <input class="amount_input" id="amount_input" type="number" placeholder="0" min="0">
                     </span>
                 </div>
             </li>

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 @RequiredArgsConstructor
@@ -53,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .formLogin()
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/login")
-                .defaultSuccessUrl("/")
+                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler()) //로그인 성공 후 이전페이지로 리다이렉트
                 .failureHandler(failureHandler()) // 에러 발생 시 핸들러 지정
             .and()
                 .oauth2Login() //oauth2로그인도 추가로 진행

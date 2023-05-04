@@ -33,7 +33,7 @@ public class ProductApiController {
     public ResponseEntity<CMResponse> getProductsByCategory(@PathVariable int categoryId){
         List<Product> productList = new ArrayList<>();
         if(categoryId == 0){ //전체 상품 조회
-            productList = productRepository.findAll();
+            productList = productRepository.findAllDesc();
         }else{
             productList = productRepository.findAllByCategoryId(categoryId);
         }
