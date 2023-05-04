@@ -57,7 +57,7 @@
 
                 <div class="delivery">
                     <span class="delivery_text">남은 수량</span>
-                    <span class="delivery_content">${productDto.stockQuantity}개</span>
+                    <span id="stock_content">${productDto.stockQuantity}개</span>
                 </div>
             </li>
 
@@ -66,7 +66,7 @@
                 <div class="amount">
                     <div class="amount_text">구매 수량</div>
                     <span class="amount_content">
-                        <input class="amount_input" id="amount_input" type="number" placeholder="0"max="10"min="1">
+                        <input class="amount_input" id="amount_input" type="number" placeholder="0">
                     </span>
                 </div>
             </li>
