@@ -2,8 +2,12 @@ package com.likelion.cheg.service;
 
 
 import com.likelion.cheg.domain.enumType.Role;
+import com.likelion.cheg.domain.point.Point;
+import com.likelion.cheg.domain.point.PointRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
+import com.likelion.cheg.handler.ErrorCode;
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +24,9 @@ import javax.transaction.Transactional;
 public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PointRepository pointRepository;
 
-    //회원가입 시 역할과 암호화된 비밀번호를 insert
+
     @Transactional
     public User signup(SignupDto signupDto){
 
@@ -31,17 +36,35 @@ public class AuthService {
         //비밀번호 암호화
         String rawPassword = signupDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        Role role;
 
         //단순히 ADMIN이라는 username으로 회원가입했을 때 ADMIN부여
+        Role role;
         if(signupDto.getUsername().equals("admin")){
             role = Role.ROLE_ADMIN;
         }else{
             role = Role.ROLE_USER;
         }
 
-        User newUser = User.createUser(signupDto.getUsername(), encPassword, signupDto.getName(), signupDto.getPhone(), signupDto.getEmail(), role);
-        userRepository.save(newUser);
+        //포인트 생성
+        Point point = Point.createPoint(5000);
+
+        //User 생성
+        User newUser = User.createUser(
+                signupDto.getUsername(),
+                encPassword,
+                signupDto.getName(),
+                signupDto.getPhone(),
+                signupDto.getEmail(),
+                role,
+                point);
+
+        try{
+            pointRepository.save(point);
+            userRepository.save(newUser);
+        }catch(Exception e){
+            throw new CustomBusinessApiException(ErrorCode.FAIL_SIGNUP);
+        }
+
         return newUser;
     }
 

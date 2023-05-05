@@ -16,6 +16,9 @@ public enum ErrorCode {
     //NOT ENOUGH
     NOT_ENOUGH_STOCK(HttpStatus.FORBIDDEN,"002","상품 재고가 부족합니다."),
 
+    //Fail sign-up
+    FAIL_SIGNUP(HttpStatus.BAD_REQUEST,"003","회원가입에 실패하였습니다.");
+
 
     ;
     ErrorCode(HttpStatus httpStatus, String errorCode,String message){

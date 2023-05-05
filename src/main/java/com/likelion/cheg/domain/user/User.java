@@ -1,6 +1,7 @@
 package com.likelion.cheg.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.likelion.cheg.domain.cart.Cart;
+import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.point.Point;
@@ -37,7 +38,7 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
 
-	@OneToOne
+	@OneToOne(mappedBy = "user") //연관관계 주인이 아님
 	@JoinColumn(name = "point_id")
 	private Point point; //포인트
 
@@ -54,8 +55,6 @@ public class User {
 
 	@Column(nullable=false)
 	private String email; //이메일
-
-
 	private String address; //주소
 
 	@Enumerated(EnumType.STRING)
@@ -63,15 +62,22 @@ public class User {
 	private Role role; //역할(관리자: ROLE_ADMIN, 회원: ROLE_USER, 비회원: ROLE_GUEST)
 
 	private LocalDateTime createDate; //날짜
-	
+
 	@PrePersist //db에 insert되기 직전에 실행
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
 
+	//연관관계 편의 메서드
+	private void setPoint(Point point){
+		this.point = point;
+		point.setUser(this);
+	}
+
 	//User 생성 메서드
-	public static User createUser(String username, String password, String name, String phone, String email, Role role){
-		return User.builder()
+	public static User createUser(String username, String password, String name, String phone, String email, Role role, Point point){
+
+		User user = User.builder()
 				.username(username)
 				.password(password)
 				.name(name)
@@ -79,6 +85,9 @@ public class User {
 				.email(email)
 				.role(role)
 				.build();
+
+		user.setPoint(point);
+		return user;
 	}
 
 

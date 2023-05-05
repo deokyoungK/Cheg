@@ -47,13 +47,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus orderStatus; //주문상태("주문완료","주문취소")
-
     private String orderNumber; //주문번호
-
     private int orderPrice; //주문총액
     private int orderProductCount; //상품갯수 -> 마이페이지에서 구분을 위해
     private LocalDateTime createDate; //날짜
-
     @PrePersist //db에 insert되기 직전에 실행
     public void createDate() {
         this.createDate = LocalDateTime.now();
