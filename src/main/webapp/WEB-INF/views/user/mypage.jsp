@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="membership_detail_content">
-                    <strong class="info"> 0P </strong>
+                    <strong class="info"> ${principal.user.point.amount}P </strong>
                     <p class="info-sub"> 포인트 </p></a>
                 </div>
             </div>

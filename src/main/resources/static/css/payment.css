@@ -442,3 +442,23 @@ vertical-align: middle;
     line-height: 24px;
     cursor: pointer;
 }
+
+
+/*포인트 부분 추가*/
+.point-input {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    background-color: #fcfcfc;
+    padding: 8px;
+    font-size: 16px;
+    width: 80px;
+    margin-left: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.point-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #66afe9;
+    background-color: #fff;
+}

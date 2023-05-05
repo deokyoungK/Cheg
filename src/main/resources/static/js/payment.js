@@ -16,7 +16,8 @@ function iamport(e){
     var detailName = $("#productName").val();
     var cartName = $("#cartName").val();
     var amount = $("#amount").val();
-    var price = $("#total-price").text();
+    var price = $("#final-price").text();
+    var pointAmount = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
 
     //결제시에 상품이름 보여질때 상세, 장바구니 구분
     if(flag==0){
@@ -136,6 +137,39 @@ function cancelPayment(imp_uid){
         }
     });
 }
+
+//포인트 입력
+$(document).ready(function() {
+    var totalPrice = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
+
+    // 포인트 입력 필드의 값이 변경될 때마다 최종 결제 금액을 계산하여 표시
+    $('#point').on('input', function() {
+        var point = parseInt($(this).val()) || 0; // 값이 없을 경우 0으로 처리
+        var maxPoint = totalPrice/2; // 최대 포인트 사용 가능 범위 설정
+        if (point > maxPoint) {
+            alert('포인트 사용 가능 최대 범위입니다');
+            point = maxPoint;
+            $(this).val(point);
+        }
+        var finalPrice = totalPrice - point;
+
+        if (finalPrice < 0) {
+            finalPrice = 0;
+            $(this).val(totalPrice); // 입력값을 총 상품 가격으로 초기화
+        }
+
+        $('#final-price').text(finalPrice + '원');
+    });
+
+    // 최대 포인트값 설정
+    $('#point').attr('max', totalPrice);
+});
+
+
+
+
+
+
 
 
 

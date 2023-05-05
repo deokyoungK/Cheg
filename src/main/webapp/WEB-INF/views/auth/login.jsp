@@ -20,7 +20,7 @@
                 <div class="login-title">
                     <div class="login-text">지금 가입하면 누구나
                         <br>
-                        <strong>30만원 쿠폰팩 지급!</strong>
+                        <strong>5000원 포인트 지급!</strong>
                     </div>
                     <div class="login-register">신규 회원이신가요?<span><a href="/auth/signup" class="registe-account-txt"> 새 계정 만들기</a></span></div>
                 </div>

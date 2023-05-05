@@ -133,35 +133,46 @@
 
 		<div class="wrap-right">
 			<div class="payment-box">
-				<div>
-					<div class="payment-box-bottom">
-						<div class="payment-box-title">결제금액</div>
-
-						<div class="payment-division">
-							<div class="payment-left">주문 상품 수</div>
-							<div class="payment-right">${payDetailDto.amount}개</div>
-						</div>
-
-						<div class="payment-division">
-							<div class="payment-left">총 상품 가격</div>
-							<div class="payment-right">${payDetailDto.totalPrice}원</div>
-						</div>
-
-						<div class="payment-division">
-							<div class="payment-left">배송비</div>
-							<div class="payment-right">전상품 무료 배송</div>
-						</div>
-					</div>
+				<div class="payment-box-bottom">
+					<div class="payment-box-title">결제금액</div>
 
 					<div class="payment-division">
-						<div class="total-payment-left">최종 결제 금액</div>
-						<div class="total-payment-right" id="total-price">${payDetailDto.totalPrice}원</div>
+						<div class="payment-left">주문 상품 수</div>
+						<div class="payment-right">${payDetailDto.amount}개</div>
+					</div>
+					<div class="payment-division">
+						<div class="payment-left">총 상품 가격</div>
+						<div class="payment-right" id="total-price">${payDetailDto.totalPrice}원</div>
+					</div>
+					<div class="payment-division">
+						<div class="payment-left">배송비</div>
+						<div class="payment-right">전상품 무료 배송</div>
+					</div>
+					<div class="payment-division">
+						<div class="payment-left">남은 포인트</div>
+						<div class="payment-right">${principal.user.point.amount}원</div>
+					</div>
+					<div class="payment-division">
+						<div class="payment-left">포인트 사용</div>
+						<div class="payment-right">
+							<input type="number" class="point-input" id="point" min="0" max="${principal.user.point.amount}" value="0">원
+						</div>
+					</div>
+					<div class="payment-division">
+						<span class="max-point-msg" style="color: #ff0000; font-size: 10px;">※최대 포인트 ${payDetailDto.totalPrice/2}원까지 사용 가능한 상품입니다.</span>
 					</div>
 				</div>
 
+				<div class="payment-division">
+					<div class="total-payment-left">최종 결제 금액</div>
+					<div class="total-payment-right" id="final-price">${payDetailDto.totalPrice}원</div>
+				</div>
 				<input class="payment-btn" type="submit" value="결제하기">
+
 			</div>
 		</div>
+
+
 	</div>
 </form>
 </body>
