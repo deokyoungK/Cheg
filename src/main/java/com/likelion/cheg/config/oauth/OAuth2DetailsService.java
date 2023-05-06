@@ -2,6 +2,8 @@ package com.likelion.cheg.config.oauth;
 
 import com.likelion.cheg.config.auth.PrincipalDetail;
 import com.likelion.cheg.domain.enumType.Role;
+import com.likelion.cheg.domain.point.Point;
+import com.likelion.cheg.domain.point.PointRepository;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.UUID;
 
@@ -22,8 +25,10 @@ import java.util.UUID;
 public class OAuth2DetailsService extends DefaultOAuth2UserService{
 	
 	private final UserRepository userRepository;
-	
+	private final PointRepository pointRepository;
+
 	@Override
+	@Transactional
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
 		OAuth2User oauth2User = super.loadUser(userRequest);
@@ -50,19 +55,26 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 		String name = oAuth2UserInfo.getName();
 
 
-		User userEntity = userRepository.findByUsername(username);
+		User findUser = userRepository.findByUsername(username);
 
-		if(userEntity==null) { //최초 로그인 시
-			User user = User.builder()
-					.username(username)
-					.password(password)
-					.email(email)
-					.name(name)
-					.role(Role.ROLE_USER)
-					.build();
-			return new PrincipalDetail(userRepository.save(user));
+		if(findUser == null) { //최초 로그인 시
+			//포인트 생성
+			Point point = Point.createPoint(5000);
+
+			User user = User.createUser(
+					username,
+					password,
+					name,
+					email,
+					Role.ROLE_USER,
+					point);
+
+			pointRepository.save(point);
+			User newUser = userRepository.save(user);
+
+			return new PrincipalDetail(newUser);
 		}else {
-			return new PrincipalDetail(userEntity);
+			return new PrincipalDetail(findUser);
 		}
 	}
 }

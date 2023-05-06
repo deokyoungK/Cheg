@@ -38,7 +38,7 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = LAZY)
 	private List<Order> orders = new ArrayList<>(); //주문
 
-	@OneToOne(mappedBy = "user") //연관관계 주인이 아님
+	@OneToOne(mappedBy = "user")
 	@JoinColumn(name = "point_id")
 	private Point point; //포인트
 
@@ -76,7 +76,6 @@ public class User {
 
 	//User 생성 메서드
 	public static User createUser(String username, String password, String name, String phone, String email, Role role, Point point){
-
 		User user = User.builder()
 				.username(username)
 				.password(password)
@@ -85,11 +84,22 @@ public class User {
 				.email(email)
 				.role(role)
 				.build();
-
 		user.setPoint(point);
 		return user;
 	}
 
+	//User 생성 메서드2
+	public static User createUser(String username, String password, String name, String email, Role role, Point point){
+		User user = User.builder()
+				.username(username)
+				.password(password)
+				.name(name)
+				.email(email)
+				.role(role)
+				.build();
+		user.setPoint(point);
+		return user;
+	}
 
 	//User 수정 메서드
 	public void changeUser(String name, String address, String email, String phone){
