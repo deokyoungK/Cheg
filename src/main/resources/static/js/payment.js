@@ -17,7 +17,7 @@ function iamport(e){
     var cartName = $("#cartName").val();
     var amount = $("#amount").val();
     var price = $("#final-price").text();
-    var pointAmount = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
+    var pointAmount = parseInt($('#point').val());
 
     //결제시에 상품이름 보여질때 상세, 장바구니 구분
     if(flag==0){
@@ -67,6 +67,7 @@ function iamport(e){
                                 address: address,
                                 productId: productId,
                                 amount: amount,
+                                pointAmount: pointAmount,
                                 flag: flag //상세,장바구니 구분
                             };
                             //비즈니스 로직
@@ -137,6 +138,8 @@ function cancelPayment(imp_uid){
         }
     });
 }
+
+
 
 //포인트 입력
 $(document).ready(function() {

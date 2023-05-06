@@ -9,6 +9,8 @@ import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.orderItem.OrderItem;
 import com.likelion.cheg.domain.orderItem.OrderItemRepository;
+import com.likelion.cheg.domain.point.Point;
+import com.likelion.cheg.domain.point.PointRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.domain.user.User;
@@ -20,8 +22,10 @@ import com.likelion.cheg.web.dto.order.OrderMyPageResponseDto;
 import com.likelion.cheg.web.dto.order.OrderResponseDto;
 import com.likelion.cheg.web.dto.pay.PaymentDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
@@ -65,6 +69,8 @@ public class OrderService {
 
     @Transactional
     public Order makeOrder(int userId, PaymentDto paymentDto){
+        int maxPoint=0; //사용 제한 포인트
+
         //회원 찾기
         User user = userRepository.findById(userId).orElseThrow(()->{
             return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
@@ -84,6 +90,8 @@ public class OrderService {
             OrderItem orderItem = OrderItem.createOrderItem(product,product.getPrice(),paymentDto.getAmount());
             orderItemList.add(orderItem);
 
+            maxPoint = product.getPrice()/2; //사용 제한 포인트 금액 구하기
+
         }else{  //장바구니
             List<Cart> cartList = cartRepository.loadCartByUserId(userId);
             for(Cart cart : cartList){
@@ -92,11 +100,27 @@ public class OrderService {
                 //장바구니에서는 삭제
                 cartRepository.deleteById(cart.getId());
                 user.getCarts().remove(cart);
+
+                maxPoint += cart.getCartTotalPrice();
             }
+            maxPoint = maxPoint/2; //사용 제한 포인트 금액 구하기(총 금액/2)
         }
 
+        //포인트 관련
+        int usedPoint = paymentDto.getPountAmount(); //사용한 포인트
+        int userTotalPoint = user.getPoint().getAmount(); //회원의 총 포인트
+
+        if(usedPoint > userTotalPoint){ //총 포인트보다 많으면 에러발생
+            throw new CustomBusinessApiException(ErrorCode.EXCEED_POINT);
+        }
+        if(usedPoint > maxPoint){ //사용 제한 포인트보다 많으면 포인트 MAX로 전환
+            usedPoint = maxPoint;
+        }
+        user.getPoint().changePoint(user.getPoint().getAmount() - usedPoint); //회원의 포인트 차감
+
+
         //Order 생성
-        Order order = Order.createOrder(user,delivery,orderItemList);
+        Order order = Order.createOrder(user,delivery,orderItemList, usedPoint);
 
         //DB에 저장
         deliveryRepository.save(delivery);

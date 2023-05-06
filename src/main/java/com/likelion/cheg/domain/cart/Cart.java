@@ -18,7 +18,6 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "CART")
 public class Cart {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

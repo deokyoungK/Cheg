@@ -1,5 +1,6 @@
 package com.likelion.cheg.domain.point;
 
+import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+import java.util.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,4 +45,7 @@ public class Point {
         this.user = user;
     }
 
+    public void changePoint(int amount){
+        this.amount = amount;
+    }
 }

@@ -40,10 +40,7 @@ public class Order {
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 
-    @OneToOne
-    @JoinColumn(name = "point_id")
-    private Point point; //포인트
-
+    private int pointAmount; //포인트금액
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus orderStatus; //주문상태("주문완료","주문취소")
@@ -85,11 +82,12 @@ public class Order {
     }
 
     //Order 생성 메서드
-    public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems) {
+    public static Order createOrder(User user, Delivery delivery, List<OrderItem> orderItems, int pointAmount) {
         Order order = Order.builder()
                 .orderNumber(createOrderNumber())
                 .orderStatus(OrderStatus.주문완료)
                 .orderProductCount(orderItems.size())
+                .pointAmount(pointAmount)
                 .build();
 
         //주문 금액 세팅
