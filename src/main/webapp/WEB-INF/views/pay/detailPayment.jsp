@@ -24,7 +24,7 @@
 	<div class="division">
 		<div class="wrap-left">
 			<h1 class="order-txt">주문/결제</h1>
-			<div >
+			<div>
 				<div class="orderer-info-box" >
 					<p class="orderer-info-box-title">주문자 정보</p>
 
@@ -37,7 +37,6 @@
 
 						<div class="orderer-info-division">
 							<div class="orderer-info-txt">연락처</div>
-
 							<input type="text" id="uphone" value="${principal.user.phone}">
 						</div>
 
@@ -102,7 +101,6 @@
 					<p class="delivery-product-title">배송 상품</p>
 
 					<div class="delivery-product-box-inner">
-
 						<div class="delivery-product-top">
 							<a class="delivery-product-img" href=""><img class="delivery-product-img" src="/upload/${payDetailDto.url}" alt=""></a>
 							<div class="delivery-product-info">
@@ -125,7 +123,6 @@
 									원
 								</span>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -171,8 +168,6 @@
 
 			</div>
 		</div>
-
-
 	</div>
 </form>
 </body>
