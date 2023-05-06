@@ -66,11 +66,12 @@ public class OrderService {
         return orderListDtos;
     }
 
-
     @Transactional
     public Order makeOrder(int userId, PaymentDto paymentDto){
         int maxPoint=0; //사용 제한 포인트
-
+        System.out.println("^^^^^^^^^^^^");
+        System.out.println("포인트 얼마인지 : " + paymentDto.getPointAmount());
+        System.out.println("^^^^^^^^^^^^");
         //회원 찾기
         User user = userRepository.findById(userId).orElseThrow(()->{
             return new CustomBusinessApiException(ErrorCode.NOT_FOUND_USER);
@@ -107,7 +108,7 @@ public class OrderService {
         }
 
         //포인트 관련
-        int usedPoint = paymentDto.getPountAmount(); //사용한 포인트
+        int usedPoint = paymentDto.getPointAmount(); //사용한 포인트
         int userTotalPoint = user.getPoint().getAmount(); //회원의 총 포인트
 
         if(usedPoint > userTotalPoint){ //총 포인트보다 많으면 에러발생
@@ -116,8 +117,16 @@ public class OrderService {
         if(usedPoint > maxPoint){ //사용 제한 포인트보다 많으면 포인트 MAX로 전환
             usedPoint = maxPoint;
         }
+        System.out.println("---------------");
+        System.out.println("사용된 포인트 : " + usedPoint);
+        System.out.println("---------------");
+        System.out.println("@@@@@@@@@@@@@@@@");
+        System.out.println("원래 포인트 : " + user.getPoint());
+        System.out.println("@@@@@@@@@@@@@@@@");
         user.getPoint().changePoint(user.getPoint().getAmount() - usedPoint); //회원의 포인트 차감
-
+        System.out.println("==============");
+        System.out.println("포인트 차감 후 : " + user.getPoint());
+        System.out.println("===============");
 
         //Order 생성
         Order order = Order.createOrder(user,delivery,orderItemList, usedPoint);

@@ -17,7 +17,7 @@ function iamport(e){
     var cartName = $("#cartName").val();
     var amount = $("#amount").val();
     var price = $("#final-price").text();
-    var pointAmount = parseInt($('#point').val());
+    var pointAmount = parseInt($('#point').val()) || 0;
 
     //결제시에 상품이름 보여질때 상세, 장바구니 구분
     if(flag==0){

@@ -9,7 +9,7 @@ public class PaymentDto {
     private String address;
     private int productId;
     private int amount;
-    private int pountAmount;
+    private int pointAmount;
     private int flag; //상세인지 장바구니인지 구분
 
 }
