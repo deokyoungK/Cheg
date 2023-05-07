@@ -33,7 +33,7 @@ public class CartApiController {
         cartService.downCart(cartId);
         List<Cart> carts = cartService.loadCart(principalDetail.getUser().getId());
         List<CartApiResponseDto> cartApiResponseDtos = cartService.makeApiResponseDto(carts);
-        return new ResponseEntity<>(new CMResponse<>(1,"장바구니 수량감소 성공", cartApiResponseDtos), HttpStatus.OK);
+        return new ResponseEntity<>(new CMResponse<>(1,"장바구니 수량 감소 성공", cartApiResponseDtos), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/up")
@@ -41,7 +41,7 @@ public class CartApiController {
         cartService.upCart(cartId);
         List<Cart> carts = cartService.loadCart(principalDetail.getUser().getId());
         List<CartApiResponseDto> cartApiResponseDtos = cartService.makeApiResponseDto(carts);
-        return new ResponseEntity<>(new CMResponse<>(1,"장바구니 수량증가 성공", cartApiResponseDtos), HttpStatus.OK);
+        return new ResponseEntity<>(new CMResponse<>(1,"장바구니 수량 증가 성공", cartApiResponseDtos), HttpStatus.OK);
     }
 
     @PostMapping("api/cart/{cartId}/delete")

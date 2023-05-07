@@ -16,7 +16,6 @@ function update(userId,e) {
         },
         error: function(xhr) {
             var errorResponse = JSON.parse(xhr.responseText);
-            var errorCode = errorResponse.errorCode;
             var errorMessage = errorResponse.errorMessage;
             alert(errorMessage);
         }

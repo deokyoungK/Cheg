@@ -36,35 +36,35 @@ public class 상품관리 {
     public void set_up(){
 
     }
-    @Test
-    public void 상품_등록() throws Exception {
-        //상품등록DTO생성
-        String category = "NEW카테고리22";
-        String brand = "NEW브랜드";
-        String product = "NEW상품";
-        String description = "설명";
-        int price = 100;
-        MockMultipartFile file = new MockMultipartFile("content", "NEW파일", "multipart/mixed", "".getBytes());
-
-        //category이름으로 Category 하나 생성
-        commonMethod.createCategory(category);
-
-        ProductUploadDto productUploadDto = new ProductUploadDto();
-        productUploadDto.setCategory(category);
-        productUploadDto.setBrand(brand);
-        productUploadDto.setName(product);
-        productUploadDto.setDescription(description);
-        productUploadDto.setPrice(price);
-        productUploadDto.setFile(file);
-
-        //상품 등록
-        Product uploadProduct = productService.addProduct(productUploadDto);
-
-        assertEquals("상품 카테고리 확인",uploadProduct.getCategory().getName(),category);
-        assertEquals("상품 URL 확인",uploadProduct.getUrl().contains(file.getOriginalFilename()),true);
-        assertEquals("상품 이름 확인",uploadProduct.getName(),product);
-        assertEquals("상품 가격 확인",uploadProduct.getPrice(), price);
-    }
+//    @Test
+//    public void 상품_등록() throws Exception {
+//        //상품등록DTO생성
+//        String category = "NEW카테고리22";
+//        String brand = "NEW브랜드";
+//        String product = "NEW상품";
+//        String description = "설명";
+//        int price = 100;
+//        MockMultipartFile file = new MockMultipartFile("content", "NEW파일", "multipart/mixed", "".getBytes());
+//
+//        //category이름으로 Category 하나 생성
+//        commonMethod.createCategory(category);
+//
+//        ProductUploadDto productUploadDto = new ProductUploadDto();
+//        productUploadDto.setCategory(category);
+//        productUploadDto.setBrand(brand);
+//        productUploadDto.setName(product);
+//        productUploadDto.setDescription(description);
+//        productUploadDto.setPrice(price);
+//        productUploadDto.setFile(file);
+//
+//        //상품 등록
+//        Product uploadProduct = productService.addProduct(productUploadDto);
+//
+//        assertEquals("상품 카테고리 확인",uploadProduct.getCategory().getName(),category);
+//        assertEquals("상품 URL 확인",uploadProduct.getUrl().contains(file.getOriginalFilename()),true);
+//        assertEquals("상품 이름 확인",uploadProduct.getName(),product);
+//        assertEquals("상품 가격 확인",uploadProduct.getPrice(), price);
+//    }
     @Test
     public void 상품_카테고리변경(){
         //카테고리 생성

@@ -102,10 +102,14 @@ public class CartService {
             return new CustomBusinessApiException(ErrorCode.NOT_FOUND_CART);
         });
 
-        //수량 0개가 아닐때 감소시킴.
-        if(cart.getProductCount() != 0) {
-            cart.changeCount(-1);
+        //수량 1개 이하인 경우에는 감소할 수 없음.
+        if(cart.getProductCount() <= 1) {
+            throw new CustomBusinessApiException(ErrorCode.FAIL_DECREASE_AMOUNT);
         }
+
+        //장바구니 수량 감소
+        cart.changeCount(-1);
+
         return cart;
     }
 
@@ -115,7 +119,17 @@ public class CartService {
             return new CustomBusinessApiException(ErrorCode.NOT_FOUND_CART);
         });
 
+        Product product = cart.getProduct();
+        int newCount = cart.getProductCount() + 1;
+
+        //재고 수량확인
+        if(newCount > product.getStockQuantity()){
+            throw new CustomBusinessApiException(ErrorCode.EXCEED_PRODUCT_STOCK);
+        }
+
+        //장바구니 수량 증가
         cart.changeCount(1);
+
         return cart;
     }
 

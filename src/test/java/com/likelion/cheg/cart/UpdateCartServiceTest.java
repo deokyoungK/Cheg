@@ -68,14 +68,17 @@ public class UpdateCartServiceTest {
         int cartId = 1;
         int productCount = 3;
         int productId = 1;
+        int stockQuantity = 10;
         Product product = Product.builder()
                 .id(productId)
+                .stockQuantity(10)
                 .build();
         Cart cart = Cart.builder()
                 .id(cartId)
                 .product(product)
                 .productCount(productCount)
                 .build();
+
         // when
         when(cartRepository.findById(cartId)).thenReturn(Optional.of(cart));
         Cart updatedCart = cartService.upCart(cartId);
