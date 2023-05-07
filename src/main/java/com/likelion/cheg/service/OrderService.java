@@ -24,6 +24,9 @@ import com.likelion.cheg.web.dto.pay.PaymentDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.buf.StringUtils;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -118,9 +121,12 @@ public class OrderService {
         }
         user.getPoint().changePoint(user.getPoint().getAmount() - usedPoint); //회원의 포인트 차감
 
-
         //Order 생성
         Order order = Order.createOrder(user,delivery,orderItemList, usedPoint);
+
+        //포인트 적립
+        double EarnedPoint = order.getFinalOrderPrice() * 0.05; //최종 구매 금액의 5% 지급
+        user.getPoint().changePoint((int) (user.getPoint().getAmount() + EarnedPoint));
 
         //DB에 저장
         deliveryRepository.save(delivery);

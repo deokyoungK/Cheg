@@ -105,7 +105,8 @@ function orderProcess(req_data, principalId, imp_uid){
         dataType: "json",
         success: function (rsp) {
             alert("결제되었습니다.");
-            location.href = `/mypage/${principalId}`;
+            // location.href = `/mypage/${principalId}`;
+            location.href = "/mypage/"+rsp.data;
 
         },
         error: function (xhr) {

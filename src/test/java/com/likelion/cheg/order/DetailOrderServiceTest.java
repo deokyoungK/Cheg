@@ -91,6 +91,7 @@ public class DetailOrderServiceTest {
         assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
         assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal - pointAmount);
 
+
     }
 
     @Test

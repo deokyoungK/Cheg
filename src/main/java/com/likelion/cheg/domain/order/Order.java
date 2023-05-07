@@ -40,12 +40,14 @@ public class Order {
     @JoinColumn(name="delivery_id")
     private Delivery delivery; //배송
 
-    private int pointAmount; //포인트금액
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus orderStatus; //주문상태("주문완료","주문취소")
     private String orderNumber; //주문번호
-    private int orderPrice; //주문총액
+    private int orderPrice; //주문금액
+    private int pointAmount; //포인트금액
+    private int finalOrderPrice; //최종구매금액
     private int orderProductCount; //상품갯수 -> 마이페이지에서 구분을 위해
     private LocalDateTime createDate; //날짜
     @PrePersist //db에 insert되기 직전에 실행
@@ -56,7 +58,9 @@ public class Order {
     private void setOrderPrice(int orderPrice){
         this.orderPrice = orderPrice;
     }
-
+    public void setFinalOrderPrice(int finalOrderPrice) {
+        this.finalOrderPrice = finalOrderPrice;
+    }
     //연관 관계 매핑 메서드
     private void setUser(User user){
         this.user = user;
@@ -96,7 +100,12 @@ public class Order {
             order.addOrderItem(orderItem);
             sum += orderItem.getOrderItemTotalPrice();
         }
+
+        //주문 상품 금액
         order.setOrderPrice(sum);
+
+        //최종 구매 금액
+        order.setFinalOrderPrice(sum-pointAmount);
 
         //양방향 연관관계 매핑
         order.setUser(user);
