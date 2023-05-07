@@ -2,6 +2,7 @@ package com.likelion.cheg.web.api;
 
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.web.dto.CMResponse;
 import com.likelion.cheg.web.dto.product.ProductHomeResponseDto;
@@ -26,8 +27,14 @@ public class ProductApiController {
     //상품 등록
     @PostMapping("/api/upload-product")
     public ResponseEntity<CMResponse> uploadProduct(@Validated ProductUploadDto productUploadDto){
-        productService.addProduct(productUploadDto);
-        return new ResponseEntity<>(new CMResponse(1,"상품 등록 성공",""),HttpStatus.OK);
+        try {
+            productService.addProduct(productUploadDto);
+            return new ResponseEntity<>(new CMResponse(1, "상품 등록 성공", ""), HttpStatus.OK);
+        } catch (CustomBusinessApiException e) {
+            return new ResponseEntity<>(new CMResponse(-1, "상품 등록 실패", e.getErrorCode().getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new CMResponse(-1, "상품 등록 실패", e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

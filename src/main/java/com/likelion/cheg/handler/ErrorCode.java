@@ -16,12 +16,15 @@ public enum ErrorCode {
     //NOT ENOUGH
     NOT_ENOUGH_STOCK(HttpStatus.FORBIDDEN,"002","상품 재고가 부족합니다."),
 
-    //Fail sign-up
+    //회원가입 실패
     FAIL_SIGNUP(HttpStatus.BAD_REQUEST,"003","회원가입에 실패하였습니다."),
 
 
     //Point초과
-    EXCEED_POINT(HttpStatus.FORBIDDEN,"004","보유한 포인트를 초과하였습니다.");
+    EXCEED_POINT(HttpStatus.FORBIDDEN,"004","보유한 포인트를 초과하였습니다."),
+
+    //파일 업로드 실패
+    FILE_UPLOAD_ERROR(HttpStatus.BAD_REQUEST, "005","이미지 파일 업로드에 실패하였습니다."),
 
     ;
     ErrorCode(HttpStatus httpStatus, String errorCode,String message){
