@@ -43,11 +43,12 @@ public class CommonMethod {
         em.persist(category);
         return category;
     }
-    public Product createProduct(Category category, String name, int price) {
+    public Product createProduct(Category category, String name, int price, int stockQuantity) {
         Product product = Product.builder()
                 .category(category)
                 .name(name)
                 .price(price)
+                .stockQuantity(stockQuantity)
                 .build();
 
         em.persist(product);

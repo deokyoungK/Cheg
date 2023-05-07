@@ -1,5 +1,6 @@
 package com.likelion.cheg.order;
 
+import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.delivery.DeliveryRepository;
 import com.likelion.cheg.domain.order.Order;
@@ -20,15 +21,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DetailOrderServiceTest {
-
+public class CartOrderServiceTest {
     @Mock
     private UserRepository userRepository;
     @Mock
@@ -39,15 +39,18 @@ public class DetailOrderServiceTest {
     private OrderItemRepository orderItemRepository;
     @Mock
     private OrderRepository orderRepository;
+    @Mock
+    private CartRepository cartRepository;
 
     @InjectMocks
     private OrderService orderService;
 
     @Test
-    public void 상세페이지주문_포인트사용_성공(){
+    public void 장바구니주문_포인트사용_성공(){
         // given
         int userId = 1;
         int productId = 1;
+        int cartId = 1;
 
         String deliveryAddress = "서초구";
         int price = 5000; //상품 가격
@@ -61,24 +64,35 @@ public class DetailOrderServiceTest {
         //회원 세팅
         User user = User.builder()
                 .id(userId).point(point).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
                 .price(price)
                 .stockQuantity(stockQuantity)
                 .build();
+
+        //장바구니 세팅
+        List<Cart> cartList = new ArrayList<>();
+        Cart cart = Cart.builder()
+                .id(cartId)
+                .user(user)
+                .product(product)
+                .productCount(3)
+                .build();
+        cartList.add(cart);
+
         //DTO 세팅
         PaymentDto paymentDto = PaymentDto.builder()
                 .address(deliveryAddress)
                 .productId(productId)
                 .amount(amount)
                 .pointAmount(pointAmount)
-                .flag(0)
+                .flag(1)
                 .build();
 
-
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
-        given(productRepository.findById(productId)).willReturn(Optional.of(product));
+        given(cartRepository.loadCartByUserId(userId)).willReturn(cartList);
 
         //when
         Order order = orderService.makeOrder(userId,paymentDto);
@@ -90,14 +104,15 @@ public class DetailOrderServiceTest {
 
         assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
         assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal - pointAmount);
+        assertEquals("주문 후 회원의 장바구니가 비워졌는지 확인 ",user.getCarts().size(),0);
 
     }
-
     @Test
-    public void 상페페이지주문_포인트미사용_성공(){
+    public void 장바구니주문_포인트미사용_성공(){
         // given
         int userId = 1;
         int productId = 1;
+        int cartId = 1;
 
         String deliveryAddress = "서초구";
         int price = 5000; //상품 가격
@@ -111,24 +126,35 @@ public class DetailOrderServiceTest {
         //회원 세팅
         User user = User.builder()
                 .id(userId).point(point).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
                 .price(price)
                 .stockQuantity(stockQuantity)
                 .build();
+
+        //장바구니 세팅
+        List<Cart> cartList = new ArrayList<>();
+        Cart cart = Cart.builder()
+                .id(cartId)
+                .user(user)
+                .product(product)
+                .productCount(3)
+                .build();
+        cartList.add(cart);
+
         //DTO 세팅
         PaymentDto paymentDto = PaymentDto.builder()
                 .address(deliveryAddress)
                 .productId(productId)
                 .amount(amount)
                 .pointAmount(pointAmount)
-                .flag(0)
+                .flag(1)
                 .build();
 
-
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
-        given(productRepository.findById(productId)).willReturn(Optional.of(product));
+        given(cartRepository.loadCartByUserId(userId)).willReturn(cartList);
 
         //when
         Order order = orderService.makeOrder(userId,paymentDto);
@@ -140,48 +166,50 @@ public class DetailOrderServiceTest {
 
         assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
         assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal);
+        assertEquals("주문 후 회원의 장바구니가 비워졌는지 확인 ",user.getCarts().size(),0);
 
     }
 
     @Test
-    public void 상세페이지주문_실패_상품없음(){
+    public void 장바구니주문_실패_회원없음(){
         // given
         int userId = 1;
         int productId = 1;
-        int pointTotal = 3000; //회원 총 포인트
-        int pointAmount = 1000; //포인트 사용 금액
-
-        Point point = Point.createPoint(pointTotal);
-        //회원 세팅
-        User user = User.builder()
-                .id(userId).point(point).build();
+        String deliveryAddress = "서초구";
+        int amount = 3;
+        int pointAmount = 1000;
 
         //DTO 세팅
         PaymentDto paymentDto = PaymentDto.builder()
-                .address("서울")
+                .address(deliveryAddress)
                 .productId(productId)
-                .amount(3)
+                .amount(amount)
                 .pointAmount(pointAmount)
-                .flag(0)
+                .flag(1)
                 .build();
 
-        given(userRepository.findById(userId)).willReturn(Optional.of(user));
-        given(productRepository.findById(productId)).willReturn(Optional.empty());
+        given(userRepository.findById(userId)).willReturn(Optional.empty());
 
         //when
         Throwable e = assertThrows(CustomBusinessApiException.class,
                 () -> orderService.makeOrder(userId, paymentDto));
 
         // then
-        assertEquals(ErrorCode.NOT_FOUND_PRODUCT, ((CustomBusinessApiException) e).getErrorCode());
+        assertEquals(ErrorCode.NOT_FOUND_USER, ((CustomBusinessApiException) e).getErrorCode());
 
     }
-
     @Test
-    public void 상세페이지주문_실패_포인트초과(){
+    public void 장바구니주문_실패_포인트초과(){
         // given
         int userId = 1;
         int productId = 1;
+        int cartId = 1;
+
+        String deliveryAddress = "서초구";
+        int price = 5000; //상품 가격
+        int stockQuantity = 100; //상품 재고
+        int amount = 3; //구매 수량
+
         int pointTotal = 3000; //회원 총 포인트
         int pointAmount = 4000; //포인트 사용 금액
 
@@ -189,22 +217,36 @@ public class DetailOrderServiceTest {
         //회원 세팅
         User user = User.builder()
                 .id(userId).point(point).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
-                .stockQuantity(100)
+                .price(price)
+                .stockQuantity(stockQuantity)
                 .build();
+
+        //장바구니 세팅
+        List<Cart> cartList = new ArrayList<>();
+        Cart cart = Cart.builder()
+                .id(cartId)
+                .user(user)
+                .product(product)
+                .productCount(3)
+                .build();
+        cartList.add(cart);
+
         //DTO 세팅
         PaymentDto paymentDto = PaymentDto.builder()
-                .address("서울")
+                .address(deliveryAddress)
                 .productId(productId)
-                .amount(3)
+                .amount(amount)
                 .pointAmount(pointAmount)
-                .flag(0)
+                .flag(1)
                 .build();
 
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
-        given(productRepository.findById(productId)).willReturn(Optional.of(product));
+        given(cartRepository.loadCartByUserId(userId)).willReturn(cartList);
+
 
         //when
         Throwable e = assertThrows(CustomBusinessApiException.class,
@@ -212,6 +254,6 @@ public class DetailOrderServiceTest {
 
         // then
         assertEquals(ErrorCode.EXCEED_POINT, ((CustomBusinessApiException) e).getErrorCode());
-
     }
+
 }

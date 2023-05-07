@@ -75,7 +75,7 @@ public class 상품관리 {
 
         //상품 생성
         String productName = "NEW상품";
-        Product product = commonMethod.createProduct(oldCategory,productName,1000);
+        Product product = commonMethod.createProduct(oldCategory,productName,1000,20);
 
         //카테고리 변경
         product.changeCategory(newCategory);
@@ -94,8 +94,8 @@ public class 상품관리 {
         //상품 생성
         String pname = "상품1";
         String pname2 = "상품2";
-        Product product = commonMethod.createProduct(category,pname,2000);
-        Product product2 = commonMethod.createProduct(category,pname2,1500);
+        Product product = commonMethod.createProduct(category,pname,2000,20);
+        Product product2 = commonMethod.createProduct(category,pname2,1500,20);
 
         //상품 1번 삭제
         productService.deleteProduct(product.getId());

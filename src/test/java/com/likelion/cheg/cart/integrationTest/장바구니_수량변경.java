@@ -36,7 +36,7 @@ public class 장바구니_수량변경 {
         //카테고리 생성
         Category category = commonMethod.createCategory("장바구니테스트_카테고리");
         //상품 생성
-        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
+        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000,20);
         //장바구니 생성
         Cart cart = commonMethod.createCart(user,product,5);
 
@@ -51,7 +51,7 @@ public class 장바구니_수량변경 {
         //카테고리 생성
         Category category = commonMethod.createCategory("장바구니테스트_카테고리");
         //product생성
-        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
+        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000,20);
         //장바구니 생성
         Cart cart = commonMethod.createCart(user,product,3);
 

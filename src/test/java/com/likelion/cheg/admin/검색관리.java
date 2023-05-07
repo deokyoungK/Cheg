@@ -56,9 +56,9 @@ public class 검색관리 {
     @Test
     public void 상품검색(){
         Category category = commonMethod.createCategory("NEW카테고리");
-        Product product = commonMethod.createProduct(category,"jordon_Tshirts",10000);
-        Product product2 = commonMethod.createProduct(category,"shoes_jordon",28000);
-        Product product3 = commonMethod.createProduct(category,"converse",6000);
+        Product product = commonMethod.createProduct(category,"jordon_Tshirts",10000,20);
+        Product product2 = commonMethod.createProduct(category,"shoes_jordon",28000,20);
+        Product product3 = commonMethod.createProduct(category,"converse",6000,20);
 
         String keyword = "jordon";
         List<Product> productList = productRepository.findAllByKeyword(keyword);

@@ -37,7 +37,7 @@ public class 장바구니_생성 {
         //카테고리 생성
         Category category = commonMethod.createCategory("장바구니테스트_카테고리");
         //product생성
-        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000);
+        Product product = commonMethod.createProduct(category,"장바구니테스트_상품",35000,20);
 
         //addCartDto생성
         AddCartDto addCartDto = new AddCartDto(product.getId(),3);

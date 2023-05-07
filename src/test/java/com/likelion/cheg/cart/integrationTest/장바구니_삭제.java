@@ -37,8 +37,8 @@ public class 장바구니_삭제 {
         //카테고리 생성
         Category category = commonMethod.createCategory("장바구니테스트_카테고리");
         //product생성
-        Product product1 = commonMethod.createProduct(category,"장바구니테스트_상품1",35000);
-        Product product2 = commonMethod.createProduct(category,"장바구니테스트_상품2",20000);
+        Product product1 = commonMethod.createProduct(category,"장바구니테스트_상품1",35000,20);
+        Product product2 = commonMethod.createProduct(category,"장바구니테스트_상품2",20000,20);
 
         //addCartDto생성
         AddCartDto addCartDto = new AddCartDto(product1.getId(),2);
