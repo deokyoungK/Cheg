@@ -109,6 +109,7 @@ public class CreateCartServiceTest {
         //product세팅
         Product product = Product.builder()
                 .id(productId)
+                .stockQuantity(5)
                 .build();
         //DTO세팅(상품id,상품갯수)
         AddCartDto addCartDto = new AddCartDto(productId, 1);

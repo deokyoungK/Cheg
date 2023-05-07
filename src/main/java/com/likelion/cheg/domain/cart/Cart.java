@@ -42,7 +42,7 @@ public class Cart {
 
     //수량 변경
     public void changeCount(int amount){
-        this.productCount = productCount + amount;
+        this.productCount = amount;
         this.calculateTotalPrice();
     }
 

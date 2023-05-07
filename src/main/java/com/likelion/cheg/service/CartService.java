@@ -87,7 +87,13 @@ public class CartService {
         });
 
         if(user.getCarts().contains(cart)){ //이미 있으면
-            cart.changeCount(addCartDto.getProductCount());
+            int totalCount = addCartDto.getProductCount() + cart.getProductCount();
+            //현재 있는 장바구니의 수량과 DTO의 수량의 합이 재고를 넘으면 상품 재고만큼 카운트 변경
+            if(totalCount > product.getStockQuantity()){
+                cart.changeCount(product.getStockQuantity());
+            }else{
+                cart.changeCount(cart.getProductCount() + addCartDto.getProductCount());
+            }
             return cart;
         }else{
             Cart newCart = Cart.createCart(user,product,addCartDto.getProductCount());
@@ -108,7 +114,7 @@ public class CartService {
         }
 
         //장바구니 수량 감소
-        cart.changeCount(-1);
+        cart.changeCount(cart.getProductCount()-1);
 
         return cart;
     }
@@ -128,7 +134,7 @@ public class CartService {
         }
 
         //장바구니 수량 증가
-        cart.changeCount(1);
+        cart.changeCount(cart.getProductCount()+1);
 
         return cart;
     }
