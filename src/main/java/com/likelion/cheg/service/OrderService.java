@@ -97,14 +97,14 @@ public class OrderService {
                 OrderItem orderItem = OrderItem.createOrderItem(cart.getProduct(),cart.getProduct().getPrice(),cart.getProductCount());
                 orderItemList.add(orderItem);
 
-                maxPoint += orderItem.getOrderItemTotalPrice();
+                maxPoint += orderItem.getOrderItemTotalPrice(); //사용 제한 포인트 금액 구하기
 
                 //장바구니에서는 삭제
                 cartRepository.deleteById(cart.getId());
                 user.getCarts().remove(cart);
 
             }
-            maxPoint = maxPoint/2; //사용 제한 포인트 금액 구하기(총 금액/2)
+            maxPoint = maxPoint/2;
         }
 
         //포인트 관련
