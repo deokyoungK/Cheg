@@ -37,7 +37,7 @@ public class 상품관리 {
 
     }
     @Test
-    public void 상품_등록(){
+    public void 상품_등록() throws Exception {
         //상품등록DTO생성
         String category = "NEW카테고리22";
         String brand = "NEW브랜드";
