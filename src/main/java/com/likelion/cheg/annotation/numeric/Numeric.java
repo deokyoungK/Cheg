@@ -1,21 +1,21 @@
-package com.likelion.cheg.annotation.phone;
+package com.likelion.cheg.annotation.numeric;
+
+import com.likelion.cheg.annotation.phone.PhoneValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = {PhoneValidator.class})
+@Constraint(validatedBy = {NumericValidator.class})
 @Documented
-public @interface Phone {
+public @interface Numeric {
 
-    String message() default "전화번호 형식이 올바르지 않습니다.";
+    String message() default "숫자만 허용 가능합니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

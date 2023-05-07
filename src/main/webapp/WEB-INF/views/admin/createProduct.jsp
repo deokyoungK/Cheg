@@ -22,9 +22,7 @@
 	
 	<div class="container">
 		
-		<form name="newProduct" action="/admin/addProduct" class="form-horizontal" method="post"
-		enctype="multipart/form-data">
-
+		<form id = "product-form" name="newProduct" action="/admin/addProduct" class="form-horizontal" method="post" enctype="multipart/form-data">
             <div class="dropdown">
 			    <div class="form-group row">
 				    <label class="col-sm-2">카테고리</label>
@@ -40,14 +38,14 @@
 			<div class="form-group row">
 				<label class="col-sm-2">브랜드</label>
 				<div class="com-sm-3">
-					<input type="" name="brand" class="form-control" required>
+					<input type="" name="brand" class="form-control" >
 				</div>
 			</div>
             
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" name="name" class="form-control" required>
+					<input type="text" name="name" class="form-control" >
 				</div>
 			</div>
 
@@ -80,9 +78,10 @@
 				</div>
 			</div>
 			
-            <a href=""><button class="cart__btn right" onclick = "">등록하기</button></a>
-			
+            <button class="cart__btn right" onclick = "uploadProduct(event)">등록하기</button>
+
 		</form>
 	</div>
 </body>
+<script type="text/javascript" src="/js/product.js"></script>
 </html>

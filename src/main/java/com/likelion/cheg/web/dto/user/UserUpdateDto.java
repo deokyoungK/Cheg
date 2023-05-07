@@ -14,6 +14,6 @@ public class UserUpdateDto {
     private String address;
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
-    @Phone(message = "전화번호 형식이 올바르지 않습니다.")
+    @Phone
     private String phone;
 }

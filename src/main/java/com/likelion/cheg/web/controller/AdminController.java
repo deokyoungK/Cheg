@@ -75,7 +75,7 @@ public class AdminController {
      **/
     @GetMapping("/admin/products")
     public String productList(Model model){
-        List<Product> productList = productService.loadProductsDESC();
+        List<Product> productList = productRepository.findAllDesc();
         List<ProductResponseDto> productListDto = productService.makeResponseDto(productList);
         model.addAttribute("productListDto",productListDto);
         return "admin/products";
@@ -89,13 +89,6 @@ public class AdminController {
         return "admin/createProduct";
     }
 
-    @PostMapping("/admin/addProduct")
-    public String uploadProduct(@Validated ProductUploadDto productUploadDto){
-        //상품등록
-        productService.addProduct(productUploadDto);
-        return "redirect:/admin/products";
-
-    }
 
     /**
      주문 관련

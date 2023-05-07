@@ -112,11 +112,6 @@ public class ProductService {
         return product;
     }
 
-    @Transactional
-    public List<Product> loadProductsDESC(){
-        List<Product> productList = productRepository.findAllDesc();
-        return productList;
-    }
 
 
 }
