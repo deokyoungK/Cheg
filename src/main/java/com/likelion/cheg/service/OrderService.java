@@ -110,7 +110,7 @@ public class OrderService {
             maxPoint = maxPoint/2;
         }
 
-        //포인트 관련
+        //포인트 차감
         int usedPoint = paymentDto.getPointAmount(); //사용한 포인트
         int userTotalPoint = user.getPoint().getAmount(); //회원의 총 포인트
         if(usedPoint > userTotalPoint){ //총 포인트보다 많으면 에러발생

@@ -89,7 +89,7 @@ public class DetailOrderServiceTest {
         assertEquals("주문의 포인트가 알맞은지 확인",order.getPointAmount(),pointAmount);
 
         assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
-        assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal - pointAmount);
+        assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal - pointAmount + (int)(order.getFinalOrderPrice()*0.05));
 
 
     }
@@ -140,7 +140,7 @@ public class DetailOrderServiceTest {
         assertEquals("주문의 포인트가 알맞은지 확인",order.getPointAmount(),pointAmount);
 
         assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
-        assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal);
+        assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal + (int)(order.getFinalOrderPrice()*0.05));
 
     }
 
