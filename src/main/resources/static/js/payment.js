@@ -138,8 +138,6 @@ function cancelPayment(imp_uid){
         }
     });
 }
-var totalPrice = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
-
 
 // 포인트 입력 필드의 값이 변경될 때마다 최종 결제 금액을 계산하여 표시
 $('#point').on('input', function() {
@@ -147,7 +145,6 @@ $('#point').on('input', function() {
     var point = parseInt($(this).val()) || 0; // 값이 없을 경우 0으로 처리
     var maxPoint = totalPrice/2; // 최대 포인트 사용 가능 범위 설정
     var myPoint = parseInt($('#now-point').text().replace('원', '')); //현재 보유한 포인트
-
 
     if (point > myPoint) { // 입력한 값이 현재 포인트보다 큰 경우
         alert('보유한 포인트를 초과하였습니다.');
@@ -171,10 +168,14 @@ $('#point').on('input', function() {
 });
 
 
-
-
-
-
+//전체 사용 버튼 클릭시
+document.getElementById('use-all-points').addEventListener('click', function(event) {
+    event.preventDefault();
+    // 버튼 클릭 시 실행될 코드
+    var maxPoint = parseInt($('#point').attr('max'));
+    $('#point').val(maxPoint);
+    $('#point').trigger('input'); // 인풋 이벤트 강제 실행
+});
 
 
 
@@ -183,7 +184,7 @@ function execDaumPostcode() {
     daum.postcode.load(function(){
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
                 $("#postcode").val(data.zonecode);
                 $("#address").val(data.roadAddress);
             }

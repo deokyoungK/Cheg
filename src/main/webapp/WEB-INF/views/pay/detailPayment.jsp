@@ -153,6 +153,7 @@
 						<div class="payment-left">포인트 사용</div>
 						<div class="payment-right">
 							<input type="number" class="point-input" id="point" min="0" max="${principal.user.point.amount}" value="0">원
+							<button id="use-all-points">전체 사용</button>
 						</div>
 					</div>
 					<div class="payment-division">

@@ -144,16 +144,17 @@
 					</div>
 					<div class="payment-division">
 						<div class="payment-left">남은 포인트</div>
-						<div class="payment-right">${principal.user.point.amount}원</div>
+						<div class="payment-right" id="now-point">${principal.user.point.amount}원</div>
 					</div>
 					<div class="payment-division">
 						<div class="payment-left">포인트 사용</div>
 						<div class="payment-right">
 							<input type="number" class="point-input" id="point" min="0" max="${principal.user.point.amount}" value="0">원
+							<button id="use-all-points">전체 사용</button>
 						</div>
 					</div>
 					<div class="payment-division">
-						<span class="max-point-msg" style="color: #ff0000; font-size: 10px;">※최대 포인트 ${payDetailDto.totalPrice/2}원까지 사용 가능한 상품입니다.</span>
+						<span class="max-point-msg" style="color: #ff0000; font-size: 10px;">※최대 포인트 ${responseMap['cartListTotalPrice']/2}원까지 사용 가능한 상품입니다.</span>
 					</div>
 				</div>
 

@@ -449,7 +449,7 @@ vertical-align: middle;
     border: 1px solid #d9d9d9;
     border-radius: 2px;
     background-color: #fcfcfc;
-    padding: 8px;
+    padding: 5px;
     font-size: 16px;
     width: 80px;
     margin-left: 5px;
@@ -459,6 +459,21 @@ vertical-align: middle;
 
 .point-input:focus {
     outline: none;
-    box-shadow: 0 0 5px #66afe9;
+    box-shadow: 0 0 5px #2f5e2c;
     background-color: #fff;
 }
+/*"전체 사용"버튼*/
+#use-all-points {
+    font-size: 0.8em;
+    padding: 5px;
+    border-radius: 0.2em;
+    border: none;
+    background-color: #2f5e2c;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+
+
+
+
