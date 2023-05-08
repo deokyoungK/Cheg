@@ -39,7 +39,7 @@ function iamport(e){
         contentType: "application/json",
         dataType: "json",
         success: function () {
-            alert("배송정보 유효성검사 성공");
+            // alert("배송정보 유효성검사 성공");
 
             //가맹점 식별코드
             IMP.init("imp20807674");
@@ -62,7 +62,7 @@ function iamport(e){
                     url: "/api/verifyIamport/" + res.imp_uid,
                     success: function (data) {
                         if (res.paid_amount == data.response.amount) {
-                            alert("결제검증완료");
+                            // alert("결제검증완료");
                             var req_data = {
                                 address: address,
                                 productId: productId,
@@ -71,10 +71,10 @@ function iamport(e){
                                 flag: flag //상세,장바구니 구분
                             };
                             //비즈니스 로직
-                            orderProcess(req_data, principalId, res.imp_uid);
+                            orderProcess(req_data, res.imp_uid);
 
                         } else {
-                            alert("결제 검증 실패");
+                            // alert("결제 검증 실패");
                             //환불 요청
                             cancelPayment(res.imp_uid);
                         }
@@ -96,7 +96,7 @@ function iamport(e){
 }
 
 //주문 비즈니스 로직
-function orderProcess(req_data, principalId, imp_uid){
+function orderProcess(req_data, imp_uid){
     $.ajax({
         type: "POST",
         url: `/api/order`,
@@ -105,7 +105,6 @@ function orderProcess(req_data, principalId, imp_uid){
         dataType: "json",
         success: function (rsp) {
             alert("결제되었습니다.");
-            // location.href = `/mypage/${principalId}`;
             location.href = "/mypage/"+rsp.data;
 
         },
@@ -139,36 +138,37 @@ function cancelPayment(imp_uid){
         }
     });
 }
+var totalPrice = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
 
 
-
-//포인트 입력
-$(document).ready(function() {
+// 포인트 입력 필드의 값이 변경될 때마다 최종 결제 금액을 계산하여 표시
+$('#point').on('input', function() {
     var totalPrice = parseInt($('#total-price').text().replace('원', '')); // 총 상품 가격을 초기화
+    var point = parseInt($(this).val()) || 0; // 값이 없을 경우 0으로 처리
+    var maxPoint = totalPrice/2; // 최대 포인트 사용 가능 범위 설정
+    var myPoint = parseInt($('#now-point').text().replace('원', '')); //현재 보유한 포인트
 
-    // 포인트 입력 필드의 값이 변경될 때마다 최종 결제 금액을 계산하여 표시
-    $('#point').on('input', function() {
-        var point = parseInt($(this).val()) || 0; // 값이 없을 경우 0으로 처리
-        var maxPoint = totalPrice/2; // 최대 포인트 사용 가능 범위 설정
-        if (point > maxPoint) {
-            alert('포인트 사용 가능 최대 범위입니다');
-            point = maxPoint;
-            $(this).val(point);
-        }
-        var finalPrice = totalPrice - point;
 
-        if (finalPrice < 0) {
-            finalPrice = 0;
-            $(this).val(totalPrice); // 입력값을 총 상품 가격으로 초기화
-        }
+    if (point > myPoint) { // 입력한 값이 현재 포인트보다 큰 경우
+        alert('보유한 포인트를 초과하였습니다.');
+        point = myPoint;
+        $(this).val(point);
+    } else if (point > maxPoint) { // 최대 포인트 사용 가능 범위를 초과한 경우
+        alert('포인트 사용 가능 최대 범위입니다');
+        point = maxPoint;
+        $(this).val(point);
+    }
 
-        $('#final-price').text(finalPrice + '원');
-    });
+    // 최종 결제 금액 계산
+    var finalPrice = totalPrice - point;
 
-    // 최대 포인트값 설정
-    $('#point').attr('max', totalPrice);
+    if (finalPrice < 0) {
+        finalPrice = 0;
+        $(this).val(totalPrice); // 입력값을 총 상품 가격으로 초기화
+    }
+
+    $('#final-price').text(finalPrice + '원');
 });
-
 
 
 

@@ -147,7 +147,7 @@
 					</div>
 					<div class="payment-division">
 						<div class="payment-left">남은 포인트</div>
-						<div class="payment-right">${principal.user.point.amount}원</div>
+						<div class="payment-right" id="now-point">${principal.user.point.amount}원</div>
 					</div>
 					<div class="payment-division">
 						<div class="payment-left">포인트 사용</div>

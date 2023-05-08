@@ -8,7 +8,6 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ErrorCode;
 import com.likelion.cheg.handler.ex.CustomBusinessApiException;
-import com.likelion.cheg.handler.ex.CustomBusinessException;
 import com.likelion.cheg.web.dto.cart.AddCartDto;
 import com.likelion.cheg.web.dto.cart.CartApiResponseDto;
 import com.likelion.cheg.web.dto.cart.CartResponseDto;
