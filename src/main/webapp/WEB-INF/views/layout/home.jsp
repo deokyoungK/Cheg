@@ -51,9 +51,11 @@
                 <button id="category-button" class="category" onclick="showCategoryProduct(${c.id})"><img src="${pageContext.request.contextPath}/images/harness.png">${c.name}</button>
             </c:forEach>
         </div>
-
+        
         <div id = "search-result" class="search-result">
-            상품이 총 ${fn:length(productListDto)}개 입니다.
+            <div  id = "search-total-count" class="search-total-count">
+                <span>상품 ${fn:length(productListDto)}개 </span>
+            </div>
         </div>
 
 

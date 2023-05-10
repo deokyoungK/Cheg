@@ -1,166 +1,3 @@
-/* body {
-  padding-top: 92px;
-}
-
-.swiper {
-  width: 100%;
-  height: 440px;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  ㅌ테스트
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  color: white;
-}
-
-.product-container {
-  margin: 30px auto;
-  max-width: 1280px;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.product-category2 {
-  display: flex;
-  justify-content: space-between;
-  padding: 40px 0px;
-  max-width: 1280px;
-}
-
-.category {
-  height: 100px;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  color: #333333;
-  font-size: 15px;
-  font-family: "Pretendard-Regular";
-}
-
-.category img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-right: 5px;
-}
-
-.search-result {
-  font-size: 20px;
-  border: 1px solid #cbcbcb;
-  padding: 10px;
-  background-color: #f6f6f6;
-}
-
-.product-card {
-  font-family: "Pretendard-Regular";
-  width: calc(33.33% - 10px);
-  margin: 5px;
-  box-sizing: border-box;
-}
-
-.product-card:hover {
-  cursor: pointer;
-}
-
-.product-list {
-  font-family: "Pretendard-Regular";
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 12px;
-  justify-content: flex-start;
-  margin-top: 30px;
-}
-
-.product-img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.product-brand {
-  font-family: "Pretendard";
-  font-size: 13px;
-  color: #222222;
-  font-weight: bold;
-  padding: 6px;
-  text-decoration: underline;
-}
-
-.product-name {
-  font-family: "Pretendard";
-  font-size: 13px;
-  color: #555555;
-  padding: 6px;
-}
-
-.product-price {
-  font-family: "Pretendard";
-  font-size: 14px;
-  color: #222222;
-  font-weight: bold;
-  padding: 6px;
-}
-
-.product-list {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  align-items: center;
-}
-
-.product-img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-.product-brand {
-  font-family: "Pretendard";
-  font-size: 13px;
-  color: #222222;
-  font-weight: bold;
-  padding: 6px;
-  text-decoration: underline;
-}
-
-.product-name {
-  font-family: "Pretendard";
-  font-size: 13px;
-  color: #555555;
-  padding: 6px;
-}
-
-.product-price {
-  font-family: "Pretendard";
-  font-size: 14px;
-  color: #222222;
-  font-weight: bold;
-  padding: 6px;
-} */
-
 body {
   padding-top: 92px;
 }
@@ -241,11 +78,22 @@ body {
 }
 
 .search-result {
-  font-size: 20px;
-  border: 1px solid #cbcbcb;
-  padding: 10px;
-  background-color: #f6f6f6;
+  padding-left: 10px;
+  padding-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.search-total-count {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(34, 34, 34, 0.8);
+}
+
 .product-card {
   font-family: "Pretendard-Regular";
   flex-basis: calc(25% - 10px);
@@ -295,4 +143,13 @@ body {
   color: #222222;
   font-weight: bold;
   padding: 6px;
+}
+
+#search-result {
+  padding-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
