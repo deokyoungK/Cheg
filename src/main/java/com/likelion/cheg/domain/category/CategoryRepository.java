@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Modifying
-    @Query(value="INSERT INTO category(name,createDate) VALUES(:name, NOW())",nativeQuery = true)
+    @Query(value="INSERT INTO CATEGORY(name,createDate) VALUES(:name, NOW())",nativeQuery = true)
     int save(String name);
 
-    @Query(value="SELECT * FROM category c WHERE c.name=:name ",nativeQuery = true)
+    @Query(value="SELECT * FROM CATEGORY c WHERE c.name=:name ",nativeQuery = true)
     Category findByCategoryName(String name);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     //모든 상품 내림차순 조회
-    @Query(value = "SELECT * FROM product p ORDER BY p.id DESC",nativeQuery = true)
+    @Query(value = "SELECT * FROM PRODUCT p ORDER BY p.id DESC",nativeQuery = true)
     List<Product> findAllDesc();
 
     //keyword로 상품조회
