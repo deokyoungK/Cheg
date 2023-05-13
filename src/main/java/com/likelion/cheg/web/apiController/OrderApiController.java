@@ -1,4 +1,4 @@
-package com.likelion.cheg.web.api;
+package com.likelion.cheg.web.apiController;
 
 import com.likelion.cheg.config.auth.PrincipalDetail;
 import com.likelion.cheg.domain.order.Order;
@@ -16,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController

@@ -1,4 +1,4 @@
-package com.likelion.cheg.web.api;
+package com.likelion.cheg.web.apiController;
 
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
@@ -8,10 +8,8 @@ import com.likelion.cheg.web.dto.CMResponse;
 import com.likelion.cheg.web.dto.product.ProductHomeResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
-import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +45,7 @@ public class ProductApiController {
 
     //카테고리 아이디로 상품조회
     @GetMapping("api/products/category/{categoryId}")
-    public ResponseEntity<CMResponse> getProductsByCategory(@PathVariable int categoryId){
+    public ResponseEntity<CMResponse> getProductsByCategory(@PathVariable Integer categoryId){
         List<Product> productList = new ArrayList<>();
         if(categoryId == 0){ //전체 상품 조회
             productList = productRepository.findAllDesc();

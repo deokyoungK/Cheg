@@ -1,19 +1,15 @@
-package com.likelion.cheg.web.api;
+package com.likelion.cheg.web.apiController;
 
-import com.likelion.cheg.service.PaymentService;
 import com.likelion.cheg.web.dto.CMResponse;
 import com.likelion.cheg.web.dto.pay.PaymentCancelRequestDto;
-import com.nimbusds.oauth2.sdk.ErrorResponse;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 

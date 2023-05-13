@@ -1,4 +1,4 @@
-package com.likelion.cheg.web.api;
+package com.likelion.cheg.web.apiController;
 
 import com.likelion.cheg.service.AuthService;
 import com.likelion.cheg.web.dto.CMResponse;

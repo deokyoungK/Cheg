@@ -1,10 +1,9 @@
-package com.likelion.cheg;
+package com.likelion.cheg.init;
 
 import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
 import com.likelion.cheg.service.CategoryService;
-import com.likelion.cheg.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,6 @@ public class initDB {
     static class InitService{
 
         private final CategoryService categoryService;
-        private final ProductService productService;
         private final ProductRepository productRepository;
 
         public void dbInitCategory(){

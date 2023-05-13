@@ -45,7 +45,6 @@ function showCategoryProduct(categoryId) {
     },
     error: function (xhr) {
       var errorResponse = JSON.parse(xhr.responseText);
-      var errorCode = errorResponse.errorCode;
       var errorMessage = errorResponse.errorMessage;
       alert(errorMessage);
     },
