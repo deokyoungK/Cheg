@@ -54,21 +54,15 @@
         
         <div id = "search-result" class="search-result">
             <div  id = "search-total-count" class="search-total-count">
-                <span>상품 ${fn:length(productListDto)}개 </span>
+                <span>상품 ${count}개 </span>
             </div>
         </div>
 
-
+        <%--상품 목록--%>
         <div id="product-list" class="product-list">
-            <c:forEach var="p" items="${productListDto}" >
-                <div class="product-card">
-                    <a class="product-img" href="/detail/${p.id}"><img class="product-img" src="/upload/${p.url}" alt=""></a>
-                    <div class="product-brand">${p.brand}</div>
-                    <div class="product-name">${p.name}</div>
-                    <div class="product-price">${p.price}원</div>
-                </div>
-            </c:forEach>
+
         </div>
+        <%--상품 목록 끝--%>
 
     </div>
 

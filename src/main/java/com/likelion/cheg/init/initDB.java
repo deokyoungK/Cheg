@@ -42,6 +42,14 @@ public class initDB {
             Product product4 = Product.createProduct(category4,"Zara","자라목","자라목입니다",200,"",10);
             Product product5 = Product.createProduct(category1,"Polo","폴로신발","폴로 신상 신발입니다.",500,"",100);
             Product product6 = Product.createProduct(category2,"Emart","이마트스웨터","봄 신상입니다.",1000,"",100);
+            Product product7 = Product.createProduct(category4,"Zara","자라시계","자라 신상 시계입니다",200,"",10);
+            Product product8 = Product.createProduct(category4,"Polo","폴로시계","폴로 신상 시계입니다.",500,"",100);
+            Product product9 = Product.createProduct(category4,"Emart","이마트시계","이마트 신상 시계입니다.",1000,"",100);
+            Product product10 = Product.createProduct(category4,"Emart","폴로시계","폴로 신상 신발입니다.",500,"",100);
+            Product product11 = Product.createProduct(category4,"Zara","자라시계","봄 신상입니다.",1000,"",100);
+            Product product12 = Product.createProduct(category4,"Zara","자라시계","자라 신상 시계입니다",200,"",10);
+            Product product13 = Product.createProduct(category4,"Polo","폴로시계","폴로 신상 시계입니다.",500,"",100);
+            Product product14 = Product.createProduct(category4,"Emart","이마트시계","이마트 신상 시계입니다.",1000,"",100);
 
             productRepository.save(product1);
             productRepository.save(product2);
@@ -49,6 +57,14 @@ public class initDB {
             productRepository.save(product4);
             productRepository.save(product5);
             productRepository.save(product6);
+            productRepository.save(product7);
+            productRepository.save(product8);
+            productRepository.save(product9);
+            productRepository.save(product10);
+            productRepository.save(product11);
+            productRepository.save(product12);
+            productRepository.save(product13);
+            productRepository.save(product14);
         }
 
 

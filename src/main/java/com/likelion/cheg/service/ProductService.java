@@ -14,6 +14,10 @@ import com.likelion.cheg.web.dto.product.ProductResponseDto;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -73,6 +77,13 @@ public class ProductService {
                         product.getStockQuantity()))
                 .collect(Collectors.toList());
         return productListDtos;
+    }
+
+    //무한 스크롤 조회
+    public Page<Product> getProductList(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        Page<Product> productList = productRepository.findAll(pageable);
+        return productList;
     }
 
     @Transactional

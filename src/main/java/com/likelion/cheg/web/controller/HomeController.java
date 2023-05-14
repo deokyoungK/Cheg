@@ -27,12 +27,14 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-        List<Product> productList = productRepository.findAllDesc();
-        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-
+//        List<Product> productList = productRepository.findAllDesc();
+//        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
+//
+        Long count = productRepository.count();
         List<Category> categoryList = categoryRepository.findAll();
         List<CategoryResponseDto> categoryListDto = categoryService.makeResponseDto(categoryList);
-        model.addAttribute("productListDto",productListDto);
+//        model.addAttribute("productListDto",productListDto);
+        model.addAttribute("count",count);
         model.addAttribute("categoryListDto",categoryListDto);
         return "layout/home";
     }

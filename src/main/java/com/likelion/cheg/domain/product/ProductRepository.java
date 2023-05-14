@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+    long count();
+
     //모든 상품 내림차순 조회
     @Query(value = "SELECT * FROM PRODUCT p ORDER BY p.id DESC",nativeQuery = true)
     List<Product> findAllDesc();
@@ -18,4 +20,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     //categoryId로 상품조회(fetch join)
     @Query("SELECT p FROM Product p JOIN FETCH p.category c WHERE c.id = :categoryId ORDER BY p.id DESC")
     List<Product> findAllByCategoryId(int categoryId);
+
 }
