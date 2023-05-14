@@ -4,8 +4,8 @@ var page = 0; // 현재 페이지 번호
 getProductList(0); //첫 화면 상품 로딩
 
 $(window).scroll(() => {
-  // 스크롤이 끝(밑에서 50 전)까지 내려갔을 때 새로운 상품 데이터 가져오기
-  if ($(window).scrollTop() >= $(document).height() - $(window).height() - 50) {
+  // 스크롤이 끝(밑에서 20 전)까지 내려갔을 때 새로운 상품 데이터 가져오기
+  if ($(window).scrollTop() >= $(document).height() - $(window).height() - 20) {
     page++;
     getProductList(page);
   }

@@ -100,9 +100,8 @@ public class ProductService {
     @Transactional
     public Product addProduct(ProductUploadDto productUploadDto) throws Exception {
         try{
-            UUID uuid = UUID.randomUUID();
             //url 파싱
-            String imageFileName = uuid+"_"+productUploadDto.getFile().getOriginalFilename();
+            String imageFileName = productUploadDto.getFile().getOriginalFilename();
             //카테고리 파싱
             Category category = categoryRepository.findByCategoryName(productUploadDto.getCategory());
 

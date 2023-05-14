@@ -111,4 +111,4 @@ spring:
 #local용 file 경로
 file:
 #  path:  /Users/yoonezi/Documents/git/project_with_duck/0209_ew/upload/
-  path: C:/Users/kang4/spring/cheg/upload/
+  path: C:/Users/kang4/spring/shop2/upload/

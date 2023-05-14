@@ -57,7 +57,6 @@ public class ProductApiController {
         return new ResponseEntity<>(new CMResponse<>(1,"카테고리별 상품조회 성공",productListDto),HttpStatus.OK);
     }
 
-
     //무한스크롤 상품 조회
     @GetMapping("api/products/{page}")
     public ResponseEntity<CMResponse> getProductList(@PathVariable int page){
@@ -66,16 +65,6 @@ public class ProductApiController {
         List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
         return new ResponseEntity<>(new CMResponse<>(1,"상품 페이징 성공",productListDto),HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
