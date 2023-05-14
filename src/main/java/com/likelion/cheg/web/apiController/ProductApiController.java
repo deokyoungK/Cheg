@@ -44,7 +44,16 @@ public class ProductApiController {
         return new ResponseEntity<>(new CMResponse<>(1,"상품 삭제 성공",""),HttpStatus.OK);
     }
 
-    //카테고리 아이디로 상품조회
+    //무한스크롤 페이징
+    @GetMapping("api/products/{page}")
+    public ResponseEntity<CMResponse> getProductList(@PathVariable int page){
+        Page<Product> pageProductList = productService.getProductList(page, 4);
+        List<Product> productList = pageProductList.getContent();
+        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
+        return new ResponseEntity<>(new CMResponse<>(1,"상품 페이징 성공",productListDto),HttpStatus.OK);
+    }
+
+    //카테고리 아이디로 상품 조회
     @GetMapping("api/products/category/{categoryId}")
     public ResponseEntity<CMResponse> getProductsByCategory(@PathVariable Integer categoryId){
         List<Product> productList = new ArrayList<>();
@@ -57,14 +66,17 @@ public class ProductApiController {
         return new ResponseEntity<>(new CMResponse<>(1,"카테고리별 상품조회 성공",productListDto),HttpStatus.OK);
     }
 
-    //무한스크롤 상품 조회
-    @GetMapping("api/products/{page}")
-    public ResponseEntity<CMResponse> getProductList(@PathVariable int page){
-        Page<Product> pageProductList = productService.getProductList(page, 4);
-        List<Product> productList = pageProductList.getContent();
+    //검색창의 keyword로 상품 조회
+    @GetMapping("api/products/keyword/{keyword}")
+    public ResponseEntity<CMResponse> getProductsByKeyword(@PathVariable String keyword){
+        List<Product> productList = productRepository.findAllByKeyword(keyword);
         List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-        return new ResponseEntity<>(new CMResponse<>(1,"상품 페이징 성공",productListDto),HttpStatus.OK);
+        return new ResponseEntity<>(new CMResponse<>(1,"검색창 상품조회 성공",productListDto),HttpStatus.OK);
     }
+
+
+
+
 
 
 }

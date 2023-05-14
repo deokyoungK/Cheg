@@ -50,7 +50,7 @@ function getProductList(page){
 }
 
 //카테고리 별로 상품 가져오기
-function showCategoryProduct(categoryId) {
+function getProductsByCategory(categoryId) {
   $.ajax({
     type: "GET",
     url: `/api/products/category/${categoryId}`,

@@ -27,32 +27,16 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-//        List<Product> productList = productRepository.findAllDesc();
-//        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-//
+        //상품은 수량만 렌더링
         Long count = productRepository.count();
+
+        //카테고리는 전부 렌더링
         List<Category> categoryList = categoryRepository.findAll();
         List<CategoryResponseDto> categoryListDto = categoryService.makeResponseDto(categoryList);
-//        model.addAttribute("productListDto",productListDto);
+
         model.addAttribute("count",count);
         model.addAttribute("categoryListDto",categoryListDto);
         return "layout/home";
     }
-
-    @GetMapping("/search")
-    public String search(@RequestParam(value="keyword") String keyword, Model model){
-        List<Product> productList = productRepository.findAllByKeyword(keyword);
-        List<ProductHomeResponseDto> productListDto = productService.makeHomeResponseDto(productList);
-
-        List<Category> categoryList = categoryRepository.findAll();
-        List<CategoryResponseDto> categoryListDto = categoryService.makeResponseDto(categoryList);
-        model.addAttribute("productListDto",productListDto);
-        model.addAttribute("categoryListDto",categoryListDto);
-        return "layout/home";
-    }
-
-
-
-
 
 }

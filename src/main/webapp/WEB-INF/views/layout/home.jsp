@@ -45,10 +45,10 @@
 
     <div class="product-container">
         <div class="product-category2">
-            <button id="category-button" class="category" onclick="showCategoryProduct(0)"><img src="${pageContext.request.contextPath}/images/harness.png">전체</button>
+            <button id="category-button" class="category" onclick="getProductsByCategory(0)"><img src="${pageContext.request.contextPath}/images/harness.png">전체</button>
 
             <c:forEach var="c" items="${categoryListDto}" >
-                <button id="category-button" class="category" onclick="showCategoryProduct(${c.id})"><img src="${pageContext.request.contextPath}/images/harness.png">${c.name}</button>
+                <button id="category-button" class="category" onclick="getProductsByCategory(${c.id})"><img src="${pageContext.request.contextPath}/images/harness.png">${c.name}</button>
             </c:forEach>
         </div>
         
