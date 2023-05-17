@@ -14,6 +14,8 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
+application-real.yml
+
 .idea
 *.iws
 *.iml

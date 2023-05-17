@@ -7,6 +7,9 @@ server:
       enabled: true
 
 spring:
+  profiles:
+    include: real
+
   mvc:
     view:
       prefix: /WEB-INF/views/
