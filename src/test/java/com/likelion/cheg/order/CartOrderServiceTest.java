@@ -9,6 +9,7 @@ import com.likelion.cheg.domain.orderItem.OrderItemRepository;
 import com.likelion.cheg.domain.point.Point;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ErrorCode;
@@ -65,11 +66,16 @@ public class CartOrderServiceTest {
         User user = User.builder()
                 .id(userId).point(point).build();
 
+        //stock세팅
+        Stock stock = Stock.builder()
+                .id(1L)
+                .quantity(stockQuantity).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
                 .price(price)
-                .stockQuantity(stockQuantity)
+                .stock(stock)
                 .build();
 
         //장바구니 세팅
@@ -102,7 +108,7 @@ public class CartOrderServiceTest {
         assertEquals("주문의 상품이 알맞은지 확인",order.getOrderItemList().get(0).getProduct(),product);
         assertEquals("주문의 포인트가 알맞은지 확인",order.getPointAmount(),pointAmount);
 
-        assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
+        assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStock().getQuantity(),stockQuantity - amount);
         assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal - pointAmount + (int)(order.getFinalOrderPrice()*0.05));
         assertEquals("주문 후 회원의 장바구니가 비워졌는지 확인 ",user.getCarts().size(),0);
 
@@ -127,11 +133,16 @@ public class CartOrderServiceTest {
         User user = User.builder()
                 .id(userId).point(point).build();
 
+        //stock세팅
+        Stock stock = Stock.builder()
+                .id(1L)
+                .quantity(stockQuantity).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
                 .price(price)
-                .stockQuantity(stockQuantity)
+                .stock(stock)
                 .build();
 
         //장바구니 세팅
@@ -164,7 +175,7 @@ public class CartOrderServiceTest {
         assertEquals("주문의 상품이 알맞은지 확인",order.getOrderItemList().get(0).getProduct(),product);
         assertEquals("주문의 포인트가 알맞은지 확인",order.getPointAmount(),pointAmount);
 
-        assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStockQuantity(),stockQuantity - amount);
+        assertEquals("주문 후 상품의 재고가 줄어들었는지 확인 ",product.getStock().getQuantity(),stockQuantity - amount);
         assertEquals("주문 후 회원의 포인트가 차감됐는지 확인 ",user.getPoint().getAmount(),pointTotal + (int)(order.getFinalOrderPrice()*0.05));
         assertEquals("주문 후 회원의 장바구니가 비워졌는지 확인 ",user.getCarts().size(),0);
 
@@ -218,11 +229,16 @@ public class CartOrderServiceTest {
         User user = User.builder()
                 .id(userId).point(point).build();
 
+        //stock세팅
+        Stock stock = Stock.builder()
+                .id(1L)
+                .quantity(stockQuantity).build();
+
         //상품 세팅
         Product product = Product.builder()
                 .id(productId)
                 .price(price)
-                .stockQuantity(stockQuantity)
+                .stock(stock)
                 .build();
 
         //장바구니 세팅

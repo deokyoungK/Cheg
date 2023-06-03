@@ -4,6 +4,7 @@ import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ErrorCode;
@@ -105,12 +106,16 @@ public class CreateCartServiceTest {
         int productId = 1;
         int cartId = 1;
         List<Cart> carts = new ArrayList<>();
-
+        //stock세팅
+        Stock stock = Stock.builder()
+                .id(1L)
+                .quantity(5).build();
         //product세팅
         Product product = Product.builder()
                 .id(productId)
-                .stockQuantity(5)
+                .stock(stock)
                 .build();
+
         //DTO세팅(상품id,상품갯수)
         AddCartDto addCartDto = new AddCartDto(productId, 1);
         //cart세팅

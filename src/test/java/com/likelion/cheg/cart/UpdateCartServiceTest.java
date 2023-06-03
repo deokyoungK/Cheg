@@ -3,6 +3,7 @@ package com.likelion.cheg.cart;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.cart.CartRepository;
 import com.likelion.cheg.domain.product.Product;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.handler.ErrorCode;
 import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.service.CartService;
@@ -68,10 +69,15 @@ public class UpdateCartServiceTest {
         int cartId = 1;
         int productCount = 3;
         int productId = 1;
-        int stockQuantity = 10;
+
+        //stock세팅
+        Stock stock = Stock.builder()
+                .id(1L)
+                .quantity(5).build();
+
         Product product = Product.builder()
                 .id(productId)
-                .stockQuantity(10)
+                .stock(stock)
                 .build();
         Cart cart = Cart.builder()
                 .id(cartId)

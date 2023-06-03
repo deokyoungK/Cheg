@@ -5,6 +5,7 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.service.ProductService;
 import com.likelion.cheg.web.dto.product.ProductUploadDto;
 import org.junit.Before;
@@ -72,10 +73,11 @@ public class 상품관리 {
         String cname2 = "new카테고리";
         Category oldCategory = commonMethod.createCategory(cname);
         Category newCategory = commonMethod.createCategory(cname2);
-
+        //재고 생성
+        Stock stock = commonMethod.createStock(10);
         //상품 생성
         String productName = "NEW상품";
-        Product product = commonMethod.createProduct(oldCategory,productName,1000,20);
+        Product product = commonMethod.createProduct(oldCategory,productName,1000,stock);
 
         //카테고리 변경
         product.changeCategory(newCategory);
@@ -90,12 +92,13 @@ public class 상품관리 {
         //카테고리 생성
         String cname = "패딩";
         Category category = commonMethod.createCategory(cname);
-
+        //재고 생성
+        Stock stock = commonMethod.createStock(10);
         //상품 생성
         String pname = "상품1";
         String pname2 = "상품2";
-        Product product = commonMethod.createProduct(category,pname,2000,20);
-        Product product2 = commonMethod.createProduct(category,pname2,1500,20);
+        Product product = commonMethod.createProduct(category,pname,2000,stock);
+        Product product2 = commonMethod.createProduct(category,pname2,1500,stock);
 
         //상품 1번 삭제
         productService.deleteProduct(product.getId());

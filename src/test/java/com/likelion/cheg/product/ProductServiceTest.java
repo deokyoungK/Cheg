@@ -4,6 +4,7 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.StockRepository;
 import com.likelion.cheg.handler.ErrorCode;
 import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.service.ProductService;
@@ -32,7 +33,8 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
     @Mock
     private CategoryRepository categoryRepository;
-
+    @Mock
+    private StockRepository stockRepository;
     @InjectMocks
     private ProductService productService;
 
@@ -77,7 +79,7 @@ public class ProductServiceTest {
         assertEquals("상품 설명 확인 ",product.getDescription(),description);
         assertEquals("상품 가격 확인 ",product.getPrice(),price);
         assertEquals("상품 file경로 확인 ",product.getUrl().contains(imageFile.getOriginalFilename()),true);
-        assertEquals("상품 재고 확인 ",product.getStockQuantity(),stockQuantity);
+        assertEquals("상품 재고 확인 ",product.getStock().getQuantity(),stockQuantity);
 
     }
     @Test

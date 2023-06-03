@@ -6,6 +6,7 @@ import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.product.Product;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,17 +44,29 @@ public class CommonMethod {
         em.persist(category);
         return category;
     }
-    public Product createProduct(Category category, String name, int price, int stockQuantity) {
+
+    public Stock createStock(int quantity){
+        Stock stock = Stock.builder()
+                .quantity(quantity)
+                .build();
+
+        em.persist(stock);
+        return stock;
+    }
+
+    public Product createProduct(Category category, String name, int price, Stock stock) {
         Product product = Product.builder()
                 .category(category)
                 .name(name)
                 .price(price)
-                .stockQuantity(stockQuantity)
+                .stock(stock)
                 .build();
 
         em.persist(product);
         return product;
     }
+
+
     public Cart createCart(User user, Product product, int productCount){
         Cart cart = Cart.builder()
                     .user(user)

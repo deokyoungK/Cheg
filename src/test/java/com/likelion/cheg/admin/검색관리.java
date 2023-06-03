@@ -6,6 +6,7 @@ import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.order.OrderRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.service.OrderService;
@@ -56,9 +57,12 @@ public class 검색관리 {
     @Test
     public void 상품검색(){
         Category category = commonMethod.createCategory("NEW카테고리");
-        Product product = commonMethod.createProduct(category,"jordon_Tshirts",10000,20);
-        Product product2 = commonMethod.createProduct(category,"shoes_jordon",28000,20);
-        Product product3 = commonMethod.createProduct(category,"converse",6000,20);
+        Stock stock = commonMethod.createStock(20);
+        Stock stock2 = commonMethod.createStock(20);
+        Stock stock3 = commonMethod.createStock(20);
+        Product product = commonMethod.createProduct(category,"jordon_Tshirts",10000,stock);
+        Product product2 = commonMethod.createProduct(category,"shoes_jordon",28000,stock2);
+        Product product3 = commonMethod.createProduct(category,"converse",6000,stock3);
 
         String keyword = "jordon";
         List<Product> productList = productRepository.findAllByKeyword(keyword);
