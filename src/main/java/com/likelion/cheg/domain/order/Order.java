@@ -61,6 +61,7 @@ public class Order {
     public void setFinalOrderPrice(int finalOrderPrice) {
         this.finalOrderPrice = finalOrderPrice;
     }
+
     //연관 관계 매핑 메서드
     private void setUser(User user){
         this.user = user;

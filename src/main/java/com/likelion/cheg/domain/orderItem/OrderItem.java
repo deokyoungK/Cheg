@@ -52,7 +52,7 @@ public class OrderItem {
                 .build();
 
         //상품재고는 감소해야됨.
-        product.dereaseStockQuantity(quantity);
+        product.getStock().decrease(quantity);
         return orderItem;
     }
 

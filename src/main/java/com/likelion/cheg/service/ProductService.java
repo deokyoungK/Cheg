@@ -5,6 +5,8 @@ import com.likelion.cheg.domain.category.Category;
 import com.likelion.cheg.domain.category.CategoryRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
+import com.likelion.cheg.domain.stock.StockRepository;
 import com.likelion.cheg.handler.ErrorCode;
 import com.likelion.cheg.handler.ex.CustomBusinessApiException;
 import com.likelion.cheg.handler.ex.CustomBusinessException;
@@ -35,6 +37,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final CartRepository cartRepository;
+    private final StockRepository stockRepository;
 
     @Value("${file.path}")
     String uploadFolder;
@@ -59,7 +62,7 @@ public class ProductService {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                product.getStockQuantity()
+                product.getStock().getQuantity()
         );
         return productDto;
     }
@@ -74,7 +77,7 @@ public class ProductService {
                         product.getName(),
                         product.getDescription(),
                         product.getPrice(),
-                        product.getStockQuantity()))
+                        product.getStock().getQuantity()))
                 .collect(Collectors.toList());
         return productListDtos;
     }
@@ -109,6 +112,11 @@ public class ProductService {
             Path imageFilePath = Paths.get(uploadFolder+imageFileName);
             Files.write(imageFilePath,productUploadDto.getFile().getBytes());
 
+            //재고 생성
+            Stock stock = Stock.builder()
+                    .quantity(productUploadDto.getStockQuantity())
+                    .build();
+
             //상품 생성
             Product product = Product.createProduct(category,
                     productUploadDto.getBrand(),
@@ -116,8 +124,9 @@ public class ProductService {
                     productUploadDto.getDescription(),
                     productUploadDto.getPrice(),
                     imageFileName,
-                    productUploadDto.getStockQuantity());
+                    stock);
 
+            stockRepository.save(stock);
             productRepository.save(product);
             return product;
 

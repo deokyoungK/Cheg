@@ -88,8 +88,8 @@ public class CartService {
         if(user.getCarts().contains(cart)){ //이미 있으면
             int totalCount = addCartDto.getProductCount() + cart.getProductCount();
             //현재 있는 장바구니의 수량과 DTO의 수량의 합이 재고를 넘으면 상품 재고만큼 카운트 변경
-            if(totalCount > product.getStockQuantity()){
-                cart.changeCount(product.getStockQuantity());
+            if(totalCount > product.getStock().getQuantity()){
+                cart.changeCount(product.getStock().getQuantity());
             }else{
                 cart.changeCount(cart.getProductCount() + addCartDto.getProductCount());
             }
@@ -128,7 +128,7 @@ public class CartService {
         int newCount = cart.getProductCount() + 1;
 
         //재고 수량확인
-        if(newCount > product.getStockQuantity()){
+        if(newCount > product.getStock().getQuantity()){
             throw new CustomBusinessApiException(ErrorCode.EXCEED_PRODUCT_STOCK);
         }
 
