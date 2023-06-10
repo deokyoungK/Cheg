@@ -96,4 +96,5 @@
 <img src="https://user-images.githubusercontent.com/74487747/223673174-3a01d364-c5a4-41be-aaf4-7c9db2adbfd6.png" width="700">
 
 ## ERD
-![image](https://github.com/deokyoungK/Cheg/assets/74487747/78ea8aed-322b-466b-8b6e-2e11e3fe076e)
+![image](https://github.com/deokyoungK/Cheg/assets/74487747/e63d0fb0-c373-4440-9290-5439eaad0362)
+
