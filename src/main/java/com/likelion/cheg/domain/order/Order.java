@@ -102,6 +102,7 @@ public class Order {
             sum += orderItem.getOrderItemTotalPrice();
         }
 
+
         //주문 상품 금액
         order.setOrderPrice(sum);
 

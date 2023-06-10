@@ -34,8 +34,7 @@ public class UserService {
                         user.getName(),
                         user.getEmail(),
                         user.getAddress(),
-                        user.getPhone(),
-                        user.getCreateDate()))
+                        user.getPhone()))
                 .collect(Collectors.toList());
         return userListDtos;
     }

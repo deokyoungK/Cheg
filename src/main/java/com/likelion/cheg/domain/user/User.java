@@ -1,5 +1,7 @@
 package com.likelion.cheg.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.likelion.cheg.domain.base.BaseEntity;
+import com.likelion.cheg.domain.base.BaseTimeEntity;
 import com.likelion.cheg.domain.cart.Cart;
 import com.likelion.cheg.domain.delivery.Delivery;
 import com.likelion.cheg.domain.enumType.Role;
@@ -7,6 +9,7 @@ import com.likelion.cheg.domain.order.Order;
 import com.likelion.cheg.domain.point.Point;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.*;
 import javax.persistence.*;
@@ -20,9 +23,10 @@ import static javax.persistence.FetchType.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(value = AuditingEntityListener.class)
 @Getter
 @Table(name = "USER")
-public class User {
+public class User extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,12 +65,6 @@ public class User {
 	@Column(nullable = false)
 	private Role role; //역할(관리자: ROLE_ADMIN, 회원: ROLE_USER, 비회원: ROLE_GUEST)
 
-	private LocalDateTime createDate; //날짜
-
-	@PrePersist //db에 insert되기 직전에 실행
-	public void createDate() {
-		this.createDate = LocalDateTime.now();
-	}
 
 	//연관관계 편의 메서드
 	private void setPoint(Point point){

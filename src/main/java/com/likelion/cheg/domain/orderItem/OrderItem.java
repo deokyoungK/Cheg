@@ -51,8 +51,6 @@ public class OrderItem {
                 .quantity(quantity)
                 .build();
 
-        //상품재고는 감소해야됨.
-        product.getStock().decrease(quantity);
         return orderItem;
     }
 

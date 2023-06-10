@@ -13,6 +13,7 @@ import com.likelion.cheg.domain.point.Point;
 import com.likelion.cheg.domain.point.PointRepository;
 import com.likelion.cheg.domain.product.Product;
 import com.likelion.cheg.domain.product.ProductRepository;
+import com.likelion.cheg.domain.stock.Stock;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import com.likelion.cheg.handler.ErrorCode;
@@ -31,6 +32,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.transaction.Transactional;
 @Slf4j
 @RequiredArgsConstructor
@@ -43,6 +46,7 @@ public class OrderService {
     private final DeliveryRepository deliveryRepository;
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
+    private final EntityManager em;
 
     public List<OrderMyPageResponseDto> makeMyPageResponseDto(List<Order> orderList){
         List<OrderMyPageResponseDto> orderListDtos = orderList.stream()
@@ -123,6 +127,12 @@ public class OrderService {
 
         //Order 생성
         Order order = Order.createOrder(user,delivery,orderItemList, usedPoint);
+
+        //상품 재고 감소
+        for(OrderItem orderItem : orderItemList){
+            Stock stock = orderItem.getProduct().getStock();
+           stock.decrease(orderItem.getQuantity());
+        }
 
         //포인트 적립
         double EarnedPoint = order.getFinalOrderPrice() * 0.05; //최종 구매 금액의 5% 지급
