@@ -1,4 +1,4 @@
-package com.likelion.cheg.config.oauth;
+package com.likelion.cheg.config.oauth.session;
 
 import java.util.Map;
 

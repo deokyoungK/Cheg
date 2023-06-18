@@ -119,7 +119,7 @@ public class User extends BaseTimeEntity {
 				.username("비회원_" + number)
 				.password("비회원_비밀번호")
 				.name("비회원")
-				.role(Role.ROLE_GUEST)
+				.role(Role.ROLE_USER)
 				.build();
 		return user;
 	}

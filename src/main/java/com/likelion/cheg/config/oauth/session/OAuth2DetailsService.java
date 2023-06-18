@@ -1,6 +1,7 @@
-package com.likelion.cheg.config.oauth;
+package com.likelion.cheg.config.oauth.session;
 
 import com.likelion.cheg.config.auth.PrincipalDetail;
+import com.likelion.cheg.config.oauth.session.*;
 import com.likelion.cheg.domain.enumType.Role;
 import com.likelion.cheg.domain.point.Point;
 import com.likelion.cheg.domain.point.PointRepository;
@@ -8,14 +9,17 @@ import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
@@ -54,6 +58,12 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 		String email = oAuth2UserInfo.getEmail();
 		String name = oAuth2UserInfo.getName();
 
+		System.out.println("=====================");
+		System.out.println(username);
+		System.out.println(password);
+		System.out.println(email);
+		System.out.println(name);
+		System.out.println("=====================");
 
 		User findUser = userRepository.findByUsername(username);
 
@@ -71,7 +81,7 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 
 			pointRepository.save(point);
 			User newUser = userRepository.save(user);
-
+;
 			return new PrincipalDetail(newUser);
 		}else {
 			return new PrincipalDetail(findUser);

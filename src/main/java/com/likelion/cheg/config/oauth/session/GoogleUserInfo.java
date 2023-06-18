@@ -1,22 +1,21 @@
-package com.likelion.cheg.config.oauth;
+package com.likelion.cheg.config.oauth.session;
 
 import java.util.Map;
 
-public class FacebookUserInfo implements OAuth2UserInfo{
-
+public class GoogleUserInfo implements OAuth2UserInfo{
     private Map<String, Object> attributes;
-    public FacebookUserInfo(Map<String,Object> attributes){
+    public GoogleUserInfo(Map<String, Object> attributes){
         this.attributes = attributes;
     }
 
     @Override
     public String getProvider() {
-        return "facebook_";
+        return "google_";
     }
 
     @Override
     public String getUsername() {
-        return (String) attributes.get("id");
+        return (String) attributes.get("sub");
     }
 
     @Override
