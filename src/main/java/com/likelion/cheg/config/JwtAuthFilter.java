@@ -1,6 +1,5 @@
 package com.likelion.cheg.config.oauth.token;
 
-import com.likelion.cheg.config.oauth.token.TokenService;
 import com.likelion.cheg.domain.user.User;
 import com.likelion.cheg.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
